@@ -1,2 +1,2 @@
 # LoversQuest
-The final Clawvenger Hunt
+The Final Clawvenger Hunt

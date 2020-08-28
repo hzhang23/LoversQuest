@@ -1,13 +1,21 @@
 package com.loversQuest.IO;
 
 
-import org.w3c.dom.ls.LSOutput;
+import com.loversQuest.GameWorld;
+import com.loversQuest.gameWorld.Player;
 
 import java.util.Scanner;
 
 public class Input {
 
+    GameWorld game;
+    Player player;
     Scanner userInput = new Scanner(System.in);
+
+    public Input(GameWorld game) {
+        this.game = game;
+        this.player = game.p1;
+    }
 
     public void userActionPrompt() {
 
@@ -18,10 +26,19 @@ public class Input {
         String response = responseInput.toLowerCase();
 
         if (response.equals("go")) {
-            System.out.println("im tired and want to see the sun");
+            goActionPrompt();
         } else if (response.equals("look")) {
             System.out.println("do something with LOOK");
         }
     }
+
+    public void goActionPrompt(){
+        System.out.println("Where would you like to go?");
+        String response = userInput.nextLine().toLowerCase();
+        player.go(response);
+
+    }
+
+
 
 }

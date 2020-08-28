@@ -5,7 +5,7 @@ import com.loversQuest.IO.Output;
 import com.loversQuest.gameWorld.Location;
 import com.loversQuest.gameWorld.Player;
 
-public class Game {
+public class GameWorld {
     public Location nothing = new Location("NOTHING", "THIS IS NOTHING");
     public Location barracks = new Location("BARRACKS", "smells like pooooooOoooh");
     public Location gym = new Location("GYM", "smells like socks");
@@ -59,7 +59,7 @@ public class Game {
         px.setNorth(chowHall);
         px.setEast(nothing);
         px.setWest(gazebo);
-        px.setEast(nothing);
+        px.setSouth(nothing);
 
         gazebo.setEast(px);
         gazebo.setNorth(nothing);

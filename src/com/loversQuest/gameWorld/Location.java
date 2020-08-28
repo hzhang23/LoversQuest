@@ -1,4 +1,4 @@
-package com.loversQuest;
+package com.loversQuest.gameWorld;
 
 public class Location {
 

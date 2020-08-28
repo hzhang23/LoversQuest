@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e1e4fbb4-d3bc-4296-959b-8e73d9968d3f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Game.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Input.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Location.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Output.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/loversQuest/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/loversQuest/GameWorld.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/loversQuest/IO/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/loversQuest/IO/Input.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/loversQuest/IO/Output.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/loversQuest/IO/Output.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1gja3UFCiIMYaceKMGaH2C1E7eH" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RunManager">
+    <configuration name="GameInterface" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GameInterface" />
+      <module name="LoversQuest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.GameInterface" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e1e4fbb4-d3bc-4296-959b-8e73d9968d3f" name="Default Changelist" comment="" />
+      <created>1598630255617</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1598630255617</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="141" y="149" key="#Project_Structure" timestamp="1598630510064">
+      <screen x="0" y="23" width="1920" height="1057" />
+    </state>
+    <state x="141" y="149" key="#Project_Structure/-1680.23.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598630510064" />
+  </component>
+</project>

@@ -54,6 +54,11 @@ public class Player {
         return !destination.getName().equals("NOTHING");
     }
 
+    public void look(){
+        System.out.println(this.getCurrentLocation().getDescription());
+
+    }
+
     // SETTERS/GETTERS
     public String getName() {
         return name;

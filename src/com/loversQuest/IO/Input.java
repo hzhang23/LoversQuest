@@ -28,7 +28,7 @@ public class Input {
         if (response.equals("go")) {
             goActionPrompt();
         } else if (response.equals("look")) {
-            System.out.println("do something with LOOK");
+            lookActionPrompt();
         }
     }
 
@@ -37,6 +37,10 @@ public class Input {
         String response = userInput.nextLine().toLowerCase();
         player.go(response);
 
+    }
+
+    public void lookActionPrompt(){
+        player.look();
     }
 
 

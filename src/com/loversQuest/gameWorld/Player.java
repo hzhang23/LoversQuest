@@ -21,35 +21,42 @@ public class Player {
 
         String direction = directionInput.toLowerCase();
 
-        if (direction.equals("east")) {
-            if(validateLocation(this.currentLocation.getEast())){
-                this.setCurrentLocation(this.currentLocation.getEast());
-            } else{
-                System.out.println("You can't go that way");
-            }
-        } else if (direction.equals("west")) {
-            if(validateLocation(this.currentLocation.getWest())){
-                this.setCurrentLocation(this.currentLocation.getWest());
-            } else{
-                System.out.println("You can't go that way");
-            }
-        } else if (direction.equals("south")) {
-            if(validateLocation(this.currentLocation.getSouth())){
-                this.setCurrentLocation(this.currentLocation.getSouth());
-            } else{
-                System.out.println("You can't go that way");
-            }
-        } else if (direction.equals("north")){
-            if(validateLocation(this.currentLocation.getNorth())){
-                this.setCurrentLocation(this.currentLocation.getNorth());
-            } else{
-                System.out.println("You can't go that way");
-            }
-        } else {
-            System.out.println("bad input, try again");
+        switch (direction) {
+            case "east":
+                if (validateLocation(this.currentLocation.getEast())) {
+                    this.setCurrentLocation(this.currentLocation.getEast());
+                } else {
+                    System.out.println("You can't go that way");
+                }
+                break;
+            case "west":
+                if (validateLocation(this.currentLocation.getWest())) {
+                    this.setCurrentLocation(this.currentLocation.getWest());
+                } else {
+                    System.out.println("You can't go that way");
+                }
+                break;
+            case "south":
+                if (validateLocation(this.currentLocation.getSouth())) {
+                    this.setCurrentLocation(this.currentLocation.getSouth());
+                } else {
+                    System.out.println("You can't go that way");
+                }
+                break;
+            case "north":
+                if (validateLocation(this.currentLocation.getNorth())) {
+                    this.setCurrentLocation(this.currentLocation.getNorth());
+                } else {
+                    System.out.println("You can't go that way");
+                }
+                break;
+            default:
+                System.out.println("bad input, try again");
+                break;
         }
     }
 
+    // checks if a given location is a place a player can move
     public boolean validateLocation(Location destination){
         return !destination.getName().equals("NOTHING");
     }
@@ -64,6 +71,7 @@ public class Player {
     }
 
     public Location getCurrentLocation() {
+
         return currentLocation;
     }
 

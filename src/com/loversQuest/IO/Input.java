@@ -19,6 +19,7 @@ public class Input {
 
     public void userActionPrompt() {
 
+        //prompt user for action
         System.out.println("What would you like to do? [ 'go', 'look' ]");
 
         String responseInput = userInput.nextLine();
@@ -33,9 +34,17 @@ public class Input {
     }
 
     public void goActionPrompt(){
-        System.out.println("Where would you like to go?");
+        System.out.println("Where would you like to go? (north, south, east, west): ");
         String response = userInput.nextLine().toLowerCase();
         player.go(response);
+
+    }
+
+    public void lookActionPrompt(){
+
+    }
+
+    public void inspectActionPrompt(){
 
     }
 

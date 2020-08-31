@@ -1,4 +1,4 @@
-package com.loversQuest.gameWorld;
+package com.loversQuest.gameWorldPieces;
 
 public enum CardinalDirection {
     NORTH, SOUTH, EAST, WEST;

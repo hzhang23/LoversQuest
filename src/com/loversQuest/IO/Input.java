@@ -2,7 +2,7 @@ package com.loversQuest.IO;
 
 
 import com.loversQuest.GameWorld;
-import com.loversQuest.gameWorld.Player;
+import com.loversQuest.gameWorldPieces.Player;
 
 import java.util.Scanner;
 
@@ -17,6 +17,7 @@ public class Input {
         this.player = game.p1;
     }
 
+    //TODO: better error / input checking on responseInput and all methods that use util.Scanner
     public void userActionPrompt() {
 
         //prompt user for action
@@ -33,8 +34,9 @@ public class Input {
         }
     }
 
+    //TODO: error checking on user input response
     public void goActionPrompt(){
-        System.out.println("Where would you like to go? (north, south, east, west): ");
+        System.out.println("Where would you like to go? (North, South, East, West): ");
         String response = userInput.nextLine().toLowerCase();
         player.go(response);
 

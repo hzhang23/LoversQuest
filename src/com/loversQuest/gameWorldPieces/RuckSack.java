@@ -1,6 +1,7 @@
 package com.loversQuest.gameWorldPieces;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class RuckSack {
@@ -8,17 +9,20 @@ public class RuckSack {
     protected Map<String, Integer> items = new HashMap<>();
 
     // CTOR
-    protected RuckSack(String item, int quantity) {
-        this.items = items;
+    public RuckSack() {}
+
+    public RuckSack(String item) {
+        items.put(item, 1);
     }
 
     // Business Methods
-    protected void addItem(String item, int quantity) {
-        this.items.put(item, quantity);
+    public void addItem(String item) {
+        items.put(item, 1);
     }
 
-    protected void displayItems() {
-        // display all contents of ruckSack
+    // display all items in ruckSack
+    protected void displayRuckSackContents() {
+        System.out.println("Contents of RuckSack: ");
         items.forEach((key, value) -> System.out.println(key + ":" + value));
     }
 }

@@ -6,8 +6,10 @@ public class Player {
     private Location currentLocation;
 
     //  making item instance for testing
-    Item item = new Item("WhiteClaw", 1);
-    RuckSack ruckSack = new RuckSack(item.getName(), item.getQuantity());
+//    Item item = new Item("WhiteClaw", 1);
+    public RuckSack ruckSack = new RuckSack();
+
+//    RuckSack ruckSack = new RuckSack(item.getName(), item.getQuantity());
 
     // CTOR
     public Player(String name, Location currentLocation) {
@@ -68,13 +70,13 @@ public class Player {
         System.out.println(this.getCurrentLocation().getDescription());
     }
 
-    public void get(String item, int quantity) {
+    public void addItem(String item) {
         // call item.addItem() to add item/quantity to ruckSack
-        ruckSack.addItem(item, quantity);
+        ruckSack.addItem(item);
     }
 
     public void displayItems() {
-        ruckSack.displayItems();
+        ruckSack.displayRuckSackContents();
     }
 
     // SETTERS/GETTERS

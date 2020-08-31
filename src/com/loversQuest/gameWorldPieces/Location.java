@@ -1,19 +1,26 @@
 package com.loversQuest.gameWorldPieces;
 
-import java.util.HashMap;
+import java.util.*;
 
 public class Location {
 
     private String name;
     private String description;
+    List<String> itemsList;
 
     //hash map with keys = enum of cardinal directions and values = Location instances
     private HashMap<CardinalDirection, Location> direction = new HashMap<>();
 
     // CTOR
     public Location(String name, String description) {
+        this(name, description, Arrays.asList(""));
+    }
+
+    public Location(String name, String description, List<String> items) {
         this.name = name;
         this.description = description;
+        this.itemsList = items;
+
         this.direction.put(CardinalDirection.NORTH, null);
         this.direction.put(CardinalDirection.SOUTH, null);
         this.direction.put(CardinalDirection.EAST, null);
@@ -24,7 +31,6 @@ public class Location {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -32,9 +38,15 @@ public class Location {
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<String> getItemsList() {
+        return itemsList;
+    }
+    public void setItemsList(List<String> itemsList) {
+        this.itemsList = itemsList;
     }
 
     // return value from direction hashmap corresponding to the given enum

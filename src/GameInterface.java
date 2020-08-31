@@ -1,5 +1,6 @@
 import com.loversQuest.*;
 import com.loversQuest.IO.*;
+import com.loversQuest.gameWorldPieces.RuckSack;
 
 public class GameInterface {
 
@@ -11,12 +12,15 @@ public class GameInterface {
 //        output.displayIntroDialog();
 
         // testing items/ruckSack class
-        g1.p1.get("whiteclaw", 0);
+//        g1.p1.get("whiteclaw");
+//        g1.p1.get("tourniquet");
+//        g1.p1.get("pt belt");
 //        g1.p1.displayItems();
 
-        g1.p1.get("tourniquet", 1);
-        g1.p1.get("pt belt", 4);
+
+        g1.equipPlayer();
         g1.p1.displayItems();
+//        System.out.println(g1.barracks.getItemsList());
 
 //        while(!g1.p1.getCurrentLocation().getName().equals("GAZEBO")){
 //

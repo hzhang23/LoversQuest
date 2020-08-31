@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 public class Input {
 
+    InputParser parser = new InputParser();
+
     GameWorld game;
     Player player;
     Scanner userInput = new Scanner(System.in);
@@ -31,7 +33,9 @@ public class Input {
 
         String[] response = responseInput.trim().toLowerCase().split("\\s+");
 
-        String actionVerb = response[0];
+        // put first word through parser, account for synonyms of command words.
+//        String actionVerb = response[0];
+        String actionVerb = parser.parseCommand(response[0]);
 
         // go action
         if (actionVerb.equals("go")) {

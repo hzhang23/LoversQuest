@@ -1,0 +1,2 @@
+go,move,walk,run,head,dance
+look

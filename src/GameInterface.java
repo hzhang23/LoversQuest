@@ -8,17 +8,24 @@ public class GameInterface {
         Input input = new Input(g1);
         Output output = new Output(g1);
         g1.createMap();
-        output.displayIntroDialog();
+//        output.displayIntroDialog();
 
+        // testing items/ruckSack class
+        g1.p1.get("whiteclaw", 0);
+//        g1.p1.displayItems();
 
-        while(!g1.p1.getCurrentLocation().getName().equals("GAZEBO")){
+        g1.p1.get("tourniquet", 1);
+        g1.p1.get("pt belt", 4);
+        g1.p1.displayItems();
 
-            //TODO: do we need this line / method?
-            //System.out.println(output.displayPlayerStatus());
-
-            System.out.println("\n" + output.locationDescription());
-            input.userActionPrompt();
-        }
+//        while(!g1.p1.getCurrentLocation().getName().equals("GAZEBO")){
+//
+//            //TODO: do we need this line / method?
+////            System.out.println(output.displayPlayerStatus());
+//
+//            System.out.println("\n" + output.locationDescription());
+//            input.userActionPrompt();
+//        }
 
     }
 }

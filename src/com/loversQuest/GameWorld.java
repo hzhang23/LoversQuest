@@ -2,6 +2,9 @@ package com.loversQuest;
 
 import com.loversQuest.gameWorldPieces.Location;
 import com.loversQuest.gameWorldPieces.Player;
+import com.loversQuest.gameWorldPieces.RuckSack;
+
+import java.util.HashMap;
 
 public class GameWorld {
     public Location nothing = new Location("NOTHING", "THIS IS NOTHING");

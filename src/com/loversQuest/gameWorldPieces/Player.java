@@ -5,6 +5,10 @@ public class Player {
     private String name;
     private Location currentLocation;
 
+    //  making item instance for testing
+    Item item = new Item("WhiteClaw", 1);
+    RuckSack ruckSack = new RuckSack(item.getName(), item.getQuantity());
+
     // CTOR
     public Player(String name, Location currentLocation) {
         this.name = name;
@@ -60,9 +64,17 @@ public class Player {
         return !destination.getName().equals("NOTHING");
     }
 
-    public void look(){
+    public void look() {
         System.out.println(this.getCurrentLocation().getDescription());
+    }
 
+    public void get(String item, int quantity) {
+        // call item.addItem() to add item/quantity to ruckSack
+        ruckSack.addItem(item, quantity);
+    }
+
+    public void displayItems() {
+        ruckSack.displayItems();
     }
 
     // SETTERS/GETTERS

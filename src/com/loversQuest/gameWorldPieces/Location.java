@@ -10,7 +10,6 @@ public class Location {
     //hash map with keys = enum of cardinal directions and values = Location instances
     private HashMap<CardinalDirection, Location> direction = new HashMap<>();
 
-
     // CTOR
     public Location(String name, String description) {
         this.name = name;

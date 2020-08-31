@@ -2,10 +2,14 @@ package com.loversQuest;
 
 import com.loversQuest.gameWorldPieces.Location;
 import com.loversQuest.gameWorldPieces.Player;
+import com.loversQuest.gameWorldPieces.RuckSack;
+
+import java.util.Arrays;
+import java.util.HashMap;
 
 public class GameWorld {
     public Location nothing = new Location("NOTHING", "THIS IS NOTHING");
-    public Location barracks = new Location("BARRACKS", "It smells of gym socks and peanut butter.");
+    public Location barracks = new Location("BARRACKS", "It smells of gym socks and peanut butter.", Arrays.asList("WhiteClaw"));
 
     public Location gym = new Location("GYM", "You watch a soldier conduct the “BEND AND REACH” in the " +
             "squat rack while grunts and clanking of weights \n" +
@@ -40,6 +44,12 @@ public class GameWorld {
             "He or She or they or it asks, “How many white claws did you bring me?”\n");
 
     public Player p1 = new Player("Bob", barracks);
+
+    public void equipPlayer() {
+        p1.addItem("m16");
+        p1.addItem("uncrustable");
+        p1.addItem("camelback");
+    }
 
     // sets N, S, E, W directions of rooms in relation to one another
     public void createMap(){

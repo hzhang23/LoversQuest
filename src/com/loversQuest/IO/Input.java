@@ -1,6 +1,5 @@
 package com.loversQuest.IO;
 
-
 import com.loversQuest.GameWorld;
 import com.loversQuest.gameWorldPieces.Player;
 
@@ -43,7 +42,6 @@ public class Input {
                 direction = response[1];
                 // player.go returns false if bad input, return statement prevents displayGoResponse() from running
                 if(!player.go(direction)) return;
-
             }
             System.out.println(displayGoResponse(direction));
             //look action
@@ -52,7 +50,6 @@ public class Input {
         }else{
             System.out.println("Unreadable input. Please try again.");
         }
-
     }
 
 
@@ -62,18 +59,13 @@ public class Input {
         String response = userInput.nextLine().toLowerCase();
         player.go(response);
         return response;
-
     }
 
     public void lookActionPrompt(){
         player.look();
-
     }
 
     public void inspectActionPrompt(){
-
     }
-
-
 
 }

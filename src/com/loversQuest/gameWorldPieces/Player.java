@@ -15,7 +15,7 @@ public class Player {
 
     //go function can result in navigating to "NOTHING" area. need to error check if
     // indicated direction is not a room and prevent movement.
-    public void go(String directionInput) {
+    public boolean go(String directionInput) {
 
         String direction = directionInput.toLowerCase();
 
@@ -50,8 +50,9 @@ public class Player {
                 break;
             default:
                 System.out.println("bad input, try again");
-                break;
+                return false;
         }
+        return true;
     }
 
     // checks if a given location is a place a player can move

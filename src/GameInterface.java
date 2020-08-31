@@ -21,7 +21,7 @@ public class GameInterface {
 
         g1.equipPlayer();
         g1.p1.displayItems();
-//        System.out.println(g1.barracks.getItemsList());
+        System.out.println(g1.barracks.getItemsList());
 
 
 

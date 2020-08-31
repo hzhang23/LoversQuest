@@ -32,8 +32,8 @@ public class Output {
     }
 
     //TODO: is this necessary as it is currently implemented?
-    public String displayPlayerStatus(){
-        String status = "You are currently in the " + player.getCurrentLocation().getName();
+    public String displayGoResponse(String direction){
+        String status = "You head to the " +direction+ " and find yourself in the " + player.getCurrentLocation().getName();
         return status;
     }
 

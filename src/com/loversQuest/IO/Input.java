@@ -17,6 +17,11 @@ public class Input {
         this.player = game.p1;
     }
 
+    public String displayGoResponse(String direction){
+        String status = "You head to the " +direction+ " and find yourself in the " + player.getCurrentLocation().getName();
+        return status;
+    }
+
     //TODO: better error / input checking on responseInput and all methods that use util.Scanner
     public void userActionPrompt() {
 
@@ -25,20 +30,38 @@ public class Input {
 
         String responseInput = userInput.nextLine();
 
-        String response = responseInput.toLowerCase();
+        String[] response = responseInput.trim().toLowerCase().split("\\s+");
 
-        if (response.equals("go")) {
-            goActionPrompt();
-        } else if (response.equals("look")) {
-            lookActionPrompt();
+        String actionVerb = response[0];
+
+        // go action
+        if (actionVerb.equals("go")) {
+            String direction;
+            if(response.length < 2){
+                direction = goActionPrompt();
+            }else{
+                direction = response[1];
+                // player.go returns false if bad input, return statement prevents displayGoResponse() from running
+                if(!player.go(direction)) return;
+
+            }
+            System.out.println(displayGoResponse(direction));
+            //look action
+        } else if (actionVerb.equals("look")) {
+            player.look();
+        }else{
+            System.out.println("Unreadable input. Please try again.");
         }
+
     }
 
+
     //TODO: error checking on user input response
-    public void goActionPrompt(){
+    public String goActionPrompt(){
         System.out.println("Where would you like to go? (North, South, East, West): ");
         String response = userInput.nextLine().toLowerCase();
         player.go(response);
+        return response;
 
     }
 

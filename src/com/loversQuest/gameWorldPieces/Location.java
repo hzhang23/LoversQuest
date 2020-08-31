@@ -6,7 +6,11 @@ public class Location {
 
     private String name;
     private String description;
+
     List<String> itemsList;
+
+    private NonPlayerCharacters occupant;
+
 
     //hash map with keys = enum of cardinal directions and values = Location instances
     private HashMap<CardinalDirection, Location> direction = new HashMap<>();
@@ -42,11 +46,21 @@ public class Location {
         this.description = description;
     }
 
+
     public List<String> getItemsList() {
         return itemsList;
     }
     public void setItemsList(List<String> itemsList) {
         this.itemsList = itemsList;
+    }
+
+    public NonPlayerCharacters getOccupant(){
+        return occupant;
+    }
+
+    public void setOccupant(NonPlayerCharacters occupant) {
+        this.occupant = occupant;
+
     }
 
     // return value from direction hashmap corresponding to the given enum

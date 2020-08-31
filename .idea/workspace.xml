@@ -23,6 +23,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LoversQuest/GameInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LoversQuest/GameInterface.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LoversQuest/com/loversQuest/GameWorld.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LoversQuest/com/loversQuest/GameWorld.class" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/out/production/LoversQuest/com/loversQuest/gameWorldPieces/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LoversQuest/com/loversQuest/gameWorldPieces/Item.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LoversQuest/com/loversQuest/gameWorldPieces/Location.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LoversQuest/com/loversQuest/gameWorldPieces/Location.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LoversQuest/com/loversQuest/gameWorldPieces/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LoversQuest/com/loversQuest/gameWorldPieces/Player.class" afterDir="false" />
@@ -33,6 +34,17 @@
       <change beforePath="$PROJECT_DIR$/src/com/loversQuest/gameWorldPieces/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/loversQuest/gameWorldPieces/Location.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/loversQuest/gameWorldPieces/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/loversQuest/gameWorldPieces/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/loversQuest/gameWorldPieces/RuckSack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/loversQuest/gameWorldPieces/RuckSack.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/out/production/LoversQuest/com/loversQuest/IO/Input.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LoversQuest/com/loversQuest/IO/Input.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LoversQuest/com/loversQuest/IO/Output.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LoversQuest/com/loversQuest/IO/Output.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LoversQuest/com/loversQuest/gameWorld/Location.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LoversQuest/com/loversQuest/gameWorld/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/loversQuest/GameWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/loversQuest/GameWorld.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/loversQuest/IO/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/loversQuest/IO/Input.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/loversQuest/gameWorldPieces/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/loversQuest/gameWorldPieces/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/loversQuest/gameWorldPieces/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/loversQuest/gameWorldPieces/Player.java" afterDir="false" />
+>>>>>>> npcbranch
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,12 +87,13 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e1e4fbb4-d3bc-4296-959b-8e73d9968d3f" name="Default Changelist" comment="" />
+      <changelist id="386e9de1-fb7b-4bce-941f-fa5c58f2511f" name="Default Changelist" comment="" />
       <created>1598630255617</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -105,6 +118,7 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="141" y="149" key="#Project_Structure/-1680.23.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598630510064" />
+<<<<<<< HEAD
     <state x="773" y="274" key="#com.intellij.ide.util.MemberChooser" timestamp="1598906055077">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -133,5 +147,36 @@
     <state width="1878" height="205" key="GridCell.Tab.0.right/-1680.23.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598910365417" />
     <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.3.1920.1040@-1920.3.1920.1040" timestamp="1598651751525" />
     <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1598653449557" />
+=======
+    <state x="773" y="247" key="#com.intellij.ide.util.MemberChooser" timestamp="1598905976565">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="773" y="274" key="#com.intellij.ide.util.MemberChooser/-1680.23.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598632669114" />
+    <state x="773" y="247" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1598905976565" />
+    <state width="1860" height="279" key="GridCell.Tab.0.bottom" timestamp="1598909156345">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1878" height="318" key="GridCell.Tab.0.bottom/-1680.23.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598640476700" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.3.1920.1040@-1920.3.1920.1040" timestamp="1598895496031" />
+    <state width="1860" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1598909156345" />
+    <state width="1860" height="279" key="GridCell.Tab.0.center" timestamp="1598909156344">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1878" height="318" key="GridCell.Tab.0.center/-1680.23.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598640476698" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.3.1920.1040@-1920.3.1920.1040" timestamp="1598895496031" />
+    <state width="1860" height="279" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1598909156344" />
+    <state width="1860" height="279" key="GridCell.Tab.0.left" timestamp="1598909156344">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1878" height="318" key="GridCell.Tab.0.left/-1680.23.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598640476698" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.3.1920.1040@-1920.3.1920.1040" timestamp="1598895496031" />
+    <state width="1860" height="279" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1598909156344" />
+    <state width="1860" height="279" key="GridCell.Tab.0.right" timestamp="1598909156344">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1878" height="318" key="GridCell.Tab.0.right/-1680.23.1680.1027/0.23.1920.1057@0.23.1920.1057" timestamp="1598640476699" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.3.1920.1040@-1920.3.1920.1040" timestamp="1598895496031" />
+    <state width="1860" height="279" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.3.1920.1040@0.0.1920.1040" timestamp="1598909156344" />
+>>>>>>> npcbranch
   </component>
 </project>

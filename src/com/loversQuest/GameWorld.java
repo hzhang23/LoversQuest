@@ -1,6 +1,7 @@
 package com.loversQuest;
 
 import com.loversQuest.gameWorldPieces.Location;
+import com.loversQuest.gameWorldPieces.NonPlayerCharacters;
 import com.loversQuest.gameWorldPieces.Player;
 import com.loversQuest.gameWorldPieces.RuckSack;
 
@@ -45,11 +46,21 @@ public class GameWorld {
 
     public Player p1 = new Player("Bob", barracks);
 
+
     public void equipPlayer() {
         p1.addItem("m16");
         p1.addItem("uncrustable");
         p1.addItem("camelback");
     }
+
+    //Instantiate NPCs
+    NonPlayerCharacters sickCallRanger = new NonPlayerCharacters("sick call ranger", laundryRoom);
+    NonPlayerCharacters chowHallLady = new NonPlayerCharacters("chow hall lady", chowHall);
+    NonPlayerCharacters drillSergeant = new NonPlayerCharacters("drill sergeant", range);
+    NonPlayerCharacters blueFalcon = new NonPlayerCharacters("blue falcon", portaJohn);
+    NonPlayerCharacters officer = new NonPlayerCharacters("officer", px);
+    NonPlayerCharacters ghostyPlayer = new NonPlayerCharacters("ghost", px);
+
 
     // sets N, S, E, W directions of rooms in relation to one another
     public void createMap(){
@@ -58,41 +69,49 @@ public class GameWorld {
         barracks.setNorth(courtYard);
         barracks.setSouth(nothing);
         barracks.setWest(laundryRoom);
+        barracks.setOccupant(ghostyPlayer);
 
         laundryRoom.setWest(nothing);
         laundryRoom.setNorth(nothing);
         laundryRoom.setSouth(nothing);
         laundryRoom.setEast(barracks);
+        laundryRoom.setOccupant(sickCallRanger);
 
         courtYard.setSouth(barracks);
         courtYard.setNorth(range);
         courtYard.setWest(nothing);
         courtYard.setEast(nothing);
+        courtYard.setOccupant(ghostyPlayer);
 
         range.setSouth(courtYard);
         range.setNorth(nothing);
         range.setWest(nothing);
         range.setEast(nothing);
+        range.setOccupant(drillSergeant);
 
         gym.setWest(barracks);
         gym.setNorth(portaJohn);
         gym.setSouth(chowHall);
         gym.setEast(nothing);
+        gym.setOccupant(ghostyPlayer);
 
         portaJohn.setSouth(gym);
         portaJohn.setWest(nothing);
         portaJohn.setNorth(nothing);
         portaJohn.setEast(nothing);
+        portaJohn.setOccupant(blueFalcon);
 
         chowHall.setNorth(gym);
         chowHall.setEast(nothing);
         chowHall.setWest(nothing);
         chowHall.setSouth(px);
+        chowHall.setOccupant(chowHallLady);
 
         px.setNorth(chowHall);
         px.setEast(nothing);
         px.setWest(gazebo);
         px.setSouth(nothing);
+        px.setOccupant(officer);
 
         gazebo.setEast(px);
         gazebo.setNorth(nothing);
@@ -100,5 +119,9 @@ public class GameWorld {
         gazebo.setSouth(nothing);
 
     }
+
+
+
+
 
 }

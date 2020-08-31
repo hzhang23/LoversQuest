@@ -96,4 +96,9 @@ public class Player {
     public void setCurrentLocation(Location currentLocation) {
         this.currentLocation = currentLocation;
     }
+
+
+    public String interact(){
+        return currentLocation.getOccupant().getName();
+    }
 }

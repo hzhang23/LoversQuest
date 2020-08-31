@@ -8,13 +8,15 @@ public class GameInterface {
         Input input = new Input(g1);
         Output output = new Output(g1);
         g1.createMap();
-        Output.displayIntroDialog();
+        output.displayIntroDialog();
 
 
         while(!g1.p1.getCurrentLocation().getName().equals("GAZEBO")){
 
-            System.out.println(output.displayPlayerStatus());
-            System.out.println(output.locationDescription());
+            //TODO: do we need this line / method?
+            //System.out.println(output.displayPlayerStatus());
+
+            System.out.println("\n" + output.locationDescription());
             input.userActionPrompt();
         }
 

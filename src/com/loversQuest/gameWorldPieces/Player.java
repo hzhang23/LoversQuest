@@ -1,6 +1,4 @@
-package com.loversQuest.gameWorld;
-
-import com.loversQuest.gameWorld.Location;
+package com.loversQuest.gameWorldPieces;
 
 public class Player {
 

@@ -26,7 +26,7 @@ public class Input {
     public void userActionPrompt() {
 
         //prompt user for action
-        System.out.println("What would you like to do? [ 'go', 'look' ]");
+        System.out.println("What would you like to do? [ 'go', 'look', 'interact']");
 
         String responseInput = userInput.nextLine();
 
@@ -49,8 +49,10 @@ public class Input {
             //look action
         } else if (actionVerb.equals("look")) {
             player.look();
-        }else{
-            System.out.println("Unreadable input. Please try again.");
+        }else if(actionVerb.equals("interact")){
+            System.out.println(player.interact());}
+            else{
+                System.out.println("Unreadable input. Please try again.");
         }
 
     }

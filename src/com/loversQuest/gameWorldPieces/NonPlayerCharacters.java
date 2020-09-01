@@ -25,6 +25,10 @@ public class NonPlayerCharacters {
         this.location = location;
     }
 
+    public String interact(){
+        return "Hi my name is " + this.name;
+    }
+
 
 
 }

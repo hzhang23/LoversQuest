@@ -76,7 +76,7 @@ public class Player {
         if(currentLocation.getOccupant() == null){
             return "There is no one here";
         }else{
-            return currentLocation.getOccupant().getName() + " is here.";
+            return currentLocation.getOccupant().getName() + " is here.\nThey say: " + currentLocation.getOccupant().interact();
         }
 
     }
@@ -86,7 +86,11 @@ public class Player {
         ruckSack.addItem(item);
     }
 
-    public boolean getItem(String itemName){
+    public Item getItem(String itemName){
+        return this.ruckSack.getItem(itemName.toLowerCase());
+    }
+
+    public boolean pickUpItem(String itemName){
         //loop through items in current location
         boolean gotItem = false;
         for(int i = 0; i < currentLocation.getItemsList().size(); i++){

@@ -6,11 +6,8 @@ public class Location {
 
     private String name;
     private String description;
-
     private ArrayList<Item> itemsList = new ArrayList<>();
-
     private NonPlayerCharacters occupant;
-
 
     //hash map with keys = enum of cardinal directions and values = Location instances
     private HashMap<CardinalDirection, Location> direction = new HashMap<>();

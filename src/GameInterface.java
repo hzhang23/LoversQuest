@@ -11,8 +11,6 @@ public class GameInterface {
         g1.createMap();
 
 
-
-
         g1.equipPlayer();
 
         output.displayIntroDialog();

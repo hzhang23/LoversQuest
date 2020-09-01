@@ -27,7 +27,7 @@ public class Input {
     public void userActionPrompt() {
 
         //prompt user for action
-        System.out.println("What would you like to do? [ 'go', 'look', 'interact', 'inventory']");
+        System.out.println("What would you like to do? [ 'go', 'look', 'interact', 'inventory', 'get item']");
 
         String responseInput = userInput.nextLine();
 
@@ -54,6 +54,19 @@ public class Input {
             case "look" -> System.out.println(player.look());
             case "interact" -> System.out.println(player.interact());
             case "inventory" -> System.out.println(player.displayItems());
+            case "get" ->{
+                String itemName;
+                if(response.length < 2){
+                    System.out.println("You can't get nothing");
+                }else{
+                    itemName = response[1];
+                    if(player.getItem(itemName)){
+                        System.out.println("You picked up " + response[1]);
+                    }else{
+                        System.out.println("You can't pick that up");
+                    };
+                }
+            }
             default -> System.out.println("Unreadable input. Please try again.");
         }
     }

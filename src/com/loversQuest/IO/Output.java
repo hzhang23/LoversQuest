@@ -13,6 +13,7 @@ public class Output {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
 
+
     public Output(GameWorld game) {
         this.game = game;
         this.player = game.p1;
@@ -26,8 +27,8 @@ public class Output {
                 "Beware of fellow students, diseases, and drill sergeants. \nTry to complete all your basic warrior skills " +
                 "while acquiring as many white claws as possible before graduation.... \n");
         System.out.println("You open your eyes, and find yourself in the barracks staring up at the crooked ceiling tiles above. It’s the day before AIT graduation.\n" +
-                "You must complete all the warrior tasks while collecting as many WCs as possible to meet up with your " + ANSI_RED + "AIT bf/gf" + ANSI_RESET + " for a few adult beverages\n" +
-                "and " + ANSI_RED + "cuddles" + ANSI_RESET+ " before you are both sent off to your duty stations." );
+                "You must complete all the warrior tasks while collecting as many WCs as possible to meet up with your AIT bf/gf for a few adult beverages\n" +
+                "and cuddles before you are both sent off to your duty stations.");
     }
 
     //TODO: is this necessary as it is currently implemented?

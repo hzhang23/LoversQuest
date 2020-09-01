@@ -6,10 +6,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class GameWorld {
-
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_RESET = "\u001B[0m";
-
     public Location nothing = new Location("NOTHING", "THIS IS NOTHING");
     public Location barracks = new Location("BARRACKS", "It smells of gym socks and peanut butter.");
 

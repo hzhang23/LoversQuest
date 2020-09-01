@@ -7,9 +7,6 @@ import java.util.Scanner;
 
 public class Input {
 
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_RESET = "\u001B[0m";
-
     InputParser parser = new InputParser();
 
     GameWorld game;
@@ -30,8 +27,7 @@ public class Input {
     public void userActionPrompt() {
 
         //prompt user for action
-//        System.out.println(ANSI_PURPLE + "\nWhat would you like to do? [ 'go', 'look', 'interact', 'inventory', 'get item']" + ANSI_RESET);
-        System.out.println("\nWhat would you like to do? " + ANSI_PURPLE +  "[ go, look, interact, inventory, get <item> ]" + ANSI_RESET);
+        System.out.println("What would you like to do? [ 'go', 'look', 'interact', 'inventory', 'get item']");
 
         String responseInput = userInput.nextLine();
 
@@ -91,7 +87,7 @@ public class Input {
 
     //TODO: error checking on user input response
     public String goActionPrompt(){
-        System.out.println("Where would you like to go? " + ANSI_PURPLE + "[ North, South, East, West ]: " + ANSI_RESET);
+        System.out.println("Where would you like to go? (North, South, East, West): ");
         String response = userInput.nextLine().toLowerCase();
         player.go(response);
         return response;

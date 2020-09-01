@@ -1,16 +1,13 @@
 package com.loversQuest;
 
-import com.loversQuest.gameWorldPieces.Location;
-import com.loversQuest.gameWorldPieces.NonPlayerCharacters;
-import com.loversQuest.gameWorldPieces.Player;
-import com.loversQuest.gameWorldPieces.RuckSack;
+import com.loversQuest.gameWorldPieces.*;
 
 import java.util.Arrays;
 import java.util.HashMap;
 
 public class GameWorld {
     public Location nothing = new Location("NOTHING", "THIS IS NOTHING");
-    public Location barracks = new Location("BARRACKS", "It smells of gym socks and peanut butter.", Arrays.asList("WhiteClaw"));
+    public Location barracks = new Location("BARRACKS", "It smells of gym socks and peanut butter.");
 
     public Location gym = new Location("GYM", "You watch a soldier conduct the “BEND AND REACH” in the " +
             "squat rack while grunts and clanking of weights \n" +
@@ -45,31 +42,39 @@ public class GameWorld {
             "He or She or they or it asks, “How many white claws did you bring me?”\n");
 
     public Player p1 = new Player("Bob", barracks);
+    public Item rifle = new Item("M16");
+    public Item uncrustable = new Item("Uncrustable");
+    public Item camelback = new Item("CamelBack");
+    public Item whiteClaw1 = new Item("WhiteClaw");
+    public Item whiteClaw2 = new Item("WhiteClaw");
+    public Item whiteClaw3 = new Item("WhiteClaw");
+    public Item whiteClaw4 = new Item("WhiteClaw");
 
 
     public void equipPlayer() {
-        p1.addItem("m16");
-        p1.addItem("uncrustable");
-        p1.addItem("camelback");
+        p1.addItem(rifle);
+        p1.addItem(uncrustable);
+        p1.addItem(camelback);
     }
 
     //Instantiate NPCs
-    NonPlayerCharacters sickCallRanger = new NonPlayerCharacters("sick call ranger", laundryRoom);
-    NonPlayerCharacters chowHallLady = new NonPlayerCharacters("chow hall lady", chowHall);
-    NonPlayerCharacters drillSergeant = new NonPlayerCharacters("drill sergeant", range);
-    NonPlayerCharacters blueFalcon = new NonPlayerCharacters("blue falcon", portaJohn);
-    NonPlayerCharacters officer = new NonPlayerCharacters("officer", px);
-    NonPlayerCharacters ghostyPlayer = new NonPlayerCharacters("ghost", px);
+    public NonPlayerCharacters sickCallRanger = new NonPlayerCharacters("sick call ranger", laundryRoom);
+    public NonPlayerCharacters chowHallLady = new NonPlayerCharacters("chow hall lady", chowHall);
+    public NonPlayerCharacters rangeDrillSergeant = new NonPlayerCharacters("drill sergeant", range);
+    public NonPlayerCharacters blueFalcon = new NonPlayerCharacters("blue falcon", portaJohn);
+    public NonPlayerCharacters officer = new NonPlayerCharacters("officer", px);
+    public NonPlayerCharacters gymDrill = new NonPlayerCharacters("Drill Sergeant", gym);
+    public NonPlayerCharacters ghostyPlayer = new NonPlayerCharacters("ghost", px);
 
 
-    // sets N, S, E, W directions of rooms in relation to one another
+    // sets N, S, E, W directions of rooms in relation to one another, add characters and items
     public void createMap(){
 
         barracks.setEast(gym);
         barracks.setNorth(courtYard);
         barracks.setSouth(nothing);
         barracks.setWest(laundryRoom);
-        barracks.setOccupant(ghostyPlayer);
+        barracks.addItem(whiteClaw1);
 
         laundryRoom.setWest(nothing);
         laundryRoom.setNorth(nothing);
@@ -81,31 +86,33 @@ public class GameWorld {
         courtYard.setNorth(range);
         courtYard.setWest(nothing);
         courtYard.setEast(nothing);
-        courtYard.setOccupant(ghostyPlayer);
 
         range.setSouth(courtYard);
         range.setNorth(nothing);
         range.setWest(nothing);
         range.setEast(nothing);
-        range.setOccupant(drillSergeant);
+        range.setOccupant(rangeDrillSergeant);
+        range.addItem(whiteClaw2);
 
         gym.setWest(barracks);
         gym.setNorth(portaJohn);
         gym.setSouth(chowHall);
         gym.setEast(nothing);
-        gym.setOccupant(ghostyPlayer);
+        gym.setOccupant(gymDrill);
 
         portaJohn.setSouth(gym);
         portaJohn.setWest(nothing);
         portaJohn.setNorth(nothing);
         portaJohn.setEast(nothing);
         portaJohn.setOccupant(blueFalcon);
+        portaJohn.addItem(whiteClaw2);
 
         chowHall.setNorth(gym);
         chowHall.setEast(nothing);
         chowHall.setWest(nothing);
         chowHall.setSouth(px);
         chowHall.setOccupant(chowHallLady);
+        chowHall.addItem(whiteClaw3);
 
         px.setNorth(chowHall);
         px.setEast(nothing);

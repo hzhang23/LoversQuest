@@ -1,3 +1,5 @@
 go,move,walk,run,head,dance
 look
-interact
+interact,speak,talk
+inventory
+get

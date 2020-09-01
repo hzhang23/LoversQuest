@@ -5,12 +5,16 @@ import java.util.HashMap;
 public class Item {
 
     private String name;
-    private int quantity;
+    private int quantity = 1;
 
     // CTOR
     public Item(String name, int quantity) {
         this.name = name;
         this.quantity = quantity;
+    }
+
+    public Item(String name){
+        this.name = name;
     }
 
     // ACCESSOR METHODS
@@ -28,4 +32,8 @@ public class Item {
         this.quantity = quantity;
     }
 
+    @Override
+    public String toString() {
+        return this.getName();
+    }
 }

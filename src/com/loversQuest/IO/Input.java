@@ -27,7 +27,7 @@ public class Input {
     public void userActionPrompt() {
 
         //prompt user for action
-        System.out.println("What would you like to do? [ 'go', 'look', 'interact']");
+        System.out.println("What would you like to do? [ 'go', 'look', 'interact', 'inventory']");
 
         String responseInput = userInput.nextLine();
 
@@ -38,23 +38,23 @@ public class Input {
         String actionVerb = parser.parseCommand(response[0]);
 
         // go action
-        if (actionVerb.equals("go")) {
-            String direction;
-            if(response.length < 2){
-                direction = goActionPrompt();
-            }else{
-                direction = response[1];
-                // player.go returns false if bad input, return statement prevents displayGoResponse() from running
-                if(!player.go(direction)) return;
+        //look action
+        switch (actionVerb) {
+            case "go" -> {
+                String direction;
+                if (response.length < 2) {
+                    direction = goActionPrompt();
+                } else {
+                    direction = response[1];
+                    // player.go returns false if bad input, return statement prevents displayGoResponse() from running
+                    if (!player.go(direction)) return;
+                }
+                System.out.println(displayGoResponse(direction));
             }
-            System.out.println(displayGoResponse(direction));
-            //look action
-        } else if (actionVerb.equals("look")) {
-            player.look();
-        }else if(actionVerb.equals("interact")){
-            System.out.println(player.interact());}
-            else{
-                System.out.println("Unreadable input. Please try again.");
+            case "look" -> System.out.println(player.look());
+            case "interact" -> System.out.println(player.interact());
+            case "inventory" -> System.out.println(player.displayItems());
+            default -> System.out.println("Unreadable input. Please try again.");
         }
     }
 

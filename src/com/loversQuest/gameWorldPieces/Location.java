@@ -7,7 +7,7 @@ public class Location {
     private String name;
     private String description;
 
-    List<String> itemsList;
+    private ArrayList<Item> itemsList = new ArrayList<>();
 
     private NonPlayerCharacters occupant;
 
@@ -16,14 +16,10 @@ public class Location {
     private HashMap<CardinalDirection, Location> direction = new HashMap<>();
 
     // CTOR
-    public Location(String name, String description) {
-        this(name, description, Arrays.asList(""));
-    }
 
-    public Location(String name, String description, List<String> items) {
+    public Location(String name, String description) {
         this.name = name;
         this.description = description;
-        this.itemsList = items;
 
         this.direction.put(CardinalDirection.NORTH, null);
         this.direction.put(CardinalDirection.SOUTH, null);
@@ -40,18 +36,32 @@ public class Location {
     }
 
     public String getDescription() {
-        return description;
+        if(this.itemsList.size() > 0){
+            return description + ". You see a " + this.getItemsList().toString();
+        }else{
+            return description;
+        }
+
     }
     public void setDescription(String description) {
         this.description = description;
     }
 
 
-    public List<String> getItemsList() {
+    public List<Item> getItemsList() {
         return itemsList;
     }
-    public void setItemsList(List<String> itemsList) {
+
+    public void setItemsList(ArrayList<Item> itemsList) {
         this.itemsList = itemsList;
+    }
+
+    public void addItem(Item item){
+        this.itemsList.add(item);
+    }
+
+    public void removeItem(Item item){
+        this.itemsList.remove(item);
     }
 
     public NonPlayerCharacters getOccupant(){

@@ -7,7 +7,7 @@ public class Player {
 
     //  making item instance for testing
 //    Item item = new Item("WhiteClaw", 1);
-    public RuckSack ruckSack = new RuckSack();
+    private RuckSack ruckSack = new RuckSack();
 
 //    RuckSack ruckSack = new RuckSack(item.getName(), item.getQuantity());
 
@@ -66,17 +66,32 @@ public class Player {
         return !destination.getName().equals("NOTHING");
     }
 
-    public void look() {
-        System.out.println(this.getCurrentLocation().getDescription());
+    public String look() {
+        return ("You look around and " + this.getCurrentLocation().getDescription());
     }
 
-    public void addItem(String item) {
+    public String interact(){
+        if(currentLocation.getOccupant() == null){
+            return "There is no one here";
+        }else{
+            return currentLocation.getOccupant().getName() + " is here.";
+        }
+
+    }
+
+    public void addItem(Item item) {
         // call item.addItem() to add item/quantity to ruckSack
         ruckSack.addItem(item);
     }
 
-    public void displayItems() {
-        ruckSack.displayRuckSackContents();
+    public void getItem(String itemName){
+        //loop through items in current location
+        // if string itemName matches an item in current location
+            // add item to inventory and remove item from location
+    }
+
+    public String displayItems() {
+        return ruckSack.displayRuckSackContents();
     }
 
     // SETTERS/GETTERS
@@ -95,10 +110,5 @@ public class Player {
 
     public void setCurrentLocation(Location currentLocation) {
         this.currentLocation = currentLocation;
-    }
-
-
-    public String interact(){
-        return currentLocation.getOccupant().getName();
     }
 }

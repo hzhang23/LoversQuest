@@ -60,10 +60,23 @@ public class Input {
                     System.out.println("You can't get nothing");
                 }else{
                     itemName = response[1];
-                    if(player.getItem(itemName)){
+                    if(player.pickUpItem(itemName)){
                         System.out.println("You picked up " + response[1]);
                     }else{
                         System.out.println("You can't pick that up");
+                    };
+                }
+            }
+            case "use" ->{
+                String itemName;
+                if(response.length < 2){
+                    System.out.println("You can't use nothing");
+                }else{
+                    itemName = response[1];
+                    if(player.getItem(itemName) != null){
+                        System.out.println(player.getItem(itemName).use());
+                    }else{
+                        System.out.println("You can't use that.");
                     };
                 }
             }

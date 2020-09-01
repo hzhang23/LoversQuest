@@ -1,7 +1,6 @@
 package com.loversQuest.gameWorldPieces;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class RuckSack {
 
@@ -17,6 +16,16 @@ public class RuckSack {
     // Business Methods
     public void addItem(Item item) {
         items.put(item, 1);
+    }
+
+    public Item getItem(String itemName){
+        List<Item> itemsList = new ArrayList<>(items.keySet());
+        for(int i = 0; i < itemsList.size(); i++){
+            if(itemsList.get(i).getName().toLowerCase().equals(itemName.toLowerCase())){
+                return itemsList.get(i);
+            }
+        }
+        return null;
     }
 
     // display all items in ruckSack

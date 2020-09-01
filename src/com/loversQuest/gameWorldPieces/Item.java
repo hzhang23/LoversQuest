@@ -6,6 +6,7 @@ public class Item {
 
     private String name;
     private int quantity = 1;
+    private String useResponse;
 
     // CTOR
     public Item(String name, int quantity) {
@@ -13,8 +14,14 @@ public class Item {
         this.quantity = quantity;
     }
 
-    public Item(String name){
+    public Item(String name, String use){
         this.name = name;
+        this.useResponse = use;
+    }
+
+    //business method
+    public String use(){
+        return this.useResponse;
     }
 
     // ACCESSOR METHODS
@@ -34,6 +41,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return this.getName();
+        return this.getName().toLowerCase();
     }
 }

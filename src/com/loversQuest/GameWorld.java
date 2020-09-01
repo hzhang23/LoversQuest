@@ -42,13 +42,13 @@ public class GameWorld {
             "He or She or they or it asks, “How many white claws did you bring me?”\n");
 
     public Player p1 = new Player("Bob", barracks);
-    public Item rifle = new Item("M16");
-    public Item uncrustable = new Item("Uncrustable");
-    public Item camelback = new Item("CamelBack");
-    public Item whiteClaw1 = new Item("WhiteClaw");
-    public Item whiteClaw2 = new Item("WhiteClaw");
-    public Item whiteClaw3 = new Item("WhiteClaw");
-    public Item whiteClaw4 = new Item("WhiteClaw");
+    public Item rifle = new Item("M16", "You shoot your rifle in the air in celebration");
+    public Item uncrustable = new Item("Uncrustable", "You look lovingly at the peanut butter and strawberry jam sandwich");
+    public Item camelback = new Item("CamelBack", "You take a refreshing drink of moldy water.");
+    public Item whiteClaw1 = new Item("WhiteClaw", "You take a refreshing drink of Natural Lime");
+    public Item whiteClaw2 = new Item("WhiteClaw", "You take a refreshing drink of Black Cherry.");
+    public Item whiteClaw3 = new Item("WhiteClaw", "You take a refreshing drink of Ruby Grapefruit");
+    public Item whiteClaw4 = new Item("WhiteClaw", "You take a refreshing drink of Mango");
 
 
     public void equipPlayer() {

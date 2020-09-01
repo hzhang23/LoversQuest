@@ -6,7 +6,7 @@ public class Location {
 
     private String name;
     private String description;
-
+    private Container container;
     private ArrayList<Item> itemsList = new ArrayList<>();
 
     private NonPlayerCharacters occupant;
@@ -47,6 +47,13 @@ public class Location {
         this.description = description;
     }
 
+    public Container getContainer() {
+        return container;
+    }
+
+    public void setContainer(Container container) {
+        this.container = container;
+    }
 
     public List<Item> getItemsList() {
         return itemsList;

@@ -49,6 +49,7 @@ public class GameWorld {
     public Item whiteClaw2 = new Item("WhiteClaw", "You take a refreshing drink of Black Cherry.");
     public Item whiteClaw3 = new Item("WhiteClaw", "You take a refreshing drink of Ruby Grapefruit");
     public Item whiteClaw4 = new Item("WhiteClaw", "You take a refreshing drink of Mango");
+    public Item ptBelt = new Item("PT-Belt", "You put it on and you are super visible and safe");
 
 
     public void equipPlayer() {
@@ -59,12 +60,19 @@ public class GameWorld {
 
     //Instantiate NPCs
     public NonPlayerCharacters sickCallRanger = new NonPlayerCharacters("sick call ranger", laundryRoom);
+
     public NonPlayerCharacters chowHallLady = new NonPlayerCharacters("chow hall lady", chowHall);
     public NonPlayerCharacters rangeDrillSergeant = new NonPlayerCharacters("drill sergeant", range);
     public NonPlayerCharacters blueFalcon = new NonPlayerCharacters("blue falcon", portaJohn);
     public NonPlayerCharacters officer = new NonPlayerCharacters("officer", px);
     public NonPlayerCharacters gymDrill = new NonPlayerCharacters("Drill Sergeant", gym);
     public NonPlayerCharacters ghostyPlayer = new NonPlayerCharacters("ghost", px);
+
+    public Container ammoBox = new Container("Ammo Box","Nothing happens" );
+    public Container trashCan = new Container("Trash Can", "Nothing happens");
+    public Container ifak = new Container("IFAK", "You feel very healthy after using the individual first aid kit");
+    public Container ceiling = new Container("Tiles", "It's dusty up here");
+
 
 
     // sets N, S, E, W directions of rooms in relation to one another, add characters and items
@@ -74,31 +82,39 @@ public class GameWorld {
         barracks.setNorth(courtYard);
         barracks.setSouth(nothing);
         barracks.setWest(laundryRoom);
-        barracks.addItem(whiteClaw1);
+        barracks.setContainer(ceiling);
+        ceiling.addItem(whiteClaw1);
 
         laundryRoom.setWest(nothing);
         laundryRoom.setNorth(nothing);
         laundryRoom.setSouth(nothing);
         laundryRoom.setEast(barracks);
         laundryRoom.setOccupant(sickCallRanger);
+        sickCallRanger.setKeyItem(uncrustable);
 
         courtYard.setSouth(barracks);
         courtYard.setNorth(range);
         courtYard.setWest(nothing);
         courtYard.setEast(nothing);
+        courtYard.setContainer(trashCan);
+        trashCan.addItem(ptBelt);
 
         range.setSouth(courtYard);
         range.setNorth(nothing);
         range.setWest(nothing);
         range.setEast(nothing);
         range.setOccupant(rangeDrillSergeant);
-        range.addItem(whiteClaw2);
+        ammoBox.addItem(whiteClaw2);
+        range.setContainer(ammoBox);
+        rangeDrillSergeant.setKeyItem(rifle);
+
 
         gym.setWest(barracks);
         gym.setNorth(portaJohn);
         gym.setSouth(chowHall);
         gym.setEast(nothing);
         gym.setOccupant(gymDrill);
+        gymDrill.setKeyItem(ptBelt);
 
         portaJohn.setSouth(gym);
         portaJohn.setWest(nothing);
@@ -119,6 +135,8 @@ public class GameWorld {
         px.setWest(gazebo);
         px.setSouth(nothing);
         px.setOccupant(officer);
+        px.setContainer(ifak);
+        ifak.addItem(whiteClaw4);
 
         gazebo.setEast(px);
         gazebo.setNorth(nothing);

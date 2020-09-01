@@ -37,8 +37,4 @@ public class InputParser {
 
     }
 
-    public static void main(String[] args) {
-        InputParser test = new InputParser();
-        System.out.println(test.parseCommand("beta"));
-    }
 }

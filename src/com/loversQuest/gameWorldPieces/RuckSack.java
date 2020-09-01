@@ -20,9 +20,9 @@ public class RuckSack {
 
     public Item getItem(String itemName){
         List<Item> itemsList = new ArrayList<>(items.keySet());
-        for(int i = 0; i < itemsList.size(); i++){
-            if(itemsList.get(i).getName().toLowerCase().equals(itemName.toLowerCase())){
-                return itemsList.get(i);
+        for (Item item : itemsList) {
+            if (item.getName().toLowerCase().equals(itemName.toLowerCase())) {
+                return item;
             }
         }
         return null;

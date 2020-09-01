@@ -1,6 +1,7 @@
 package com.loversQuest.IO;
 
 import com.loversQuest.GameWorld;
+import com.loversQuest.gameWorldPieces.Item;
 import com.loversQuest.gameWorldPieces.Player;
 
 import java.util.Scanner;
@@ -84,6 +85,23 @@ public class Input {
                     };
                 }
             }
+            case "inspect" ->{
+                String containerName;
+                if(response.length < 2){
+                    System.out.println("You can't inspect nothing");
+                }else{
+                    containerName = response[1];
+                    if(player.inspect() != null){
+                        System.out.println(player.inspect());
+                        for(Item item: player.inspect()){
+                            player.getCurrentLocation().addItem(item);
+                        }
+                    }else{
+                        System.out.println("You can't look there.");
+                    };
+                }
+            }
+
             default -> System.out.println("Unreadable input. Please try again.");
         }
     }

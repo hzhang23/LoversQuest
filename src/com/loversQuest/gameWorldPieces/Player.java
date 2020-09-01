@@ -1,5 +1,7 @@
 package com.loversQuest.gameWorldPieces;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Player {
@@ -76,7 +78,7 @@ public class Player {
         if(currentLocation.getOccupant() == null){
             return "There is no one here";
         }else{
-            return currentLocation.getOccupant().getName() + " is here.\nThey say: " + currentLocation.getOccupant().interact();
+            return currentLocation.getOccupant().getName() + " is here.\nThey say: " + currentLocation.getOccupant().interact(this);
         }
 
     }
@@ -95,7 +97,7 @@ public class Player {
         boolean gotItem = false;
         for(int i = 0; i < currentLocation.getItemsList().size(); i++){
             Item locationItem = currentLocation.getItemsList().get(i);
-            if (itemName.toLowerCase().equals(locationItem.getName().toLowerCase())){
+            if (itemName.toLowerCase().equals(locationItem.getName().toLowerCase()) && !(locationItem instanceof Container)){
                 this.addItem(locationItem);
                 currentLocation.removeItem(locationItem);
                 gotItem = true;
@@ -104,6 +106,11 @@ public class Player {
         return gotItem;
         // if string itemName matches an item in current location
             // add item to inventory and remove item from location
+    }
+
+    public ArrayList<Item> inspect() {
+        ArrayList<Item> result = currentLocation.getContainer().displayContents();
+        return result;
     }
 
     public String displayItems() {

@@ -33,6 +33,9 @@ public class NonPlayerCharacters {
     }
 
     public String interact(Player player){
+        if (this.keyItem == null){
+            return "I got nothing for you loser";
+        }
         if(player.getItem(keyItem.getName()) != null){
             player.addItem(prize);
             return "Ah, I see you have " + keyItem + ", good work soldier!";

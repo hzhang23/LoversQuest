@@ -9,15 +9,9 @@ public class GameInterface {
         Input input = new Input(g1);
         Output output = new Output(g1);
         g1.createMap();
-
-
-
-
         g1.equipPlayer();
 
         output.displayIntroDialog();
-
-
 
         while(!g1.p1.getCurrentLocation().getName().equals("GAZEBO")){
             //TODO: do we need this line / method?

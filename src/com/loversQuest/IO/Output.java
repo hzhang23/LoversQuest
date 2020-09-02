@@ -13,12 +13,10 @@ public class Output {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
 
-
     public Output(GameWorld game) {
         this.game = game;
         this.player = game.p1;
     }
-
 
     public void displayIntroDialog() {
         System.out.println("WELCOME TO " + ANSI_RED + "LOVERSQUEST \n" + ANSI_RESET);
@@ -47,6 +45,4 @@ public class Output {
                 "\nTo the West is " + currentLocation.getWest().getName();
         return description;
     }
-
-
 }

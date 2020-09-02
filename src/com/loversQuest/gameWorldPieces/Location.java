@@ -47,7 +47,6 @@ public class Location {
         this.description = description;
     }
 
-
     public List<Item> getItemsList() {
         return itemsList;
     }

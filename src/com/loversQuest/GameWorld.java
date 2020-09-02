@@ -45,11 +45,17 @@ public class GameWorld {
     public Item rifle = new Item("M16", "You shoot your rifle in the air in celebration");
     public Item uncrustable = new Item("Uncrustable", "You look lovingly at the peanut butter and strawberry jam sandwich");
     public Item camelback = new Item("CamelBack", "You take a refreshing drink of moldy water.");
-    public Item whiteClaw1 = new Item("WhiteClaw", "You take a refreshing drink of Natural Lime");
-    public Item whiteClaw2 = new Item("WhiteClaw", "You take a refreshing drink of Black Cherry.");
-    public Item whiteClaw3 = new Item("WhiteClaw", "You take a refreshing drink of Ruby Grapefruit");
-    public Item whiteClaw4 = new Item("WhiteClaw", "You take a refreshing drink of Mango");
+//    public Item whiteClaw1 = new Item("Natural Lime WhiteClaw", "You take a refreshing drink of Natural Lime");
+//    public Item whiteClaw2 = new Item("Black Cherry WhiteClaw", "You take a refreshing drink of Black Cherry.");
+//    public Item whiteClaw3 = new Item("Ruby Grapefruit WhiteClaw", "You take a refreshing drink of Ruby Grapefruit");
+//    public Item whiteClaw4 = new Item("Mango WhiteClaw", "You take a refreshing drink of Mango");
+//    public Item whiteClaw5 = new Item("Watermelon WhiteClaw", "You take a refreshing drink of Watermelon");
 
+    public Item whiteClaw1 = new Item("Natural Lime WhiteClaw", "You take a refreshing drink of Natural Lime");
+    public Item whiteClaw2 = new Item("Black Cherry WhiteClaw", "You take a refreshing drink of Black Cherry.");
+    public Item whiteClaw3 = new Item("Ruby Grapefruit WhiteClaw", "You take a refreshing drink of Ruby Grapefruit");
+    public Item whiteClaw4 = new Item("Mango WhiteClaw", "You take a refreshing drink of Mango");
+    public Item whiteClaw5 = new Item("Watermelon WhiteClaw", "You take a refreshing drink of Watermelon");
 
     public void equipPlayer() {
         p1.addItem(rifle);
@@ -65,7 +71,6 @@ public class GameWorld {
     public NonPlayerCharacters officer = new NonPlayerCharacters("officer", px);
     public NonPlayerCharacters gymDrill = new NonPlayerCharacters("Drill Sergeant", gym);
     public NonPlayerCharacters ghostyPlayer = new NonPlayerCharacters("ghost", px);
-
 
     // sets N, S, E, W directions of rooms in relation to one another, add characters and items
     public void createMap(){
@@ -92,7 +97,7 @@ public class GameWorld {
         range.setWest(nothing);
         range.setEast(nothing);
         range.setOccupant(rangeDrillSergeant);
-        range.addItem(whiteClaw2);
+        range.addItem(whiteClaw4);
 
         gym.setWest(barracks);
         gym.setNorth(portaJohn);
@@ -124,11 +129,5 @@ public class GameWorld {
         gazebo.setNorth(nothing);
         gazebo.setWest(nothing);
         gazebo.setSouth(nothing);
-
     }
-
-
-
-
-
 }

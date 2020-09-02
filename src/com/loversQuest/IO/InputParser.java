@@ -4,7 +4,6 @@ import java.util.*;
 
 public class InputParser {
 
-
     // takes in a word and looks for a matching command word
     public String parseCommand(String command) {
         try{

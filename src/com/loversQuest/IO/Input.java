@@ -1,5 +1,7 @@
 package com.loversQuest.IO;
 
+import com.loversQuest.GUI.MapFactory;
+import com.loversQuest.GUI.MapFrame;
 import com.loversQuest.GameWorld;
 import com.loversQuest.gameWorldPieces.Item;
 import com.loversQuest.gameWorldPieces.Player;
@@ -12,23 +14,22 @@ public class Input {
     public static final String ANSI_RESET = "\u001B[0m";
 
     InputParser parser = new InputParser();
+    MapFactory generateMap = new MapFactory();
 
-    GameWorld game;
-    Player player;
     Scanner userInput = new Scanner(System.in);
 
-    public Input(GameWorld game) {
-        this.game = game;
-        this.player = game.p1;
+    public Input() {
+//        this.game = game;
+//        this.player = game.p1;
     }
 
-    public String displayGoResponse(String direction){
+    public String displayGoResponse(String direction, Player player){
         String status = "You head to the " +direction+ " and find yourself in the " + player.getCurrentLocation().getName();
         return status;
     }
 
     //TODO: better error / input checking on responseInput and all methods that use util.Scanner
-    public void userActionPrompt() {
+    public void userActionPrompt(Player player) {
 
         //prompt user for action
 //        System.out.println("What would you like to do? [ 'go', 'look', 'interact', 'inventory', 'get item']");
@@ -48,13 +49,14 @@ public class Input {
             case "go" -> {
                 String direction;
                 if (response.length < 2) {
-                    direction = goActionPrompt();
+                    direction = goActionPrompt(player);
                 } else {
                     direction = response[1];
                     // player.go returns false if bad input, return statement prevents displayGoResponse() from running
                     if (!player.go(direction)) return;
                 }
-                System.out.println(displayGoResponse(direction));
+                //continue here with ousmane, point him in direction of display go response for function
+                System.out.println(displayGoResponse(direction, player));
             }
             case "look" -> System.out.println(player.look());
             case "interact" -> System.out.println(player.interact());
@@ -101,6 +103,9 @@ public class Input {
                     };
                 }
             }
+            case "map" ->{
+                generateMap.showMapFrame();
+            }
 
             default -> System.out.println("Unreadable input. Please try again.");
         }
@@ -108,7 +113,7 @@ public class Input {
 
 
     //TODO: error checking on user input response
-    public String goActionPrompt(){
+    public String goActionPrompt(Player player){
 //        System.out.println("Where would you like to go? (North, South, East, West): ");
         System.out.println("Where would you like to go? " + ANSI_PURPLE + "[ North, South, East, West ]: " + ANSI_RESET);
         String response = userInput.nextLine().toLowerCase();
@@ -116,7 +121,7 @@ public class Input {
         return response;
     }
 
-    public void lookActionPrompt(){
+    public void lookActionPrompt(Player player){
         player.look();
     }
 

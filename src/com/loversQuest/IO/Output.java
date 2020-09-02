@@ -4,6 +4,11 @@ import com.loversQuest.GameWorld;
 import com.loversQuest.gameWorldPieces.Location;
 import com.loversQuest.gameWorldPieces.Player;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Output {
@@ -17,6 +22,29 @@ public class Output {
     public Output(GameWorld game) {
         this.game = game;
         this.player = game.p1;
+    }
+
+    // make string send string to jframe, start jframe
+    public StringBuilder showMap(){
+        StringBuilder jframeString = new StringBuilder();
+        try{
+            //read in csv file
+//            DataInputStream in = new DataInputStream(getClass().getResourceAsStream("inputWords.txt"));
+            DataInputStream in = new DataInputStream(getClass().getResourceAsStream("Utilities/map.txt"));
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            String strLine;
+
+            //continue to read in file while lines exist
+            while ((strLine = br.readLine()) != null){
+                jframeString.append(strLine).append("\n");
+
+            }
+
+            in.close();
+        }catch (Exception e){
+            System.err.println("error: " + e.getMessage());
+        }
+        return(jframeString);
     }
 
 

@@ -121,6 +121,7 @@ public class GameWorld {
         portaJohn.setNorth(nothing);
         portaJohn.setEast(nothing);
         portaJohn.setOccupant(blueFalcon);
+        blueFalcon.setKeyItem(whiteClaw2);
         portaJohn.addItem(whiteClaw2);
 
         chowHall.setNorth(gym);

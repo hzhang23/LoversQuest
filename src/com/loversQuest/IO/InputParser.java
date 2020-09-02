@@ -9,7 +9,8 @@ public class InputParser {
     public String parseCommand(String command) {
         try{
             //read in csv file
-            DataInputStream in = new DataInputStream(getClass().getResourceAsStream("inputWords.txt"));
+//            DataInputStream in = new DataInputStream(getClass().getResourceAsStream("inputWords.txt"));
+            DataInputStream in = new DataInputStream(getClass().getResourceAsStream("Utilities/test.txt"));
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String strLine;
 

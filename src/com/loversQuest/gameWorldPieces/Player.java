@@ -29,6 +29,8 @@ public class Player {
 
         String direction = directionInput.toLowerCase();
 
+        // "there has got to be a better way to do this" moar methods
+        // externalize 'decision making"?
         switch (direction) {
             case "east":
                 if (validateLocation(this.currentLocation.getEast())) {
@@ -80,7 +82,6 @@ public class Player {
         }else{
             return currentLocation.getOccupant().getName() + " is here.\nThey say: " + currentLocation.getOccupant().interact(this);
         }
-
     }
 
     public void addItem(Item item) {
@@ -117,6 +118,10 @@ public class Player {
         return ruckSack.displayRuckSackContents();
     }
 
+    public List<Item> getAllItems() {
+        return ruckSack.items;
+    }
+
     // SETTERS/GETTERS
     public String getName() {
         return name;
@@ -127,7 +132,6 @@ public class Player {
     }
 
     public Location getCurrentLocation() {
-
         return currentLocation;
     }
 

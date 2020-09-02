@@ -45,11 +45,14 @@ public class GameWorld {
     public Item rifle = new Item("M16", "You shoot your rifle in the air in celebration");
     public Item uncrustable = new Item("Uncrustable", "You look lovingly at the peanut butter and strawberry jam sandwich");
     public Item camelback = new Item("CamelBack", "You take a refreshing drink of moldy water.");
-    public Item whiteClaw1 = new Item("WhiteClaw", "You take a refreshing drink of Natural Lime");
-    public Item whiteClaw2 = new Item("WhiteClaw", "You take a refreshing drink of Black Cherry.");
-    public Item whiteClaw3 = new Item("WhiteClaw", "You take a refreshing drink of Ruby Grapefruit");
-    public Item whiteClaw4 = new Item("WhiteClaw", "You take a refreshing drink of Mango");
-    public Item ptBelt = new Item("PT-Belt", "You put it on and you are super visible and safe");
+    public Item ptBelt = new Item("Pt Belt", "You put it on and are now super safe and visible.");
+
+
+    public Item whiteClaw1 = new Item("Natural Lime WhiteClaw", "You take a refreshing drink of Natural Lime");
+    public Item whiteClaw2 = new Item("Black Cherry WhiteClaw", "You take a refreshing drink of Black Cherry.");
+    public Item whiteClaw3 = new Item("Ruby Grapefruit WhiteClaw", "You take a refreshing drink of Ruby Grapefruit");
+    public Item whiteClaw4 = new Item("Mango WhiteClaw", "You take a refreshing drink of Mango");
+    public Item whiteClaw5 = new Item("Watermelon WhiteClaw", "You take a refreshing drink of Watermelon");
 
 
     public void equipPlayer() {
@@ -60,7 +63,6 @@ public class GameWorld {
 
     //Instantiate NPCs
     public NonPlayerCharacters sickCallRanger = new NonPlayerCharacters("sick call ranger", laundryRoom);
-
     public NonPlayerCharacters chowHallLady = new NonPlayerCharacters("chow hall lady", chowHall);
     public NonPlayerCharacters rangeDrillSergeant = new NonPlayerCharacters("drill sergeant", range);
     public NonPlayerCharacters blueFalcon = new NonPlayerCharacters("blue falcon", portaJohn);
@@ -72,8 +74,6 @@ public class GameWorld {
     public Container trashCan = new Container("Trash Can", "Nothing happens");
     public Container ifak = new Container("IFAK", "You feel very healthy after using the individual first aid kit");
     public Container ceiling = new Container("Tiles", "It's dusty up here");
-
-
 
     // sets N, S, E, W directions of rooms in relation to one another, add characters and items
     public void createMap(){
@@ -107,6 +107,7 @@ public class GameWorld {
         ammoBox.addItem(whiteClaw2);
         range.setContainer(ammoBox);
         rangeDrillSergeant.setKeyItem(rifle);
+
 
 
         gym.setWest(barracks);
@@ -143,11 +144,5 @@ public class GameWorld {
         gazebo.setNorth(nothing);
         gazebo.setWest(nothing);
         gazebo.setSouth(nothing);
-
     }
-
-
-
-
-
 }

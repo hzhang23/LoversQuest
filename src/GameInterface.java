@@ -14,6 +14,7 @@ public class GameInterface {
 
 
         output.displayIntroDialog();
+
         while(!g1.p1.getCurrentLocation().getName().equals("GAZEBO")){
             //TODO: do we need this line / method?
 //            System.out.println(output.displayPlayerStatus());

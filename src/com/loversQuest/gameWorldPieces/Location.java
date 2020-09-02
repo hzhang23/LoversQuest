@@ -47,6 +47,7 @@ public class Location {
         this.description = description;
     }
 
+
     public Container getContainer() {
         return container;
     }
@@ -54,6 +55,7 @@ public class Location {
     public void setContainer(Container container) {
         this.container = container;
     }
+
 
     public List<Item> getItemsList() {
         return itemsList;

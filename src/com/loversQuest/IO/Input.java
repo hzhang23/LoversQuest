@@ -3,11 +3,14 @@ package com.loversQuest.IO;
 import com.loversQuest.GameWorld;
 import com.loversQuest.gameWorldPieces.Player;
 
+
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Input {
 
     InputParser parser = new InputParser();
+    GraphicClass graphicImage = new GraphicClass();
 
     GameWorld game;
     Player player;
@@ -18,13 +21,15 @@ public class Input {
         this.player = game.p1;
     }
 
-    public String displayGoResponse(String direction){
+    public String displayGoResponse(String direction) throws IOException {
         String status = "You head to the " +direction+ " and find yourself in the " + player.getCurrentLocation().getName();
-        return status;
+
+          return status;
+//                  + graphicImage.printLocation("home.txt");
     }
 
     //TODO: better error / input checking on responseInput and all methods that use util.Scanner
-    public void userActionPrompt() {
+    public void userActionPrompt() throws IOException {
 
         //prompt user for action
         System.out.println("What would you like to do? [ 'go', 'look', 'interact']");
@@ -48,6 +53,7 @@ public class Input {
                 if(!player.go(direction)) return;
             }
             System.out.println(displayGoResponse(direction));
+
             //look action
         } else if (actionVerb.equals("look")) {
             player.look();
@@ -60,7 +66,7 @@ public class Input {
 
 
     //TODO: error checking on user input response
-    public String goActionPrompt(){
+    public String goActionPrompt() throws IOException {
         System.out.println("Where would you like to go? (North, South, East, West): ");
         String response = userInput.nextLine().toLowerCase();
         player.go(response);

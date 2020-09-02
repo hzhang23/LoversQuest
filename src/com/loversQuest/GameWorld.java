@@ -1,5 +1,6 @@
 package com.loversQuest;
 
+import com.loversQuest.IO.GraphicClass;
 import com.loversQuest.gameWorldPieces.Location;
 import com.loversQuest.gameWorldPieces.NonPlayerCharacters;
 import com.loversQuest.gameWorldPieces.Player;
@@ -60,6 +61,10 @@ public class GameWorld {
     NonPlayerCharacters blueFalcon = new NonPlayerCharacters("blue falcon", portaJohn);
     NonPlayerCharacters officer = new NonPlayerCharacters("officer", px);
     NonPlayerCharacters ghostyPlayer = new NonPlayerCharacters("ghost", px);
+
+
+     //    Instantiate GraphicClass
+//  GraphicClass barracksLocation = new GraphicClass("home.txt", barracks);
 
 
     // sets N, S, E, W directions of rooms in relation to one another

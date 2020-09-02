@@ -1,5 +1,9 @@
 package com.loversQuest.gameWorldPieces;
 
+import com.loversQuest.IO.GraphicClass;
+
+import java.io.IOException;
+
 public class Player {
 
     private String name;
@@ -8,6 +12,7 @@ public class Player {
     //  making item instance for testing
 //    Item item = new Item("WhiteClaw", 1);
     public RuckSack ruckSack = new RuckSack();
+    GraphicClass graphicImage = new GraphicClass();
 
 //    RuckSack ruckSack = new RuckSack(item.getName(), item.getQuantity());
 
@@ -21,7 +26,7 @@ public class Player {
 
     //go function can result in navigating to "NOTHING" area. need to error check if
     // indicated direction is not a room and prevent movement.
-    public boolean go(String directionInput) {
+    public boolean go(String directionInput) throws IOException {
 
         String direction = directionInput.toLowerCase();
 
@@ -29,6 +34,7 @@ public class Player {
             case "east":
                 if (validateLocation(this.currentLocation.getEast())) {
                     this.setCurrentLocation(this.currentLocation.getEast());
+                    this.printCurrentAscii();
                 } else {
                     System.out.println("You can't go that way");
                 }
@@ -36,6 +42,9 @@ public class Player {
             case "west":
                 if (validateLocation(this.currentLocation.getWest())) {
                     this.setCurrentLocation(this.currentLocation.getWest());
+//                    When player goes to a location successfully
+//                    print ASCII art associated to current location
+                    this.printCurrentAscii();
                 } else {
                     System.out.println("You can't go that way");
                 }
@@ -43,6 +52,7 @@ public class Player {
             case "south":
                 if (validateLocation(this.currentLocation.getSouth())) {
                     this.setCurrentLocation(this.currentLocation.getSouth());
+                    this.printCurrentAscii();
                 } else {
                     System.out.println("You can't go that way");
                 }
@@ -50,6 +60,7 @@ public class Player {
             case "north":
                 if (validateLocation(this.currentLocation.getNorth())) {
                     this.setCurrentLocation(this.currentLocation.getNorth());
+                    this.printCurrentAscii();
                 } else {
                     System.out.println("You can't go that way");
                 }
@@ -100,5 +111,13 @@ public class Player {
 
     public String interact(){
         return currentLocation.getOccupant().getName();
+    }
+
+    public void printCurrentAscii() throws IOException {
+        if (this.currentLocation.getName().toLowerCase().equals("laundryroom")){
+            graphicImage.printLocation("laundryRoom.txt");
+        } else if(this.currentLocation.getName().toLowerCase().equals("barracks")){
+            graphicImage.printLocation("home.txt");
+        }
     }
 }

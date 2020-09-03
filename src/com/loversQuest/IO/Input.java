@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Input {
 
     InputParser parser = new InputParser();
-    GraphicClass graphicImage = new GraphicClass();
+
 
     GameWorld game;
     Player player;

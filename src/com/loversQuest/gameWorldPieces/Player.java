@@ -73,7 +73,7 @@ public class Player {
     }
 
     // checks if a given location is a place a player can move
-    public boolean validateLocation(Location destination){
+    public boolean validateLocation(Location destination) {
         return !destination.getName().equals("NOTHING");
     }
 
@@ -109,15 +109,24 @@ public class Player {
     }
 
 
-    public String interact(){
+    public String interact() {
         return currentLocation.getOccupant().getName();
     }
 
     public void printCurrentAscii() throws IOException {
-        if (this.currentLocation.getName().toLowerCase().equals("laundryroom")){
-            graphicImage.printLocation("laundryRoom.txt");
-        } else if(this.currentLocation.getName().toLowerCase().equals("barracks")){
-            graphicImage.printLocation("home.txt");
+        //            this.currentLocation.getName().toLowerCase().equals("gazebo");
+        switch (this.currentLocation.getName().toLowerCase()) {
+            case "laundryroom" -> graphicImage.printLocation("laundryRoom.txt");
+            case "barracks" -> graphicImage.printLocation("home.txt");
+            case "gym" -> graphicImage.printLocation("gym.txt");
+            case "courtyard" -> graphicImage.printLocation("courtYard.txt");
+            case "range" -> graphicImage.printLocation("range.txt");
+            case "portajohn" -> graphicImage.printLocation("portaJohn.txt");
+            case "chowhall" -> graphicImage.printLocation("chowHall.txt");
+            case "px" -> graphicImage.printLocation("px.txt");
+            default -> graphicImage.printLocation("gazebo.txt");
         }
+
     }
 }
+

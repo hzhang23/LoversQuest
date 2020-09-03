@@ -12,8 +12,8 @@ public class GameInterface {
         Output output = new Output(g1);
         g1.createMap();
 
-        GraphicClass barracksLocation = new GraphicClass();
-//        barracksLocation.printLocation("home.txt");
+
+
 //        output.displayIntroDialog();
 
         // testing items/ruckSack class

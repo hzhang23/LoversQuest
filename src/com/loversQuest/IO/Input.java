@@ -6,8 +6,11 @@ import com.loversQuest.GameWorld;
 import com.loversQuest.gameWorldPieces.Item;
 import com.loversQuest.gameWorldPieces.Player;
 
+
 import java.awt.*;
 import java.util.Arrays;
+import java.io.IOException;
+
 import java.util.Scanner;
 
 public class Input {
@@ -22,18 +25,24 @@ public class Input {
     Scanner userInput = new Scanner(System.in);
 
 
-    public String displayGoResponse(String direction, Player player){
+
+    public String displayGoResponse(String direction, Player player) throws IOException{
+
         String status = "You head to the " +direction+ " and find yourself in the " + player.getCurrentLocation().getName();
-        return status;
+
+          return status;
+//                  + graphicImage.printLocation("home.txt");
     }
 
     //TODO: better error / input checking on responseInput and all methods that use util.Scanner
 
 
 
-    public String getUserAction(Player player) {
+
+    public String getUserAction(Player player) throws IOException{
 
         String finalResponse = null;
+
 
 
         //prompt user for action
@@ -129,7 +138,8 @@ public class Input {
     }
 
     //TODO: error checking on user input response
-    public String goActionPrompt(Player player){
+
+    public String goActionPrompt(Player player) throws IOException{
         System.out.println("Where would you like to go? " + ANSI_PURPLE + "[ North, South, East, West ]: " + ANSI_RESET);
         String response = userInput.nextLine().toLowerCase();
         player.go(response);

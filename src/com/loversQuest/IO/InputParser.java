@@ -8,7 +8,8 @@ public class InputParser {
     public String parseCommand(String command) {
         try{
             //read in csv file
-            DataInputStream in = new DataInputStream(getClass().getResourceAsStream("inputWords.txt"));
+//            DataInputStream in = new DataInputStream(getClass().getResourceAsStream("inputWords.txt"));
+            DataInputStream in = new DataInputStream(getClass().getResourceAsStream("Utilities/inputWords.txt"));
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String strLine;
 
@@ -36,8 +37,4 @@ public class InputParser {
 
     }
 
-    public static void main(String[] args) {
-        InputParser test = new InputParser();
-        System.out.println(test.parseCommand("beta"));
-    }
 }

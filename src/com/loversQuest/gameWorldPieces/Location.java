@@ -6,7 +6,7 @@ public class Location {
 
     private String name;
     private String description;
-
+    private Container container;
     private ArrayList<Item> itemsList = new ArrayList<>();
 
     private NonPlayerCharacters occupant;
@@ -37,7 +37,7 @@ public class Location {
 
     public String getDescription() {
         if(this.itemsList.size() > 0){
-            return description + ". You see a " + this.getItemsList().toString();
+            return description + ". You find " + this.getItemsList().toString() + " in the room.";
         }else{
             return description;
         }
@@ -46,6 +46,16 @@ public class Location {
     public void setDescription(String description) {
         this.description = description;
     }
+
+
+    public Container getContainer() {
+        return container;
+    }
+
+    public void setContainer(Container container) {
+        this.container = container;
+    }
+
 
     public List<Item> getItemsList() {
         return itemsList;

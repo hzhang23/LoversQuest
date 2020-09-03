@@ -4,3 +4,5 @@ interact,speak,talk
 inventory
 get
 use
+inspect
+map

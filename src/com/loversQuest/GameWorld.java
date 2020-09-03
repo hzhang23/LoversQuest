@@ -45,17 +45,15 @@ public class GameWorld {
     public Item rifle = new Item("M16", "You shoot your rifle in the air in celebration");
     public Item uncrustable = new Item("Uncrustable", "You look lovingly at the peanut butter and strawberry jam sandwich");
     public Item camelback = new Item("CamelBack", "You take a refreshing drink of moldy water.");
-//    public Item whiteClaw1 = new Item("Natural Lime WhiteClaw", "You take a refreshing drink of Natural Lime");
-//    public Item whiteClaw2 = new Item("Black Cherry WhiteClaw", "You take a refreshing drink of Black Cherry.");
-//    public Item whiteClaw3 = new Item("Ruby Grapefruit WhiteClaw", "You take a refreshing drink of Ruby Grapefruit");
-//    public Item whiteClaw4 = new Item("Mango WhiteClaw", "You take a refreshing drink of Mango");
-//    public Item whiteClaw5 = new Item("Watermelon WhiteClaw", "You take a refreshing drink of Watermelon");
+    public Item ptBelt = new Item("Pt Belt", "You put it on and are now super safe and visible.");
+
 
     public Item whiteClaw1 = new Item("Natural Lime WhiteClaw", "You take a refreshing drink of Natural Lime");
     public Item whiteClaw2 = new Item("Black Cherry WhiteClaw", "You take a refreshing drink of Black Cherry.");
     public Item whiteClaw3 = new Item("Ruby Grapefruit WhiteClaw", "You take a refreshing drink of Ruby Grapefruit");
     public Item whiteClaw4 = new Item("Mango WhiteClaw", "You take a refreshing drink of Mango");
     public Item whiteClaw5 = new Item("Watermelon WhiteClaw", "You take a refreshing drink of Watermelon");
+
 
     public void equipPlayer() {
         p1.addItem(rifle);
@@ -72,6 +70,11 @@ public class GameWorld {
     public NonPlayerCharacters gymDrill = new NonPlayerCharacters("Drill Sergeant", gym);
     public NonPlayerCharacters ghostyPlayer = new NonPlayerCharacters("ghost", px);
 
+    public Container ammoBox = new Container("Ammo Box","Nothing happens" );
+    public Container trashCan = new Container("Trash Can", "Nothing happens");
+    public Container ifak = new Container("IFAK", "You feel very healthy after using the individual first aid kit");
+    public Container ceiling = new Container("Tiles", "It's dusty up here");
+
     // sets N, S, E, W directions of rooms in relation to one another, add characters and items
     public void createMap(){
 
@@ -79,37 +82,47 @@ public class GameWorld {
         barracks.setNorth(courtYard);
         barracks.setSouth(nothing);
         barracks.setWest(laundryRoom);
-        barracks.addItem(whiteClaw1);
+        barracks.setContainer(ceiling);
+        ceiling.addItem(whiteClaw1);
 
         laundryRoom.setWest(nothing);
         laundryRoom.setNorth(nothing);
         laundryRoom.setSouth(nothing);
         laundryRoom.setEast(barracks);
         laundryRoom.setOccupant(sickCallRanger);
+        sickCallRanger.setKeyItem(uncrustable);
 
         courtYard.setSouth(barracks);
         courtYard.setNorth(range);
         courtYard.setWest(nothing);
         courtYard.setEast(nothing);
+        courtYard.setContainer(trashCan);
+        trashCan.addItem(ptBelt);
 
         range.setSouth(courtYard);
         range.setNorth(nothing);
         range.setWest(nothing);
         range.setEast(nothing);
         range.setOccupant(rangeDrillSergeant);
-        range.addItem(whiteClaw4);
+        ammoBox.addItem(whiteClaw2);
+        range.setContainer(ammoBox);
+        rangeDrillSergeant.setKeyItem(rifle);
+
+
 
         gym.setWest(barracks);
         gym.setNorth(portaJohn);
         gym.setSouth(chowHall);
         gym.setEast(nothing);
         gym.setOccupant(gymDrill);
+        gymDrill.setKeyItem(ptBelt);
 
         portaJohn.setSouth(gym);
         portaJohn.setWest(nothing);
         portaJohn.setNorth(nothing);
         portaJohn.setEast(nothing);
         portaJohn.setOccupant(blueFalcon);
+        blueFalcon.setKeyItem(whiteClaw2);
         portaJohn.addItem(whiteClaw2);
 
         chowHall.setNorth(gym);
@@ -124,6 +137,8 @@ public class GameWorld {
         px.setWest(gazebo);
         px.setSouth(nothing);
         px.setOccupant(officer);
+        px.setContainer(ifak);
+        ifak.addItem(whiteClaw4);
 
         gazebo.setEast(px);
         gazebo.setNorth(nothing);

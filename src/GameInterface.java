@@ -1,4 +1,5 @@
 import com.loversQuest.*;
+import com.loversQuest.GUI.GameFrame;
 import com.loversQuest.IO.*;
 
 
@@ -8,7 +9,7 @@ public class GameInterface {
         GameWorld g1 = new GameWorld();
         Input input = new Input();
         Output output = new Output(g1);
-
+        GameFrame gameFrame = new GameFrame(input, output);
         g1.createMap();
         g1.equipPlayer();
 

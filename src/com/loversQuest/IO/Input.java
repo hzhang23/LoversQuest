@@ -21,24 +21,6 @@ public class Input {
 
     Scanner userInput = new Scanner(System.in);
 
-//    public Input() {
-//        this.game = game;
-//        this.player = game.p1;
-
-    // private?
-//    GameWorld game; // do we need this?
-//    Player player;
-    // *** look up scanner JAVADOC
-    // how can i point my scanner at a file?
-
-
-    // CTOR
-    // constructor can take in file or sys.in
-//    public Input(GameWorld game) {
-//        this.game = game;
-//        this.player = game.p1;
-//>>>>>>> master
-//    }
 
     public String displayGoResponse(String direction, Player player){
         String status = "You head to the " +direction+ " and find yourself in the " + player.getCurrentLocation().getName();
@@ -57,23 +39,13 @@ public class Input {
 
 
         String[] response = responseInput.trim().toLowerCase().split("\\s+");
-        // if user input = "get watermelon whiteclaw" ==>
-        // {get, natural, lime, whiteclaw}
 
         // parses user response further, into second array
         String stringifiedResponse = String.join(" ", Arrays.copyOfRange(response, 1, response.length));
-        //Arrays.toString(Arrays.copyOfRange(response, 1, response.length)).toLowerCase();
-        // {natural, lime, whiteclaw}
-//        String finalParsedResponse = stringifiedResponse.replace("'", " ");
-        // turn back into string, "natural lime whiteclaw"
-            // use in "get" method below
 
-        // put first word through parser, account for synonyms of command words.
-//        String actionVerb = response[0];
         String actionVerb = parser.parseCommand(response[0]);
 
-        // go action
-        //look action
+        // handles first word of response
         switch (actionVerb) {
             case "go" -> {
                 String direction;
@@ -84,7 +56,6 @@ public class Input {
                     // player.go returns false if bad input, return statement prevents displayGoResponse() from running
                     if (!player.go(direction)) return;
                 }
-                //continue here with ousmane, point him in direction of display go response for function
                 System.out.println(displayGoResponse(direction, player));
             }
             case "look" -> System.out.println(player.look());
@@ -93,13 +64,14 @@ public class Input {
             case "get" ->{
                 Item chosenItem = null;
 
+                // check if item is in location
                 for (Item item: player.getCurrentLocation().getItemsList()) {
                     if (stringifiedResponse.equals(item.getName().toLowerCase())){
                         chosenItem = item;
                         break;
                     }
                 }
-
+                // if item is in location pick up item
                 if (chosenItem != null) {
                     player.pickUpItem(stringifiedResponse);
                     System.out.println("You picked up " + stringifiedResponse);
@@ -107,26 +79,10 @@ public class Input {
                     System.out.println("You can't pick that up");
                 }
 
-                // old code below
-//                String itemName;
-//                if(response.length < 2){
-////                    System.out.println("You can't get nothing");
-//                }else{
-//                    itemName = response[1];
-//                    if(player.pickUpItem(itemName)){
-//                        System.out.println("You picked up " + response[1]);
-//                    }else{
-//                        System.out.println("You can't pick that up");
-//                    };
-//                }
             }
             case "use" ->{
 //              if the item is in current inventory
                 for (Item item: player.getAllItems()) {
-//                    System.out.println(item);
-
-//                    System.out.println("stringifiedResponse " + stringifiedResponse);
-//                    System.out.println("item.getName().toLowerCase() " + item.getName().toLowerCase());
                     if (stringifiedResponse.equals(item.getName().toLowerCase())){
                         System.out.println(player.getItem(item.getName().toLowerCase()).use());
                         return;
@@ -134,34 +90,9 @@ public class Input {
                 }
                 System.out.println("You can't use nothing");
 
-//                for (Item item: player.displayItems()) {
-//                    if (stringifiedResponse.equals(player.getItem())){
-//                        System.out.println(item.use());
-//                    } else {
-//                        System.out.println("You can't use nothing");
-//                    }
-//                }
-
-//                if (chosenItem != null) {
-//                    System.out.println(chosenItem.use());
-//                } else {
-//                    System.out.println("You can't use nothing");
-//                }
-
-                // old code below
-//                String itemName;
-//                if(response.length < 2){
-//                    System.out.println("You can't use nothing");
-//                }else{
-//                    itemName = response[1];
-//                    if(player.getItem(itemName) != null){
-//                        System.out.println(player.getItem(itemName).use());
-//                    }else{
-//                        System.out.println("You can't use that.");
-//                    };
-//                }
             }
             case "inspect" ->{
+                // not currently used because locations have only one container
                 String containerName;
                 if(response.length < 2){
                     System.out.println("You can't inspect nothing");
@@ -177,28 +108,21 @@ public class Input {
                     };
                 }
             }
+            // results in jframe window with map jpeg popping up
             case "map" ->{
                 generateMap.showMapFrame();
             }
 
+            // input action verb does not match
             default -> System.out.println("Unreadable input. Please try again.");
         }
     }
 
     //TODO: error checking on user input response
     public String goActionPrompt(Player player){
-//        System.out.println("Where would you like to go? (North, South, East, West): ");
         System.out.println("Where would you like to go? " + ANSI_PURPLE + "[ North, South, East, West ]: " + ANSI_RESET);
         String response = userInput.nextLine().toLowerCase();
         player.go(response);
         return response;
     }
-
-    public void lookActionPrompt(Player player){
-        player.look();
-    }
-
-    public void inspectActionPrompt(){
-    }
-
 }

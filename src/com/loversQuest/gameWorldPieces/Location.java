@@ -37,7 +37,7 @@ public class Location {
 
     public String getDescription() {
         if(this.itemsList.size() > 0){
-            return description + ". You see a " + this.getItemsList().toString();
+            return description + ". You find " + this.getItemsList().toString() + " in the room.";
         }else{
             return description;
         }

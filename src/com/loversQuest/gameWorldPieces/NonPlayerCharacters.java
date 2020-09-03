@@ -32,6 +32,10 @@ public class NonPlayerCharacters {
         this.location = location;
     }
 
+    public void setPrize(Item item){
+        this.prize = item;
+    }
+
     public String interact(Player player){
         if (this.keyItem == null){
             return "I got nothing for you loser";

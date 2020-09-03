@@ -53,6 +53,9 @@ public class GameWorld {
     public Item whiteClaw3 = new Item("Ruby Grapefruit WhiteClaw", "You take a refreshing drink of Ruby Grapefruit");
     public Item whiteClaw4 = new Item("Mango WhiteClaw", "You take a refreshing drink of Mango");
     public Item whiteClaw5 = new Item("Watermelon WhiteClaw", "You take a refreshing drink of Watermelon");
+    public Item ptCert = new Item("Pt Certificate", "You scored 300");
+    public Item sickCallSlip = new Item("Sick call slip", "You enjoy your soft shoe profile");
+    public Item expertBadge = new Item("Expert Marksmanship Badge", "You can make things more deader better");
 
 
     public void equipPlayer() {
@@ -91,6 +94,7 @@ public class GameWorld {
         laundryRoom.setEast(barracks);
         laundryRoom.setOccupant(sickCallRanger);
         sickCallRanger.setKeyItem(uncrustable);
+        sickCallRanger.setPrize(sickCallSlip);
 
         courtYard.setSouth(barracks);
         courtYard.setNorth(range);
@@ -107,6 +111,7 @@ public class GameWorld {
         ammoBox.addItem(whiteClaw2);
         range.setContainer(ammoBox);
         rangeDrillSergeant.setKeyItem(rifle);
+        rangeDrillSergeant.setPrize(expertBadge);
 
 
 
@@ -116,6 +121,7 @@ public class GameWorld {
         gym.setEast(nothing);
         gym.setOccupant(gymDrill);
         gymDrill.setKeyItem(ptBelt);
+        gymDrill.setPrize(ptCert);
 
         portaJohn.setSouth(gym);
         portaJohn.setWest(nothing);
@@ -124,6 +130,7 @@ public class GameWorld {
         portaJohn.setOccupant(blueFalcon);
         blueFalcon.setKeyItem(whiteClaw2);
         portaJohn.addItem(whiteClaw2);
+        blueFalcon.setPrize(whiteClaw4);
 
         chowHall.setNorth(gym);
         chowHall.setEast(nothing);

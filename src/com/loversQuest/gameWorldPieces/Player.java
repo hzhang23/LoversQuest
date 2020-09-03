@@ -28,6 +28,7 @@ public class Player {
     public boolean go(String directionInput) {
 
         String direction = directionInput.toLowerCase();
+        String response = null;
 
         // "there has got to be a better way to do this" moar methods
         // externalize 'decision making"?
@@ -36,7 +37,7 @@ public class Player {
                 if (validateLocation(this.currentLocation.getEast())) {
                     this.setCurrentLocation(this.currentLocation.getEast());
                 } else {
-                    System.out.println("You can't go that way");
+                    response = ("You can't go that way");
                 }
                 break;
             case "west":

@@ -29,11 +29,17 @@ public class Input {
 
     //TODO: better error / input checking on responseInput and all methods that use util.Scanner
 
-    public void userActionPrompt(Player player) {
+
+
+    public String getUserAction(Player player) {
+
+        String finalResponse = null;
+
 
         //prompt user for action
+        ///move to output class
 //        System.out.println("What would you like to do? [ 'go', 'look', 'interact', 'inventory', 'get item']");
-        System.out.println("\nWhat would you like to do? " + ANSI_PURPLE +  "[ go, look, interact, inventory, get <item> ]" + ANSI_RESET);
+        //System.out.println("\nWhat would you like to do? " + ANSI_PURPLE +  "[ go, look, interact, inventory, get <item> ]" + ANSI_RESET);
 
         String responseInput = userInput.nextLine();
 
@@ -54,13 +60,13 @@ public class Input {
                 } else {
                     direction = response[1];
                     // player.go returns false if bad input, return statement prevents displayGoResponse() from running
-                    if (!player.go(direction)) return;
+                    if (!player.go(direction)) break;
                 }
-                System.out.println(displayGoResponse(direction, player));
+                finalResponse = (displayGoResponse(direction, player));
             }
-            case "look" -> System.out.println(player.look());
-            case "interact" -> System.out.println(player.interact());
-            case "inventory" -> System.out.println(player.displayItems());
+            case "look" -> finalResponse = (player.look());
+            case "interact" -> finalResponse = (player.interact());
+            case "inventory" -> finalResponse = (player.displayItems());
             case "get" ->{
                 Item chosenItem = null;
 
@@ -74,9 +80,9 @@ public class Input {
                 // if item is in location pick up item
                 if (chosenItem != null) {
                     player.pickUpItem(stringifiedResponse);
-                    System.out.println("You picked up " + stringifiedResponse);
+                    finalResponse = ("You picked up " + stringifiedResponse);
                 } else {
-                    System.out.println("You can't pick that up");
+                    finalResponse = ("You can't pick that up");
                 }
 
             }
@@ -84,38 +90,42 @@ public class Input {
 //              if the item is in current inventory
                 for (Item item: player.getAllItems()) {
                     if (stringifiedResponse.equals(item.getName().toLowerCase())){
-                        System.out.println(player.getItem(item.getName().toLowerCase()).use());
-                        return;
+                        finalResponse = (player.getItem(item.getName().toLowerCase()).use());
+                        break;
                     }
                 }
-                System.out.println("You can't use nothing");
+                if(finalResponse == null){
+                    finalResponse = ("You can't use nothing");
+                }
 
             }
             case "inspect" ->{
                 // not currently used because locations have only one container
                 String containerName;
                 if(response.length < 2){
-                    System.out.println("You can't inspect nothing");
+                    finalResponse = ("You can't inspect nothing");
                 }else{
                     containerName = response[1];
                     if(player.inspect() != null){
-                        System.out.println(player.inspect());
+                        finalResponse = (player.inspect()).toString();
                         for(Item item: player.inspect()){
                             player.getCurrentLocation().addItem(item);
                         }
                     }else{
-                        System.out.println("You can't look there.");
+                        finalResponse = ("You can't look there.");
                     };
                 }
             }
             // results in jframe window with map jpeg popping up
             case "map" ->{
                 generateMap.showMapFrame();
+                finalResponse = "Here's the map.";
             }
 
             // input action verb does not match
-            default -> System.out.println("Unreadable input. Please try again.");
+            default -> finalResponse = ("Unreadable input. Please try again.");
         }
+        return finalResponse;
     }
 
     //TODO: error checking on user input response

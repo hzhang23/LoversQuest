@@ -12,9 +12,11 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Output {
+
     GameWorld game;
     Player player;
     Scanner userInput = new Scanner(System.in);
+    public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
 
@@ -59,10 +61,18 @@ public class Output {
         return "This is the intro dialog";
     }
 
+//    public String initialStatus(){
+//        String status = "You've"
+//    }
+
     //TODO: is this necessary as it is currently implemented?
     public String displayGoResponse(String direction){
         String status = "You head to the " +direction+ " and find yourself in the " + player.getCurrentLocation().getName();
         return status;
+    }
+
+    public String promptForAction(){
+        return ("\nWhat would you like to do? " + ANSI_PURPLE +  "[ go, look, interact, inventory, get <item> ]" + ANSI_RESET);
     }
 
     public String locationDescription(){

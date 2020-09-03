@@ -1,8 +1,14 @@
 package com.loversQuest.gameWorldPieces;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import com.loversQuest.IO.GraphicClass;
+
+import java.io.IOException;
+
 
 public class Player {
 
@@ -11,7 +17,10 @@ public class Player {
 
     //  making item instance for testing
 //    Item item = new Item("WhiteClaw", 1);
-    private RuckSack ruckSack = new RuckSack();
+
+    public RuckSack ruckSack = new RuckSack();
+    GraphicClass graphicImage = new GraphicClass();
+
 
 //    RuckSack ruckSack = new RuckSack(item.getName(), item.getQuantity());
 
@@ -25,7 +34,7 @@ public class Player {
 
     //go function can result in navigating to "NOTHING" area. need to error check if
     // indicated direction is not a room and prevent movement.
-    public boolean go(String directionInput) {
+    public boolean go(String directionInput) throws IOException {
 
         String direction = directionInput.toLowerCase();
         String response = null;
@@ -36,6 +45,7 @@ public class Player {
             case "east":
                 if (validateLocation(this.currentLocation.getEast())) {
                     this.setCurrentLocation(this.currentLocation.getEast());
+                    this.printCurrentAscii();
                 } else {
                     response = ("You can't go that way");
                 }
@@ -43,6 +53,9 @@ public class Player {
             case "west":
                 if (validateLocation(this.currentLocation.getWest())) {
                     this.setCurrentLocation(this.currentLocation.getWest());
+//                    When player goes to a location successfully
+//                    print ASCII art associated to current location
+                    this.printCurrentAscii();
                 } else {
                     System.out.println("You can't go that way");
                 }
@@ -50,6 +63,7 @@ public class Player {
             case "south":
                 if (validateLocation(this.currentLocation.getSouth())) {
                     this.setCurrentLocation(this.currentLocation.getSouth());
+                    this.printCurrentAscii();
                 } else {
                     System.out.println("You can't go that way");
                 }
@@ -57,6 +71,7 @@ public class Player {
             case "north":
                 if (validateLocation(this.currentLocation.getNorth())) {
                     this.setCurrentLocation(this.currentLocation.getNorth());
+                    this.printCurrentAscii();
                 } else {
                     System.out.println("You can't go that way");
                 }
@@ -69,7 +84,7 @@ public class Player {
     }
 
     // checks if a given location is a place a player can move
-    public boolean validateLocation(Location destination){
+    public boolean validateLocation(Location destination) {
         return !destination.getName().equals("NOTHING");
     }
 
@@ -77,10 +92,10 @@ public class Player {
         return ("You look around and " + this.getCurrentLocation().getDescription());
     }
 
-    public String interact(){
-        if(currentLocation.getOccupant() == null){
+    public String interact() {
+        if (currentLocation.getOccupant() == null) {
             return "There is no one here";
-        }else{
+        } else {
             return currentLocation.getOccupant().getName() + " is here.\nThey say: " + currentLocation.getOccupant().interact(this);
         }
     }
@@ -90,16 +105,16 @@ public class Player {
         ruckSack.addItem(item);
     }
 
-    public Item getItem(String itemName){
+    public Item getItem(String itemName) {
         return this.ruckSack.getItem(itemName.toLowerCase());
     }
 
-    public boolean pickUpItem(String itemName){
+    public boolean pickUpItem(String itemName) {
         //loop through items in current location
         boolean gotItem = false;
-        for(int i = 0; i < currentLocation.getItemsList().size(); i++){
+        for (int i = 0; i < currentLocation.getItemsList().size(); i++) {
             Item locationItem = currentLocation.getItemsList().get(i);
-            if (itemName.toLowerCase().equals(locationItem.getName().toLowerCase()) && !(locationItem instanceof Container)){
+            if (itemName.toLowerCase().equals(locationItem.getName().toLowerCase()) && !(locationItem instanceof Container)) {
                 this.addItem(locationItem);
                 currentLocation.removeItem(locationItem);
                 gotItem = true;
@@ -107,7 +122,7 @@ public class Player {
         }
         return gotItem;
         // if string itemName matches an item in current location
-            // add item to inventory and remove item from location
+        // add item to inventory and remove item from location
     }
 
     public ArrayList<Item> inspect() {
@@ -139,4 +154,21 @@ public class Player {
     public void setCurrentLocation(Location currentLocation) {
         this.currentLocation = currentLocation;
     }
+
+    public void printCurrentAscii() throws IOException {
+        //            this.currentLocation.getName().toLowerCase().equals("gazebo");
+        switch (this.currentLocation.getName().toLowerCase()) {
+            case "laundryroom" -> graphicImage.printLocation("laundryRoom.txt");
+            case "barracks" -> graphicImage.printLocation("home.txt");
+            case "gym" -> graphicImage.printLocation("gym.txt");
+            case "courtyard" -> graphicImage.printLocation("courtYard.txt");
+            case "range" -> graphicImage.printLocation("range.txt");
+            case "portajohn" -> graphicImage.printLocation("portaJohn.txt");
+            case "chowhall" -> graphicImage.printLocation("chowHall.txt");
+            case "px" -> graphicImage.printLocation("px.txt");
+            default -> graphicImage.printLocation("gazebo.txt");
+        }
+
+    }
 }
+

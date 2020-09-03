@@ -1,5 +1,6 @@
 package com.loversQuest.gameWorldPieces;
 
+
 import java.util.*;
 
 public class Location {

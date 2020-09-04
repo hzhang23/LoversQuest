@@ -45,7 +45,7 @@ public class GameInterface {
                 System.out.println();
             }
 
-            System.out.println("Current Location: " + g1.p1.getCurrentLocation().getName());
+            System.out.println("Current Location: " + g1.p1.getCurrentLocation().getColoredName());
             asciiPrinter.printCurrentAscii(g1.p1);
 
             System.out.println();

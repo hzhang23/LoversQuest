@@ -31,8 +31,12 @@ public class Location {
     }
 
     // SETTERS/GETTERS
-    public String getName() {
+    public String getColoredName() {
         return BLUE + name + ANSI_RESET;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
@@ -45,12 +49,10 @@ public class Location {
         }else{
             return description;
         }
-
     }
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     public Container getContainer() {
         return container;
@@ -59,7 +61,6 @@ public class Location {
     public void setContainer(Container container) {
         this.container = container;
     }
-
 
     public List<Item> getItemsList() {
         return itemsList;
@@ -83,7 +84,6 @@ public class Location {
 
     public void setOccupant(NonPlayerCharacters occupant) {
         this.occupant = occupant;
-
     }
 
     //returns the location that is in the direction given via string

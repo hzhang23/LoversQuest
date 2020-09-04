@@ -195,7 +195,6 @@ public class Player {
         this.currentLocation = currentLocation;
     }
 
-
 //    public void printCurrentAscii() throws IOException {
 //        //            this.currentLocation.getName().toLowerCase().equals("gazebo");
 //

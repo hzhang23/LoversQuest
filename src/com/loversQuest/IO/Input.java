@@ -29,7 +29,7 @@ public class Input {
 
     public String displayGoResponse(String direction, Player player) throws IOException{
 
-        String status = "You head to the " +direction+ " and find yourself in the " + player.getCurrentLocation().getName();
+        String status = "You head to the " +direction+ " and find yourself in the " + player.getCurrentLocation().getColoredName();
 
           return status;
 //                  + graphicImage.printLocation("home.txt");

@@ -35,12 +35,10 @@ public class Output {
 
     //TODO: is this necessary as it is currently implemented?
 
-    public String displayGoResponse(String direction, Player player){
-        String status = "You head to the " +direction+ " and find yourself in the " + player.getCurrentLocation().getName();
-
-        return status;
-    }
-
+//    public String displayGoResponse(String direction, Player player){
+//        String status = "You head to the " +direction+ " and find yourself in the " + player.getCurrentLocation().getColoredName(); // WHY CANT I GET A COLORED NAME HERE?
+//        return status;
+//    }
 
     public String locationDescription(Player player){
         Location currentLocation = player.getCurrentLocation();

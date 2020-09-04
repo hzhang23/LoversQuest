@@ -3,6 +3,7 @@ package com.loversQuest.IO;
 import com.loversQuest.GUI.MapFactory;
 import com.loversQuest.GUI.MapFrame;
 import com.loversQuest.GameWorld;
+import com.loversQuest.gameWorldPieces.CardinalDirection;
 import com.loversQuest.gameWorldPieces.Item;
 import com.loversQuest.gameWorldPieces.Officer;
 import com.loversQuest.gameWorldPieces.Player;
@@ -25,14 +26,24 @@ public class Input {
 
     Scanner userInput = new Scanner(System.in);
 
-
-
     public String displayGoResponse(String direction, Player player) throws IOException{
 
-        String status = "You head to the " +direction+ " and find yourself in the " + player.getCurrentLocation().getColoredName();
+//        String status = "You head to the " + direction + " and find yourself in the " + player.getCurrentLocation().getColoredName();
+//        return status;
 
-          return status;
-//                  + graphicImage.printLocation("home.txt");
+        // loop over directions
+        // if input direction doesn't equal a real direction,
+        for (CardinalDirection realDirections: CardinalDirection.values()) {
+
+            if (realDirections.toString().equalsIgnoreCase(direction)) {
+                String status = "You head to the " + direction + " and find yourself in the " + player.getCurrentLocation().getColoredName();
+                return status;
+            } else {
+                return "Bad Directional Input Private!";
+            }
+        }
+        // why the hell do i need this return statement if im returning in my else block?
+        return "Bad Directional Input";
     }
 
     //TODO: better error / input checking on responseInput and all methods that use util.Scanner
@@ -41,15 +52,12 @@ public class Input {
 
         String finalResponse = null;
 
-
-
         //prompt user for action
         ///move to output class
 //        System.out.println("What would you like to do? [ 'go', 'look', 'interact', 'inventory', 'get item']");
         //System.out.println("\nWhat would you like to do? " + ANSI_PURPLE +  "[ go, look, interact, inventory, get <item> ]" + ANSI_RESET);
 
         String responseInput = userInput.nextLine();
-
 
         String[] response = responseInput.trim().toLowerCase().split("\\s+");
 

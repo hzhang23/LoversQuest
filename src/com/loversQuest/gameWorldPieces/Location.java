@@ -19,7 +19,6 @@ public class Location {
     private HashMap<CardinalDirection, Location> directionMap = new HashMap<>();
 
     // CTOR
-
     public Location(String name, String description) {
         this.name = name;
         this.description = description;
@@ -50,6 +49,7 @@ public class Location {
             return description;
         }
     }
+
     public void setDescription(String description) {
         this.description = description;
     }

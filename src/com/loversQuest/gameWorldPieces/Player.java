@@ -51,14 +51,14 @@ public class Player {
                     return false;
                 }
             }
-
         }
 
         //replaces the switch statement below
         // key is the ability to get locations by string inputs i.e. getDirectionFromString in location class
         Location destination = this.currentLocation.getDirectionFromString(directionInput);
         // if it is a valid direction to go, update current position
-        if (validateLocation(destination)) {
+
+        if (destination != null && validateLocation(destination)) {
             this.setCurrentLocation(destination);
             result = true;
         }
@@ -114,15 +114,12 @@ public class Player {
 //                response = ("bad input, try again");
 //                return false;
 //        }
-
     }
-
 
     // checks if a given location is a place a player can move
     public boolean validateLocation(Location destination) {
-        return !destination.getName().contains("NOTHING");
+        return !destination.getName().equals("NOTHING");
     }
-
 
     public String look() {
         if (this.getCurrentLocation().getOccupant() == null) {

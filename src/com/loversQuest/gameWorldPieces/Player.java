@@ -88,7 +88,7 @@ public class Player {
 
     // checks if a given location is a place a player can move
     public boolean validateLocation(Location destination) {
-        return !destination.getName().equals("NOTHING");
+        return !destination.getName().contains("NOTHING");
     }
 
     public String look() {
@@ -164,15 +164,18 @@ public class Player {
 
     public void printCurrentAscii() throws IOException {
         //            this.currentLocation.getName().toLowerCase().equals("gazebo");
+
+//        String printLocation = this.currentLocation.getName().toLowerCase();
+
         switch (this.currentLocation.getName().toLowerCase()) {
-            case "laundryroom" -> graphicImage.printLocation("laundryRoom.txt");
-            case "barracks" -> graphicImage.printLocation("home.txt");
-            case "gym" -> graphicImage.printLocation("gym.txt");
-            case "courtyard" -> graphicImage.printLocation("courtYard.txt");
-            case "range" -> graphicImage.printLocation("range.txt");
-            case "portajohn" -> graphicImage.printLocation("portaJohn.txt");
-            case "chowhall" -> graphicImage.printLocation("chowHall.txt");
-            case "px" -> graphicImage.printLocation("px.txt");
+            case BLUE + "laundryroom" + ANSI_RESET -> graphicImage.printLocation("laundryRoom.txt");
+            case BLUE +"barracks"+ ANSI_RESET -> graphicImage.printLocation("home.txt");
+            case BLUE +"gym"+ ANSI_RESET -> graphicImage.printLocation("gym.txt");
+            case BLUE +"courtyard"+ ANSI_RESET -> graphicImage.printLocation("courtYard.txt");
+            case BLUE +"range"+ ANSI_RESET -> graphicImage.printLocation("range.txt");
+            case BLUE +"portajohn"+ ANSI_RESET -> graphicImage.printLocation("portaJohn.txt");
+            case BLUE +"chowhall"+ ANSI_RESET -> graphicImage.printLocation("chowHall.txt");
+            case BLUE +"px"+ ANSI_RESET -> graphicImage.printLocation("px.txt");
             default -> graphicImage.printLocation("gazebo.txt");
         }
 

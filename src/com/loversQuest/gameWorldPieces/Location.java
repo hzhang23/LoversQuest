@@ -34,6 +34,7 @@ public class Location {
     public String getName() {
         return BLUE + name + ANSI_RESET;
     }
+
     public void setName(String name) {
         this.name = name;
     }

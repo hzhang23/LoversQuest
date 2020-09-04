@@ -25,7 +25,7 @@ public class GameInterface {
         g1.p1.addItem(g1.whiteClaw3);
         g1.p1.addItem(g1.whiteClaw4);
         g1.p1.addItem(g1.whiteClaw5);
-        g1.p1.addItem(g1.challengeCoin);
+//        g1.p1.addItem(g1.challengeCoin);
         g1.p1.addItem(g1.ptBadge);
         g1.p1.addItem(g1.medicalBadge);
         g1.p1.addItem(g1.expertBadge);

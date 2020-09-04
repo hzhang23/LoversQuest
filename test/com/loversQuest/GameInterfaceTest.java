@@ -29,20 +29,20 @@ public class GameInterfaceTest {
 
     }
 
-    // is it okay to have mutliple assert methods?
+    // is it okay to have multiple assert methods?
     // how do i go about implementing automated tests for a whole text file
     @Test
     public void moveFromBarracksToGym() throws IOException {
         input.getUserAction(g1.p1);
         String actual = g1.p1.getCurrentLocation().getName();
         String expected = "GYM";
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
 
-        //this fails
+
         input.getUserAction(g1.p1);
         actual = g1.p1.getCurrentLocation().getName();
-        expected = "BARR";
-        assertEquals(actual, expected);
+        expected = "BARRACKS";
+        assertEquals(expected, actual);
 
 
 

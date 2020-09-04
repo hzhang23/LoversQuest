@@ -36,22 +36,22 @@ public void printLocation(String filename) throws IOException {
 
     public void printCurrentAscii(Player player) throws IOException {
 
-        String location = player.getCurrentLocation().getName().toLowerCase();
-        String fileName = locationsGraphicsMap.get(location);
-        this.printLocation(fileName);
+//        String location = player.getCurrentLocation().getName().toLowerCase();
+//        String fileName = locationsGraphicsMap.get(location);
+//        this.printLocation(fileName);
 
-        //            this.currentLocation.getName().toLowerCase().equals("gazebo");
-//        switch (player.getCurrentLocation().getName().toLowerCase()) {
-//            case "laundryroom" -> this.printLocation("laundryRoom.txt");
-//            case "barracks" -> this.printLocation("home.txt");
-//            case "gym" -> this.printLocation("gym.txt");
-//            case "courtyard" -> this.printLocation("courtYard.txt");
-//            case "range" -> this.printLocation("range.txt");
-//            case "portajohn" -> this.printLocation("portaJohn.txt");
-//            case "chowhall" -> this.printLocation("chowHall.txt");
-//            case "px" -> this.printLocation("px.txt");
-//            default -> this.printLocation("gazebo.txt");
-//        }
+                    player.getCurrentLocation().getName().toLowerCase().equals("gazebo");
+        switch (player.getCurrentLocation().getName().toLowerCase()) {
+            case "laundryroom" -> this.printLocation("laundryRoom.txt");
+            case "barracks" -> this.printLocation("home.txt");
+            case "gym" -> this.printLocation("gym.txt");
+            case "courtyard" -> this.printLocation("courtYard.txt");
+            case "range" -> this.printLocation("range.txt");
+            case "portajohn" -> this.printLocation("portaJohn.txt");
+            case "chowhall" -> this.printLocation("chowHall.txt");
+            case "px" -> this.printLocation("px.txt");
+            default -> this.printLocation("gazebo.txt");
+        }
 
     }
 

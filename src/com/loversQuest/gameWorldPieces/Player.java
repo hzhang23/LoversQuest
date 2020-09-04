@@ -50,6 +50,7 @@ public class Player {
             }
 
         }
+
         //replaces the switch statement below
         // key is the ability to get locations by string inputs i.e. getDirectionFromString in location class
         Location destination = this.currentLocation.getDirectionFromString(directionInput);

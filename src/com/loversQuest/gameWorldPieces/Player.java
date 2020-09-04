@@ -40,7 +40,7 @@ public class Player {
 
         boolean result = false;
 
-        // conditions for officer functionality.
+        // conditions for officer functionality. (Preventing us from going to the west)
         if(getCurrentLocation().getOccupant() instanceof Officer){
             if(direction.equals("west")){
                 if(getItem(getCurrentLocation().getOccupant().getPrize().getName()) == null ){

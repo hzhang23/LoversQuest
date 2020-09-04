@@ -8,6 +8,10 @@ public class Lover extends NonPlayerCharacters{
         super(name, location);
     }
 
+    public Lover(String name, String description, Location location) {
+        super(name, description, location);
+    }
+
     @Override
     public void setPrize(Item item) {
         super.setPrize(item);

@@ -37,9 +37,6 @@ public class Input {
 
     //TODO: better error / input checking on responseInput and all methods that use util.Scanner
 
-
-
-
     public String getUserAction(Player player) throws IOException{
 
         String finalResponse = null;

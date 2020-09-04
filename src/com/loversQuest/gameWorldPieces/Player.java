@@ -14,12 +14,15 @@ public class Player {
     private String name;
     private Location currentLocation;
 
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String BLUE = "\u001B[34m";
+
     //  making item instance for testing
 //    Item item = new Item("WhiteClaw", 1);
 
     public RuckSack ruckSack = new RuckSack();
     GraphicClass graphicImage = new GraphicClass();
-
+    NonPlayerCharacters character = new NonPlayerCharacters();
 
 //    RuckSack ruckSack = new RuckSack(item.getName(), item.getQuantity());
 
@@ -33,7 +36,7 @@ public class Player {
 
     //go function can result in navigating to "NOTHING" area. need to error check if
     // indicated direction is not a room and prevent movement.
-    public boolean go(String directionInput){
+    public boolean go(String directionInput) {
 
         String direction = directionInput.toLowerCase();
         String response = null;
@@ -41,9 +44,9 @@ public class Player {
         boolean result = false;
 
         // conditions for officer functionality. (Preventing us from going to the west)
-        if(getCurrentLocation().getOccupant() instanceof Officer){
-            if(direction.equals("west")){
-                if(getItem(getCurrentLocation().getOccupant().getPrize().getName()) == null ){
+        if (getCurrentLocation().getOccupant() instanceof Officer) {
+            if (direction.equals("west")) {
+                if (getItem(getCurrentLocation().getOccupant().getPrize().getName()) == null) {
                     getCurrentLocation().getOccupant().interact(this);
                     return false;
                 }
@@ -55,7 +58,7 @@ public class Player {
         // key is the ability to get locations by string inputs i.e. getDirectionFromString in location class
         Location destination = this.currentLocation.getDirectionFromString(directionInput);
         // if it is a valid direction to go, update current position
-        if(validateLocation(destination)){
+        if (validateLocation(destination)) {
             this.setCurrentLocation(destination);
             result = true;
         }
@@ -117,12 +120,16 @@ public class Player {
 
     // checks if a given location is a place a player can move
     public boolean validateLocation(Location destination) {
-        return !destination.getName().equals("NOTHING");
+        return !destination.getName().contains("NOTHING");
     }
 
 
     public String look() {
-        return ("You look around and " + this.getCurrentLocation().getDescription());
+        if (this.getCurrentLocation().getOccupant() == null) {
+            return ("You look around and " + this.getCurrentLocation().getDescription());
+        } else {
+            return ("You look around and " + this.getCurrentLocation().getDescription() + " \n\n" + this.getCurrentLocation().getOccupant().getName() + " " +this.getCurrentLocation().getOccupant().getDescription());
+        }
     }
 
     public String interact() {
@@ -188,6 +195,25 @@ public class Player {
         this.currentLocation = currentLocation;
     }
 
+
+//    public void printCurrentAscii() throws IOException {
+//        //            this.currentLocation.getName().toLowerCase().equals("gazebo");
+//
+////        String printLocation = this.currentLocation.getName().toLowerCase();
+//
+//        switch (this.currentLocation.getName().toLowerCase()) {
+//            case BLUE + "laundryroom" + ANSI_RESET -> graphicImage.printLocation("laundryRoom.txt");
+//            case BLUE + "barracks" + ANSI_RESET -> graphicImage.printLocation("home.txt");
+//            case BLUE + "gym" + ANSI_RESET -> graphicImage.printLocation("gym.txt");
+//            case BLUE + "courtyard" + ANSI_RESET -> graphicImage.printLocation("courtYard.txt");
+//            case BLUE + "range" + ANSI_RESET -> graphicImage.printLocation("range.txt");
+//            case BLUE + "portajohn" + ANSI_RESET -> graphicImage.printLocation("portaJohn.txt");
+//            case BLUE + "chowhall" + ANSI_RESET -> graphicImage.printLocation("chowHall.txt");
+//            case BLUE + "px" + ANSI_RESET -> graphicImage.printLocation("px.txt");
+//            default -> graphicImage.printLocation("gazebo.txt");
+//        }
+//
+//    }
 
 }
 

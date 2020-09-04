@@ -11,6 +11,7 @@ public class Output {
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
+    public static final String BLUE = "\u001B[34m";
 
 
     public String displayIntroDialog() {
@@ -33,8 +34,10 @@ public class Output {
 ////////////////   None of the below methods are used currently   ////////////////////////////////////
 
     //TODO: is this necessary as it is currently implemented?
+
     public String displayGoResponse(String direction, Player player){
         String status = "You head to the " +direction+ " and find yourself in the " + player.getCurrentLocation().getName();
+
         return status;
     }
 

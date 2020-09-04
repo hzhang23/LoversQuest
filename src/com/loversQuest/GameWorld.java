@@ -39,6 +39,8 @@ public class GameWorld {
             "He or She or they or it asks, “How many white claws did you bring me?”\n");
 
     public Player p1 = new Player("Bob", barracks);
+
+    //create items
     public Item rifle = new Item("M16", "You shoot your rifle in the air in celebration");
     public Item uncrustable = new Item("uncrustable", "You look lovingly at the peanut butter and strawberry jam sandwich");
     public Item camelback = new Item("CamelBack", "You take a refreshing drink of moldy water.");
@@ -51,13 +53,17 @@ public class GameWorld {
     public Item whiteClaw5 = new Item("Watermelon WhiteClaw", "You take a refreshing drink of Watermelon");
     public Item ptCert = new Item("Pt Certificate", "You scored 300");
     public Item sickCallSlip = new Item("Sick call slip", "You enjoy your soft shoe profile");
-    public Item expertBadge = new Item("Expert Marksmanship Badge", "You can make things more deader better");
 
-    public void equipPlayer() {
-        p1.addItem(rifle);
-        p1.addItem(uncrustable);
-        p1.addItem(camelback);
-    }
+    public Item expertBadge = new Item("Expert Marksmanship Badge", "You can make things more deader better");
+    public Item medicalBadge = new Item("Combat Life Saver Badge", "You can make things less deader better");
+    public Item ptBadge = new Item("Physical Training Badge", "You showed up for the pt test");
+
+
+    public Item challengeCoin = new Item("AIT Challenge Coin", "It says 'Play the Game'");
+    public Item kiss = new Item("A loving Kiss", "You're head is foggy from romance, or is it the WhiteClaws?");
+
+
+
 
     //Instantiate NPCs
     public NonPlayerCharacters sickCallRanger = new NonPlayerCharacters("Sick call Ranger"," is hiding behind the last dryer " +
@@ -66,9 +72,11 @@ public class GameWorld {
     public NonPlayerCharacters clsInstructor = new NonPlayerCharacters("CLS Instructor", " is watching your every move. You see something reflecting in trashcan.", courtYard);
     public NonPlayerCharacters rangeDrillSergeant = new NonPlayerCharacters("Drill Sergeant", " is pounding a monster under the range tower. \nUnder the bleachers is a suspicious looking ammo box.", range);
     public NonPlayerCharacters blueFalcon = new NonPlayerCharacters("Blue Falcon", " is sleeping next to a bottomless pit of despair.", portaJohn);
-    public NonPlayerCharacters officer = new NonPlayerCharacters("Executive Officer (XO)", " is eating a Charlie’s cheesesteak by the WEST exit of the food court.", px);
     public NonPlayerCharacters gymDrill = new NonPlayerCharacters("Drill Sergeant"," is staring at you with his beady eyes. ", gym);
-    public NonPlayerCharacters ghostyPlayer = new NonPlayerCharacters("Ghost", px);
+
+    public Lover lover = new Lover("Your Sweetheart", " stares at you lovingly", gazebo);
+    public Officer officer = new Officer("Captain Charlie", " looks at you over his sandwhich.", px);
+
 
     public Container ammoBox = new Container("Ammo Box","do something to pick up WC" );
     public Container trashCan = new Container("Trash Can", "do something to pick up WC x 2");
@@ -139,13 +147,31 @@ public class GameWorld {
         px.setEast(nothing);
         px.setWest(gazebo);
         px.setSouth(nothing);
+
         px.setOccupant(officer);
+        officer.setKeyItemName("badge");
+        officer.setNumOfItemsNeeded(3);
+        officer.setSendPlayerDestination(chowHall);
+        officer.setPrize(challengeCoin);
         px.setContainer(ifak);
         ifak.addItem(whiteClaw4);
+
 
         gazebo.setEast(px);
         gazebo.setNorth(nothing);
         gazebo.setWest(nothing);
         gazebo.setSouth(nothing);
+        gazebo.setOccupant(lover);
+        lover.setPrize(kiss);
+        lover.setKeyItemName("whiteclaw");
+        lover.setNumOfItemsNeeded(5);
+
+    }
+
+    // give player starting items
+    public void equipPlayer() {
+        p1.addItem(rifle);
+        p1.addItem(uncrustable);
+        p1.addItem(camelback);
     }
 }

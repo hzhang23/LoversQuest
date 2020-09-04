@@ -1,20 +1,16 @@
-package com.loversQuest.IO;
+package com.loversQuest;
 
 import com.loversQuest.GUI.MapFactory;
-import com.loversQuest.GUI.MapFrame;
-import com.loversQuest.GameWorld;
+import com.loversQuest.IO.InputParser;
 import com.loversQuest.gameWorldPieces.Item;
-import com.loversQuest.gameWorldPieces.Officer;
 import com.loversQuest.gameWorldPieces.Player;
 
-
-import java.awt.*;
-import java.util.Arrays;
 import java.io.IOException;
-
+import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Scanner;
 
-public class Input {
+public class InputTest {
 
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_RESET = "\u001B[0m";
@@ -23,7 +19,10 @@ public class Input {
     InputParser parser = new InputParser();
     MapFactory generateMap = new MapFactory();
 
-    Scanner userInput = new Scanner(System.in);
+    InputStream inputStream = GameInterfaceTest.class.getResourceAsStream("inputTest.txt");
+    Scanner testScanner = new Scanner(inputStream);
+
+    Scanner userInput = testScanner;
 
 
 
@@ -36,6 +35,9 @@ public class Input {
     }
 
     //TODO: better error / input checking on responseInput and all methods that use util.Scanner
+
+
+
 
     public String getUserAction(Player player) throws IOException{
 

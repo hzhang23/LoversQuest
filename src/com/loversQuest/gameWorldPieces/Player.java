@@ -15,12 +15,15 @@ public class Player {
     private String name;
     private Location currentLocation;
 
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String BLUE = "\u001B[34m";
+
     //  making item instance for testing
 //    Item item = new Item("WhiteClaw", 1);
 
     public RuckSack ruckSack = new RuckSack();
     GraphicClass graphicImage = new GraphicClass();
-
+    NonPlayerCharacters character = new NonPlayerCharacters();
 
 //    RuckSack ruckSack = new RuckSack(item.getName(), item.getQuantity());
 
@@ -89,7 +92,11 @@ public class Player {
     }
 
     public String look() {
-        return ("You look around and " + this.getCurrentLocation().getDescription());
+        if (this.getCurrentLocation().getOccupant() == null) {
+            return ("You look around and " + this.getCurrentLocation().getDescription());
+        } else {
+            return ("You look around and " + this.getCurrentLocation().getDescription() + " \n\n" + this.getCurrentLocation().getOccupant().getName() + this.getCurrentLocation().getOccupant().getDescription());
+        }
     }
 
     public String interact() {

@@ -40,11 +40,21 @@ public class Location {
     }
 
     public String getDescription() {
-        if(this.itemsList.size() > 0){
-            return description + "You find " + this.getItemsList().toString() + " in the room.";
-        }else{
-            return description;
+        StringBuilder result = new StringBuilder(this.description);
+        if(this.container != null){
+            result.append("You see a suspicious looking " + container.getColorName());
         }
+
+        if(this.itemsList.size() > 0){
+             result.append("You find " +
+                    BLUE +   this.getItemsList().toString() + ANSI_RESET + " in the room.");
+        }
+        if(this.getOccupant() != null){
+            result.append("You see " +
+                    BLUE + this.getOccupant().getColorName() + ANSI_RESET +
+                    " " + this.getOccupant().getDescription());
+        }
+        return result.toString();
 
     }
     public void setDescription(String description) {

@@ -14,6 +14,8 @@ import java.io.IOException;
 
 import java.util.Scanner;
 
+import static com.loversQuest.IO.Output.BLUE;
+
 public class Input {
 
     public static final String ANSI_PURPLE = "\u001B[35m";
@@ -116,7 +118,7 @@ public class Input {
                 }else{
                     containerName = response[1];
                     if(player.inspect() != null){
-                        finalResponse = (player.inspect()).toString();
+                        finalResponse = BLUE + (player.inspect()).toString() + ANSI_RESET;
                         for(Item item: player.inspect()){
                             player.getCurrentLocation().addItem(item);
                         }

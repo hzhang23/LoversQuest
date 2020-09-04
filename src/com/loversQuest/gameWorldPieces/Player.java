@@ -3,7 +3,6 @@ package com.loversQuest.gameWorldPieces;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.loversQuest.IO.GraphicClass;
 
@@ -34,59 +33,92 @@ public class Player {
 
     //go function can result in navigating to "NOTHING" area. need to error check if
     // indicated direction is not a room and prevent movement.
-    public boolean go(String directionInput) throws IOException {
+    public boolean go(String directionInput){
 
         String direction = directionInput.toLowerCase();
         String response = null;
 
+        boolean result = false;
+
+        // conditions for officer functionality.
+        if(getCurrentLocation().getOccupant() instanceof Officer){
+            if(direction.equals("west")){
+                if(getItem(getCurrentLocation().getOccupant().getPrize().getName()) == null ){
+                    getCurrentLocation().getOccupant().interact(this);
+                    return false;
+                }
+            }
+
+        }
+        //replaces the switch statement below
+        // key is the ability to get locations by string inputs i.e. getDirectionFromString in location class
+        Location destination = this.currentLocation.getDirectionFromString(directionInput);
+        // if it is a valid direction to go, update current position
+        if(validateLocation(destination)){
+            this.setCurrentLocation(destination);
+            result = true;
+        }
+        return result;
+
         // "there has got to be a better way to do this" moar methods
         // externalize 'decision making"?
-        switch (direction) {
-            case "east":
-                if (validateLocation(this.currentLocation.getEast())) {
-                    this.setCurrentLocation(this.currentLocation.getEast());
-                    this.printCurrentAscii();
-                } else {
-                    response = ("You can't go that way");
-                }
-                break;
-            case "west":
-                if (validateLocation(this.currentLocation.getWest())) {
-                    this.setCurrentLocation(this.currentLocation.getWest());
-//                    When player goes to a location successfully
-//                    print ASCII art associated to current location
-                    this.printCurrentAscii();
-                } else {
-                    System.out.println("You can't go that way");
-                }
-                break;
-            case "south":
-                if (validateLocation(this.currentLocation.getSouth())) {
-                    this.setCurrentLocation(this.currentLocation.getSouth());
-                    this.printCurrentAscii();
-                } else {
-                    System.out.println("You can't go that way");
-                }
-                break;
-            case "north":
-                if (validateLocation(this.currentLocation.getNorth())) {
-                    this.setCurrentLocation(this.currentLocation.getNorth());
-                    this.printCurrentAscii();
-                } else {
-                    System.out.println("You can't go that way");
-                }
-                break;
-            default:
-                System.out.println("bad input, try again");
-                return false;
-        }
-        return true;
+//        switch (direction) {
+//            case "east":
+//                if (validateLocation(this.currentLocation.getEast())) {
+//                    this.setCurrentLocation(this.currentLocation.getEast());
+//
+//                } else {
+//                    response = ("You can't go that way");
+//                }
+//                break;
+//            case "west":
+//                // terrible needs to be decoupled and refactored
+//                // if we try to go west and the occupant is an officer && we do not have the officer prize in inventory
+//                if(this.currentLocation.getOccupant() instanceof Officer &&
+//                        this.getItem( this.currentLocation.getOccupant().getPrize().getName() ) == null){
+//                    //interact with officer
+//                    this.getCurrentLocation().getOccupant().interact(this);
+//                }
+//
+//                // normal behavior without officer
+//                if (validateLocation(this.currentLocation.getWest())) {
+//                    this.setCurrentLocation(this.currentLocation.getWest());
+////                    When player goes to a location successfully
+////                    print ASCII art associated to current location
+//
+//                } else {
+//                    response = ("You can't go that way");
+//                }
+//                break;
+//            case "south":
+//                if (validateLocation(this.currentLocation.getSouth())) {
+//                    this.setCurrentLocation(this.currentLocation.getSouth());
+//
+//                } else {
+//                    response = ("You can't go that way");
+//                }
+//                break;
+//            case "north":
+//                if (validateLocation(this.currentLocation.getNorth())) {
+//                    this.setCurrentLocation(this.currentLocation.getNorth());
+//
+//                } else {
+//                    response = ("You can't go that way");
+//                }
+//                break;
+//            default:
+//                response = ("bad input, try again");
+//                return false;
+//        }
+
     }
+
 
     // checks if a given location is a place a player can move
     public boolean validateLocation(Location destination) {
         return !destination.getName().equals("NOTHING");
     }
+
 
     public String look() {
         return ("You look around and " + this.getCurrentLocation().getDescription());
@@ -155,20 +187,6 @@ public class Player {
         this.currentLocation = currentLocation;
     }
 
-    public void printCurrentAscii() throws IOException {
-        //            this.currentLocation.getName().toLowerCase().equals("gazebo");
-        switch (this.currentLocation.getName().toLowerCase()) {
-            case "laundryroom" -> graphicImage.printLocation("laundryRoom.txt");
-            case "barracks" -> graphicImage.printLocation("home.txt");
-            case "gym" -> graphicImage.printLocation("gym.txt");
-            case "courtyard" -> graphicImage.printLocation("courtYard.txt");
-            case "range" -> graphicImage.printLocation("range.txt");
-            case "portajohn" -> graphicImage.printLocation("portaJohn.txt");
-            case "chowhall" -> graphicImage.printLocation("chowHall.txt");
-            case "px" -> graphicImage.printLocation("px.txt");
-            default -> graphicImage.printLocation("gazebo.txt");
-        }
 
-    }
 }
 

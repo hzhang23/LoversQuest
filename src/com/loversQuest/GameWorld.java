@@ -45,6 +45,8 @@ public class GameWorld {
             "He or She or they or it asks, “How many white claws did you bring me?”\n");
 
     public Player p1 = new Player("Bob", barracks);
+
+    //create items
     public Item rifle = new Item("M16", "You shoot your rifle in the air in celebration");
     public Item uncrustable = new Item("Uncrustable", "You look lovingly at the peanut butter and strawberry jam sandwich");
     public Item camelback = new Item("CamelBack", "You take a refreshing drink of moldy water.");
@@ -59,25 +61,24 @@ public class GameWorld {
     public Item ptCert = new Item("Pt Certificate", "You scored 300");
     public Item sickCallSlip = new Item("Sick call slip", "You enjoy your soft shoe profile");
     public Item expertBadge = new Item("Expert Marksmanship Badge", "You can make things more deader better");
+    public Item medicalBadge = new Item("Combat Life Saver Badge", "You can make things less deader better");
+    public Item ptBadge = new Item("Physical Training Badge", "You showed up for the pt test");
+    public Item challengeCoin = new Item("AIT Challenge Coin", "It says 'Play the Game'");
 
-
-    public void equipPlayer() {
-        p1.addItem(rifle);
-        p1.addItem(uncrustable);
-        p1.addItem(camelback);
-    }
+    public Item kiss = new Item("A loving Kiss", "You're head is foggy from romance, or is it the WhiteClaws?");
 
     //Instantiate NPCs
     public NonPlayerCharacters sickCallRanger = new NonPlayerCharacters("sick call ranger", laundryRoom);
     public NonPlayerCharacters chowHallLady = new NonPlayerCharacters("chow hall lady", chowHall);
     public NonPlayerCharacters rangeDrillSergeant = new NonPlayerCharacters("drill sergeant", range);
     public NonPlayerCharacters blueFalcon = new NonPlayerCharacters("blue falcon", portaJohn);
-    public NonPlayerCharacters officer = new NonPlayerCharacters("officer", px);
     public NonPlayerCharacters gymDrill = new NonPlayerCharacters("Drill Sergeant", gym);
-    public NonPlayerCharacters ghostyPlayer = new NonPlayerCharacters("ghost", px);
+    public Lover lover = new Lover("Your Sweetheart", gazebo);
+    public Officer officer = new Officer("Captain Charlie", px);
 
+    // create containers
     public Container ammoBox = new Container("Ammo Box","Nothing happens" );
-    public Container trashCan = new Container("Trash Can", "Nothing happens");
+    public Container trashCan = new Container("trash", "Nothing happens");
     public Container ifak = new Container("IFAK", "You feel very healthy after using the individual first aid kit");
     public Container ceiling = new Container("Tiles", "It's dusty up here");
 
@@ -116,8 +117,6 @@ public class GameWorld {
         rangeDrillSergeant.setKeyItem(rifle);
         rangeDrillSergeant.setPrize(expertBadge);
 
-
-
         gym.setWest(barracks);
         gym.setNorth(portaJohn);
         gym.setSouth(chowHall);
@@ -146,13 +145,31 @@ public class GameWorld {
         px.setEast(nothing);
         px.setWest(gazebo);
         px.setSouth(nothing);
+
         px.setOccupant(officer);
+        officer.setKeyItemName("badge");
+        officer.setNumOfItemsNeeded(3);
+        officer.setSendPlayerDestination(chowHall);
+        officer.setPrize(challengeCoin);
         px.setContainer(ifak);
         ifak.addItem(whiteClaw4);
+
 
         gazebo.setEast(px);
         gazebo.setNorth(nothing);
         gazebo.setWest(nothing);
         gazebo.setSouth(nothing);
+        gazebo.setOccupant(lover);
+        lover.setPrize(kiss);
+        lover.setKeyItemName("whiteclaw");
+        lover.setNumOfItemsNeeded(5);
+
+    }
+
+    // give player starting items
+    public void equipPlayer() {
+        p1.addItem(rifle);
+        p1.addItem(uncrustable);
+        p1.addItem(camelback);
     }
 }

@@ -1,0 +1,51 @@
+package com.loversQuest.gameWorldPieces;
+
+public class Officer extends NonPlayerCharacters{
+    private int numOfItemsNeeded;
+    private String keyItemName;
+    private Location sendPlayerDestination;
+
+    public Officer(String name, Location location) {
+        super(name, location);
+    }
+
+    @Override
+    public void setPrize(Item item) {
+        super.setPrize(item);
+    }
+
+    @Override
+    public Item getPrize() {
+        return super.getPrize();
+    }
+
+    public void setSendPlayerDestination(Location location){
+        this.sendPlayerDestination = location;
+    }
+
+    public void setKeyItemName (String keyItemName){
+        this.keyItemName = keyItemName;
+    }
+
+    public void setNumOfItemsNeeded(int numOfItemsNeeded){
+        this.numOfItemsNeeded = numOfItemsNeeded;
+    }
+
+    @Override
+    public String interact(Player player) {
+        int keyItemCount = 0;
+        for(Item item: player.ruckSack.getAllItems()){
+            if(item.getName().toLowerCase().contains(this.keyItemName)){
+                keyItemCount ++;
+            }
+        }
+        if(keyItemCount >= this.numOfItemsNeeded){
+            player.addItem(this.getPrize());
+            return "You have made all the boxes green. Good job, carry on.";
+
+        }else if(player.ruckSack.getItem(this.getPrize().getName()) == null)
+            player.setCurrentLocation(sendPlayerDestination);
+            return "It would behoove you.... \n(He sends you back to complete all your warrior tasks)";
+        }
+
+    }

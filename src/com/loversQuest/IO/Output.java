@@ -1,52 +1,16 @@
 package com.loversQuest.IO;
 
-import com.loversQuest.GameWorld;
 import com.loversQuest.gameWorldPieces.Location;
 import com.loversQuest.gameWorldPieces.Player;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Output {
 
-    GameWorld game;
-    Player player;
     Scanner userInput = new Scanner(System.in);
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
-
-    public Output(GameWorld game) {
-        this.game = game;
-        this.player = game.p1;
-    }
-
-    // make string send string to jframe, start jframe
-    public StringBuilder showMap(){
-        StringBuilder jframeString = new StringBuilder();
-        try{
-            //read in csv file
-//            DataInputStream in = new DataInputStream(getClass().getResourceAsStream("inputWords.txt"));
-            DataInputStream in = new DataInputStream(getClass().getResourceAsStream("Utilities/map.txt"));
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
-            String strLine;
-
-            //continue to read in file while lines exist
-            while ((strLine = br.readLine()) != null){
-                jframeString.append(strLine).append("\n");
-
-            }
-
-            in.close();
-        }catch (Exception e){
-            System.err.println("error: " + e.getMessage());
-        }
-        return(jframeString);
-    }
 
 
     public String displayIntroDialog() {
@@ -61,21 +25,21 @@ public class Output {
         return "This is the intro dialog";
     }
 
-//    public String initialStatus(){
-//        String status = "You've"
-//    }
+    public String promptForAction(){
+        return ("\nWhat would you like to do? " + ANSI_PURPLE +
+                "[ go, look, interact, inspect, get <item>, use <item>, map, inventory ]" + ANSI_RESET);
+    }
+
+////////////////   None of the below methods are used currently   ////////////////////////////////////
 
     //TODO: is this necessary as it is currently implemented?
-    public String displayGoResponse(String direction){
+    public String displayGoResponse(String direction, Player player){
         String status = "You head to the " +direction+ " and find yourself in the " + player.getCurrentLocation().getName();
         return status;
     }
 
-    public String promptForAction(){
-        return ("\nWhat would you like to do? " + ANSI_PURPLE +  "[ go, look, interact, inventory, get <item> ]" + ANSI_RESET);
-    }
 
-    public String locationDescription(){
+    public String locationDescription(Player player){
         Location currentLocation = player.getCurrentLocation();
 
         String description = "The " + currentLocation.getName() + ": "+ currentLocation.getDescription() +

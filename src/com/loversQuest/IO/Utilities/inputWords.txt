@@ -2,7 +2,7 @@ go,move,walk,run,head,dance
 look
 interact,speak,talk
 inventory
-get
-use
+get, pick, grab, take
+use, shoot, drink
 inspect
 map

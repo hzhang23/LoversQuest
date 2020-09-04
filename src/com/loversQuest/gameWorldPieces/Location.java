@@ -14,7 +14,7 @@ public class Location {
 
 
     //hash map with keys = enum of cardinal directions and values = Location instances
-    private HashMap<CardinalDirection, Location> direction = new HashMap<>();
+    private HashMap<CardinalDirection, Location> directionMap = new HashMap<>();
 
     // CTOR
 
@@ -22,10 +22,10 @@ public class Location {
         this.name = name;
         this.description = description;
 
-        this.direction.put(CardinalDirection.NORTH, null);
-        this.direction.put(CardinalDirection.SOUTH, null);
-        this.direction.put(CardinalDirection.EAST, null);
-        this.direction.put(CardinalDirection.WEST, null);
+        this.directionMap.put(CardinalDirection.NORTH, null);
+        this.directionMap.put(CardinalDirection.SOUTH, null);
+        this.directionMap.put(CardinalDirection.EAST, null);
+        this.directionMap.put(CardinalDirection.WEST, null);
     }
 
     // SETTERS/GETTERS
@@ -38,7 +38,7 @@ public class Location {
 
     public String getDescription() {
         if(this.itemsList.size() > 0){
-            return description + ". You find " + this.getItemsList().toString() + " in the room.";
+            return description + "You find " + this.getItemsList().toString() + " in the room.";
         }else{
             return description;
         }
@@ -83,32 +83,46 @@ public class Location {
 
     }
 
+    //returns the location that is in the direction given via string
+    public Location getDirectionFromString(String stringDirection){
+        Location result = null;
+        //loop through key set of direction map
+        for(CardinalDirection direction : directionMap.keySet()){
+            // if the cardinal direction string matches the input string
+            if(direction.getDirectionName().equals(stringDirection)){
+                //return the location in that direction
+                result = directionMap.get(direction);
+            }
+        }
+        return result;
+    }
+
     // return value from direction hashmap corresponding to the given enum
     public Location getEast(){
-        return direction.get(CardinalDirection.EAST);
+        return directionMap.get(CardinalDirection.EAST);
     }
     public Location getWest(){
-        return direction.get(CardinalDirection.WEST);
+        return directionMap.get(CardinalDirection.WEST);
     }
     public Location getSouth(){
-        return direction.get(CardinalDirection.SOUTH);
+        return directionMap.get(CardinalDirection.SOUTH);
     }
     public Location getNorth(){
-        return direction.get(CardinalDirection.NORTH);
+        return directionMap.get(CardinalDirection.NORTH);
     }
 
     // replace value in direction hashmap with new Location instance
     public void setNorth(Location area){
-        direction.replace(CardinalDirection.NORTH, area);
+        directionMap.replace(CardinalDirection.NORTH, area);
     }
     public void setSouth(Location area){
-        direction.replace(CardinalDirection.SOUTH, area);
+        directionMap.replace(CardinalDirection.SOUTH, area);
     }
     public void setEast(Location area){
-        direction.replace(CardinalDirection.EAST, area);
+        directionMap.replace(CardinalDirection.EAST, area);
     }
     public void setWest(Location area){
-        direction.replace(CardinalDirection.WEST, area);
+        directionMap.replace(CardinalDirection.WEST, area);
     }
 
     @Override

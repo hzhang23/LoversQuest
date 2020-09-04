@@ -24,6 +24,10 @@ public class NonPlayerCharacters {
         this.keyItem = keyItem;
     }
 
+    public Item getKeyItem(){
+        return this.keyItem;
+    }
+
     public String getLocation() {
         return location.getName();
     }
@@ -36,12 +40,16 @@ public class NonPlayerCharacters {
         this.prize = item;
     }
 
+    public Item getPrize() {
+        return prize;
+    }
+
     public String interact(Player player){
         if (this.keyItem == null){
             return "I got nothing for you loser";
         }
         if(player.getItem(keyItem.getName()) != null){
-            player.addItem(prize);
+            player.addItem(this.getPrize());
             return "Ah, I see you have " + keyItem + ", good work soldier!";
         }else{
             return "You don't have " + keyItem + ", kick rocks nerd!";

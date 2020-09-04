@@ -4,6 +4,7 @@ import com.loversQuest.GUI.MapFactory;
 import com.loversQuest.GUI.MapFrame;
 import com.loversQuest.GameWorld;
 import com.loversQuest.gameWorldPieces.Item;
+import com.loversQuest.gameWorldPieces.Officer;
 import com.loversQuest.gameWorldPieces.Player;
 
 
@@ -61,6 +62,8 @@ public class Input {
         String actionVerb = parser.parseCommand(response[0]);
 
         // handles first word of response
+
+        // this should all go in separate controller class
         switch (actionVerb) {
             case "go" -> {
                 String direction;
@@ -69,7 +72,7 @@ public class Input {
                 } else {
                     direction = response[1];
                     // player.go returns false if bad input, return statement prevents displayGoResponse() from running
-                    if (!player.go(direction)) break;
+                    if (!player.go(direction)) return "You can't go that way.";
                 }
                 finalResponse = (displayGoResponse(direction, player));
             }

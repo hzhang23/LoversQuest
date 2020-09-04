@@ -15,12 +15,15 @@ public class Player {
     private String name;
     private Location currentLocation;
 
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String BLUE = "\u001B[34m";
+
     //  making item instance for testing
 //    Item item = new Item("WhiteClaw", 1);
 
     public RuckSack ruckSack = new RuckSack();
     GraphicClass graphicImage = new GraphicClass();
-
+    NonPlayerCharacters character = new NonPlayerCharacters();
 
 //    RuckSack ruckSack = new RuckSack(item.getName(), item.getQuantity());
 
@@ -85,11 +88,15 @@ public class Player {
 
     // checks if a given location is a place a player can move
     public boolean validateLocation(Location destination) {
-        return !destination.getName().equals("NOTHING");
+        return !destination.getName().contains("NOTHING");
     }
 
     public String look() {
-        return ("You look around and " + this.getCurrentLocation().getDescription());
+        if (this.getCurrentLocation().getOccupant() == null) {
+            return ("You look around and " + this.getCurrentLocation().getDescription());
+        } else {
+            return ("You look around and " + this.getCurrentLocation().getDescription() + " \n\n" + this.getCurrentLocation().getOccupant().getName() + this.getCurrentLocation().getOccupant().getDescription());
+        }
     }
 
     public String interact() {
@@ -157,15 +164,18 @@ public class Player {
 
     public void printCurrentAscii() throws IOException {
         //            this.currentLocation.getName().toLowerCase().equals("gazebo");
+
+//        String printLocation = this.currentLocation.getName().toLowerCase();
+
         switch (this.currentLocation.getName().toLowerCase()) {
-            case "laundryroom" -> graphicImage.printLocation("laundryRoom.txt");
-            case "barracks" -> graphicImage.printLocation("home.txt");
-            case "gym" -> graphicImage.printLocation("gym.txt");
-            case "courtyard" -> graphicImage.printLocation("courtYard.txt");
-            case "range" -> graphicImage.printLocation("range.txt");
-            case "portajohn" -> graphicImage.printLocation("portaJohn.txt");
-            case "chowhall" -> graphicImage.printLocation("chowHall.txt");
-            case "px" -> graphicImage.printLocation("px.txt");
+            case BLUE + "laundryroom" + ANSI_RESET -> graphicImage.printLocation("laundryRoom.txt");
+            case BLUE +"barracks"+ ANSI_RESET -> graphicImage.printLocation("home.txt");
+            case BLUE +"gym"+ ANSI_RESET -> graphicImage.printLocation("gym.txt");
+            case BLUE +"courtyard"+ ANSI_RESET -> graphicImage.printLocation("courtYard.txt");
+            case BLUE +"range"+ ANSI_RESET -> graphicImage.printLocation("range.txt");
+            case BLUE +"portajohn"+ ANSI_RESET -> graphicImage.printLocation("portaJohn.txt");
+            case BLUE +"chowhall"+ ANSI_RESET -> graphicImage.printLocation("chowHall.txt");
+            case BLUE +"px"+ ANSI_RESET -> graphicImage.printLocation("px.txt");
             default -> graphicImage.printLocation("gazebo.txt");
         }
 

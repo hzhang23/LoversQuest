@@ -19,6 +19,7 @@ public class Output {
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
+    public static final String BLUE = "\u001B[34m";
 
     public Output(GameWorld game) {
         this.game = game;
@@ -67,7 +68,7 @@ public class Output {
 
     //TODO: is this necessary as it is currently implemented?
     public String displayGoResponse(String direction){
-        String status = "You head to the " +direction+ " and find yourself in the " + player.getCurrentLocation().getName();
+        String status = "You head to the " +direction+ " and find yourself in the " + BLUE + player.getCurrentLocation().getName() + ANSI_RESET;
         return status;
     }
 

@@ -14,42 +14,35 @@ public class GameWorld {
 
     public Location gym = new Location("GYM", "You watch a soldier conduct the “BEND AND REACH” in the " +
             "squat rack while grunts and clanking of weights \n" +
-            "can be heard in the far back/corner. You see your battle buddies taking an APFT (ARMY PHYSICAL FITNESS TEST) in the basketball courts. \n" +
-            "A drill sergeant is staring at you with his beady eyes. ");
+            "can be heard in the far back/corner. You see your battle buddies taking an APFT (ARMY PHYSICAL FITNESS TEST) in the basketball courts.");
 
     public Location laundryRoom = new Location("LAUNDRYROOM",
             "Oxyclean and bleach are the scents noticed in this area. Stuffed in the corner is a copious \n" +
-                    "amount of green laundry bags. You also notice “Sick Call Ranger” hiding behind the last dryer \n" +
-                    "with the remnants of his last uncrustable around his mouth. ");
+                    "amount of green laundry bags");
 
     public Location courtYard = new Location("COURTYARD", "A vast field littered with cigarettes butts, empty monster cans, and fellow soldiers. \n" +
-            "Your unit is conducting some sort of exam. Upon closer look, there’s a COMBAT LIFE SAVER WARRIOR SKILL LEVEL 1 EXAM taking place.\n" +
-            "You notice something reflecting in a pile of garbage next to the CLS instructor.");
+            "Your unit is conducting some sort of exam. Upon closer look, there’s a COMBAT LIFE SAVER WARRIOR SKILL LEVEL 1 EXAM taking place.");
 
-    public Location range = new Location("RANGE", "You hear the sound of rifles going off… \n" +
-            "Under the bleachers is a suspicious ammo box (WC).\n" +
-            "Directly under the range tower stands a drill sergeant drinking a monster.");
+    public Location range = new Location("RANGE", "hear the sounds of rifles and the cries of soldiers as they are getting smoked  \n");
 
-    public Location portaJohn = new Location("PORTAJOHN", "You step into the portajohn and see a BLUE FALCON sleeping next to a bottomless pit of despair. \n" +
-            "It smells of elephant flatulent and rotting garbage.");
+    public Location portaJohn = new Location("PORTAJOHN", "It smells of elephant flatulent and rotting garbage.");
 
     public Location chowHall = new Location("CHOWHALL", "Your stomach grumbles as you pass by the variety of fried foods in the red categorized section. \n" +
-            "Your favorite CHOW HALL LADY is speaking to you in your native tongue...");
+            "You're tempted to pocket some tater tots.");
 
-    public Location px = new Location("PX", "The company’s Executive Officer (XO) is eating a Charlie’s cheesesteak by the WEST exit of the food court. \n" +
-            "There’s a lone individual first aid kit (IFAK) next to a potted plant.\n" +
+    public Location px = new Location("PX", "see a Barber Shop, Eyebrow Threading station, and a GNC.\n" +
+            "A lone individual first aid kit (IFAK) next to a potted plant.\n" +
             "You look far to the WEST and see a silhouette of a full-bodied individual.\n");
 
-    public Location gazebo = new Location("GAZEBO", "At first glance, you don’t see anything through the misty night \n" +
+    public Location gazebo = new Location("GAZEBO", "at first glance, you don’t see anything through the misty night \n" +
             "but out from the shadows appears your AIT bf/gf - You’re elated. \n" +
             "He or She or they or it asks, “How many white claws did you bring me?”\n");
 
     public Player p1 = new Player("Bob", barracks);
     public Item rifle = new Item("M16", "You shoot your rifle in the air in celebration");
-    public Item uncrustable = new Item("Uncrustable", "You look lovingly at the peanut butter and strawberry jam sandwich");
+    public Item uncrustable = new Item("uncrustable", "You look lovingly at the peanut butter and strawberry jam sandwich");
     public Item camelback = new Item("CamelBack", "You take a refreshing drink of moldy water.");
     public Item ptBelt = new Item("Pt Belt", "You put it on and are now super safe and visible.");
-
 
     public Item whiteClaw1 = new Item("Natural Lime WhiteClaw", "You take a refreshing drink of Natural Lime");
     public Item whiteClaw2 = new Item("Black Cherry WhiteClaw", "You take a refreshing drink of Black Cherry.");
@@ -60,7 +53,6 @@ public class GameWorld {
     public Item sickCallSlip = new Item("Sick call slip", "You enjoy your soft shoe profile");
     public Item expertBadge = new Item("Expert Marksmanship Badge", "You can make things more deader better");
 
-
     public void equipPlayer() {
         p1.addItem(rifle);
         p1.addItem(uncrustable);
@@ -68,16 +60,18 @@ public class GameWorld {
     }
 
     //Instantiate NPCs
-    public NonPlayerCharacters sickCallRanger = new NonPlayerCharacters("sick call ranger", laundryRoom);
-    public NonPlayerCharacters chowHallLady = new NonPlayerCharacters("chow hall lady", chowHall);
-    public NonPlayerCharacters rangeDrillSergeant = new NonPlayerCharacters("drill sergeant", range);
-    public NonPlayerCharacters blueFalcon = new NonPlayerCharacters("blue falcon", portaJohn);
-    public NonPlayerCharacters officer = new NonPlayerCharacters("officer", px);
-    public NonPlayerCharacters gymDrill = new NonPlayerCharacters("Drill Sergeant", gym);
-    public NonPlayerCharacters ghostyPlayer = new NonPlayerCharacters("ghost", px);
+    public NonPlayerCharacters sickCallRanger = new NonPlayerCharacters("Sick call Ranger"," is hiding behind the last dryer " +
+            "with the remnants of his last " + uncrustable.getName() + " around his mouth.", laundryRoom);
+    public NonPlayerCharacters chowHallLady = new NonPlayerCharacters("Chow Hall lady", " is speaking to you in your native tongue. You find [ruby grapefruit whiteclaw] in the room.", chowHall);
+    public NonPlayerCharacters clsInstructor = new NonPlayerCharacters("CLS Instructor", " is watching your every move. You see something reflecting in trashcan.", courtYard);
+    public NonPlayerCharacters rangeDrillSergeant = new NonPlayerCharacters("Drill Sergeant", " is pounding a monster under the range tower. \nUnder the bleachers is a suspicious looking ammo box.", range);
+    public NonPlayerCharacters blueFalcon = new NonPlayerCharacters("Blue Falcon", " is sleeping next to a bottomless pit of despair.", portaJohn);
+    public NonPlayerCharacters officer = new NonPlayerCharacters("Executive Officer (XO)", " is eating a Charlie’s cheesesteak by the WEST exit of the food court.", px);
+    public NonPlayerCharacters gymDrill = new NonPlayerCharacters("Drill Sergeant"," is staring at you with his beady eyes. ", gym);
+    public NonPlayerCharacters ghostyPlayer = new NonPlayerCharacters("Ghost", px);
 
-    public Container ammoBox = new Container("Ammo Box","Nothing happens" );
-    public Container trashCan = new Container("Trash Can", "Nothing happens");
+    public Container ammoBox = new Container("Ammo Box","do something to pick up WC" );
+    public Container trashCan = new Container("Trash Can", "do something to pick up WC x 2");
     public Container ifak = new Container("IFAK", "You feel very healthy after using the individual first aid kit");
     public Container ceiling = new Container("Tiles", "It's dusty up here");
 
@@ -104,6 +98,7 @@ public class GameWorld {
         courtYard.setWest(nothing);
         courtYard.setEast(nothing);
         courtYard.setContainer(trashCan);
+        courtYard.setOccupant(clsInstructor);
         trashCan.addItem(ptBelt);
 
         range.setSouth(courtYard);
@@ -115,8 +110,6 @@ public class GameWorld {
         range.setContainer(ammoBox);
         rangeDrillSergeant.setKeyItem(rifle);
         rangeDrillSergeant.setPrize(expertBadge);
-
-
 
         gym.setWest(barracks);
         gym.setNorth(portaJohn);

@@ -12,6 +12,8 @@ public class Location {
 
     private NonPlayerCharacters occupant;
 
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String BLUE = "\u001B[34m";
 
     //hash map with keys = enum of cardinal directions and values = Location instances
     private HashMap<CardinalDirection, Location> direction = new HashMap<>();
@@ -30,8 +32,9 @@ public class Location {
 
     // SETTERS/GETTERS
     public String getName() {
-        return name;
+        return BLUE + name + ANSI_RESET;
     }
+
     public void setName(String name) {
         this.name = name;
     }

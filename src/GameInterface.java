@@ -23,12 +23,12 @@ public class GameInterface {
             //TODO: do we need this line / method?
 //            System.out.println(output.displayPlayerStatus());
 
-
             gameResponse = (input.getUserAction(g1.p1));
             System.out.println(output.promptForAction());
             for (int i = 0; i < 30; i++) {
                 System.out.println();
             }
+
             System.out.println("You find yourself in the:");
             System.out.println(g1.p1.getCurrentLocation().getName());
             System.out.println();
@@ -37,7 +37,6 @@ public class GameInterface {
             System.out.println();
             System.out.println(gameResponse);
             System.out.println(output.promptForAction());
-
         }
 
     }

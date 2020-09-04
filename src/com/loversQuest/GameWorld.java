@@ -68,9 +68,9 @@ public class GameWorld {
     //Instantiate NPCs
     public NonPlayerCharacters sickCallRanger = new NonPlayerCharacters("Sick call Ranger"," is hiding behind the last dryer " +
             "with the remnants of his last " + uncrustable.getName() + " around his mouth.", laundryRoom);
-    public NonPlayerCharacters chowHallLady = new NonPlayerCharacters("Chow Hall lady", " is speaking to you in your native tongue. You find [ruby grapefruit whiteclaw] in the room.", chowHall);
-    public NonPlayerCharacters clsInstructor = new NonPlayerCharacters("CLS Instructor", " is watching your every move. You see something reflecting in trashcan.", courtYard);
-    public NonPlayerCharacters rangeDrillSergeant = new NonPlayerCharacters("Drill Sergeant", " is pounding a monster under the range tower. \nUnder the bleachers is a suspicious looking ammo box.", range);
+    public NonPlayerCharacters chowHallLady = new NonPlayerCharacters("Chow Hall lady", " is speaking to you in your native tongue.", chowHall);
+    public NonPlayerCharacters clsInstructor = new NonPlayerCharacters("CLS Instructor", " is watching your every move.", courtYard);
+    public NonPlayerCharacters rangeDrillSergeant = new NonPlayerCharacters("Drill Sergeant", " is pounding a monster under the range tower.", range);
     public NonPlayerCharacters blueFalcon = new NonPlayerCharacters("Blue Falcon", " is sleeping next to a bottomless pit of despair.", portaJohn);
     public NonPlayerCharacters gymDrill = new NonPlayerCharacters("Drill Sergeant"," is staring at you with his beady eyes. ", gym);
 

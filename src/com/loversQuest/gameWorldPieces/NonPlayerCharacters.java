@@ -23,7 +23,10 @@ public class NonPlayerCharacters {
     public NonPlayerCharacters() {
     }
 
-    public String getName() {
+    public String getName (){
+        return name;
+    }
+    public String getColorName() {
         return BLUE + name + ANSI_RESET;
     }
 

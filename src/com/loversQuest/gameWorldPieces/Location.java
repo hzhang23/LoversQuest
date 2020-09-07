@@ -43,11 +43,23 @@ public class Location {
     }
 
     public String getDescription() {
-        if(this.itemsList.size() > 0){
-            return description + "You find " + this.getItemsList().toString() + " in the room.";
-        }else{
-            return description;
+        StringBuilder result = new StringBuilder(this.description);
+        if(this.container != null){
+            result.append("You see a suspicious looking " + container.getColorName()+ ".\n");
         }
+
+        if(this.itemsList.size() > 0){
+             result.append("You find " +
+                    BLUE +   this.getItemsList().toString() + ANSI_RESET + " in the room.\n");
+        }
+        if(this.getOccupant() != null){
+            result.append("You see " +
+                    BLUE + this.getOccupant().getColorName() + ANSI_RESET +
+                    ". They " + this.getOccupant().getDescription());
+        }
+        return result.toString();
+
+
     }
 
     public void setDescription(String description) {
@@ -91,8 +103,8 @@ public class Location {
         Location result = null;
         //loop through key set of direction map
         for(CardinalDirection direction : directionMap.keySet()){
-            // if the cardinal direction string matches the input string
-            if(direction.getDirectionName().equals(stringDirection)){
+            //if direction enum to string is same as input string direction
+            if(direction.toString().equalsIgnoreCase(stringDirection)){
                 //return the location in that direction
                 result = directionMap.get(direction);
             }

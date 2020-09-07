@@ -5,13 +5,15 @@ import com.loversQuest.IO.Output;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class GameFrame {
     JFrame mainFrame;
     MapFactory generateMap = new MapFactory();
-    public GameFrame(Input input, Output output){
+    public GameFrame(Input input, Output output) {
         //create main frame with title
         mainFrame = new JFrame("Lovers Quest");
         //stop function on exit of main frame
@@ -45,8 +47,22 @@ public class GameFrame {
 
         //create a button called map
         JButton map = new JButton("Map");
+
+        // TODO: finish east, west, south buttons + figure out sizing of buttons
+        // create a button called "north"
+        JButton north = new JButton("Go North");
+        JButton south = new JButton("Go South");
+        JButton east = new JButton("Go East");
+        JButton west = new JButton("Go West");
+//        north.setPreferredSize(new Dimension(1, 1)); ***how to set size of button?
+
+
         // add event listener to map button, overrides a lot of methods
         map.addMouseListener(new MouseListener() {
+
+//            public void setButtonTestLabel(JLabel buttonTestLabel) {
+//                this.buttonTestLabel = buttonTestLabel;
+//            }
 
             //on mouse click, show map of game world
             // must import MapFactory for this to work
@@ -76,15 +92,47 @@ public class GameFrame {
             }
         });
 
+        // TODO: CLEAN THIS ISH UP ( 4 VERY SIMILAR LOOKING METHODS? )
+        // TODO: CONNECT ACTION LISTENERS TO APPROPRIATE MOVE METHODS IN GAME
+        // add action listener and add text to bottomLeft of frame
+        north.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                bottomLeft.setText(" north button working b. ");
+            }
+        });
+
+        south.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                bottomLeft.setText(" South button working b. ");
+            }
+        });
+
+        east.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                bottomLeft.setText(" easT button working b. ");
+            }
+        });
+
+        west.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                bottomLeft.setText(" WEST button working b. ");
+            }
+        });
+
         JTextArea bottomRightText = new JTextArea(10, 20);
         bottomRightText.append("bottom right");
         bottomRight.add(map);
         bottomRight.add(bottomRightText);
-        bottomRightText.setEditable(false);
+        bottomRightText.setEditable(true);
+
+        // movement buttons
+        bottomRight.add(north);
+        bottomRight.add(south);
+        bottomRight.add(east);
+        bottomRight.add(west);
 
         // add all jcomponents to the main game frame
         mainFrame.getContentPane().add(topLeft);
-
         mainFrame.getContentPane().add(topRight);
         mainFrame.getContentPane().add(bottomLeft);
         mainFrame.getContentPane().add(bottomRight);

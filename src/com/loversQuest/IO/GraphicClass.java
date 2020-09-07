@@ -47,7 +47,9 @@ public class GraphicClass {
 
         switch (player.getCurrentLocation().getName().toLowerCase()) {
             case "laundryroom" -> this.printLocation("laundryRoom.txt");
+
             case "barracks"-> this.printLocation("home.txt");
+
             case "gym" -> this.printLocation("gym.txt");
             case "courtyard" -> this.printLocation("courtYard.txt");
             case "range" -> this.printLocation("range.txt");

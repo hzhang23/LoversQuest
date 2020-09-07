@@ -122,11 +122,7 @@ public class Player {
     }
 
     public String look() {
-        if (this.getCurrentLocation().getOccupant() == null) {
             return ("You look around and " + this.getCurrentLocation().getDescription());
-        } else {
-            return ("You look around and " + this.getCurrentLocation().getDescription() + " \n\n" + this.getCurrentLocation().getOccupant().getName() + " " +this.getCurrentLocation().getOccupant().getDescription());
-        }
     }
 
     public String interact() {

@@ -1,4 +1,5 @@
 import com.loversQuest.*;
+import com.loversQuest.GUI.GameFrame;
 import com.loversQuest.IO.*;
 import com.loversQuest.gameWorldPieces.*;
 
@@ -7,13 +8,16 @@ import java.io.IOException;
 
 public class GameInterface {
 
+
+    //testing//
+    // have text file as argument and pass it in
     public static void main(String[] args) throws IOException {
 
         GameWorld g1 = new GameWorld();
         Input input = new Input();
         Output output = new Output();
         GraphicClass asciiPrinter = new GraphicClass();
-        //GameFrame gameFrame = new GameFrame(input, output);
+        GameFrame gameFrame = new GameFrame(input, output);
         g1.createMap();
         g1.equipPlayer();
 

@@ -1,13 +1,12 @@
 package com.loversQuest.gameWorldPieces;
 
-
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.loversQuest.IO.GraphicClass;
 
 import java.io.IOException;
-
 
 public class Player {
 

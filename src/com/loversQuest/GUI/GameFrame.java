@@ -5,10 +5,7 @@ import com.loversQuest.IO.Output;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 public class GameFrame {
     JFrame mainFrame;
@@ -130,6 +127,47 @@ public class GameFrame {
         bottomRight.add(south);
         bottomRight.add(east);
         bottomRight.add(west);
+
+        // testing arrowkey input by visual count
+        JLabel upArrowKey = new JLabel();
+        JLabel downArrowKey = new JLabel();
+        JLabel leftArrowKey = new JLabel();
+        JLabel rightArrowKey = new JLabel();
+
+        upArrowKey.setText("Up: 0");
+        downArrowKey.setText("Down: 0");
+        leftArrowKey.setText("Left: 0");
+        rightArrowKey.setText("Right: 0");
+
+        bottomRight.add(upArrowKey);
+        bottomRight.add(downArrowKey);
+        bottomRight.add(leftArrowKey);
+        bottomRight.add(rightArrowKey);
+
+        mainFrame.setFocusable(true);
+        mainFrame.addKeyListener(new KeyListener() {
+            int upCount = 0;
+            int downCount = 0;
+            int rightCount = 0;
+            int leftCount = 0;
+
+            @Override
+            public void keyTyped(KeyEvent e) {}
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                int keyCode = e.getKeyCode();
+                switch (keyCode) {
+                    case KeyEvent.VK_UP -> upArrowKey.setText("Up: " + Integer.toString(upCount++));
+                    case KeyEvent.VK_DOWN -> downArrowKey.setText("Down: " + Integer.toString(downCount++));
+                    case KeyEvent.VK_RIGHT -> rightArrowKey.setText("Right: " + Integer.toString(rightCount++));
+                    case KeyEvent.VK_LEFT -> leftArrowKey.setText("Left: " + Integer.toString(leftCount++));
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) { }
+        });
 
         // add all jcomponents to the main game frame
         mainFrame.getContentPane().add(topLeft);

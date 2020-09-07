@@ -87,6 +87,7 @@ public class GameWorld {
     // sets N, S, E, W directions of rooms in relation to one another, add characters and items
     public void createMap(){
 
+
         barracks.setEast(gym);
         barracks.setNorth(courtYard);
         barracks.setSouth(nothing);

@@ -15,15 +15,15 @@ public class Output {
 
 
     public String displayIntroDialog() {
-        System.out.println("WELCOME TO " + ANSI_RED + "LOVERSQUEST \n" + ANSI_RESET);
-        System.out.println("You have almost completed AIT at Fort Sam Houston. You graduate tomorrow but you still " +
+        String output = "WELCOME TO " + ANSI_RED + "LOVERSQUEST \n" + ANSI_RESET +
+                "You have almost completed AIT at Fort Sam Houston. You graduate tomorrow but you still " +
                 "have tasks to finish. \nYour mission is to gather 5 white claws and complete 3 warrior tasks. " +
                 "Beware of fellow students, diseases, and drill sergeants. \nTry to complete all your basic warrior skills " +
-                "while acquiring as many white claws as possible before graduation.... \n");
-        System.out.println("You open your eyes, and find yourself in the barracks staring up at the crooked ceiling tiles above. It’s the day before AIT graduation.\n" +
+                "while acquiring as many white claws as possible before graduation.... \n" +
+                "You open your eyes, and find yourself in the barracks staring up at the crooked ceiling tiles above. It’s the day before AIT graduation.\n" +
                 "You must complete all the warrior tasks while collecting as many WCs as possible to meet up with your " + ANSI_RED + "AIT bf/gf" + ANSI_RESET + " for a few adult beverages\n" +
-                "and " + ANSI_RED + "cuddles" + ANSI_RESET+ " before you are both sent off to your duty stations." );
-        return "This is the intro dialog";
+                "and " + ANSI_RED + "cuddles" + ANSI_RESET + " before you are both sent off to your duty stations.";
+        return output;
     }
 
     public String promptForAction(){

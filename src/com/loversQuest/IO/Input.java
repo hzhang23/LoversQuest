@@ -20,7 +20,9 @@ import java.util.Scanner;
 
 import static com.loversQuest.IO.Output.BLUE;
 
-public class Input{
+
+public class Input {
+
 
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_RESET = "\u001B[0m";
@@ -131,9 +133,11 @@ public class Input{
                     finalResponse = ("You can't inspect nothing");
                 } else {
                     containerName = response[1];
+
                     if (player.inspect() != null) {
                         finalResponse = BLUE + (player.inspect()).toString() + ANSI_RESET;
                         for (Item item : player.inspect()) {
+
                             player.getCurrentLocation().addItem(item);
                         }
                     } else {

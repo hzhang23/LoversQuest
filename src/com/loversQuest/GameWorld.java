@@ -72,6 +72,7 @@ public class GameWorld {
 
     public NonPlayerCharacters clsInstructor = new NonPlayerCharacters("CLS Instructor", " is watching your every move. You see something reflecting in trashcan.", courtYard);
     public NonPlayerCharacters rangeDrillSergeant = new NonPlayerCharacters("Drill Sergeant", " is pounding a monster under the range tower. \nUnder the bleachers is a suspicious looking ammo box.", range);
+
     public NonPlayerCharacters blueFalcon = new NonPlayerCharacters("Blue Falcon", " is sleeping next to a bottomless pit of despair.", portaJohn);
     public NonPlayerCharacters gymDrill = new NonPlayerCharacters("Drill Sergeant"," is staring at you with his beady eyes. ", gym);
 

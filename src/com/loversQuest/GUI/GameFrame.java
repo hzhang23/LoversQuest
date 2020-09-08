@@ -14,7 +14,7 @@ public class GameFrame {
     JFrame mainFrame;
     MapFactory generateMap = new MapFactory();
     JTextArea topLeftText = new JTextArea();
-    JTextArea topRightText = new JTextArea();
+    JTextArea topRightText = new JTextArea(10, 20);
     JTextField bottomLeftText = new JTextField(15);
     JFrameInput input;
     Player player;
@@ -34,7 +34,7 @@ public class GameFrame {
         //stop function on exit of main frame
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //set layout
-        GridLayout gridLayout = new GridLayout(3, 2);
+        GridLayout gridLayout = new GridLayout(2, 2);
         ///apply layout to content of frame
         mainFrame.getContentPane().setLayout(gridLayout);
 
@@ -189,10 +189,6 @@ public class GameFrame {
         mainFrame.getContentPane().add(bottomLeft);
         mainFrame.getContentPane().add(bottomRight);
 
-        JTextPane testPane = new JTextPane();
-        testPane.setText(gameResponse);
-        testPane.setVisible(true);
-        mainFrame.getContentPane().add(testPane);
 
         //idk what this does
         mainFrame.pack();
@@ -215,6 +211,7 @@ public class GameFrame {
         String response = input.getUserAction(this.player, command);
         this.changeTopLeftText(response);
         this.bottomLeftText.setText(null);
+        this.topRightText.setText(this.player.getAllItems().toString());
 
     }
 

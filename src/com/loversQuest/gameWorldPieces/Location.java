@@ -43,18 +43,18 @@ public class Location {
     }
 
     public String getDescription() {
-        StringBuilder result = new StringBuilder(this.description);
+        StringBuilder result = new StringBuilder(this.description + " ");
         if(this.container != null){
-            result.append("You see a suspicious looking " + container.getColorName()+ ".\n");
+            result.append("You see a suspicious looking " + container.getName()+ ".\n");
         }
 
         if(this.itemsList.size() > 0){
              result.append("You find " +
-                    BLUE +   this.getItemsList().toString() + ANSI_RESET + " in the room.\n");
+                    this.getItemsList().toString() + " in the room.\n");
         }
         if(this.getOccupant() != null){
             result.append("You see " +
-                    BLUE + this.getOccupant().getColorName() + ANSI_RESET +
+                    this.getOccupant().getName() +
                     ". They " + this.getOccupant().getDescription());
         }
         return result.toString();

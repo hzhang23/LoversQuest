@@ -1,7 +1,5 @@
 package com.loversQuest.GUI;
 
-import com.loversQuest.GUI.MapFactory;
-import com.loversQuest.GUI.MapFrame;
 import com.loversQuest.GameWorld;
 import com.loversQuest.IO.InputParser;
 import com.loversQuest.gameWorldPieces.Item;
@@ -15,12 +13,8 @@ import java.io.IOException;
 
 import java.util.Scanner;
 
-import static com.loversQuest.IO.Output.BLUE;
 
 public class JFrameInput {
-
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_RESET = "\u001B[0m";
 
     // private?
     InputParser parser = new InputParser();
@@ -32,7 +26,7 @@ public class JFrameInput {
 
     public String displayGoResponse(String direction, Player player) throws IOException{
 
-        String status = "You head to the " +direction+ " and find yourself in the " + player.getCurrentLocation().getColoredName();
+        String status = "You head to the " +direction+ " and find yourself in the " + player.getCurrentLocation().getName();
 
         return status;
 //                  + graphicImage.printLocation("home.txt");
@@ -58,9 +52,9 @@ public class JFrameInput {
         // this should all go in separate controller class
         switch (actionVerb) {
             case "go" -> {
-                String direction;
+                String direction = null;
                 if (response.length < 2) {
-                    direction = goActionPrompt(player);
+                    return "Cannot go nowhere";
                 } else {
                     direction = response[1];
                     // player.go returns false if bad input, return statement prevents displayGoResponse() from running
@@ -76,7 +70,8 @@ public class JFrameInput {
 
                 // check if item is in location
                 for (Item item: player.getCurrentLocation().getItemsList()) {
-                    if (stringifiedResponse.equals(item.getName().toLowerCase())){
+                    //originally: stringifiedResponse.equals(item.getName().toLowerCase())
+                    if (item.getName().toLowerCase().contains(stringifiedResponse) && stringifiedResponse.length() > 2){
                         chosenItem = item;
                         break;
                     }
@@ -93,13 +88,13 @@ public class JFrameInput {
             case "use" ->{
 //              if the item is in current inventory
                 for (Item item: player.getAllItems()) {
-                    if (stringifiedResponse.equals(item.getName().toLowerCase())){
+                    if (item.getName().toLowerCase().contains(stringifiedResponse) && stringifiedResponse.length() > 2){
                         finalResponse = (player.getItem(item.getName().toLowerCase()).use());
                         break;
                     }
                 }
                 if(finalResponse == null){
-                    finalResponse = ("You can't use nothing");
+                    finalResponse = ("You can't use that");
                 }
 
             }
@@ -107,11 +102,11 @@ public class JFrameInput {
                 // not currently used because locations have only one container
                 String containerName;
                 if(response.length < 2){
-                    finalResponse = ("You can't inspect nothing");
+                    finalResponse = ("You can't inspect that");
                 }else{
                     containerName = response[1];
                     if(player.inspect() != null){
-                        finalResponse = BLUE + (player.inspect()).toString() + ANSI_RESET;
+                        finalResponse = "You find a " + (player.inspect()).toString();
                         for(Item item: player.inspect()){
                             player.getCurrentLocation().addItem(item);
                         }
@@ -134,9 +129,9 @@ public class JFrameInput {
 
     //TODO: error checking on user input response
 
-    public String goActionPrompt(Player player) throws IOException{
-        System.out.println("Where would you like to go? " + ANSI_PURPLE + "[ North, South, East, West ]: " + ANSI_RESET);
-        String response = userInput.nextLine().toLowerCase();
+    public String goActionPrompt(Player player, String direction) throws IOException{
+        System.out.println("Where would you like to go? [ North, South, East, West ]");
+        String response = direction;
         player.go(response);
         return response;
     }

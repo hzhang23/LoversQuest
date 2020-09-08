@@ -63,56 +63,6 @@ public class Player {
         }
         return result;
 
-        // "there has got to be a better way to do this" moar methods
-        // externalize 'decision making"?
-//        switch (direction) {
-//            case "east":
-//                if (validateLocation(this.currentLocation.getEast())) {
-//                    this.setCurrentLocation(this.currentLocation.getEast());
-//
-//                } else {
-//                    response = ("You can't go that way");
-//                }
-//                break;
-//            case "west":
-//                // terrible needs to be decoupled and refactored
-//                // if we try to go west and the occupant is an officer && we do not have the officer prize in inventory
-//                if(this.currentLocation.getOccupant() instanceof Officer &&
-//                        this.getItem( this.currentLocation.getOccupant().getPrize().getName() ) == null){
-//                    //interact with officer
-//                    this.getCurrentLocation().getOccupant().interact(this);
-//                }
-//
-//                // normal behavior without officer
-//                if (validateLocation(this.currentLocation.getWest())) {
-//                    this.setCurrentLocation(this.currentLocation.getWest());
-////                    When player goes to a location successfully
-////                    print ASCII art associated to current location
-//
-//                } else {
-//                    response = ("You can't go that way");
-//                }
-//                break;
-//            case "south":
-//                if (validateLocation(this.currentLocation.getSouth())) {
-//                    this.setCurrentLocation(this.currentLocation.getSouth());
-//
-//                } else {
-//                    response = ("You can't go that way");
-//                }
-//                break;
-//            case "north":
-//                if (validateLocation(this.currentLocation.getNorth())) {
-//                    this.setCurrentLocation(this.currentLocation.getNorth());
-//
-//                } else {
-//                    response = ("You can't go that way");
-//                }
-//                break;
-//            default:
-//                response = ("bad input, try again");
-//                return false;
-//        }
     }
 
     // checks if a given location is a place a player can move
@@ -146,7 +96,8 @@ public class Player {
         boolean gotItem = false;
         for (int i = 0; i < currentLocation.getItemsList().size(); i++) {
             Item locationItem = currentLocation.getItemsList().get(i);
-            if (itemName.toLowerCase().equals(locationItem.getName().toLowerCase()) && !(locationItem instanceof Container)) {
+            // first portion originally: itemName.toLowerCase().equals(locationItem.getName().toLowerCase()
+            if (locationItem.getName().toLowerCase().contains(itemName.toLowerCase()) && !(locationItem instanceof Container)) {
                 this.addItem(locationItem);
                 currentLocation.removeItem(locationItem);
                 gotItem = true;

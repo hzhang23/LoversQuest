@@ -44,7 +44,7 @@ public class GameInterface {
 
         JFrameInput jFrameInput = new JFrameInput();
 
-        GameFrame gameFrame = new GameFrame(output.displayIntroDialog(), jFrameInput, g1.p1);
+        GameFrame gameFrame = new GameFrame(output.displayIntroDialog(), jFrameInput, g1.p1, asciiPrinter);
 
         gameFrame.changeTopRightText(g1.p1.displayItems());
 
@@ -76,11 +76,8 @@ public class GameInterface {
             System.out.println(output.promptForAction());
         }
 
-        for (int i = 0; i < 30; i++) {
-            System.out.println();
-        }
-        System.out.println(gameResponse);
-        System.out.println("Congrats soldier you've just graduated. Now go buy a Camaro.");
+        gameFrame.changeTopLeftText(gameResponse + "\n" +
+        "Congrats soldier you've just graduated. Now go buy a Camaro.");
 
     }
 }

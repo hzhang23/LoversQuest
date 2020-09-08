@@ -1,7 +1,8 @@
 package com.loversQuest.GUI;
 
+import com.loversQuest.IO.GraphicClass;
 import com.loversQuest.gameWorldPieces.Player;
-
+import com.loversQuest.IO.GraphicClass.*;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
@@ -9,24 +10,27 @@ import java.io.IOException;
 import java.awt.event.*;
 
 
-public class GameFrame {
+public class GameFrame extends JFrame implements KeyListener{
     JFrame mainFrame;
     MapFactory generateMap = new MapFactory();
-    JTextArea topLeftText = new JTextArea();
-    JTextArea topRightText = new JTextArea(10, 20);
-    JTextField bottomLeftText = new JTextField(15);
+    JTextArea topLeftText = new JTextArea(20, 20);
+    JTextArea topRightText = new JTextArea(20,20);
+    JTextField bottomLeftText = new JTextField(20);
+    JTextArea locationArt = new JTextArea();
     JFrameInput input;
     Player player;
+    GraphicClass asciiPrinter;
 
 
     String gameCommand;
 
-    public GameFrame(String gameResponse, JFrameInput input, Player player){
+    public GameFrame(String gameResponse, JFrameInput input, Player player, GraphicClass asciiPrinter) throws IOException {
         //TODO: Text input area at bottom has event listener for enter key and button press.
         // When event is triggered the panes are re-rendered with the following
         // Game response text, Inventory, Map(if location is included), Ascii art..
         this.input = input;
         this.player = player;
+        this.asciiPrinter = asciiPrinter;
 
 
         //create main frame with title
@@ -39,29 +43,38 @@ public class GameFrame {
         mainFrame.getContentPane().setLayout(gridLayout);
 
 
-
-
-
         JPanel topLeft = new JPanel();
-        GridLayout layoutTopLeft = new GridLayout(1,1);
+        GridBagLayout layoutTopLeft = new GridBagLayout();
         topLeft.setLayout(layoutTopLeft);
-//        JTextArea topLeftText = new JTextArea();
-        //adds text to text area
+        GridBagConstraints gbcTopLeft = new GridBagConstraints();
+        gbcTopLeft.gridx = getX();
+        gbcTopLeft.weightx = 1;
+        gbcTopLeft.gridy = getY();
+        gbcTopLeft.weighty = 1;
+        JLabel topLeftLabel = new JLabel("The Quest for Love");
+        gbcTopLeft.fill = GridBagConstraints.HORIZONTAL;
+        gbcTopLeft.gridx = 0;
+        gbcTopLeft.gridy = 0;
+        topLeft.add(topLeftLabel, gbcTopLeft);
 
-
-        topLeftText.append(gameResponse);
         // make it so text cannot be changed
         topLeftText.setEditable(false);
         topLeftText.setLineWrap(true);
         topLeftText.setWrapStyleWord(true);
-        topLeft.add(topLeftText);
+        gbcTopLeft.fill = GridBagConstraints.BOTH;
+        gbcTopLeft.gridx = 0;
+        gbcTopLeft.gridy = 1;
+        topLeft.add(topLeftText, gbcTopLeft);
+        //adds text to text area
+        topLeftText.append(gameResponse);
+
 
         // create text area and set how many rows and columns of text there are
         JPanel bottomLeft = new JPanel();
-        GridLayout layoutBottomLeft = new GridLayout(1,2);
-        topLeft.setLayout(layoutBottomLeft);
+        GridLayout layoutBottomLeft = new GridLayout(1, 2);
 
-//        bottomLeftText.append("");
+        bottomLeft.add(locationArt);
+//        bottomLeft.setLayout(layoutBottomLeft);
         bottomLeftText.setEditable(true);
         bottomLeftText.addKeyListener(new KeyListener() {
             @Override
@@ -86,6 +99,7 @@ public class GameFrame {
 
             }
         });
+
         bottomLeft.add(bottomLeftText);
 
         JButton submitButton = new JButton("Submit");
@@ -127,14 +141,26 @@ public class GameFrame {
 
 
         JPanel topRight = new JPanel();
-        GridLayout layoutTopRight = new GridLayout(1,1);
-        topLeft.setLayout(layoutTopRight);
+        GridBagLayout layoutTopRight = new GridBagLayout();
+        topRight.setLayout(layoutTopRight);
+        GridBagConstraints gbcTopRight = new GridBagConstraints();
+        gbcTopRight.gridx = getX();
+        gbcTopRight.weightx = 1;
+        gbcTopRight.gridy = getY();
+        gbcTopRight.weighty = 1;
+        JLabel topRightLabel = new JLabel("Rucksack Inventory", SwingConstants.CENTER);
 
-        topRightText.append("top right");
+        gbcTopRight.fill = GridBagConstraints.HORIZONTAL;
+        gbcTopRight.gridx = 0;
+        gbcTopRight.gridy = 0;
+        topRight.add(topRightLabel, gbcTopRight);
         topRightText.setEditable(false);
         topRightText.setLineWrap(true);
         topRightText.setWrapStyleWord(true);
-        topRight.add(topRightText);
+        gbcTopRight.fill = GridBagConstraints.BOTH;
+        gbcTopRight.gridx = 0;
+        gbcTopRight.gridy = 1;
+        topRight.add(topRightText, gbcTopRight);
 
 
         // done correctly with a panel
@@ -299,10 +325,39 @@ public class GameFrame {
         this.changeTopLeftText(response);
         this.bottomLeftText.setText(null);
         this.topRightText.setText(this.player.getAllItems().toString());
+        this.locationArt.setText(this.asciiPrinter.printCurrentAscii(this.player));
 
     }
 
 
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    //does this put an event listener on the whole frame?
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if(e.getKeyCode()==KeyEvent.VK_ENTER){
+            try {
+                GameFrame.this.runCommand(bottomLeftText.getText());
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
+        if(e.getKeyCode() == KeyEvent.VK_DOWN){
+            try {
+                GameFrame.this.runCommand("go south");
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
 
 
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
 }

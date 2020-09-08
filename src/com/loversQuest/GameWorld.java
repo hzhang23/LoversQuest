@@ -128,7 +128,7 @@ public class GameWorld {
         gym.setEast(nothing);
         gym.setOccupant(gymDrill);
         gymDrill.setKeyItem(ptBelt);
-        gymDrill.setPrize(ptCert);
+        gymDrill.setPrize(ptBadge   );
 
         portaJohn.setSouth(gym);
         portaJohn.setWest(nothing);

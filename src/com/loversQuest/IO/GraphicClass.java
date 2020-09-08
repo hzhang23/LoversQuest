@@ -43,10 +43,13 @@ public class GraphicClass {
 //        String fileName = locationsGraphicsMap.get(location);
 //        this.printLocation(fileName);
 
-                    player.getCurrentLocation().getName().toLowerCase().equals("gazebo");
+        player.getCurrentLocation().getName().toLowerCase().equals("gazebo");
+
         switch (player.getCurrentLocation().getName().toLowerCase()) {
             case "laundryroom" -> this.printLocation("laundryRoom.txt");
-            case "barracks" -> this.printLocation("home.txt");
+
+            case "barracks"-> this.printLocation("home.txt");
+
             case "gym" -> this.printLocation("gym.txt");
             case "courtyard" -> this.printLocation("courtYard.txt");
             case "range" -> this.printLocation("range.txt");

@@ -1,13 +1,12 @@
 package com.loversQuest.gameWorldPieces;
 
-
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.loversQuest.IO.GraphicClass;
 
 import java.io.IOException;
-
 
 public class Player {
 
@@ -51,13 +50,13 @@ public class Player {
                     return false;
                 }
             }
-
         }
 
         //replaces the switch statement below
         // key is the ability to get locations by string inputs i.e. getDirectionFromString in location class
         Location destination = this.currentLocation.getDirectionFromString(directionInput);
         // if it is a valid direction to go, update current position
+
         if (destination != null && validateLocation(destination)) {
             this.setCurrentLocation(destination);
             result = true;
@@ -114,15 +113,12 @@ public class Player {
 //                response = ("bad input, try again");
 //                return false;
 //        }
-
     }
-
 
     // checks if a given location is a place a player can move
     public boolean validateLocation(Location destination) {
         return !destination.getName().equals("NOTHING");
     }
-
 
     public String look() {
             return ("You look around and " + this.getCurrentLocation().getDescription());

@@ -4,11 +4,11 @@ import com.loversQuest.GUI.JFrameInput;
 import com.loversQuest.IO.*;
 import com.loversQuest.gameWorldPieces.*;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 
 public class GameInterface {
-
 
     //testing//
     // have text file as argument and pass it in
@@ -21,7 +21,6 @@ public class GameInterface {
 
         g1.createMap();
         g1.equipPlayer();
-
 
         //testing setup
         g1.p1.setCurrentLocation(g1.px);
@@ -38,6 +37,7 @@ public class GameInterface {
 
 
         System.out.println(output.displayIntroDialog());
+
         System.out.println(output.promptForAction());
 
         String gameResponse = null;

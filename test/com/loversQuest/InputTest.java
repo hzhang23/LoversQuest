@@ -43,11 +43,9 @@ public class InputTest {
 
         String finalResponse = null;
 
-
-
         //prompt user for action
         ///move to output class
-//        System.out.println("What would you like to do? [ 'go', 'look', 'interact', 'inventory', 'get item']");
+        // System.out.println("What would you like to do? [ 'go', 'look', 'interact', 'inventory', 'get item']");
         //System.out.println("\nWhat would you like to do? " + ANSI_PURPLE +  "[ go, look, interact, inventory, get <item> ]" + ANSI_RESET);
 
         String responseInput = userInput.nextLine();

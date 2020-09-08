@@ -13,6 +13,8 @@ public class Player {
     private String name;
     private Location currentLocation;
 
+    private boolean hasChallengeCoin = false;
+
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String BLUE = "\u001B[34m";
 
@@ -46,14 +48,13 @@ public class Player {
         if (getCurrentLocation().getOccupant() instanceof Officer) {
             if (direction.equals("west")) {
                 if (getItem(getCurrentLocation().getOccupant().getPrize().getName()) == null) {
-                    getCurrentLocation().getOccupant().interact(this);
+                    ((Officer) getCurrentLocation().getOccupant()).reRoute(this);
                     return false;
                 }
             }
         }
 
-        //replaces the switch statement below
-        // key is the ability to get locations by string inputs i.e. getDirectionFromString in location class
+        //get indicated destination from direction string
         Location destination = this.currentLocation.getDirectionFromString(directionInput);
         // if it is a valid direction to go, update current position
 
@@ -154,6 +155,14 @@ public class Player {
 //            case BLUE + "px" + ANSI_RESET -> graphicImage.printLocation("px.txt");
 //            default -> graphicImage.printLocation("gazebo.txt");
 //        }
+
+    public boolean isHasChallengeCoin() {
+        return hasChallengeCoin;
+    }
+
+    public void setHasChallengeCoin(boolean hasChallengeCoin) {
+        this.hasChallengeCoin = hasChallengeCoin;
+    }
 //
 //    }
 

@@ -4,8 +4,10 @@ import com.loversQuest.GUI.JFrameInput;
 import com.loversQuest.IO.*;
 import com.loversQuest.gameWorldPieces.*;
 
+import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.Arrays;
 
 
 public class GameInterface {
@@ -47,6 +49,9 @@ public class GameInterface {
         GameFrame gameFrame = new GameFrame(output.displayIntroDialog(), jFrameInput, g1.p1, asciiPrinter);
 
         gameFrame.changeTopRightText(g1.p1.displayItems());
+        ////////input map test
+        InputMap test = gameFrame.getRootPane().getInputMap();
+        System.out.println(test.toString());
 
 
 

@@ -58,7 +58,13 @@ public class JFrameInput {
                 } else {
                     direction = response[1];
                     // player.go returns false if bad input, return statement prevents displayGoResponse() from running
-                    if (!player.go(direction)) return "You can't go that way.";
+                    if (player.getCurrentLocation().getName().equalsIgnoreCase("px") &&
+                            direction.equalsIgnoreCase("west") &&
+                            !player.isHasChallengeCoin() &&
+                            !player.go(direction)) return "Captain Charlie sends you back to complete your WARRIOR SKILL LEVEL 1 tasks.";
+                    else if(!player.go(direction)){
+                        return "You can't go that way";
+                    }
                 }
                 finalResponse = (displayGoResponse(direction, player));
             }

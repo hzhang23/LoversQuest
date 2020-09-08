@@ -35,6 +35,13 @@ public class Officer extends NonPlayerCharacters{
         this.numOfItemsNeeded = numOfItemsNeeded;
     }
 
+
+    //overlaps with interact override below
+    public String reRoute(Player player){
+        player.setCurrentLocation(sendPlayerDestination);
+        return "It would behoove you.... \n(He sends you back to complete all your warrior tasks)";
+    }
+
     @Override
     public String interact(Player player) {
         int keyItemCount = 0;
@@ -44,6 +51,7 @@ public class Officer extends NonPlayerCharacters{
             }
         }
         if(keyItemCount >= this.numOfItemsNeeded){
+            player.setHasChallengeCoin(true);
             player.addItem(this.getPrize());
             return "You have made all the boxes green. Good job, carry on.";
 

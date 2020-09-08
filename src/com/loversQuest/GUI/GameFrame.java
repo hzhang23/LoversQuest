@@ -4,6 +4,7 @@ import com.loversQuest.IO.GraphicClass;
 import com.loversQuest.gameWorldPieces.Player;
 import com.loversQuest.IO.GraphicClass.*;
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.io.IOException;
 
@@ -20,6 +21,7 @@ public class GameFrame extends JFrame implements KeyListener{
     JFrameInput input;
     Player player;
     GraphicClass asciiPrinter;
+    Border blackBorder = BorderFactory.createLineBorder(Color.BLACK);
 
 
     String gameCommand;
@@ -38,9 +40,9 @@ public class GameFrame extends JFrame implements KeyListener{
         //stop function on exit of main frame
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //set layout
-        GridLayout gridLayout = new GridLayout(2, 2);
+        GridLayout mainGridLayout = new GridLayout(2, 2, 3, 3);
         ///apply layout to content of frame
-        mainFrame.getContentPane().setLayout(gridLayout);
+        mainFrame.getContentPane().setLayout(mainGridLayout);
 
 
         JPanel topLeft = new JPanel();
@@ -51,7 +53,8 @@ public class GameFrame extends JFrame implements KeyListener{
         gbcTopLeft.weightx = 1;
         gbcTopLeft.gridy = getY();
         gbcTopLeft.weighty = 1;
-        JLabel topLeftLabel = new JLabel("The Quest for Love");
+        JLabel topLeftLabel = new JLabel("The Quest for Love", SwingConstants.CENTER);
+        topLeftLabel.setFont(new Font("Helvetica", Font.PLAIN, 20));
         gbcTopLeft.fill = GridBagConstraints.HORIZONTAL;
         gbcTopLeft.gridx = 0;
         gbcTopLeft.gridy = 0;
@@ -61,6 +64,7 @@ public class GameFrame extends JFrame implements KeyListener{
         topLeftText.setEditable(false);
         topLeftText.setLineWrap(true);
         topLeftText.setWrapStyleWord(true);
+        topLeftText.setFont(new Font("Helvetica", Font.PLAIN, 20));
         gbcTopLeft.fill = GridBagConstraints.BOTH;
         gbcTopLeft.gridx = 0;
         gbcTopLeft.gridy = 1;
@@ -71,10 +75,11 @@ public class GameFrame extends JFrame implements KeyListener{
 
         // create text area and set how many rows and columns of text there are
         JPanel bottomLeft = new JPanel();
-        GridLayout layoutBottomLeft = new GridLayout(1, 2);
+        GridLayout layoutBottomLeft = new GridLayout(3, 1);
+        JLabel bottomLeftLabel = new JLabel("Commands: Go <direction>, Look, Inspect <suspicious container>, Use <item>, Interact");
 
-        bottomLeft.add(locationArt);
-//        bottomLeft.setLayout(layoutBottomLeft);
+//        bottomLeft.add(locationArt);
+        bottomLeft.setLayout(layoutBottomLeft);
         bottomLeftText.setEditable(true);
         bottomLeftText.addKeyListener(new KeyListener() {
             @Override
@@ -99,7 +104,9 @@ public class GameFrame extends JFrame implements KeyListener{
 
             }
         });
+        bottomLeftText.setFont(new Font("Helvetica", Font.PLAIN, 20));
 
+        bottomLeft.add(bottomLeftLabel);
         bottomLeft.add(bottomLeftText);
 
         JButton submitButton = new JButton("Submit");
@@ -149,6 +156,7 @@ public class GameFrame extends JFrame implements KeyListener{
         gbcTopRight.gridy = getY();
         gbcTopRight.weighty = 1;
         JLabel topRightLabel = new JLabel("Rucksack Inventory", SwingConstants.CENTER);
+        topRightLabel.setFont(new Font("Helvetica", Font.PLAIN, 20));
 
         gbcTopRight.fill = GridBagConstraints.HORIZONTAL;
         gbcTopRight.gridx = 0;
@@ -157,6 +165,7 @@ public class GameFrame extends JFrame implements KeyListener{
         topRightText.setEditable(false);
         topRightText.setLineWrap(true);
         topRightText.setWrapStyleWord(true);
+        topRightText.setFont(new Font("Helvetica", Font.PLAIN, 20));
         gbcTopRight.fill = GridBagConstraints.BOTH;
         gbcTopRight.gridx = 0;
         gbcTopRight.gridy = 1;
@@ -296,6 +305,12 @@ public class GameFrame extends JFrame implements KeyListener{
             public void keyReleased(KeyEvent e) { }
         });
 
+        //set border
+        mainFrame.getRootPane().setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
+        topLeft.setBorder(blackBorder);
+        topRight.setBorder(blackBorder);
+        bottomLeft.setBorder(blackBorder);
+        bottomRight.setBorder(blackBorder);
         // add all jcomponents to the main game frame
         mainFrame.getContentPane().add(topLeft);
         mainFrame.getContentPane().add(topRight);

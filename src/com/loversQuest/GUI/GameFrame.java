@@ -5,11 +5,13 @@ import com.loversQuest.gameWorldPieces.Player;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-
+import java.awt.event.ActionEvent;
 import java.awt.event.*;
-
+import java.util.Arrays;
 
 public class GameFrame {
+//    Action upAction = new UpAction();
+
     JFrame mainFrame;
     MapFactory generateMap = new MapFactory();
     JTextArea topLeftText = new JTextArea();
@@ -17,9 +19,14 @@ public class GameFrame {
     JTextField bottomLeftText = new JTextField(15);
     JFrameInput input;
     Player player;
-
-
     String gameCommand;
+
+    // creating action instance variables for arrow input
+    Action upAction;
+    Action downAction;
+    Action leftAction;
+    Action rightAction;
+
 
     public GameFrame(String gameResponse, JFrameInput input, Player player){
         //TODO: Text input area at bottom has event listener for enter key and button press.
@@ -27,7 +34,6 @@ public class GameFrame {
         // Game response text, Inventory, Map(if location is included), Ascii art..
         this.input = input;
         this.player = player;
-
 
         //create main frame with title
         mainFrame = new JFrame("Lovers Quest");
@@ -38,16 +44,12 @@ public class GameFrame {
         ///apply layout to content of frame
         mainFrame.getContentPane().setLayout(gridLayout);
 
-
-
-
-
         JPanel topLeft = new JPanel();
         GridLayout layoutTopLeft = new GridLayout(1,1);
         topLeft.setLayout(layoutTopLeft);
+
 //        JTextArea topLeftText = new JTextArea();
         //adds text to text area
-
 
         topLeftText.append(gameResponse);
         // make it so text cannot be changed
@@ -58,6 +60,10 @@ public class GameFrame {
 
         // create text area and set how many rows and columns of text there are
         JPanel bottomLeft = new JPanel();
+
+        JLabel testingArrowsKeys = new JLabel();
+        bottomLeft.add(testingArrowsKeys);
+
         GridLayout layoutBottomLeft = new GridLayout(1,2);
         topLeft.setLayout(layoutBottomLeft);
 
@@ -66,7 +72,6 @@ public class GameFrame {
         bottomLeftText.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-
             }
 
             @Override
@@ -78,14 +83,13 @@ public class GameFrame {
                         ioException.printStackTrace();
                     }
                 }
-
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {
+            public void keyReleased(KeyEvent e) {}
 
-            }
         });
+
         bottomLeft.add(bottomLeftText);
 
         JButton submitButton = new JButton("Submit");
@@ -124,8 +128,6 @@ public class GameFrame {
         mainFrame.getRootPane().setDefaultButton(submitButton);
         bottomLeft.add(submitButton);
 
-
-
         JPanel topRight = new JPanel();
         GridLayout layoutTopRight = new GridLayout(1,1);
         topLeft.setLayout(layoutTopRight);
@@ -135,7 +137,6 @@ public class GameFrame {
         topRightText.setLineWrap(true);
         topRightText.setWrapStyleWord(true);
         topRight.add(topRightText);
-
 
         // done correctly with a panel
         JPanel bottomRight = new JPanel();
@@ -148,12 +149,11 @@ public class GameFrame {
 
         // TODO: finish east, west, south buttons + figure out sizing of buttons
         // create a button called "north"
-        JButton north = new JButton("Go North");
-        JButton south = new JButton("Go South");
-        JButton east = new JButton("Go East");
-        JButton west = new JButton("Go West");
+//        JButton north = new JButton("Go North");
+//        JButton south = new JButton("Go South");
+//        JButton east = new JButton("Go East");
+//        JButton west = new JButton("Go West");
 //        north.setPreferredSize(new Dimension(1, 1)); ***how to set size of button?
-
 
         // add event listener to map button, overrides a lot of methods
         map.addMouseListener(new MouseListener() {
@@ -193,29 +193,37 @@ public class GameFrame {
         // TODO: CLEAN THIS ISH UP ( 4 VERY SIMILAR LOOKING METHODS? )
         // TODO: CONNECT ACTION LISTENERS TO APPROPRIATE MOVE METHODS IN GAME
         // add action listener and add text to bottomLeft of frame
-        north.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                bottomLeftText.setText(" north button working b. ");
-            }
-        });
-
-        south.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                bottomLeftText.setText(" South button working b. ");
-            }
-        });
-
-        east.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                bottomLeftText.setText(" easT button working b. ");
-            }
-        });
-
-        west.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                bottomLeftText.setText(" WEST button working b. ");
-            }
-        });
+//        north.addActionListener(e -> {
+//            try {
+//                GameFrame.this.runCommand("go north");
+//            } catch (IOException ioException) {
+//                ioException.printStackTrace();
+//            }
+//        });
+//
+//        south.addActionListener(e -> {
+//            try {
+//                GameFrame.this.runCommand("go south");
+//            } catch (IOException ioException) {
+//                ioException.printStackTrace();
+//            }
+//        });
+//
+//        east.addActionListener(e -> {
+//            try {
+//                GameFrame.this.runCommand("go east");
+//            } catch (IOException ioException) {
+//                ioException.printStackTrace();
+//            }
+//        });
+//
+//        west.addActionListener(e -> {
+//            try {
+//                GameFrame.this.runCommand("go west");
+//            } catch (IOException ioException) {
+//                ioException.printStackTrace();
+//            }
+//        });
 
         JTextArea bottomRightText = new JTextArea(10, 20);
         bottomRightText.append("bottom right");
@@ -224,51 +232,60 @@ public class GameFrame {
         bottomRightText.setEditable(true);
 
         // movement buttons
-        bottomRight.add(north);
-        bottomRight.add(south);
-        bottomRight.add(east);
-        bottomRight.add(west);
+//        bottomRight.add(north);
+//        bottomRight.add(south);
+//        bottomRight.add(east);
+//        bottomRight.add(west);
 
         // testing arrowkey input by visual count
-        JLabel upArrowKey = new JLabel();
-        JLabel downArrowKey = new JLabel();
-        JLabel leftArrowKey = new JLabel();
-        JLabel rightArrowKey = new JLabel();
 
-        upArrowKey.setText("Up: 0");
-        downArrowKey.setText("Down: 0");
-        leftArrowKey.setText("Left: 0");
-        rightArrowKey.setText("Right: 0");
+//        bottomLeft.getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "UPARROW");
+//        bottomLeft.getActionMap("UPARROW", GameFrame.this.runCommand("go north"));
+//
+//        JLabel downArrowKey = new JLabel();
+//        JLabel leftArrowKey = new JLabel();
+//        JLabel rightArrowKey = new JLabel();
 
-        bottomRight.add(upArrowKey);
-        bottomRight.add(downArrowKey);
-        bottomRight.add(leftArrowKey);
-        bottomRight.add(rightArrowKey);
+//        upArrowKey.setText("Up: 0");
+//        downArrowKey.setText("Down: 0");
+//        leftArrowKey.setText("Left: 0");
+//        rightArrowKey.setText("Right: 0");
+//
+//        bottomRight.add(upArrowKey);
+//        bottomRight.add(downArrowKey);
+//        bottomRight.add(leftArrowKey);
+//        bottomRight.add(rightArrowKey);
 
         mainFrame.setFocusable(true);
-        mainFrame.addKeyListener(new KeyListener() {
-            int upCount = 0;
-            int downCount = 0;
-            int rightCount = 0;
-            int leftCount = 0;
+//        mainFrame.addKeyListener(new KeyListener() {
+//            int upCount = 0;
+//            int downCount = 0;
+//            int rightCount = 0;
+//            int leftCount = 0;
+//
+//            @Override
+//            public void keyTyped(KeyEvent e) {}
+//
+//            @Override
+//            public void keyPressed(KeyEvent e) {
+//                int keyCode = e.getKeyCode();
+//                try {
+//                    switch (keyCode) {
+//                        case KeyEvent.VK_UP -> GameFrame.this.runCommand("go north");
+//                        case KeyEvent.VK_DOWN -> GameFrame.this.runCommand("go south");
+//                        case KeyEvent.VK_RIGHT -> GameFrame.this.runCommand("go east");
+//                        case KeyEvent.VK_LEFT -> GameFrame.this.runCommand("go west");
+//                    }
+//                } catch (IOException ioException) {
+//                    ioException.printStackTrace();
+//                }
+//            }
 
-            @Override
-            public void keyTyped(KeyEvent e) {}
+//            @Override
+//                public void keyReleased (KeyEvent e){
+//            }
 
-            @Override
-            public void keyPressed(KeyEvent e) {
-                int keyCode = e.getKeyCode();
-                switch (keyCode) {
-                    case KeyEvent.VK_UP -> upArrowKey.setText("Up: " + Integer.toString(upCount++));
-                    case KeyEvent.VK_DOWN -> downArrowKey.setText("Down: " + Integer.toString(downCount++));
-                    case KeyEvent.VK_RIGHT -> rightArrowKey.setText("Right: " + Integer.toString(rightCount++));
-                    case KeyEvent.VK_LEFT -> leftArrowKey.setText("Left: " + Integer.toString(leftCount++));
-                }
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) { }
-        });
+//        });
 
         // add all jcomponents to the main game frame
         mainFrame.getContentPane().add(topLeft);
@@ -281,6 +298,35 @@ public class GameFrame {
         mainFrame.pack();
         //make frame visible
         mainFrame.setVisible(true);
+
+        // key bindings testing instead of using key event/listener as we are running into issues
+//        private static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
+//
+//        bottomLeft.getInputMap().put(KeyStroke.getKeyCode(KeyEvent.VK_UP), "upAction");
+//        bottomLeft.getActionMap().put("upAction", UpAction);
+
+        upAction = new GameFrame.UpAction();
+        downAction = new GameFrame.DownAction();
+        leftAction  = new GameFrame.LeftAction();
+        rightAction = new GameFrame.RightAction();
+
+//        JLabel testLabel = new JLabel();
+//        mainFrame.add(testLabel);
+//        InputMap testingArrows = new InputMap();
+//        mainFrame.getContentPane().add(testingArrowsKeys);
+
+        mainFrame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("UP"), "upAction");
+        System.out.println(Arrays.toString(mainFrame.getRootPane().getInputMap().allKeys()));
+        mainFrame.getRootPane().getActionMap().put("upAction", upAction);
+
+        mainFrame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DOWN"), "downAction");
+        mainFrame.getRootPane().getActionMap().put("downAction", downAction);
+
+        mainFrame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"), "rightAction");
+        mainFrame.getRootPane().getActionMap().put("rightAction", rightAction);
+
+        mainFrame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"), "leftAction");
+        mainFrame.getRootPane().getActionMap().put("leftAction", leftAction);
     }
 
     public void changeTopLeftText (String newText){
@@ -289,7 +335,6 @@ public class GameFrame {
 
     public void changeTopRightText(String inventory){
         topRightText.setText(inventory);
-
     }
 
     //runs all internal in this method. need to uncouple
@@ -302,7 +347,53 @@ public class GameFrame {
 
     }
 
+    // need for key binding
+    public class UpAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                GameFrame.this.runCommand("go north");
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
+    }
 
+    public class DownAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                GameFrame.this.runCommand("go south");
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            System.out.println("working down");
+        }
+    }
+
+    public class RightAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                GameFrame.this.runCommand("go east");
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            System.out.println("working right");
+        }
+    }
+
+    public class LeftAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                GameFrame.this.runCommand("go west");
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            System.out.println("working left");
+        }
+    }
 
 
 }

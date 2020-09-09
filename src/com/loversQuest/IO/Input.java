@@ -2,16 +2,17 @@ package com.loversQuest.IO;
 
 import com.loversQuest.GUI.MapFactory;
 import com.loversQuest.GUI.MapFrame;
+import com.loversQuest.GameInterface;
 import com.loversQuest.GameWorld;
 import com.loversQuest.gameWorldPieces.CardinalDirection;
 import com.loversQuest.gameWorldPieces.Item;
 import com.loversQuest.gameWorldPieces.Officer;
 import com.loversQuest.gameWorldPieces.Player;
 
-
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.InputStream;
 import java.sql.SQLOutput;
 import java.util.Arrays;
 import java.io.IOException;
@@ -31,7 +32,17 @@ public class Input {
     InputParser parser = new InputParser();
     MapFactory generateMap = new MapFactory();
 
-    Scanner userInput = new Scanner(System.in);
+    Scanner userInput;
+
+    public Input() {
+        userInput = new Scanner(System.in);
+    }
+
+    public Input(String testTextFile){
+        System.out.println(testTextFile);
+        InputStream inputStream = GameInterface.class.getResourceAsStream(testTextFile);
+        userInput = new Scanner(inputStream);
+    }
 
     public String displayGoResponse(String direction, Player player) throws IOException {
 

@@ -1,3 +1,5 @@
+package com.loversQuest;
+
 import com.loversQuest.*;
 import com.loversQuest.GUI.GameFrame;
 import com.loversQuest.GUI.JFrameInput;
@@ -15,9 +17,20 @@ public class GameInterface {
     //testing//
     // have text file as argument and pass it in
     public static void main(String[] args) throws IOException {
+        System.out.println(args[0]);
+        Input input;
+        if(args.length != 0){
+            System.out.println("We have args");
+            input = new Input(args[0]);
+        }else{
+            System.out.println("No Args");
+            input = new Input();
+        }
+
+        System.out.println("Input made");
 
         GameWorld g1 = new GameWorld();
-        Input input = new Input();
+
         Output output = new Output();
         GraphicClass asciiPrinter = new GraphicClass();
 

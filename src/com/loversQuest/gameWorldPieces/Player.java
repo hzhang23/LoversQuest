@@ -14,18 +14,13 @@ public class Player {
     private Location currentLocation;
 
     private boolean hasChallengeCoin = false;
-
+    private boolean hasKiss = false;
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String BLUE = "\u001B[34m";
 
-    //  making item instance for testing
-//    Item item = new Item("WhiteClaw", 1);
 
     public RuckSack ruckSack = new RuckSack();
-    GraphicClass graphicImage = new GraphicClass();
-    NonPlayerCharacters character = new NonPlayerCharacters();
 
-//    RuckSack ruckSack = new RuckSack(item.getName(), item.getQuantity());
 
     // CTOR
     public Player(String name, Location currentLocation) {
@@ -110,7 +105,10 @@ public class Player {
     }
 
     public ArrayList<Item> inspect() {
-        ArrayList<Item> result = currentLocation.getContainer().displayContents();
+        ArrayList<Item> result = null;
+        if(currentLocation.getContainer() != null){
+            result = currentLocation.getContainer().displayContents();
+        }
         return result;
     }
 
@@ -163,8 +161,13 @@ public class Player {
     public void setHasChallengeCoin(boolean hasChallengeCoin) {
         this.hasChallengeCoin = hasChallengeCoin;
     }
-//
-//    }
 
+    public boolean isHasKiss() {
+        return hasKiss;
+    }
+
+    public void setHasKiss(boolean hasKiss) {
+        this.hasKiss = hasKiss;
+    }
 }
 

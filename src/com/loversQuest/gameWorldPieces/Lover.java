@@ -40,6 +40,7 @@ public class Lover extends NonPlayerCharacters{
         }
         if(keyItemCount >= this.numOfItemsNeeded){
             player.addItem(this.getPrize());
+            player.setHasKiss(true);
             return "OMG five WhiteClaws for me? I love you";
         }else{
             return "I'm not drinking moldy CamelBak water. Get lost POG";

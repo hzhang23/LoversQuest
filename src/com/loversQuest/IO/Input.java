@@ -7,6 +7,7 @@ import com.loversQuest.gameWorldPieces.CardinalDirection;
 import com.loversQuest.gameWorldPieces.Item;
 import com.loversQuest.gameWorldPieces.Officer;
 import com.loversQuest.gameWorldPieces.Player;
+import com.loversQuest.gameWorldPieces.Container;
 
 
 import java.awt.*;
@@ -133,13 +134,17 @@ public class Input {
                     finalResponse = ("You can't inspect nothing");
                 } else {
                     containerName = response[1];
-
-                    if (player.inspect() != null) {
+                    Container currentContainer = player.getCurrentLocation().getContainer();
+                    if (player.inspect() != null &&
+                            player.getCurrentLocation().getContainer().getName().contains(containerName.toLowerCase())) {
                         finalResponse = BLUE + (player.inspect()).toString() + ANSI_RESET;
                         for (Item item : player.inspect()) {
-
+                            //add item to location
                             player.getCurrentLocation().addItem(item);
                         }
+                        //remove all items from container
+                        currentContainer.emptyContainer();
+                        System.out.println("container emptied");
                     } else {
                         finalResponse = ("You can't look there.");
                     }

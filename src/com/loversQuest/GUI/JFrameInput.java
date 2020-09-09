@@ -20,8 +20,6 @@ public class JFrameInput {
     InputParser parser = new InputParser();
     MapFactory generateMap = new MapFactory();
 
-    Scanner userInput = new Scanner(System.in);
-
 
 
     public String displayGoResponse(String direction, Player player) throws IOException{
@@ -111,13 +109,14 @@ public class JFrameInput {
                     finalResponse = ("You can't inspect that");
                 }else{
                     containerName = response[1];
-                    if(player.inspect() != null){
-                        finalResponse = "You find a " + (player.inspect()).toString();
+                    if(player.inspect() != null && player.getCurrentLocation().getContainer().getName().toLowerCase().contains(containerName.toLowerCase())){
+                        finalResponse = "You find: " + (player.inspect()).toString();
                         for(Item item: player.inspect()){
                             player.getCurrentLocation().addItem(item);
                         }
+                        player.getCurrentLocation().getContainer().emptyContainer();
                     }else{
-                        finalResponse = ("You can't look there.");
+                        finalResponse = ("You can't inspect there.");
                     };
                 }
             }

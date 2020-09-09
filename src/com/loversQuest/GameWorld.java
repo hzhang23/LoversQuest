@@ -40,6 +40,14 @@ public class GameWorld {
 
     public Player p1 = new Player("Bob", barracks);
 
+    public Player getP1() {
+        return p1;
+    }
+
+    public void setP1(Player p1) {
+        this.p1 = p1;
+    }
+
     //create items
     public Item rifle = new Item("M16", "You shoot your rifle in the air in celebration");
     public Item uncrustable = new Item("uncrustable", "You look lovingly at the peanut butter and strawberry jam sandwich");
@@ -51,7 +59,6 @@ public class GameWorld {
     public Item whiteClaw3 = new Item("Ruby Grapefruit WhiteClaw", "You take a refreshing drink of Ruby Grapefruit");
     public Item whiteClaw4 = new Item("Mango WhiteClaw", "You take a refreshing drink of Mango");
     public Item whiteClaw5 = new Item("Watermelon WhiteClaw", "You take a refreshing drink of Watermelon");
-    public Item ptCert = new Item("Pt Certificate", "You scored 300");
     public Item sickCallSlip = new Item("Sick call slip", "You enjoy your soft shoe profile");
 
     public Item expertBadge = new Item("Expert Marksmanship Badge", "You can make things more deader better");
@@ -176,5 +183,13 @@ public class GameWorld {
         p1.addItem(rifle);
         p1.addItem(uncrustable);
         p1.addItem(camelback);
+    }
+
+    public boolean isGameOver(){
+        boolean gameOver = false;
+        if(this.p1.isHasKiss()){
+            gameOver = true;
+        }
+        return gameOver;
     }
 }

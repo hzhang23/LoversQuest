@@ -12,12 +12,15 @@ import java.awt.event.*;
 import java.util.Arrays;
 
 
+
 public class GameFrame extends JFrame{
 //    Action upAction = new UpAction();
+
     JFrame mainFrame;
     JPanel mainPanel;
     JFrameInput input;
     Player player;
+
     Border blackBorder = BorderFactory.createLineBorder(Color.BLACK);
 
     //not in use at the moment
@@ -35,7 +38,7 @@ public class GameFrame extends JFrame{
     //bottom right panel
     MapPanel mapPanel;
 
-    String gameCommand;
+
 
 
     // creating action instance variables for arrow input
@@ -73,6 +76,7 @@ public class GameFrame extends JFrame{
         //stop function on exit of main frame
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //set layout
+
         GridLayout mainGridLayout = new GridLayout(2, 2, 3, 3);
 
 
@@ -88,6 +92,7 @@ public class GameFrame extends JFrame{
 
         //set event listeners for input panel (bottom left)
         inputPanel.getInputText().addKeyListener(new KeyListener() {
+
             @Override
             public void keyTyped(KeyEvent e) {
             }
@@ -107,10 +112,12 @@ public class GameFrame extends JFrame{
             public void keyReleased(KeyEvent e) {}
 
         });
+
         inputPanel.getSubmitButton().addMouseListener(new MouseListener() {
+
             @Override
             public void mouseClicked(MouseEvent e) {
-                gameCommand = inputPanel.getInputText().getText();
+                String gameCommand = inputPanel.getInputText().getText();
                 //calls relay command function of GameFrame class instance
                 try {
                     GameFrame.this.runCommand(gameCommand);
@@ -139,6 +146,7 @@ public class GameFrame extends JFrame{
 
             }
         });
+
 
 
         // TODO: finish east, west, south buttons + figure out sizing of buttons
@@ -239,6 +247,7 @@ public class GameFrame extends JFrame{
 //                }
 //            }
 
+
 //            @Override
 //                public void keyReleased (KeyEvent e){
 //            }
@@ -258,6 +267,7 @@ public class GameFrame extends JFrame{
         mainPanel.add(inventoryPanel);
         mainPanel.add(inputPanel);
         mainPanel.add(mapPanel);
+
 
 //        // add all panels to main pane to the main game frame
 //        mainFrame.getContentPane().add(gameResponsePanel);
@@ -306,7 +316,9 @@ public class GameFrame extends JFrame{
     }
 
     public void changeTopRightText(String inventory){
+
         inventoryPanel.setInventoryText(inventory);
+
     }
 
     //runs all internal in this method. need to uncouple
@@ -321,8 +333,6 @@ public class GameFrame extends JFrame{
         this.locationArt.setText(this.asciiPrinter.printCurrentAscii(this.player));
 
     }
-
-
 
     // need for key binding
     public class UpAction extends AbstractAction {
@@ -371,5 +381,7 @@ public class GameFrame extends JFrame{
             System.out.println("working left");
         }
     }
+
+
 
 }

@@ -1,25 +1,42 @@
 package com.loversQuest.GUI;
 
+import com.loversQuest.IO.GraphicClass;
 import com.loversQuest.gameWorldPieces.Player;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.event.*;
 import java.util.Arrays;
 
-public class GameFrame {
+public class GameFrame extends JFrame{
 //    Action upAction = new UpAction();
 
     JFrame mainFrame;
-    MapFactory generateMap = new MapFactory();
-    JTextArea topLeftText = new JTextArea();
-    JTextArea topRightText = new JTextArea(10, 20);
-    JTextField bottomLeftText = new JTextField(15);
+    //////////////////////////////////////////////DANNY HERE IS YOUR PANEL //////////////////////////////////////////
+    JPanel mainPanel;
+    //////////////////////////////////////////////DANNY HERE IS YOUR PANEL //////////////////////////////////////////
     JFrameInput input;
     Player player;
-    String gameCommand;
+
+    Border blackBorder = BorderFactory.createLineBorder(Color.BLACK);
+
+    //not in use at the moment
+    JTextArea locationArt = new JTextArea();
+    GraphicClass asciiPrinter;
+
+    //this thing makes panels
+    JPanelFactory panelFactory;
+    //top right panel
+    InventoryPanel inventoryPanel;
+    //top left panel
+    GameResponsePanel gameResponsePanel;
+    //bottom left panel
+    InputPanel inputPanel;
+    //bottom right panel
+    MapPanel mapPanel;
 
     // creating action instance variables for arrow input
     Action upAction;
@@ -28,48 +45,51 @@ public class GameFrame {
     Action rightAction;
 
 
-    public GameFrame(String gameResponse, JFrameInput input, Player player){
+    public GameFrame(String gameResponse, JFrameInput input, Player player, GraphicClass asciiPrinter) throws IOException {
         //TODO: Text input area at bottom has event listener for enter key and button press.
         // When event is triggered the panes are re-rendered with the following
         // Game response text, Inventory, Map(if location is included), Ascii art..
         this.input = input;
         this.player = player;
 
+        //not in use at the moment
+        this.asciiPrinter = asciiPrinter;
+
+        //make some panels
+        this.panelFactory = new JPanelFactory(this);
+        this.gameResponsePanel = panelFactory.getGameResponsePanel();
+        this.inventoryPanel = panelFactory.getInventoryPanel();
+        this.inputPanel = panelFactory.getInputPanel();
+        this.mapPanel = panelFactory.getMapPanel();
+
+        //main panel
+        this.mainPanel = new JPanel();
+
+        //set intro dialogue
+        this.gameResponsePanel.setResponseText(gameResponse);
+
         //create main frame with title
         mainFrame = new JFrame("Lovers Quest");
         //stop function on exit of main frame
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //set layout
-        GridLayout gridLayout = new GridLayout(2, 2);
-        ///apply layout to content of frame
-        mainFrame.getContentPane().setLayout(gridLayout);
 
-        JPanel topLeft = new JPanel();
-        GridLayout layoutTopLeft = new GridLayout(1,1);
-        topLeft.setLayout(layoutTopLeft);
+        GridLayout mainGridLayout = new GridLayout(2, 2, 3, 3);
 
-//        JTextArea topLeftText = new JTextArea();
-        //adds text to text area
 
-        topLeftText.append(gameResponse);
-        // make it so text cannot be changed
-        topLeftText.setEditable(false);
-        topLeftText.setLineWrap(true);
-        topLeftText.setWrapStyleWord(true);
-        topLeft.add(topLeftText);
+        //comment out for main panel to have main layout
+//        ///apply layout to content of frame
+//        mainFrame.getContentPane().setLayout(mainGridLayout);
 
-        // create text area and set how many rows and columns of text there are
-        JPanel bottomLeft = new JPanel();
 
-        JLabel testingArrowsKeys = new JLabel();
-        bottomLeft.add(testingArrowsKeys);
 
-        GridLayout layoutBottomLeft = new GridLayout(1,2);
-        topLeft.setLayout(layoutBottomLeft);
+        // what does this label do? interfering with current layout
+//        JLabel testingArrowsKeys = new JLabel();
+//        inputPanel.add(testingArrowsKeys);
 
-//        bottomLeftText.append("");
-        bottomLeftText.setEditable(true);
-        bottomLeftText.addKeyListener(new KeyListener() {
+        //set event listeners for input panel (bottom left)
+        inputPanel.getInputText().addKeyListener(new KeyListener() {
+
             @Override
             public void keyTyped(KeyEvent e) {
             }
@@ -78,7 +98,7 @@ public class GameFrame {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_ENTER){
                     try {
-                        GameFrame.this.runCommand(bottomLeftText.getText());
+                        GameFrame.this.runCommand(inputPanel.getInputText().getText());
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
                     }
@@ -90,13 +110,11 @@ public class GameFrame {
 
         });
 
-        bottomLeft.add(bottomLeftText);
+        inputPanel.getSubmitButton().addMouseListener(new MouseListener() {
 
-        JButton submitButton = new JButton("Submit");
-        submitButton.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                gameCommand = bottomLeftText.getText();
+                String gameCommand = inputPanel.getInputText().getText();
                 //calls relay command function of GameFrame class instance
                 try {
                     GameFrame.this.runCommand(gameCommand);
@@ -125,27 +143,9 @@ public class GameFrame {
 
             }
         });
-        mainFrame.getRootPane().setDefaultButton(submitButton);
-        bottomLeft.add(submitButton);
 
-        JPanel topRight = new JPanel();
-        GridLayout layoutTopRight = new GridLayout(1,1);
-        topLeft.setLayout(layoutTopRight);
 
-        topRightText.append("top right");
-        topRightText.setEditable(false);
-        topRightText.setLineWrap(true);
-        topRightText.setWrapStyleWord(true);
-        topRight.add(topRightText);
 
-        // done correctly with a panel
-        JPanel bottomRight = new JPanel();
-        // set layout of panel
-        GridLayout gridLayoutBottomRight = new GridLayout(2, 1);
-        bottomRight.setLayout(gridLayoutBottomRight);
-
-        //create a button called map
-        JButton map = new JButton("Map");
 
         // TODO: finish east, west, south buttons + figure out sizing of buttons
         // create a button called "north"
@@ -156,39 +156,7 @@ public class GameFrame {
 //        north.setPreferredSize(new Dimension(1, 1)); ***how to set size of button?
 
         // add event listener to map button, overrides a lot of methods
-        map.addMouseListener(new MouseListener() {
 
-//            public void setButtonTestLabel(JLabel buttonTestLabel) {
-//                this.buttonTestLabel = buttonTestLabel;
-//            }
-
-            //on mouse click, show map of game world
-            // must import MapFactory for this to work
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                generateMap.showMapFrame();
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
 
         // TODO: CLEAN THIS ISH UP ( 4 VERY SIMILAR LOOKING METHODS? )
         // TODO: CONNECT ACTION LISTENERS TO APPROPRIATE MOVE METHODS IN GAME
@@ -225,11 +193,7 @@ public class GameFrame {
 //            }
 //        });
 
-        JTextArea bottomRightText = new JTextArea(10, 20);
-        bottomRightText.append("bottom right");
-        bottomRight.add(map);
-        bottomRight.add(bottomRightText);
-        bottomRightText.setEditable(true);
+
 
         // movement buttons
 //        bottomRight.add(north);
@@ -281,17 +245,34 @@ public class GameFrame {
 //                }
 //            }
 
+
 //            @Override
 //                public void keyReleased (KeyEvent e){
 //            }
 
 //        });
 
-        // add all jcomponents to the main game frame
-        mainFrame.getContentPane().add(topLeft);
-        mainFrame.getContentPane().add(topRight);
-        mainFrame.getContentPane().add(bottomLeft);
-        mainFrame.getContentPane().add(bottomRight);
+        //set border
+        mainFrame.getRootPane().setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
+        gameResponsePanel.setBorder(blackBorder);
+        inventoryPanel.setBorder(blackBorder);
+        inputPanel.setBorder(blackBorder);
+        mapPanel.setBorder(blackBorder);
+
+        //add main panel to frame, then add other panels to main panel.
+        mainFrame.getContentPane().add(mainPanel);
+        mainPanel.setLayout(mainGridLayout);
+        mainPanel.add(gameResponsePanel);
+        mainPanel.add(inventoryPanel);
+        mainPanel.add(inputPanel);
+        mainPanel.add(mapPanel);
+
+
+//        // add all panels to main pane to the main game frame
+//        mainFrame.getContentPane().add(gameResponsePanel);
+//        mainFrame.getContentPane().add(inventoryPanel);
+//        mainFrame.getContentPane().add(inputPanel);
+//        mainFrame.getContentPane().add(mapPanel);
 
 
         //idk what this does
@@ -330,20 +311,25 @@ public class GameFrame {
     }
 
     public void changeTopLeftText (String newText){
-        topLeftText.setText(newText);
+        gameResponsePanel.setResponseText(newText);
     }
 
     public void changeTopRightText(String inventory){
-        topRightText.setText(inventory);
+
+        inventoryPanel.setInventoryText(inventory);
+
     }
 
     //runs all internal in this method. need to uncouple
     public void runCommand(String command) throws IOException {
 
         String response = input.getUserAction(this.player, command);
-        this.changeTopLeftText(response);
-        this.bottomLeftText.setText(null);
-        this.topRightText.setText(this.player.getAllItems().toString());
+        this.gameResponsePanel.setResponseText(response);
+        this.inputPanel.getInputText().setText(null);
+        this.inventoryPanel.setInventoryText(this.player.getAllItems().toString());
+
+        //ascii art not working at the moment
+        this.locationArt.setText(this.asciiPrinter.printCurrentAscii(this.player));
 
     }
 
@@ -394,6 +380,7 @@ public class GameFrame {
             System.out.println("working left");
         }
     }
+
 
 
 }

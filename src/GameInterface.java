@@ -4,8 +4,10 @@ import com.loversQuest.GUI.JFrameInput;
 import com.loversQuest.IO.*;
 import com.loversQuest.gameWorldPieces.*;
 
+import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.Arrays;
 
 
 public class GameInterface {
@@ -47,9 +49,12 @@ public class GameInterface {
 
         JFrameInput jFrameInput = new JFrameInput();
 
-        GameFrame gameFrame = new GameFrame(output.displayIntroDialog(), jFrameInput, g1.p1);
+        GameFrame gameFrame = new GameFrame(output.displayIntroDialog(), jFrameInput, g1.p1, asciiPrinter);
 
         gameFrame.changeTopRightText(g1.p1.displayItems());
+        ////////input map test
+        InputMap test = gameFrame.getRootPane().getInputMap();
+        System.out.println(test.toString());
 
 
 
@@ -79,11 +84,8 @@ public class GameInterface {
             System.out.println(output.promptForAction());
         }
 
-        for (int i = 0; i < 30; i++) {
-            System.out.println();
-        }
-        System.out.println(gameResponse);
-        System.out.println("Congrats soldier you've just graduated. Now go buy a Camaro.");
+        gameFrame.changeTopLeftText(gameResponse + "\n" +
+        "Congrats soldier you've just graduated. Now go buy a Camaro.");
 
     }
 }

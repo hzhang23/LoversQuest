@@ -21,6 +21,9 @@ public class GameInterface {
         Output output = new Output();
         GraphicClass asciiPrinter = new GraphicClass();
 
+        // testing
+//        Game game = new Game();
+
         g1.createMap();
         g1.equipPlayer();
 

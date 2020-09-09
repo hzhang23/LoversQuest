@@ -14,7 +14,7 @@ public class MapPanel extends JPanel {
     MapPanel(JFrame mainFrame){
         // set layout of panel
         GridLayout gridLayoutBottomRight = new GridLayout(2, 1);
-        this.setLayout(gridLayoutBottomRight);
+//        this.setLayout(gridLayoutBottomRight);
 
         //create a button called map
         JButton map = new JButton("Map");
@@ -55,8 +55,18 @@ public class MapPanel extends JPanel {
 
         mapText.append("bottom right");
         this.add(map);
-        this.add(mapText);
-        mapText.setEditable(false);
+
+        //adds map image to the panel.
+//        java.net.URL mapUrl = getClass().getResource("gameMap.jpg");
+//        ImageIcon mapImage = new ImageIcon(mapUrl);
+//        JLabel mapImageLabel = new JLabel(mapImage);
+//        map.setSize(500, 500);
+//
+//        GridLayout gridLayout = new GridLayout(1, 1);
+//        this.setLayout(gridLayout);
+//        this.add(mapImageLabel, BorderLayout.CENTER);
+
+
     }
 
 }

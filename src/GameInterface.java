@@ -14,10 +14,11 @@ public class GameInterface {
 
     //testing//
     // have text file as argument and pass it in
+
     public static void main(String[] args) throws IOException {
 
         GameWorld g1 = new GameWorld();
-        Input input = new Input();
+
         Output output = new Output();
         GraphicClass asciiPrinter = new GraphicClass();
 
@@ -34,58 +35,20 @@ public class GameInterface {
         g1.p1.addItem(g1.whiteClaw3);
         g1.p1.addItem(g1.whiteClaw4);
         g1.p1.addItem(g1.whiteClaw5);
-//        g1.p1.addItem(g1.challengeCoin);
-//        g1.p1.addItem(g1.ptBadge);
+        g1.p1.addItem(g1.challengeCoin);
+        g1.p1.addItem(g1.ptBadge);
         g1.p1.addItem(g1.medicalBadge);
         g1.p1.addItem(g1.expertBadge);
         //end test setup
 
 
-        System.out.println(output.displayIntroDialog());
-
-        System.out.println(output.promptForAction());
-
-        String gameResponse = null;
-
         JFrameInput jFrameInput = new JFrameInput();
 
         GameFrame gameFrame = new GameFrame(output.displayIntroDialog(), jFrameInput, g1.p1, asciiPrinter);
 
-        gameFrame.changeTopRightText(g1.p1.displayItems());
-        ////////input map test
-        InputMap test = gameFrame.getRootPane().getInputMap();
-        System.out.println(test.toString());
+        gameFrame.changeTopRightText("This is your rucksack.\nIn it you will find all the items you are currently carrying and can use.\n" +
+                "Below is the command window. Enter any of the commands listed. You may also maneuver using the arrow keys.");
 
-
-
-        while (g1.p1.getItem(g1.kiss.getName()) == null) {
-
-
-            gameResponse = (input.getUserAction(g1.p1));
-            System.out.println(output.promptForAction());
-            for (int i = 0; i < 35; i++) {
-                System.out.println();
-            }
-
-
-            System.out.println("Current Location: " + g1.p1.getCurrentLocation().getColoredName());
-            asciiPrinter.printCurrentAscii(g1.p1);
-
-            System.out.println();
-            System.out.println(gameResponse);
-
-
-            gameFrame.changeTopLeftText(gameResponse);
-
-
-            System.out.println();
-            System.out.println("Rucksack Contents:");
-            System.out.println(g1.p1.getAllItems());
-            System.out.println(output.promptForAction());
-        }
-
-        gameFrame.changeTopLeftText(gameResponse + "\n" +
-        "Congrats soldier you've just graduated. Now go buy a Camaro.");
 
     }
 }

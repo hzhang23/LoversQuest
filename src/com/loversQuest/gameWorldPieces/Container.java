@@ -19,8 +19,11 @@ public class Container extends Item {
    public void removeItem(Item item){
         contents.remove(item);
    }
+   public void emptyContainer(){
+        this.contents = new ArrayList<>();
+    }
 
-   public ArrayList<Item> displayContents(){
+    public ArrayList<Item> displayContents(){
         return contents;
    }
 

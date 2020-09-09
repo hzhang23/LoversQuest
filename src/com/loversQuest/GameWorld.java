@@ -50,7 +50,7 @@ public class GameWorld {
 
     //create items
     public Item rifle = new Item("M16", "You shoot your rifle in the air in celebration");
-    public Item uncrustable = new Item("uncrustable", "You look lovingly at the peanut butter and strawberry jam sandwich");
+    public Item uncrustable = new Item("uncrustable", "You look lovingly at the peanut butter and jelly sandwich");
     public Item camelback = new Item("CamelBack", "You take a refreshing drink of moldy water.");
     public Item ptBelt = new Item("Pt Belt", "You put it on and are now super safe and visible.");
 
@@ -73,15 +73,15 @@ public class GameWorld {
 
 
     //Instantiate NPCs
-    public NonPlayerCharacters sickCallRanger = new NonPlayerCharacters("Sick call Ranger"," is hiding behind the last dryer " +
+    public NonPlayerCharacters sickCallRanger = new NonPlayerCharacters("Sick call Ranger"," are hiding behind the last dryer " +
             "with the remnants of his last " + uncrustable.getName() + " around his mouth.", laundryRoom);
-    public NonPlayerCharacters chowHallLady = new NonPlayerCharacters("Chow Hall lady", " is speaking to you in your native tongue.", chowHall);
+    public NonPlayerCharacters chowHallLady = new NonPlayerCharacters("Chow Hall lady", " are speaking to you in your native tongue.", chowHall);
 
-    public NonPlayerCharacters clsInstructor = new NonPlayerCharacters("CLS Instructor", " is watching your every move. You see something reflecting in trashcan.", courtYard);
+    public NonPlayerCharacters clsInstructor = new NonPlayerCharacters("CLS Instructor", " are watching your every move. You see something reflecting in trashcan.", courtYard);
     public NonPlayerCharacters rangeDrillSergeant = new NonPlayerCharacters("Drill Sergeant", " is pounding a monster under the range tower. \nUnder the bleachers is a suspicious looking ammo box.", range);
 
-    public NonPlayerCharacters blueFalcon = new NonPlayerCharacters("Blue Falcon", " is sleeping next to a bottomless pit of despair.", portaJohn);
-    public NonPlayerCharacters gymDrill = new NonPlayerCharacters("Drill Sergeant"," is staring at you with his beady eyes. ", gym);
+    public NonPlayerCharacters blueFalcon = new NonPlayerCharacters("Blue Falcon", " are sleeping next to a bottomless pit of despair.", portaJohn);
+    public NonPlayerCharacters gymDrill = new NonPlayerCharacters("Drill Sergeant"," are staring at you with his beady eyes. ", gym);
 
     public Lover lover = new Lover("Your Sweetheart", " stares at you lovingly", gazebo);
     public Officer officer = new Officer("Captain Charlie", " looks at you over his sandwhich.", px);

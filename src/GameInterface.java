@@ -58,10 +58,5 @@ public class GameInterface {
         gameFrame.changeTopRightText(g1.p1.getAllItems().toString());
 
 
-        System.out.println("Game over");
-
-        gameFrame.changeTopLeftText(gameResponse + "\n" +
-        "Congrats soldier you've just graduated. Now go buy a Camaro.");
-
     }
 }

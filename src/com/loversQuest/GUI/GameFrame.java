@@ -221,7 +221,13 @@ public class GameFrame extends JFrame{
         this.inventoryPanel.setInventoryText(this.player.getAllItems().toString());
 
         if(this.player.isHasKiss()){
-            System.out.println("Game end");
+            this.gameResponsePanel.setResponseText(
+                    "Your sweetheart says: OMG five WhiteClaws for me? I love you\n" +
+                    "\nCongrats soldier you've just graduated AIT. Now go buy a Camaro."+
+                    "\nYour quest for Love has ended.");
+            this.inputPanel.setVisible(false);
+            this.mapPanel.setVisible(false);
+            this.inventoryPanel.setVisible(false);
         }
 
     }

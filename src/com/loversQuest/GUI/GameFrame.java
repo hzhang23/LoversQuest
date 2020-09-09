@@ -43,7 +43,7 @@ public class GameFrame extends JFrame{
     Action downAction;
     Action leftAction;
     Action rightAction;
-
+    Action inputEnterAction;
 
     public GameFrame(String gameResponse, JFrameInput input, Player player, GraphicClass asciiPrinter) throws IOException {
         //TODO: Text input area at bottom has event listener for enter key and button press.
@@ -88,27 +88,32 @@ public class GameFrame extends JFrame{
 //        inputPanel.add(testingArrowsKeys);
 
         //set event listeners for input panel (bottom left)
-        inputPanel.getInputText().addKeyListener(new KeyListener() {
+//        inputPanel.getInputText().addKeyListener(new KeyListener() {
+//
+//            @Override
+//            public void keyTyped(KeyEvent e) {
+//            }
+//
+//            @Override
+//            public void keyPressed(KeyEvent e) {
+//                if(e.getKeyCode()==KeyEvent.VK_ENTER){
+//                    try {
+//                        GameFrame.this.runCommand(inputPanel.getInputText().getText());
+//                    } catch (IOException ioException) {
+//                        ioException.printStackTrace();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void keyReleased(KeyEvent e) {}
+//
+//        });
 
-            @Override
-            public void keyTyped(KeyEvent e) {
-            }
+        inputEnterAction = new GameFrame.inputEnterKeyAction();
+        inputPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "inputEnterSubmit");
+        inputPanel.getActionMap().put("inputEnterSubmit", inputEnterAction);
 
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode()==KeyEvent.VK_ENTER){
-                    try {
-                        GameFrame.this.runCommand(inputPanel.getInputText().getText());
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {}
-
-        });
 
         inputPanel.getSubmitButton().addMouseListener(new MouseListener() {
 
@@ -381,6 +386,16 @@ public class GameFrame extends JFrame{
         }
     }
 
-
+    public class inputEnterKeyAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                GameFrame.this.runCommand(inputPanel.getInputText().getText());
+                mainFrame.getRootPane().requestFocusInWindow();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
+    }
 
 }

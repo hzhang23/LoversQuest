@@ -40,6 +40,9 @@ public class GameFrame extends JFrame{
     //bottom right panel
     MapPanel mapPanel;
 
+    //scrolli boi
+    ScrollPane scrollPane = new ScrollPane();
+
     // creating action instance variables for arrow input
     Action upAction;
     Action downAction;
@@ -64,6 +67,8 @@ public class GameFrame extends JFrame{
         this.inputPanel = panelFactory.getInputPanel();
         this.mapPanel = panelFactory.getMapPanel();
 
+
+
         //main panel
         this.mainPanel = new JPanel();
 
@@ -76,7 +81,7 @@ public class GameFrame extends JFrame{
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //set layout
 
-        GridLayout mainGridLayout = new GridLayout(2, 2, 3, 3);
+        GridLayout mainGridLayout = new GridLayout(1, 1, 3, 3);
 
 
         //comment out for main panel to have main layout
@@ -163,8 +168,12 @@ public class GameFrame extends JFrame{
         mapPanel.setBorder(blackBorder);
 
         //add main panel to frame, then add other panels to main panel.
+        mainPanel.setPreferredSize(new Dimension(500, 500));
+//        scrollPane.add(mainPanel);
         mainFrame.getContentPane().add(mainPanel);
-        mainPanel.setLayout(mainGridLayout);
+        FlowLayout flowFromInsurance = new FlowLayout(2);
+
+//        mainPanel.setLayout(mainGridLayout);
         mainPanel.add(gameResponsePanel);
         mainPanel.add(inventoryPanel);
         mainPanel.add(inputPanel);

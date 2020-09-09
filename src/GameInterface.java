@@ -46,7 +46,8 @@ public class GameInterface {
 
         GameFrame gameFrame = new GameFrame(output.displayIntroDialog(), jFrameInput, g1.p1, asciiPrinter);
 
-        gameFrame.changeTopRightText("This is your rucksack.\nIn it you will find all the items you are currently carrying and can use.");
+        gameFrame.changeTopRightText("This is your rucksack.\nIn it you will find all the items you are currently carrying and can use.\n" +
+                "Below is the command window. Enter any of the commands listed. You may also maneuver using the arrow keys.");
 
 
     }

@@ -11,13 +11,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.*;
 import java.util.Arrays;
 
-
-
 public class GameFrame extends JFrame{
 //    Action upAction = new UpAction();
 
     JFrame mainFrame;
+    //////////////////////////////////////////////DANNY HERE IS YOUR PANEL //////////////////////////////////////////
     JPanel mainPanel;
+    //////////////////////////////////////////////DANNY HERE IS YOUR PANEL //////////////////////////////////////////
     JFrameInput input;
     Player player;
 
@@ -37,9 +37,6 @@ public class GameFrame extends JFrame{
     InputPanel inputPanel;
     //bottom right panel
     MapPanel mapPanel;
-
-
-
 
     // creating action instance variables for arrow input
     Action upAction;
@@ -146,6 +143,7 @@ public class GameFrame extends JFrame{
 
             }
         });
+
 
 
 
@@ -261,6 +259,7 @@ public class GameFrame extends JFrame{
         inputPanel.setBorder(blackBorder);
         mapPanel.setBorder(blackBorder);
 
+        //add main panel to frame, then add other panels to main panel.
         mainFrame.getContentPane().add(mainPanel);
         mainPanel.setLayout(mainGridLayout);
         mainPanel.add(gameResponsePanel);

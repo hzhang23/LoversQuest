@@ -15,17 +15,10 @@ public class GameInterface {
     //testing//
     // have text file as argument and pass it in
 
-    public static boolean isGameOver(GameWorld game){
-        boolean gameOver = false;
-        if(game.getP1().getItem(game.kiss.getName()) != null){
-            gameOver = true;
-        }
-        return gameOver;
-    }
     public static void main(String[] args) throws IOException {
 
         GameWorld g1 = new GameWorld();
-        Input input = new Input();
+
         Output output = new Output();
         GraphicClass asciiPrinter = new GraphicClass();
 
@@ -49,13 +42,11 @@ public class GameInterface {
         //end test setup
 
 
-        String gameResponse = null;
-
         JFrameInput jFrameInput = new JFrameInput();
 
         GameFrame gameFrame = new GameFrame(output.displayIntroDialog(), jFrameInput, g1.p1, asciiPrinter);
 
-        gameFrame.changeTopRightText(g1.p1.getAllItems().toString());
+        gameFrame.changeTopRightText("This is your rucksack.\nIn it you will find all the items you are currently carrying and can use.");
 
 
     }

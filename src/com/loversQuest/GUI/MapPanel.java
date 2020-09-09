@@ -14,7 +14,7 @@ public class MapPanel extends JPanel {
     MapPanel(JFrame mainFrame){
         // set layout of panel
         GridLayout gridLayoutBottomRight = new GridLayout(2, 1);
-        this.setLayout(gridLayoutBottomRight);
+//        this.setLayout(gridLayoutBottomRight);
 
         //create a button called map
         JButton map = new JButton("Map");

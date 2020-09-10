@@ -37,6 +37,8 @@ public class GameFrame extends JFrame{
     InputPanel inputPanel;
     //bottom right panel
     MapPanel mapPanel;
+    //legend panel
+    ColoredLegendMap legendMapPanel;
 
     // creating action instance variables for arrow input
     Action upAction;
@@ -61,6 +63,7 @@ public class GameFrame extends JFrame{
         this.inventoryPanel = panelFactory.getInventoryPanel();
         this.inputPanel = panelFactory.getInputPanel();
         this.mapPanel = panelFactory.getMapPanel();
+        this.legendMapPanel = panelFactory.getLegendPanel();
 
         //main panel
         this.mainPanel = new JPanel();
@@ -271,6 +274,7 @@ public class GameFrame extends JFrame{
         mainPanel.add(inventoryPanel);
         mainPanel.add(inputPanel);
         mainPanel.add(mapPanel);
+        mainPanel.add(legendMapPanel);
 
 
 //        // add all panels to main pane to the main game frame

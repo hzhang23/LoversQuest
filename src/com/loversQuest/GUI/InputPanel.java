@@ -6,7 +6,9 @@ import java.awt.*;
 
 public class InputPanel extends JPanel {
 
-    private JLabel bottomLeftLabel = new JLabel("Commands: Go <direction>, Look, Inspect <suspicious container>, Use <item>, Interact");
+//    private JLabel bottomLeftLabel = new JLabel("Commands: Go <direction>, Look, Inspect <suspicious container>, Use <item>, Interact");
+    private JLabel bottomLeftLabel = new JLabel("<html>Commands: <font color=blue> Go </font> 'direction', <font color=orange> Look </font>, <font color=purple> Inspect </font>'suspicious container',<font color=red> Use </font> 'item', <font color=green> Interact </font></html>");
+
     private JTextField inputText = new JTextField(20);
     private JButton submitButton = new JButton("Submit");
 

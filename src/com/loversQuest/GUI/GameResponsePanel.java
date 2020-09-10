@@ -24,7 +24,6 @@ public class GameResponsePanel extends JPanel{
         gbcTopLeft.gridy = 0;
         this.add(topLeftLabel, gbcTopLeft);
 
-
         // make it so text cannot be changed
         responseText.setEditable(false);
         responseText.setLineWrap(true);
@@ -34,7 +33,6 @@ public class GameResponsePanel extends JPanel{
         gbcTopLeft.gridx = 0;
         gbcTopLeft.gridy = 1;
         this.add(responseText, gbcTopLeft);
-
     }
 
     public void setResponseText(String text){

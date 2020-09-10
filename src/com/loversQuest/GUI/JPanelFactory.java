@@ -24,4 +24,8 @@ public class JPanelFactory {
     public MapPanel getMapPanel(){
         return new MapPanel(mainFrame);
     }
+
+    public ColoredLegendMap getLegendPanel() {
+        return new ColoredLegendMap();
+    }
 }

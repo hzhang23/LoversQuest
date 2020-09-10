@@ -14,7 +14,7 @@ public class GameWorld {
 
     public Location gym = new Location("GYM", "You watch a soldier conduct the “BEND AND REACH” in the " +
             "squat rack while grunts and clanking of weights \n" +
-            "can be heard in the far back/corner. You see your battle buddies taking an APFT (ARMY PHYSICAL FITNESS TEST) in the basketball courts.");
+            "can be heard in the far back corner. You see your battle buddies taking an APFT (ARMY PHYSICAL FITNESS TEST) in the basketball courts.");
 
     public Location laundryRoom = new Location("LAUNDRYROOM",
             "Oxyclean and bleach are the scents noticed in this area. Stuffed in the corner is a copious \n" +
@@ -23,20 +23,19 @@ public class GameWorld {
     public Location courtYard = new Location("COURTYARD", "A vast field littered with cigarettes butts, empty monster cans, and fellow soldiers. \n" +
             "Your unit is conducting some sort of exam. Upon closer look, there’s a COMBAT LIFE SAVER WARRIOR SKILL LEVEL 1 EXAM taking place.");
 
-    public Location range = new Location("RANGE", "hear the sounds of rifles and the cries of soldiers as they are getting smoked  \n");
+    public Location range = new Location("RANGE", "hear the sounds of rifles and the cries of soldiers as they are getting smoked.\n");
 
-    public Location portaJohn = new Location("PORTAJOHN", "It smells of elephant flatulent and rotting garbage.");
+    public Location portaJohn = new Location("PORTAJOHN", "It smells of elephant flatulence and rotting garbage.");
 
     public Location chowHall = new Location("CHOWHALL", "Your stomach grumbles as you pass by the variety of fried foods in the red categorized section. \n" +
             "You're tempted to pocket some tater tots.");
 
     public Location px = new Location("PX", "see a Barber Shop, Eyebrow Threading station, and a GNC.\n" +
-            "A lone individual first aid kit (IFAK) next to a potted plant.\n" +
             "You look far to the WEST and see a silhouette of a full-bodied individual.\n");
 
     public Location gazebo = new Location("GAZEBO", "at first glance, you don’t see anything through the misty night \n" +
-            "but out from the shadows appears your AIT bf/gf - You’re elated. \n" +
-            "He or She or they or it asks, “How many white claws did you bring me?”\n");
+            "but out from the shadows appears your AIT lover - You’re elated. \n" +
+            "They ask, “How many white claws did you bring me?”\n");
 
     public Player p1 = new Player("Bob", barracks);
 
@@ -73,24 +72,24 @@ public class GameWorld {
 
 
     //Instantiate NPCs
-    public NonPlayerCharacters sickCallRanger = new NonPlayerCharacters("Sick call Ranger"," are hiding behind the last dryer " +
-            "with the remnants of his last " + uncrustable.getName() + " around his mouth.", laundryRoom);
-    public NonPlayerCharacters chowHallLady = new NonPlayerCharacters("Chow Hall lady", " are speaking to you in your native tongue.", chowHall);
+    public NonPlayerCharacters sickCallRanger = new NonPlayerCharacters("The Sick Call Ranger"," are hiding behind the last dryer " +
+            "with the remnants of an " + uncrustable.getName() + " around their mouth.", laundryRoom);
+    public NonPlayerCharacters chowHallLady = new NonPlayerCharacters("The Chow Hall lady", " are speaking to you in your native tongue.", chowHall);
 
     public NonPlayerCharacters clsInstructor = new NonPlayerCharacters("CLS Instructor", " are watching your every move. You see something reflecting in trashcan.", courtYard);
-    public NonPlayerCharacters rangeDrillSergeant = new NonPlayerCharacters("Drill Sergeant", " is pounding a monster under the range tower. \nUnder the bleachers is a suspicious looking ammo box.", range);
+    public NonPlayerCharacters rangeDrillSergeant = new NonPlayerCharacters("Drill Sergeant Gustav", " are pounding a monster under the range tower.", range);
 
-    public NonPlayerCharacters blueFalcon = new NonPlayerCharacters("Blue Falcon", " are sleeping next to a bottomless pit of despair.", portaJohn);
-    public NonPlayerCharacters gymDrill = new NonPlayerCharacters("Drill Sergeant"," are staring at you with his beady eyes. ", gym);
+    public NonPlayerCharacters blueFalcon = new NonPlayerCharacters("The Blue Falcon", " are sleeping next to a bottomless pit of despair.", portaJohn);
+    public NonPlayerCharacters gymDrill = new NonPlayerCharacters("Drill Sergeant Winstrol"," are staring at you with their beady eyes. ", gym);
 
-    public Lover lover = new Lover("Your Sweetheart", " stares at you lovingly", gazebo);
-    public Officer officer = new Officer("Captain Charlie", " looks at you over his sandwhich.", px);
+    public Lover lover = new Lover("Your Sweetheart", " stare at you lovingly", gazebo);
+    public Officer officer = new Officer("Captain Charlie", " look at you over their sandwhich.", px);
 
 
-    public Container ammoBox = new Container("Ammo Box","do something to pick up WC" );
-    public Container trashCan = new Container("Trash Can", "do something to pick up WC x 2");
+    public Container ammoBox = new Container("Ammo Box","Full of brass and whiteclaws" );
+    public Container trashCan = new Container("Trash Can", "Just your hopes and dreams");
     public Container ifak = new Container("IFAK", "You feel very healthy after using the individual first aid kit");
-    public Container ceiling = new Container("Tiles", "It's dusty up here");
+    public Container ceiling = new Container("Ceiling Tile", "It's dusty up here");
 
     // sets N, S, E, W directions of rooms in relation to one another, add characters and items
     public void createMap(){

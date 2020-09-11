@@ -11,17 +11,25 @@ public class InputParser {
 //            DataInputStream in = new DataInputStream(getClass().getResourceAsStream("inputWords.txt"));
             DataInputStream in = new DataInputStream(getClass().getResourceAsStream("Utilities/inputWords.txt"));
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
-            String strLine;
+            String strLine = null;
 
-            //continue to read in file while lines exist
+            // continue to read in file while lines exist
             while ((strLine = br.readLine()) != null){
-                //split file into a list of words
-                String[] words = strLine.split(",");
-                //create an array list of command words
-                ArrayList<String> commandWords = new ArrayList<>(Arrays.asList(words));
+                // split file into a list of words
+                String wordsOnSameLine = br.readLine();
+
+                // split words into an array
+                String[] wordsArray = wordsOnSameLine.split(",");
+
+                // put it into an ArrayList
+                ArrayList<String> commandWords = new ArrayList<>(Arrays.asList(wordsArray));
+
                 //programmed word is first word of a line, if input word is found on same line,
                 //  return the programmed command word.
-                if(commandWords.contains(command)){
+                if(wordsOnSameLine.contains(command)){
+                    System.out.println("HERE!!!");
+                    System.out.println(strLine);
+                    System.out.println(wordsOnSameLine);
                     return commandWords.get(0);
                 }
             }

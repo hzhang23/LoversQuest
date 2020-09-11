@@ -34,7 +34,7 @@ public class GameWorld {
             "You look far to the WEST and see a silhouette of a full-bodied individual.\n");
 
     public Location gazebo = new Location("GAZEBO", "at first glance, you don’t see anything through the misty night \n" +
-            "but out from the shadows appears your AIT lover - You’re elated. \n" +
+            ".  \n" +
             "They ask, “How many white claws did you bring me?”\n");
 
     public Player p1 = new Player("Bob", barracks);

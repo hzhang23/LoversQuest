@@ -1,0 +1,102 @@
+@startuml
+package com.loversQuest{
+class GameWorld{
++Location ++
++Item ++
++createMap()
++equipPLayer()
++isGameOver()
+}
+
+package gameWorldPieces{
+Item <--"is_A" Container
+enum CarinalDirection
+Item *--"has_a" NonPlayerCharacters
+Officer <--"is_A" NonPlayerCharacters
+Lover <--"is_A" NonPlayerCharacters
+RuckSack *--"has_a" Player
+NonPlayerCharacters <|-- "use" Player
+
+class PlayerController{}
+class Item {
+-String name
+-String useResponse
++String use()
++String toString()
+}
+class Container{
+-Arraylist<Item> contents
++getItem(String name)
+}
+class NonPlayerCharacters{
+-String name
+-String description
+-Location location
+-Item keyItem
+-Item prize
++String interact(Player player)
+}
+class Officer{
+-int numOfItemsNeeded;
+-String keyItemName;
+-private Location sendPlayerDestination;
++String reRoute(Player player)
++String interact(Player player)
+}
+class Lover{
+-int numOfItemsNeeded
+-String keyItemName
++setKeyItemName(String KeyItemName)
++setNumOfItemsNeeded(int numOfItemsNeeded)
+}
+class Player{
+-String name
+-Location currentLocation
+-boolean hasChallengeCoin
+-boolean hasKiss
++RuckSack ruckSack
++go(String directionInput)
++validateLocation(Location destination)
++addItem(Item item)
++pickUpItem(String itemName)
++inspect() @return <Item>
++displayItems()
++getAllItems() @return ruckSack.items
+}
+class RuckSack{
+#Arraylist<Item> items
++addItem(Item item)
++getItem(String itemName)
++getAllItems() @return <Item>
++displayRuckSackContents() @return String
+}
+enum CarinalDirection {
+NORTH
+SOUTH
+EAST
+WEST
+}
+}
+package GUI{
+class GameFrame
+class GameResponsePanel
+class InputPanel
+class InventoryPanel
+class JFrameInput
+class JPanelFactory
+class MapFactory
+class MapFrame
+class MapPanel
+}
+
+package IO{
+class GraphicClass
+class Input
+class InputParser
+class Output
+}
+
+}
+
+
+@enduml

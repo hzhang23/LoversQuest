@@ -9,7 +9,6 @@ public class RuckSack {
 
     // CTOR
     public RuckSack() {}
-
     public RuckSack(Item item) {
         items.add(item);
     }
@@ -36,4 +35,5 @@ public class RuckSack {
     protected String displayRuckSackContents() {
         return items.toString();
     }
+
 }

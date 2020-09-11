@@ -5,36 +5,24 @@ public class Officer extends NonPlayerCharacters{
     private String keyItemName;
     private Location sendPlayerDestination;
 
+    //ctor
     public Officer(String name, Location location) {
         super(name, location);
     }
-
     public Officer(String name, String description, Location location) {
         super(name, description, location);
     }
 
-    @Override
-    public void setPrize(Item item) {
-        super.setPrize(item);
-    }
-
-    @Override
-    public Item getPrize() {
-        return super.getPrize();
-    }
-
+    //getter & setter
     public void setSendPlayerDestination(Location location){
         this.sendPlayerDestination = location;
     }
-
     public void setKeyItemName (String keyItemName){
         this.keyItemName = keyItemName;
     }
-
     public void setNumOfItemsNeeded(int numOfItemsNeeded){
         this.numOfItemsNeeded = numOfItemsNeeded;
     }
-
 
     //overlaps with interact override below
     public String reRoute(Player player){
@@ -59,5 +47,6 @@ public class Officer extends NonPlayerCharacters{
             player.setCurrentLocation(sendPlayerDestination);
             return "It would behoove you.... \n(He sends you back to complete all your warrior tasks)";
         }
+
 
     }

@@ -3,6 +3,13 @@ package com.loversQuest.GUI;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * a class just for map frame
+ *
+ */
+
+
+
 public class MapFrame {
     JFrame frame;
 

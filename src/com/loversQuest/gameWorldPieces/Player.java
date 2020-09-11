@@ -18,9 +18,7 @@ public class Player {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String BLUE = "\u001B[34m";
 
-
     public RuckSack ruckSack = new RuckSack();
-
 
     // CTOR
     public Player(String name, Location currentLocation) {
@@ -104,6 +102,10 @@ public class Player {
         // add item to inventory and remove item from location
     }
 
+    /**
+     * may return Null??
+     * @return
+     */
     public ArrayList<Item> inspect() {
         ArrayList<Item> result = null;
         if(currentLocation.getContainer() != null){
@@ -121,21 +123,14 @@ public class Player {
     }
 
     // SETTERS/GETTERS
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Location getCurrentLocation() {
-        return currentLocation;
-    }
-
-    public void setCurrentLocation(Location currentLocation) {
-        this.currentLocation = currentLocation;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public Location getCurrentLocation() { return currentLocation; }
+    public void setCurrentLocation(Location currentLocation) { this.currentLocation = currentLocation; }
+    public boolean isHasChallengeCoin() { return hasChallengeCoin; }
+    public void setHasChallengeCoin(boolean hasChallengeCoin) { this.hasChallengeCoin = hasChallengeCoin; }
+    public boolean isHasKiss() { return hasKiss; }
+    public void setHasKiss(boolean hasKiss) { this.hasKiss = hasKiss; }
 
 //    public void printCurrentAscii() throws IOException {
 //        //            this.currentLocation.getName().toLowerCase().equals("gazebo");
@@ -153,21 +148,5 @@ public class Player {
 //            case BLUE + "px" + ANSI_RESET -> graphicImage.printLocation("px.txt");
 //            default -> graphicImage.printLocation("gazebo.txt");
 //        }
-
-    public boolean isHasChallengeCoin() {
-        return hasChallengeCoin;
-    }
-
-    public void setHasChallengeCoin(boolean hasChallengeCoin) {
-        this.hasChallengeCoin = hasChallengeCoin;
-    }
-
-    public boolean isHasKiss() {
-        return hasKiss;
-    }
-
-    public void setHasKiss(boolean hasKiss) {
-        this.hasKiss = hasKiss;
-    }
 }
 

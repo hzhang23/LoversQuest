@@ -1,5 +1,9 @@
 package com.loversQuest.gameWorldPieces;
 
+/**
+ * location is some thing that has name , description, container and an Item List & NPC
+ */
+
 
 import java.util.*;
 

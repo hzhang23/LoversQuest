@@ -1,5 +1,9 @@
 package com.loversQuest.gameWorldPieces;
 
+/**
+ * a Container is an item that is able to store other items in a list.
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -7,25 +7,14 @@ public class Lover extends NonPlayerCharacters{
     public Lover(String name, Location location) {
         super(name, location);
     }
-
     public Lover(String name, String description, Location location) {
         super(name, description, location);
     }
 
-    @Override
-    public void setPrize(Item item) {
-        super.setPrize(item);
-    }
-
-    @Override
-    public Item getPrize() {
-        return super.getPrize();
-    }
 
     public void setKeyItemName (String keyItemName){
         this.keyItemName = keyItemName;
     }
-
     public void setNumOfItemsNeeded(int numOfItemsNeeded){
         this.numOfItemsNeeded = numOfItemsNeeded;
     }

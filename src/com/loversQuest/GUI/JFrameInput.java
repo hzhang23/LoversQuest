@@ -50,11 +50,10 @@ public class JFrameInput {
 //        ArrayList responseList = new ArrayList(Arrays.asList(response));
 //        System.out.println("Response is " + responseList);
 
-        String actionVerb = parser.parseCommand(response[0]);
+        String actionVerb = parser.parseCommand2(response[0]);
 
-        Scanner textFile = new Scanner(new File("src/com/loversQuest/IO/Utilities/inputWords.txt"));
 
-        parser.findSynonyms(response[0]);
+//        parser.findSynonyms(response[0]);
 
 
         // handles first word of response

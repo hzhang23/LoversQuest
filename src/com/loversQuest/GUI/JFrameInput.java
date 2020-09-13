@@ -8,6 +8,8 @@ import com.loversQuest.gameWorldPieces.Player;
 
 
 import java.awt.*;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.io.IOException;
 
@@ -40,10 +42,24 @@ public class JFrameInput {
 
         String[] response = command.trim().toLowerCase().split("\\s+");
 
+
         // parses user response further, into second array
         String stringifiedResponse = String.join(" ", Arrays.copyOfRange(response, 1, response.length));
 
+//        System.out.println("Command is " + command);
+//        ArrayList responseList = new ArrayList(Arrays.asList(response));
+//        System.out.println("Response is " + responseList);
+
         String actionVerb = parser.parseCommand(response[0]);
+
+        Scanner textFile = new Scanner(new File("src/com/loversQuest/IO/Utilities/inputWords.txt"));
+
+        if (parser.isInFile(response[0], textFile)) {
+            System.out.println("Word is in here!");
+        } else {
+            System.out.println("NOT IN HERE!");
+        }
+
 
         // handles first word of response
 

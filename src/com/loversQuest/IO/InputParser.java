@@ -27,9 +27,9 @@ public class InputParser {
                 //programmed word is first word of a line, if input word is found on same line,
                 //  return the programmed command word.
                 if(wordsOnSameLine.contains(command)){
-                    System.out.println("HERE!!!");
-                    System.out.println(strLine);
-                    System.out.println(wordsOnSameLine);
+//                    System.out.println("HERE!!!");
+//                    System.out.println(strLine);
+//                    System.out.println(wordsOnSameLine);
                     return commandWords.get(0);
                 }
             }
@@ -45,4 +45,25 @@ public class InputParser {
 
     }
 
+    public boolean isInFile(String command, Scanner file) {
+        try {
+            List<String> wordsList = new ArrayList<>();
+            for (int i = 0; file.hasNextLine() != false; i++) {
+                wordsList.add(file.nextLine());
+                if (wordsList.get(i).contains(command)) {
+                    return true;
+                }
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    // find the line number
+
+    // read that line
+
+    // return the first word of that line
 }

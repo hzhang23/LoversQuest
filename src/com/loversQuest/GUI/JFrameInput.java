@@ -54,11 +54,7 @@ public class JFrameInput {
 
         Scanner textFile = new Scanner(new File("src/com/loversQuest/IO/Utilities/inputWords.txt"));
 
-        if (parser.isInFile(response[0], textFile)) {
-            System.out.println("Word is in here!");
-        } else {
-            System.out.println("NOT IN HERE!");
-        }
+        parser.findSynonyms(response[0]);
 
 
         // handles first word of response

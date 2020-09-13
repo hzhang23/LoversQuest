@@ -1,5 +1,6 @@
 package com.loversQuest.IO;
 import java.io.*;
+import java.nio.Buffer;
 import java.util.*;
 
 public class InputParser {
@@ -11,25 +12,17 @@ public class InputParser {
 //            DataInputStream in = new DataInputStream(getClass().getResourceAsStream("inputWords.txt"));
             DataInputStream in = new DataInputStream(getClass().getResourceAsStream("Utilities/inputWords.txt"));
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
-            String strLine = null;
+            String strLine;
 
-            // continue to read in file while lines exist
+            //continue to read in file while lines exist
             while ((strLine = br.readLine()) != null){
-                // split file into a list of words
-                String wordsOnSameLine = br.readLine();
-
-                // split words into an array
-                String[] wordsArray = wordsOnSameLine.split(",");
-
-                // put it into an ArrayList
-                ArrayList<String> commandWords = new ArrayList<>(Arrays.asList(wordsArray));
-
+                //split file into a list of words
+                String[] words = strLine.split(",");
+                //create an array list of command words
+                ArrayList<String> commandWords = new ArrayList<>(Arrays.asList(words));
                 //programmed word is first word of a line, if input word is found on same line,
                 //  return the programmed command word.
-                if(wordsOnSameLine.contains(command)){
-//                    System.out.println("HERE!!!");
-//                    System.out.println(strLine);
-//                    System.out.println(wordsOnSameLine);
+                if(commandWords.contains(command)){
                     return commandWords.get(0);
                 }
             }
@@ -41,8 +34,6 @@ public class InputParser {
 
         // return non command sensitive string if command word not found
         return "Command not found";
-
-
     }
 
     public boolean isInFile(String command, Scanner file) {
@@ -58,6 +49,22 @@ public class InputParser {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public void findSynonyms(String command) {
+       File file = new File ("src/com/loversQuest/IO/Utilities/inputWords.txt");
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String linesOfSynonyms;
+            while ((linesOfSynonyms = br.readLine()) != null) {
+                if (linesOfSynonyms.contains(command)) {
+                    System.out.println(linesOfSynonyms);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

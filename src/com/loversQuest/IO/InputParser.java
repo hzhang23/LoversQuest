@@ -10,7 +10,7 @@ public class InputParser {
         try{
             //read in csv file
 //            DataInputStream in = new DataInputStream(getClass().getResourceAsStream("inputWords.txt"));
-            DataInputStream in = new DataInputStream(getClass().getResourceAsStream("Utilities/inputWords.txt"));
+            DataInputStream in = new DataInputStream(getClass().getResourceAsStream("Utilities/inputWfords.txt"));
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String strLine;
 
@@ -29,7 +29,8 @@ public class InputParser {
 
             in.close();
         }catch (Exception e){
-            System.err.println("error: " + e.getMessage());
+            e.printStackTrace();
+//            System.err.println("error: " + e.getMessage());
         }
 
         // return non command sensitive string if command word not found

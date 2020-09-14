@@ -59,7 +59,7 @@ public class ReadExcel {
         return locationList;
     }
 
-    public static List<NonPlayerCharacters> readNpcFromXl(String filePath, List<Location> locationList){
+    public static List<NonPlayerCharacters> getNpcList(String filePath, List<Location> locationList){
         Workbook locationBook = getGamebook(filePath);
         Sheet npcSheet = locationBook.getSheet("npc");
         List<NonPlayerCharacters> npcList = new ArrayList<>();

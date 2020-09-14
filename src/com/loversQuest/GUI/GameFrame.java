@@ -168,7 +168,7 @@ public class GameFrame extends JFrame{
         mapPanel.setBorder(blackBorder);
 
         //add main panel to frame, then add other panels to main panel.
-        mainPanel.setPreferredSize(new Dimension(500, 500));
+        mainPanel.setPreferredSize(new Dimension(1100, 1100));
 //        scrollPane.add(mainPanel);
         mainFrame.getContentPane().add(mainPanel);
         FlowLayout flowFromInsurance = new FlowLayout(2);
@@ -180,7 +180,7 @@ public class GameFrame extends JFrame{
         mainPanel.add(mapPanel);
 
 
-//        // add all panels to main pane to the main game frame
+        // add all panels to main pane to the main game frame
 //        mainFrame.getContentPane().add(gameResponsePanel);
 //        mainFrame.getContentPane().add(inventoryPanel);
 //        mainFrame.getContentPane().add(inputPanel);

@@ -1,8 +1,8 @@
-go,move,walk,run,head,dance
+go, move, walk, run, head, dance
 look
 interact,speak,talk
 inventory
-get, pick, grab, take
-use, shoot, drink
+get,pick,grab,take
+use,shoot,drink
 inspect
-map
+map, location, where

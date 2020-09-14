@@ -173,6 +173,11 @@ public class GameFrame extends JFrame{
         mainFrame.getContentPane().add(mainPanel);
         FlowLayout flowFromInsurance = new FlowLayout(2);
 
+        // adding a scroll pane to place the map - david
+//        JScrollPane scroll = new JScrollPane(mapPanel);
+//        scroll.setBounds(100, 370, 700, 280);
+//        scroll.setOpaque(true);
+
 //        mainPanel.setLayout(mainGridLayout);
         mainPanel.add(gameResponsePanel);
         mainPanel.add(inventoryPanel);

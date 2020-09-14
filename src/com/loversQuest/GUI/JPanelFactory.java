@@ -22,6 +22,6 @@ public class JPanelFactory {
     }
 
     public MapPanel getMapPanel(){
-        return new MapPanel(this.mainFrame.getX(), this.mainFrame.getY());
+        return new MapPanel();
     }
 }

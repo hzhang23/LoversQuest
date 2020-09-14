@@ -65,7 +65,7 @@ public class GameFrame extends JFrame{
         this.gameResponsePanel = panelFactory.getGameResponsePanel();
         this.inventoryPanel = panelFactory.getInventoryPanel();
         this.inputPanel = panelFactory.getInputPanel();
-        this.mapPanel = panelFactory.getMapPanel();
+        this.mapPanel = new MapPanel(this.player.getCurrentLocation().getName());
 
 
 
@@ -238,8 +238,10 @@ public class GameFrame extends JFrame{
         this.gameResponsePanel.setResponseText(response);
         this.inputPanel.getInputText().setText(null);
         this.inventoryPanel.setInventoryText(this.player.getAllItems().toString());
-        this.mapPanel.setVisible(true);
 
+        // david edited this to pass the player's location
+        this.mapPanel = new MapPanel(this.player.getCurrentLocation().getName());
+//        this.mapPanel.findPlayerLocation(this.player.getCurrentLocation().getName());
         if(this.player.isHasKiss()){
             this.gameResponsePanel.setResponseText(
                     "Your sweetheart says: OMG five WhiteClaws for me? I love you\n" +

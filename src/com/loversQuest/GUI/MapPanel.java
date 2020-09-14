@@ -11,8 +11,13 @@ import java.util.concurrent.Flow;
 
 public class MapPanel extends JPanel{
 
-    MapPanel(){
-        ImageIcon image = new ImageIcon("resources/barracks.png");
+
+    public MapPanel(String location){
+        String locationName = this.findPlayerLocation(location);
+        System.out.println("NAME to PASS is: " + locationName);
+        String fileName = String.format("resources/%s.png", locationName);
+        System.out.println("FILENAME is : " + fileName);
+        ImageIcon image = new ImageIcon(fileName);
         JLabel imageLabel = new JLabel(image);
         JPanel imagePanel = new JPanel(new BorderLayout());
         imagePanel.add(imageLabel);
@@ -21,5 +26,11 @@ public class MapPanel extends JPanel{
         scrollPane.setOpaque(true);
         scrollPane.setPreferredSize(new Dimension (900, 250));
         this.add(scrollPane);
+    }
+
+    public String findPlayerLocation(String location) {
+        String lowercasedLocationName = location.toLowerCase();
+        System.out.println(lowercasedLocationName);
+        return lowercasedLocationName;
     }
 }

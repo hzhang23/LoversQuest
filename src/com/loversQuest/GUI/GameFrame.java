@@ -66,7 +66,7 @@ public class GameFrame extends JFrame{
         this.gameResponsePanel = panelFactory.getGameResponsePanel();
         this.inventoryPanel = panelFactory.getInventoryPanel();
         this.inputPanel = panelFactory.getInputPanel();
-        this.mapPanel = panelFactory.getMapPanel();
+        this.mapPanel = new MapPanel(this.player.getCurrentLocation().getName());
 
 
         //main panel
@@ -166,10 +166,11 @@ public class GameFrame extends JFrame{
         mapPanel.setBorder(blackBorder);
 
         //add main panel to frame, then add other panels to main panel.
-        mainPanel.setPreferredSize(new Dimension(500, 500));
+        mainPanel.setPreferredSize(new Dimension(1100, 1100));
 //        scrollPane.add(mainPanel);
         mainFrame.getContentPane().add(mainPanel);
         FlowLayout flowFromInsurance = new FlowLayout(2);
+
 
 //      mainPanel.setLayout(mainGridLayout);
         mainPanel.add(gameResponsePanel);
@@ -178,6 +179,16 @@ public class GameFrame extends JFrame{
         mainPanel.add(mapPanel);
         inputPanel.requestFocus();
 
+
+        // add all panels to main pane to the main game frame
+//        mainFrame.getContentPane().add(gameResponsePanel);
+//        mainFrame.getContentPane().add(inventoryPanel);
+//        mainFrame.getContentPane().add(inputPanel);
+//        mainFrame.getContentPane().add(mapPanel);
+
+
+        //idk what this does
+        mainFrame.pack();
         //sets mainFrame to final params
         mainFrame.setSize(MAX_GAME_WINDOW_WIDTH, MAX_GAME_WINDOW_HEIGHT);
         //sets window centered in screen
@@ -226,6 +237,10 @@ public class GameFrame extends JFrame{
         this.gameResponsePanel.setResponseText(response);
         this.inputPanel.getInputText().setText("");
         this.inventoryPanel.setInventoryText(this.player.getAllItems().toString());
+
+        // david edited this to pass the player's location
+        this.mapPanel = new MapPanel(this.player.getCurrentLocation().getName());
+//        this.mapPanel.findPlayerLocation(this.player.getCurrentLocation().getName());
         if(this.player.isHasKiss()){
             this.gameResponsePanel.setResponseText(
                     "Your sweetheart says: OMG five WhiteClaws for me? I love you\n" +

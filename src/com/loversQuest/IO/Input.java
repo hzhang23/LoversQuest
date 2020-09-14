@@ -173,8 +173,9 @@ public class Input {
 
     // TODO: IMPLEMENT ARROW KEY INPUT -> call appropriate go method
     // if user presses up arrow, call go north on player
-    public void moveWhenKeyPressed(KeyEvent event) {
+    public void moveWhenKeyPressed(KeyEvent event){
         if (event.getKeyCode() == KeyEvent.VK_UP) {
+            Player.go("north");
             System.out.println("up arrow was pressed ninja");
         } else if (event.getKeyCode() == KeyEvent.VK_DOWN) {
             System.out.println("down arrow pressed");

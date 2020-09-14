@@ -1,14 +1,17 @@
 package com.loversQuest.gameWorldPieces;
 
+import com.loversQuest.gameWorldPieces.models_NPC.NPC_Properties;
+
 public class NonPlayerCharacters {
     private String name;
     private String description;
+    private NPC_Properties properties;
     private Location location;
     private Item keyItem;
     private Item prize;
 
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String BLUE = "\u001B[34m";
+//    public static final String ANSI_RESET = "\u001B[0m";
+//    public static final String BLUE = "\u001B[34m";
 
     //ctor
     public NonPlayerCharacters(String name, Location location) {
@@ -19,6 +22,11 @@ public class NonPlayerCharacters {
         this.name = name;
         this.description = description;
         this.location = location;
+    }
+
+    public NonPlayerCharacters(String name, String description) {
+        this.name = name;
+        this.description = description;
     }
 
     public NonPlayerCharacters() {
@@ -40,12 +48,21 @@ public class NonPlayerCharacters {
 
 
     //getter&setter
+
+    public NPC_Properties getProperties() {
+        return properties;
+    }
+
+    public void setProperties(NPC_Properties properties) {
+        this.properties = properties;
+    }
+
     public String getName (){
         return name;
     }
-    public String getColorName() {
-        return BLUE + name + ANSI_RESET;
-    }
+//    public String getColorName() {
+//        return BLUE + name + ANSI_RESET;
+//    }
 
     public void setName(String name) {
         this.name = name;

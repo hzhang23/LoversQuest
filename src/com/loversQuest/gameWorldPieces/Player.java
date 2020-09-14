@@ -1,24 +1,21 @@
 package com.loversQuest.gameWorldPieces;
 
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.loversQuest.IO.GraphicClass;
-
-import java.io.IOException;
 
 public class Player {
 
     private String name;
     private Location currentLocation;
+    private double money;
 
     private boolean hasChallengeCoin = false;
     private boolean hasKiss = false;
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String BLUE = "\u001B[34m";
+//    public static final String ANSI_RESET = "\u001B[0m";
+//    public static final String BLUE = "\u001B[34m";
 
-    public RuckSack ruckSack = new RuckSack();
+    public PlayerContainer ruckSack = new PlayerContainer();
+    public PlayerContainer footlocker = new PlayerContainer();
 
     // CTOR
     public Player(String name, Location currentLocation) {
@@ -37,6 +34,9 @@ public class Player {
 
         boolean result = false;
 
+        /**
+         * need to get rid of officer class and reRoute method
+         *
         // conditions for officer functionality. (Preventing us from going to the west)
         if (getCurrentLocation().getOccupant() instanceof Officer) {
             if (direction.equals("west")) {
@@ -46,6 +46,7 @@ public class Player {
                 }
             }
         }
+         */
 
         //get indicated destination from direction string
         Location destination = this.currentLocation.getDirectionFromString(directionInput);

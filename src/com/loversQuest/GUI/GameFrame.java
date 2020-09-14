@@ -12,8 +12,9 @@ import java.awt.event.*;
 import java.util.Arrays;
 
 public class GameFrame extends JFrame{
-//    Action upAction = new UpAction();
 
+    public static final int MAX_GAME_WINDOW_WIDTH = 1300;
+    public static final int MAX_GAME_WINDOW_HEIGHT = 800;
     JFrame mainFrame;
     //////////////////////////////////////////////DANNY HERE IS YOUR PANEL //////////////////////////////////////////
     JPanel mainPanel;
@@ -170,22 +171,17 @@ public class GameFrame extends JFrame{
         mainFrame.getContentPane().add(mainPanel);
         FlowLayout flowFromInsurance = new FlowLayout(2);
 
-//        mainPanel.setLayout(mainGridLayout);
+//      mainPanel.setLayout(mainGridLayout);
         mainPanel.add(gameResponsePanel);
         mainPanel.add(inventoryPanel);
         mainPanel.add(inputPanel);
         mainPanel.add(mapPanel);
         inputPanel.requestFocus();
 
-//        // add all panels to main pane to the main game frame
-//        mainFrame.getContentPane().add(gameResponsePanel);
-//        mainFrame.getContentPane().add(inventoryPanel);
-//        mainFrame.getContentPane().add(inputPanel);
-//        mainFrame.getContentPane().add(mapPanel);
-
-
-        //idk what this does
-        mainFrame.pack();
+        //sets mainFrame to final params
+        mainFrame.setSize(MAX_GAME_WINDOW_WIDTH, MAX_GAME_WINDOW_HEIGHT);
+        //sets window centered in screen
+        mainFrame.setLocationRelativeTo(null);
         //make frame visible
         mainFrame.setVisible(true);
 

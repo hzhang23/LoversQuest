@@ -16,7 +16,11 @@ public class MapPanel extends JPanel {
         GridLayout gridLayoutBottomRight = new GridLayout(2, 1);
 //        this.setLayout(gridLayoutBottomRight);
 
-        //create a button called map
+
+        /*
+        disabling the "map" button
+
+           //create a button called map
         JButton map = new JButton("Map");
         //create event listener for map button, brings up new window with map
         map.addMouseListener(new MouseListener() {
@@ -53,8 +57,12 @@ public class MapPanel extends JPanel {
             }
         });
 
+
+         */
+
+
         mapText.append("bottom right");
-        this.add(map);
+//        this.add(map);
 
         //adds map image to the panel.
 //        java.net.URL mapUrl = getClass().getResource("gameMap.jpg");

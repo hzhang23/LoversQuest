@@ -233,6 +233,7 @@ public class GameFrame extends JFrame{
         this.gameResponsePanel.setResponseText(response);
         this.inputPanel.getInputText().setText(null);
         this.inventoryPanel.setInventoryText(this.player.getAllItems().toString());
+        this.mapPanel.setVisible(true);
 
         if(this.player.isHasKiss()){
             this.gameResponsePanel.setResponseText(

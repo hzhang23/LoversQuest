@@ -68,7 +68,6 @@ public class GameFrame extends JFrame{
         this.mapPanel = panelFactory.getMapPanel();
 
 
-
         //main panel
         this.mainPanel = new JPanel();
 
@@ -120,8 +119,6 @@ public class GameFrame extends JFrame{
         inputEnterAction = new GameFrame.inputEnterKeyAction();
         inputPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "inputEnterSubmit");
         inputPanel.getActionMap().put("inputEnterSubmit", inputEnterAction);
-
-
         inputPanel.getSubmitButton().addMouseListener(new MouseListener() {
 
             @Override
@@ -178,7 +175,7 @@ public class GameFrame extends JFrame{
         mainPanel.add(inventoryPanel);
         mainPanel.add(inputPanel);
         mainPanel.add(mapPanel);
-
+        inputPanel.requestFocus();
 
 //        // add all panels to main pane to the main game frame
 //        mainFrame.getContentPane().add(gameResponsePanel);
@@ -218,7 +215,7 @@ public class GameFrame extends JFrame{
     public void changeTopRightText(String inventory){
 
         inventoryPanel.setInventoryText(inventory);
-
+        inputPanel.getInputText().requestFocus();
     }
 
     public String getCommand(){
@@ -231,9 +228,8 @@ public class GameFrame extends JFrame{
 
         String response = input.getUserAction(this.player, command);
         this.gameResponsePanel.setResponseText(response);
-        this.inputPanel.getInputText().setText(null);
+        this.inputPanel.getInputText().setText("");
         this.inventoryPanel.setInventoryText(this.player.getAllItems().toString());
-
         if(this.player.isHasKiss()){
             this.gameResponsePanel.setResponseText(
                     "Your sweetheart says: OMG five WhiteClaws for me? I love you\n" +
@@ -299,7 +295,7 @@ public class GameFrame extends JFrame{
         public void actionPerformed(ActionEvent e) {
             try {
                 GameFrame.this.runCommand(inputPanel.getInputText().getText());
-                mainFrame.getRootPane().requestFocusInWindow();
+                inputPanel.cursorFocus();
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }

@@ -8,6 +8,8 @@ import com.loversQuest.gameWorldPieces.Player;
 
 
 import java.awt.*;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.io.IOException;
 
@@ -40,10 +42,19 @@ public class JFrameInput {
 
         String[] response = command.trim().toLowerCase().split("\\s+");
 
+
         // parses user response further, into second array
         String stringifiedResponse = String.join(" ", Arrays.copyOfRange(response, 1, response.length));
 
-        String actionVerb = parser.parseCommand(response[0]);
+//        System.out.println("Command is " + command);
+//        ArrayList responseList = new ArrayList(Arrays.asList(response));
+//        System.out.println("Response is " + responseList);
+
+        String actionVerb = parser.parseCommand2(response[0]);
+
+
+//        parser.findSynonyms(response[0]);
+
 
         // handles first word of response
 
@@ -129,6 +140,7 @@ public class JFrameInput {
             // input action verb does not match
             default -> finalResponse = ("Unreadable input. Please try again.");
         }
+
         return finalResponse;
     }
 

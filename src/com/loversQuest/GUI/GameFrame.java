@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class GameFrame extends JFrame{
 
     public static final int MAX_GAME_WINDOW_WIDTH = 1300;
-    public static final int MAX_GAME_WINDOW_HEIGHT = 800;
+    public static final int MAX_GAME_WINDOW_HEIGHT = 1200;
     JFrame mainFrame;
     //////////////////////////////////////////////DANNY HERE IS YOUR PANEL //////////////////////////////////////////
     JPanel mainPanel;
@@ -177,7 +177,7 @@ public class GameFrame extends JFrame{
         mainPanel.add(inventoryPanel);
         mainPanel.add(inputPanel);
         mainPanel.add(mapPanel);
-        inputPanel.requestFocus();
+
 
 
         // add all panels to main pane to the main game frame

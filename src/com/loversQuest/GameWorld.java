@@ -2,11 +2,6 @@ package com.loversQuest;
 
 
 import com.loversQuest.gameWorldPieces.*;
-import com.loversQuest.IO.GraphicClass;
-
-
-import java.util.Arrays;
-import java.util.HashMap;
 
 public class GameWorld {
     public Location nothing = new Location("NOTHING", "THIS IS NOTHING");
@@ -82,7 +77,7 @@ public class GameWorld {
     public NonPlayerCharacters blueFalcon = new NonPlayerCharacters("The Blue Falcon", " are sleeping next to a bottomless pit of despair.", portaJohn);
     public NonPlayerCharacters gymDrill = new NonPlayerCharacters("Drill Sergeant Winstrol"," are staring at you with their beady eyes. ", gym);
 
-    public Lover lover = new Lover("Your Sweetheart", " stare at you lovingly", gazebo);
+    public Lover_Old lover = new Lover_Old("Your Sweetheart", " stare at you lovingly", gazebo);
     public Officer officer = new Officer("Captain Charlie", " look at you over their sandwhich.", px);
 
 

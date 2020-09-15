@@ -2,14 +2,14 @@ package com.loversQuest.gameWorldPieces;
 
 import java.util.*;
 
-public class RuckSack {
+public class PlayerContainer {
 
 //    protected Map<Item, Integer> items = new HashMap<>();
     protected ArrayList<Item> items = new ArrayList<>();
 
     // CTOR
-    public RuckSack() {}
-    public RuckSack(Item item) {
+    public PlayerContainer() {}
+    public PlayerContainer(Item item) {
         items.add(item);
     }
 

@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class GameResponsePanel extends JPanel{
 
-    private JTextArea responseText = new JTextArea(20, 20);
+    private JTextArea responseText = new JTextArea(8, 35);
 
     GameResponsePanel(int x, int y){
 

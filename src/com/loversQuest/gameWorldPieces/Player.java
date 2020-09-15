@@ -27,42 +27,37 @@ public class Player {
 
     //go function can result in navigating to "NOTHING" area. need to error check if
     // indicated direction is not a room and prevent movement.
-    public boolean go(String directionInput) {
-
+    /**
+    this go function change room and return a result of boolean
+     */
+    public void changeLocation(String directionInput){
         String direction = directionInput.toLowerCase();
+        Location destination = this.currentLocation.getDirectionFromString(direction);
+
+
+    }
+
+
+
+
+
+    public boolean go(String directionInput) {
+        String direction = directionInput.toUpperCase();
         String response = null;
-
         boolean result = false;
-
-        /**
-         * need to get rid of officer class and reRoute method
-         *
-        // conditions for officer functionality. (Preventing us from going to the west)
-        if (getCurrentLocation().getOccupant() instanceof Officer) {
-            if (direction.equals("west")) {
-                if (getItem(getCurrentLocation().getOccupant().getPrize().getName()) == null) {
-                    ((Officer) getCurrentLocation().getOccupant()).reRoute(this);
-                    return false;
-                }
-            }
-        }
-         */
-
         //get indicated destination from direction string
-        Location destination = this.currentLocation.getDirectionFromString(directionInput);
-        // if it is a valid direction to go, update current position
-
+        Location destination = this.currentLocation.getDirectionFromString(direction);
         if (destination != null && validateLocation(destination)) {
             this.setCurrentLocation(destination);
             result = true;
+
         }
         return result;
-
     }
 
     // checks if a given location is a place a player can move
     public boolean validateLocation(Location destination) {
-        return !destination.getName().equals("NOTHING");
+        return !destination.getName().toUpperCase().equals("NOTHING");
     }
 
     public String look() {

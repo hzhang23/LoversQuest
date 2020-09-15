@@ -44,7 +44,7 @@ public class Input {
         for (CardinalDirection realDirections : CardinalDirection.values()) {
 
             if (realDirections.toString().equalsIgnoreCase(direction)) {
-                String status = "You head to the " + direction + " and find yourself in the " + player.getCurrentLocation().getColoredName();
+                String status = "You head to the " + direction + " and find yourself in the " + player.getCurrentLocation().getName();
                 return status;
             } else {
                 return "Bad Directional Input Private!";

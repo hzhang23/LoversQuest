@@ -5,6 +5,8 @@ package com.loversQuest.gameWorldPieces;
  */
 
 
+import com.loversQuest.excelReader.ReadExcel;
+
 import java.util.*;
 
 public class Location {
@@ -13,18 +15,17 @@ public class Location {
     private String description;
     private Container container;
     private ArrayList<Item> itemsList = new ArrayList<>();
-
     private NonPlayerCharacters occupant;
 
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String BLUE = "\u001B[34m";
-
     //hash map with keys = enum of cardinal directions and values = Location instances
-    private HashMap<CardinalDirection, Location> directionMap = new HashMap<>();
+    private HashMap<CardinalDirection,String> directionMap = new HashMap<>();
 
     // CTOR
     public Location(){
-
+        this.directionMap.put(CardinalDirection.NORTH, null);
+        this.directionMap.put(CardinalDirection.SOUTH, null);
+        this.directionMap.put(CardinalDirection.EAST, null);
+        this.directionMap.put(CardinalDirection.WEST, null);
     }
 
     public Location(String name, String description) {
@@ -38,9 +39,6 @@ public class Location {
     }
 
     // SETTERS/GETTERS
-    public String getColoredName() {
-        return BLUE + name + ANSI_RESET;
-    }
 
     public String getName() {
         return name;
@@ -109,42 +107,48 @@ public class Location {
     //returns the location that is in the direction given via string
     public Location getDirectionFromString(String stringDirection){
         Location result = null;
+        List<Location> locationList = ReadExcel.getLocationList("resources/gameBook.xlsx");
+
         //loop through key set of direction map
         for(CardinalDirection direction : directionMap.keySet()){
-            //if direction enum to string is same as input string direction
             if(direction.toString().equalsIgnoreCase(stringDirection)){
-                //return the location in that direction
-                result = directionMap.get(direction);
+                String locationName = directionMap.get(direction);
+                for (Location location : locationList){
+                    String curName = location.getName().trim();
+                    if(locationName.equals(curName)){
+                        result = location;
+                    }
+                }
             }
         }
         return result;
     }
 
     // return value from direction hashmap corresponding to the given enum
-    public Location getEast(){
+    public String getEast(){
         return directionMap.get(CardinalDirection.EAST);
     }
-    public Location getWest(){
+    public String getWest(){
         return directionMap.get(CardinalDirection.WEST);
     }
-    public Location getSouth(){
+    public String getSouth(){
         return directionMap.get(CardinalDirection.SOUTH);
     }
-    public Location getNorth(){
+    public String getNorth(){
         return directionMap.get(CardinalDirection.NORTH);
     }
 
     // replace value in direction hashmap with new Location instance
-    public void setNorth(Location area){
+    public void setNorth(String area){
         directionMap.replace(CardinalDirection.NORTH, area);
     }
-    public void setSouth(Location area){
+    public void setSouth(String area){
         directionMap.replace(CardinalDirection.SOUTH, area);
     }
-    public void setEast(Location area){
+    public void setEast(String area){
         directionMap.replace(CardinalDirection.EAST, area);
     }
-    public void setWest(Location area){
+    public void setWest(String area){
         directionMap.replace(CardinalDirection.WEST, area);
     }
 

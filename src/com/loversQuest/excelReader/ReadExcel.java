@@ -111,91 +111,102 @@ public class ReadExcel {
      * @return
      */
     public static List<Location> getLocationList(String filePath) {
-            Workbook gameBook = getGamebook(filePath);
-            Sheet locationSheet = gameBook.getSheet("location");
-            String cellStr = null;
-            List<Location> locationList = new ArrayList<>();
-            for(int rowNum = 1; rowNum <= locationSheet.getLastRowNum(); rowNum++){
-                Location location = new Location();
-                Row row = locationSheet.getRow(rowNum);
-                for(int cellNum = 0; cellNum< row.getLastCellNum(); cellNum++){
-                    Cell cell = row.getCell(cellNum);
-                    cellStr = cell.getStringCellValue().toLowerCase();
-                    switch (cellNum){
-                        case 0:{
-                            location.setName(cellStr);
-                            break;
-                        }
-                        case 5: {
-                            location.setDescription(cellStr);
-                            break;
-                        }
+        Workbook gameBook = getGamebook(filePath);
+        Sheet locationSheet = gameBook.getSheet("location");
+        String cellStr = null;
+        List<Location> locationList = new ArrayList<>();
+        for (int rowNum = 1; rowNum <= locationSheet.getLastRowNum(); rowNum++) {
+            Location location = new Location();
+            Row row = locationSheet.getRow(rowNum);
+            for (int cellNum = 0; cellNum < row.getLastCellNum(); cellNum++) {
+                Cell cell = row.getCell(cellNum);
+                cellStr = cell.getStringCellValue().toLowerCase().trim();
+                switch (cellNum) {
+                    case 0: {
+                        location.setName(cellStr);
+                        break;
+                    }
+                    case 5: {
+                        location.setDescription(cellStr);
+                        break;
                     }
                 }
-                locationList.add(location);
             }
-
-
-
-        return locationList;
-    }
-
-    /**
-     * get npcList from npc sheet
-     * @param filePath
-     * @param locationList
-     * @return
-     */
-
-    public static List<NonPlayerCharacters> getNpcList(String filePath, List<Location> locationList){
-        Workbook gameBook = getGamebook(filePath);
-        Sheet npcSheet = gameBook.getSheet("npc");
-        List<NonPlayerCharacters> npcList = new ArrayList<>();
-        String cellString = null;
-        for (int rowNum = 1; rowNum <= npcSheet.getLastRowNum(); rowNum++){
-            Row row = npcSheet.getRow(rowNum);
-            NonPlayerCharacters npc = new NonPlayerCharacters();
-            for(int cellNum =0; cellNum <=row.getLastCellNum();cellNum++){
+            locationList.add(location);
+        }
+        for (int rowNum = 1; rowNum <= locationSheet.getLastRowNum(); rowNum++) {
+            Row row = locationSheet.getRow(rowNum);
+            for (int cellNum = 0; cellNum < row.getLastCellNum(); cellNum++) {
                 Cell cell = row.getCell(cellNum);
-                cellString = cell.getStringCellValue().toUpperCase();
-                switch (cellNum){
-                    case(0)-> {
-                        for (NPC_Properties property : NPC_Properties.values()){
-                            if(property.toString().equals(cellString));
-                            npc.setProperties(property);
-                            break;
-                        }
-                    }
-                    case(1)->{
-                        npc.setName(cellString);
-                        break;
-                    }
-                    case(2)->{
-                        npc.setDescription(cellString);
-                        break;
-                    }
-                    case(3)->{
-                        for(Location location : locationList){
-                            if (location.getName().toUpperCase().equals(cellString)){
-                                npc.setLocation(location);
+                String locationName = row.getCell(0).getStringCellValue().toLowerCase();
+                if (cell.getStringCellValue() != ""){
+                    cellStr = cell.getStringCellValue().toLowerCase().trim();
+                } else {
+                    cellStr = "nothing";
+                }
+                for (Location location : locationList){
+                    if (location.getName().equals(locationName)){
+                        switch (cellNum) {
+                            case 1 -> {
+                                location.setEast(cellStr);
                                 break;
+                            }
+                            case 2 -> {
+                                location.setWest(cellStr);
+                                break;
+                            }
+                            case 3 -> {
+                                location.setNorth(cellStr);
+                                break;
+                            }
+                            case 4 -> {
+                                location.setSouth(cellStr);
+                                break;
+                            }
+                                }
                             }
                         }
                     }
                 }
-            }
-            npcList.add(npc);
+            return locationList;
         }
-        return npcList;
-    }
+
+        /**
+         * get npcList from npc sheet
+         * @param filePath
+         * @param locationList
+         * @return
+         */
+
+        public static List<NonPlayerCharacters> getNpcList (String filePath, List < Location > locationList){
+            Workbook gameBook = getGamebook(filePath);
+            Sheet npcSheet = gameBook.getSheet("npc");
+            List<NonPlayerCharacters> npcList = new ArrayList<>();
+            String cellString = null;
+            for (int rowNum = 1; rowNum <= npcSheet.getLastRowNum(); rowNum++) {
+                Row row = npcSheet.getRow(rowNum);
+                NonPlayerCharacters npc = new NonPlayerCharacters();
+                for (int cellNum = 0; cellNum <= row.getLastCellNum(); cellNum++) {
+                    Cell cell = row.getCell(cellNum);
+                    cellString = cell.getStringCellValue().toUpperCase();
+
+                }
+            }
+            return npcList;
+        }
 
 
 
     public static void main(String[] args) {
         ReadExcel reader = new ReadExcel();
+        String path = "resources/gameBook.xlsx";
+        List<Container> containerList = getContainerList("resources/gameBook.xlsx");
+        List<Item> itemList = getItemList(path);
+        System.out.println(containerList.get(1).getName());
+        System.out.println(itemList.get(1).getName());
         ArrayList<Location> locations = (ArrayList<Location>) reader.getLocationList("resources/gameBook.xlsx");
-        Location Barracks = locations.get(2);
-        System.out.println(Barracks.getDescription());
+        List<NonPlayerCharacters> npcList = reader.getNpcList("resources/gameBook.xlsx", locations);
+        System.out.println(npcList.get(0).getName());
 
     }
 

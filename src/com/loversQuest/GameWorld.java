@@ -90,67 +90,67 @@ public class GameWorld {
     public void createMap(){
 
 
-        barracks.setEast(gym);
-        barracks.setNorth(courtYard);
-        barracks.setSouth(nothing);
-        barracks.setWest(laundryRoom);
+        barracks.setEast("gym");
+        barracks.setNorth("courtYard");
+        barracks.setSouth("nothing");
+        barracks.setWest("laundryRoom");
         barracks.setContainer(ceiling);
         ceiling.addItem(whiteClaw1);
 
-        laundryRoom.setWest(nothing);
-        laundryRoom.setNorth(nothing);
-        laundryRoom.setSouth(nothing);
-        laundryRoom.setEast(barracks);
+        laundryRoom.setWest("nothing");
+        laundryRoom.setNorth("nothing");
+        laundryRoom.setSouth("nothing");
+        laundryRoom.setEast("barracks");
         laundryRoom.setOccupant(sickCallRanger);
         sickCallRanger.setKeyItem(uncrustable);
         sickCallRanger.setPrize(sickCallSlip);
 
-        courtYard.setSouth(barracks);
-        courtYard.setNorth(range);
-        courtYard.setWest(nothing);
-        courtYard.setEast(nothing);
+        courtYard.setSouth("barracks");
+        courtYard.setNorth("range");
+        courtYard.setWest("nothing");
+        courtYard.setEast("nothing");
         courtYard.setContainer(trashCan);
         courtYard.setOccupant(clsInstructor);
         trashCan.addItem(ptBelt);
 
-        range.setSouth(courtYard);
-        range.setNorth(nothing);
-        range.setWest(nothing);
-        range.setEast(nothing);
+        range.setSouth("courtYard");
+        range.setNorth("nothing");
+        range.setWest("nothing");
+        range.setEast("nothing");
         range.setOccupant(rangeDrillSergeant);
         ammoBox.addItem(whiteClaw2);
         range.setContainer(ammoBox);
         rangeDrillSergeant.setKeyItem(rifle);
         rangeDrillSergeant.setPrize(expertBadge);
 
-        gym.setWest(barracks);
-        gym.setNorth(portaJohn);
-        gym.setSouth(chowHall);
-        gym.setEast(nothing);
+        gym.setWest("barracks");
+        gym.setNorth("portaJohn");
+        gym.setSouth("chowHall");
+        gym.setEast("nothing");
         gym.setOccupant(gymDrill);
         gymDrill.setKeyItem(ptBelt);
         gymDrill.setPrize(ptBadge   );
 
-        portaJohn.setSouth(gym);
-        portaJohn.setWest(nothing);
-        portaJohn.setNorth(nothing);
-        portaJohn.setEast(nothing);
+        portaJohn.setSouth("gym");
+        portaJohn.setWest("nothing");
+        portaJohn.setNorth("nothing");
+        portaJohn.setEast("nothing");
         portaJohn.setOccupant(blueFalcon);
         blueFalcon.setKeyItem(whiteClaw2);
         portaJohn.addItem(whiteClaw2);
         blueFalcon.setPrize(whiteClaw4);
 
-        chowHall.setNorth(gym);
-        chowHall.setEast(nothing);
-        chowHall.setWest(nothing);
-        chowHall.setSouth(px);
+        chowHall.setNorth("gym");
+        chowHall.setEast("nothing");
+        chowHall.setWest("nothing");
+        chowHall.setSouth("px");
         chowHall.setOccupant(chowHallLady);
         chowHall.addItem(whiteClaw3);
 
-        px.setNorth(chowHall);
-        px.setEast(nothing);
-        px.setWest(gazebo);
-        px.setSouth(nothing);
+        px.setNorth("chowHall");
+        px.setEast("nothing");
+        px.setWest("gazebo");
+        px.setSouth("nothing");
 
         px.setOccupant(officer);
         officer.setKeyItemName("badge");
@@ -161,10 +161,10 @@ public class GameWorld {
         ifak.addItem(whiteClaw4);
 
 
-        gazebo.setEast(px);
-        gazebo.setNorth(nothing);
-        gazebo.setWest(nothing);
-        gazebo.setSouth(nothing);
+        gazebo.setEast("px");
+        gazebo.setNorth("nothing");
+        gazebo.setWest("nothing");
+        gazebo.setSouth("nothing");
         gazebo.setOccupant(lover);
         lover.setPrize(kiss);
         lover.setKeyItemName("whiteclaw");

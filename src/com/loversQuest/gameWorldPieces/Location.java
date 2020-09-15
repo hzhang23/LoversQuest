@@ -5,6 +5,8 @@ package com.loversQuest.gameWorldPieces;
  */
 
 
+import com.loversQuest.excelReader.ReadExcel;
+
 import java.util.*;
 
 public class Location {
@@ -16,11 +18,14 @@ public class Location {
     private NonPlayerCharacters occupant;
 
     //hash map with keys = enum of cardinal directions and values = Location instances
-    private HashMap<CardinalDirection, Location> directionMap = new HashMap<>();
+    private HashMap<CardinalDirection,String> directionMap = new HashMap<>();
 
     // CTOR
     public Location(){
-
+        this.directionMap.put(CardinalDirection.NORTH, null);
+        this.directionMap.put(CardinalDirection.SOUTH, null);
+        this.directionMap.put(CardinalDirection.EAST, null);
+        this.directionMap.put(CardinalDirection.WEST, null);
     }
 
     public Location(String name, String description) {
@@ -102,12 +107,18 @@ public class Location {
     //returns the location that is in the direction given via string
     public Location getDirectionFromString(String stringDirection){
         Location result = null;
+        List<Location> locationList = ReadExcel.getLocationList("resources/gameBook.xlsx");
+
         //loop through key set of direction map
         for(CardinalDirection direction : directionMap.keySet()){
-            //if direction enum to string is same as input string direction
             if(direction.toString().equalsIgnoreCase(stringDirection)){
-                //return the location in that direction
-                result = directionMap.get(direction);
+                String locationName = directionMap.get(direction);
+                for (Location location : locationList){
+                    String curName = location.getName().trim();
+                    if(locationName.equals(curName)){
+                        result = location;
+                    }
+                }
             }
         }
         return result;

@@ -44,10 +44,10 @@ public class Output {
         Location currentLocation = player.getCurrentLocation();
 
         String description = "The " + currentLocation.getName() + ": "+ currentLocation.getDescription() +
-                "\nTo the North is " + currentLocation.getNorth().getName() +
-                "\nTo the East is " + currentLocation.getEast().getName() +
-                "\nTo the South is " + currentLocation.getSouth().getName() +
-                "\nTo the West is " + currentLocation.getWest().getName();
+                "\nTo the North is " + currentLocation.getNorth() +
+                "\nTo the East is " + currentLocation.getEast() +
+                "\nTo the South is " + currentLocation.getSouth() +
+                "\nTo the West is " + currentLocation.getWest();
         return description;
     }
 }

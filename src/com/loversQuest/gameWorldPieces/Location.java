@@ -114,30 +114,30 @@ public class Location {
     }
 
     // return value from direction hashmap corresponding to the given enum
-    public Location getEast(){
+    public String getEast(){
         return directionMap.get(CardinalDirection.EAST);
     }
-    public Location getWest(){
+    public String getWest(){
         return directionMap.get(CardinalDirection.WEST);
     }
-    public Location getSouth(){
+    public String getSouth(){
         return directionMap.get(CardinalDirection.SOUTH);
     }
-    public Location getNorth(){
+    public String getNorth(){
         return directionMap.get(CardinalDirection.NORTH);
     }
 
     // replace value in direction hashmap with new Location instance
-    public void setNorth(Location area){
+    public void setNorth(String area){
         directionMap.replace(CardinalDirection.NORTH, area);
     }
-    public void setSouth(Location area){
+    public void setSouth(String area){
         directionMap.replace(CardinalDirection.SOUTH, area);
     }
-    public void setEast(Location area){
+    public void setEast(String area){
         directionMap.replace(CardinalDirection.EAST, area);
     }
-    public void setWest(Location area){
+    public void setWest(String area){
         directionMap.replace(CardinalDirection.WEST, area);
     }
 

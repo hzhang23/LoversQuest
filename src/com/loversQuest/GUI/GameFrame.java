@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class GameFrame extends JFrame{
 
     public static final int MAX_GAME_WINDOW_WIDTH = 1300;
-    public static final int MAX_GAME_WINDOW_HEIGHT = 800;
+    public static final int MAX_GAME_WINDOW_HEIGHT = 900;
     JFrame mainFrame;
     //////////////////////////////////////////////DANNY HERE IS YOUR PANEL //////////////////////////////////////////
     JPanel mainPanel;
@@ -166,7 +166,6 @@ public class GameFrame extends JFrame{
         mapPanel.setBorder(blackBorder);
 
         //add main panel to frame, then add other panels to main panel.
-        mainPanel.setPreferredSize(new Dimension(1100, 1100));
 //        scrollPane.add(mainPanel);
         mainFrame.getContentPane().add(mainPanel);
         FlowLayout flowFromInsurance = new FlowLayout(2);
@@ -177,7 +176,7 @@ public class GameFrame extends JFrame{
         mainPanel.add(inventoryPanel);
         mainPanel.add(inputPanel);
         mainPanel.add(mapPanel);
-        inputPanel.requestFocus();
+
 
 
         // add all panels to main pane to the main game frame
@@ -190,7 +189,13 @@ public class GameFrame extends JFrame{
         //idk what this does
         mainFrame.pack();
         //sets mainFrame to final params
-        mainFrame.setSize(MAX_GAME_WINDOW_WIDTH, MAX_GAME_WINDOW_HEIGHT);
+       // mainFrame.setSize(MAX_GAME_WINDOW_WIDTH, MAX_GAME_WINDOW_HEIGHT);
+        /**
+         * next line is to set game window to full screen size
+         */
+
+        mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        mainFrame.setResizable(false);
         //sets window centered in screen
         mainFrame.setLocationRelativeTo(null);
         //make frame visible

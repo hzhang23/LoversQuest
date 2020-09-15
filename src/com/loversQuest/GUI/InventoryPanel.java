@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class InventoryPanel extends JPanel{
 
-    private JTextArea inventoryText = new JTextArea(20,20);
+    private JTextArea inventoryText = new JTextArea(8,35);
 
     InventoryPanel(int x, int y){
         GridBagLayout layoutTopRight = new GridBagLayout();

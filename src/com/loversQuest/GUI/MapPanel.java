@@ -29,7 +29,7 @@ public class MapPanel extends JPanel{
         // make the scroll pane
         scrollPane = new JScrollPane(imagePanel);
         scrollPane.setOpaque(true);
-        scrollPane.setPreferredSize(new Dimension (900, 250));
+        scrollPane.setPreferredSize(new Dimension (880, 550));
         this.add(scrollPane);
     }
 

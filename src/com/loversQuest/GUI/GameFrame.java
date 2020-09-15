@@ -239,7 +239,8 @@ public class GameFrame extends JFrame{
         this.inventoryPanel.setInventoryText(this.player.getAllItems().toString());
 
         // david edited this to pass the player's location
-        this.mapPanel = new MapPanel(this.player.getCurrentLocation().getName());
+        this.mapPanel.updateImageLabel(this.player.getCurrentLocation().getName());
+
 //        this.mapPanel.findPlayerLocation(this.player.getCurrentLocation().getName());
         if(this.player.isHasKiss()){
             this.gameResponsePanel.setResponseText(

@@ -13,7 +13,8 @@ public class MapPanel extends JPanel{
 
     // ctor
     public MapPanel(String location){
-        String fileName = String.format("resources/%s.png", location);
+        String picLocation = location.replaceAll(" ", "");
+        String fileName = String.format("resources/%s.png", picLocation);
         ImageIcon image = new ImageIcon(fileName);
 
         // make the label
@@ -35,7 +36,8 @@ public class MapPanel extends JPanel{
 
     // method to update the corresponding map image
     public void updateImageLabel(String location) {
-        String fileName = String.format("resources/%s.png", location);
+        String picLocation = location.replaceAll(" ", "");
+        String fileName = String.format("resources/%s.png", picLocation);
         ImageIcon image = new ImageIcon(fileName);
         this.imageLabel.setIcon(image);
         System.out.println("file name is " + fileName);

@@ -12,7 +12,7 @@ public class Container extends Item {
 
     private ArrayList<Item> contents = new ArrayList<>();
 
-
+    public Container(){};
     public Container(String name, String use) {
         super(name, use);
     }

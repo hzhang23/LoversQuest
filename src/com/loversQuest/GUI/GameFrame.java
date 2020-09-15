@@ -189,7 +189,12 @@ public class GameFrame extends JFrame{
         //idk what this does
         mainFrame.pack();
         //sets mainFrame to final params
-        mainFrame.setSize(MAX_GAME_WINDOW_WIDTH, MAX_GAME_WINDOW_HEIGHT);
+       // mainFrame.setSize(MAX_GAME_WINDOW_WIDTH, MAX_GAME_WINDOW_HEIGHT);
+        /**
+         * next line is to set game window to full screen size
+         */
+
+        mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         mainFrame.setResizable(false);
         //sets window centered in screen
         mainFrame.setLocationRelativeTo(null);

@@ -10,5 +10,6 @@ public enum NPC_Properties {
     Battle_PT,
     BATTLE_SICKCALL,
     BATTLE_1S1K,
+    Non_Mission,
 }
 

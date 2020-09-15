@@ -70,7 +70,8 @@ public class JFrameInput {
                     if (player.getCurrentLocation().getName().equalsIgnoreCase("px") &&
                             direction.equalsIgnoreCase("west") &&
                             !player.isHasChallengeCoin() &&
-                            !player.go(direction)) return "Captain Charlie sends you back to complete your WARRIOR SKILL LEVEL 1 tasks.";
+                            !player.go(direction))
+                        return "Captain Charlie sends you back to complete your WARRIOR SKILL LEVEL 1 tasks.";
                     else if(!player.go(direction)){
                         return "You can't go that way";
                     }

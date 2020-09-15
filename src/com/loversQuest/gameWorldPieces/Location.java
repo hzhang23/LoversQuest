@@ -13,11 +13,7 @@ public class Location {
     private String description;
     private Container container;
     private ArrayList<Item> itemsList = new ArrayList<>();
-
     private NonPlayerCharacters occupant;
-
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String BLUE = "\u001B[34m";
 
     //hash map with keys = enum of cardinal directions and values = Location instances
     private HashMap<CardinalDirection, Location> directionMap = new HashMap<>();
@@ -38,9 +34,6 @@ public class Location {
     }
 
     // SETTERS/GETTERS
-    public String getColoredName() {
-        return BLUE + name + ANSI_RESET;
-    }
 
     public String getName() {
         return name;

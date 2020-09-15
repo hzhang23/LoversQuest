@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class GameFrame extends JFrame{
 
     public static final int MAX_GAME_WINDOW_WIDTH = 1300;
-    public static final int MAX_GAME_WINDOW_HEIGHT = 1200;
+    public static final int MAX_GAME_WINDOW_HEIGHT = 900;
     JFrame mainFrame;
     //////////////////////////////////////////////DANNY HERE IS YOUR PANEL //////////////////////////////////////////
     JPanel mainPanel;
@@ -166,7 +166,6 @@ public class GameFrame extends JFrame{
         mapPanel.setBorder(blackBorder);
 
         //add main panel to frame, then add other panels to main panel.
-        mainPanel.setPreferredSize(new Dimension(1100, 1100));
 //        scrollPane.add(mainPanel);
         mainFrame.getContentPane().add(mainPanel);
         FlowLayout flowFromInsurance = new FlowLayout(2);

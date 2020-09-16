@@ -5,23 +5,33 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
 public class Game2 extends JPanel {
-    @Override
-    public void paint (Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(Color.RED);
-        g2d.fillOval(0, 0, 30, 30);
-        g2d.drawOval(0, 50, 30, 30);
-        g2d.fillRect(50, 0, 30, 30);
-        g2d.drawRect(50, 50, 30, 30);
+    Ball ball = new Ball(this);
 
-        g2d.draw(new Ellipse2D.Double(0, 100, 30, 30));
+    private void move() {
+        ball.move();
     }
 
-    public static void main(String[] args) {
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+        ball.paint(g2d);
+    }
+
+    public static void main(String[] args) throws InterruptedException {
         JFrame frame = new JFrame("Agility Training Game");
-        frame.add(new Game2());
-        frame.setSize(300, 300);
+        Game2 game = new Game2();
+        frame.add(game);
+        frame.setSize(300, 400);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        while (true) {
+            game.move();
+            game.repaint();
+            Thread.sleep(10);
+        }
     }
 }

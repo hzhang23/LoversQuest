@@ -11,7 +11,7 @@ public class Container extends Item {
 
 
     private ArrayList<Item> contents = new ArrayList<>();
-
+    private String location;
     public Container(){};
     public Container(String name, String use) {
         super(name, use);
@@ -25,6 +25,12 @@ public class Container extends Item {
    }
     public void emptyContainer(){
         this.contents = new ArrayList<>();
+    }
+    public String getLocation() {
+        return location;
+    }
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public ArrayList<Item> displayContents(){

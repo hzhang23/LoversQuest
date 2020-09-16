@@ -9,8 +9,8 @@ import java.util.Map;
 public class GameInit {
     public static String filePath = "resources/gameBook.xlsx";
     public static List<Location> locationList = ReadExcel.getLocationList(filePath);
-    public static List<NonPlayerCharacters> npcList = ReadExcel.getNpcList(filePath,locationList);
-    public static Map<String, Location> locationMap = ReadExcel.getLocationMap(locationList,npcList);
+    public static List<NonPlayerCharacters> npcList = ReadExcel.getNpcList(filePath);
+    public static Map<String, Location> locationMap = ReadExcel.getLocationMap(filePath);
     public static List<Item> itemList = ReadExcel.getItemList(filePath);
     public static List<Container> containersList = ReadExcel.getContainerList(filePath);
 

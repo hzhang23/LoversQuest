@@ -76,23 +76,23 @@ public class InputTest {
             case "look" -> finalResponse = (player.look());
             case "interact" -> finalResponse = (player.interact());
             case "inventory" -> finalResponse = (player.displayItems());
-            case "get" ->{
-                Item chosenItem = null;
-
-                // check if item is in location
-                for (Item item: player.getCurrentLocation().getItemsList()) {
-                    if (stringifiedResponse.equals(item.getName().toLowerCase())){
-                        chosenItem = item;
-                        break;
-                    }
-                }
-                // if item is in location pick up item
-                if (chosenItem != null) {
-                    player.pickUpItem(stringifiedResponse);
-                    finalResponse = ("You picked up " + stringifiedResponse);
-                } else {
-                    finalResponse = ("You can't pick that up");
-                }
+            case "get" ->{ finalResponse = player.pickUpItem(responseInput);
+//                Item chosenItem = null;
+//
+//                // check if item is in location
+//                for (Item item: player.getCurrentLocation().getItemsList()) {
+//                    if (stringifiedResponse.equals(item.getName().toLowerCase())){
+//                        chosenItem = item;
+//                        break;
+//                    }
+//                }
+//                // if item is in location pick up item
+//                if (chosenItem != null) {
+//                    player.pickUpItem(stringifiedResponse);
+//                    finalResponse = ("You picked up " + stringifiedResponse);
+//                } else {
+//                    finalResponse = ("You can't pick that up");
+//                }
 
             }
             case "use" ->{
@@ -109,21 +109,22 @@ public class InputTest {
 
             }
             case "inspect" ->{
+                player.inspect();
                 // not currently used because locations have only one container
-                String containerName;
-                if(response.length < 2){
-                    finalResponse = ("You can't inspect nothing");
-                }else{
-                    containerName = response[1];
-                    if(player.inspect() != null){
-                        finalResponse = (player.inspect()).toString();
-                        for(Item item: player.inspect()){
-                            player.getCurrentLocation().addItem(item);
-                        }
-                    }else{
-                        finalResponse = ("You can't look there.");
-                    };
-                }
+//                String containerName;
+//                if(response.length < 2){
+//                    finalResponse = ("You can't inspect nothing");
+//                }else{
+//                    containerName = response[1];
+//                    if(player.inspect() != null){
+//                        finalResponse = (player.inspect()).toString();
+//                        for(Item item: player.inspect()){
+//                            player.getCurrentLocation().addItem(item);
+//                        }
+//                    }else{
+//                        finalResponse = ("You can't look there.");
+//                    };
+//                }
             }
             // results in jframe window with map jpeg popping up
             case "map" ->{

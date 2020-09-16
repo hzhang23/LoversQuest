@@ -1,12 +1,13 @@
 package com.loversQuest.gameWorldPieces.models_NPC;
 
+import com.loversQuest.gameWorldPieces.Location;
 import com.loversQuest.gameWorldPieces.NonPlayerCharacters;
 import com.loversQuest.gameWorldPieces.Player;
 
-public class DrillSGT_LandNav extends NonPlayerCharacters {
+public class DrillSGT_CLS extends NonPlayerCharacters {
 
-    public DrillSGT_LandNav(String name, String description) {
-        super(name, description);
+    public DrillSGT_CLS(String name, String description, Location location, NPC_Properties properties){
+        super(name, description,location, properties);
     }
 
     @Override

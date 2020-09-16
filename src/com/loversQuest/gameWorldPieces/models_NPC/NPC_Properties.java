@@ -5,11 +5,11 @@ public enum NPC_Properties {
     DRILL_DICKS,
     DRILL_PT,
     DRILL_RANGE,
-    DRILL_LANDNAV,
-    Battle_BF,
-    Battle_PT,
+    DRILL_CLS,
+    BATTLE_BF,
+    BATTLE_PT,
     BATTLE_SICKCALL,
     BATTLE_1S1K,
-    Non_Mission,
+    NON_MISSION
 }
 

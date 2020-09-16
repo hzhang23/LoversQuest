@@ -5,8 +5,8 @@ import com.loversQuest.gameWorldPieces.Player;
 import com.loversQuest.gameWorldPieces.Location;
 
 public class Battle_1Shot1Kill extends NonPlayerCharacters {
-    public Battle_1Shot1Kill(String name, String description){
-        super(name, description);
+    public Battle_1Shot1Kill(String name, String description, Location location, NPC_Properties properties){
+        super(name, description,location, properties);
     }
 
     @Override

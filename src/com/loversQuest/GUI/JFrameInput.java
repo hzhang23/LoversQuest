@@ -24,22 +24,18 @@ public class JFrameInput {
 
 
 
-    public String displayGoResponse(String direction, Player player) throws IOException{
+    public String displayGoResponse(String direction, Player player) {
 
         String status = "You head to the " +direction+ " and find yourself in the " + player.getCurrentLocation().getName();
-
         return status;
-//                  + graphicImage.printLocation("home.txt");
     }
 
     //TODO: better error / input checking on responseInput and all methods that use util.Scanner
 
     //takes a command to be taken in by jframe input text section
-    public String getUserAction(Player player, String command) throws IOException{
+    public String getUserAction(Player player, String command) {
 
         String finalResponse = null;
-
-
         String[] response = command.trim().toLowerCase().split("\\s+");
 
 
@@ -66,15 +62,9 @@ public class JFrameInput {
                     return "Cannot go nowhere";
                 } else {
                     direction = response[1];
-                    // player.go returns false if bad input, return statement prevents displayGoResponse() from running
-                    if (player.getCurrentLocation().getName().equalsIgnoreCase("px") &&
-                            direction.equalsIgnoreCase("west") &&
-                            !player.isHasChallengeCoin() &&
-                            !player.go(direction))
-                        return "Captain Charlie sends you back to complete your WARRIOR SKILL LEVEL 1 tasks.";
-                    else if(!player.go(direction)){
-                        return "You can't go that way";
-                    }
+                    Boolean isGo = player.go(direction);
+                    System.out.println(isGo);
+                    System.out.println(player.getCurrentLocation().getName());
                 }
                 finalResponse = (displayGoResponse(direction, player));
             }
@@ -147,7 +137,7 @@ public class JFrameInput {
 
     //TODO: error checking on user input response
 
-    public String goActionPrompt(Player player, String direction) throws IOException{
+    public String goActionPrompt(Player player, String direction) {
         System.out.println("Where would you like to go? [ North, South, East, West ]");
         String response = direction;
         player.go(response);

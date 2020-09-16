@@ -5,6 +5,7 @@ package com.loversQuest.gameWorldPieces;
  */
 
 
+import com.loversQuest.GameInit;
 import com.loversQuest.excelReader.ReadExcel;
 
 import java.util.*;
@@ -19,6 +20,11 @@ public class Location {
 
     //hash map with keys = enum of cardinal directions and values = Location instances
     private HashMap<CardinalDirection,String> directionMap = new HashMap<>();
+
+    public static String filePath = "resources/gameBook.xlsx";
+    public static List<Location> locationList = ReadExcel.getLocationList(filePath);
+    public static List<NonPlayerCharacters> npcList = ReadExcel.getNpcList(filePath,locationList);
+    public static Map<String, Location> locationMap = ReadExcel.getLocationMap(locationList,npcList);
 
     // CTOR
     public Location(){
@@ -54,10 +60,10 @@ public class Location {
             result.append("You see a suspicious looking " + container.getName()+ ".\n");
         }
 
-        if(this.itemsList.size() > 0){
-             result.append("You find " +
-                    this.getItemsList().toString() + " in the room.\n");
-        }
+//        if(this.itemsList.size() > 0){
+//             result.append("You find " +
+//                    this.getItemsList().toString() + " in the room.\n");
+//        }
         if(this.getOccupant() != null){
             result.append("You see " +
                     this.getOccupant().getName() +
@@ -107,18 +113,10 @@ public class Location {
     //returns the location that is in the direction given via string
     public Location getDirectionFromString(String stringDirection){
         Location result = null;
-        List<Location> locationList = ReadExcel.getLocationList("resources/gameBook.xlsx");
-
-        //loop through key set of direction map
         for(CardinalDirection direction : directionMap.keySet()){
             if(direction.toString().equalsIgnoreCase(stringDirection)){
                 String locationName = directionMap.get(direction);
-                for (Location location : locationList){
-                    String curName = location.getName().trim();
-                    if(locationName.equals(curName)){
-                        result = location;
-                    }
-                }
+                result = locationMap.get(locationName);
             }
         }
         return result;

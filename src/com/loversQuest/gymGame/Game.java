@@ -7,10 +7,13 @@ import java.awt.event.KeyListener;
 
 public class Game extends JPanel {
 
-   Ball ball = new Ball(this);
-   Racquet racquet = new Racquet(this);
+    // variables
+    Ball ball = new Ball(this);
+    Racquet racquet = new Racquet(this);
+    int speed = 1;
 
-   public Game() {
+    // ctor
+    public Game() {
        addKeyListener(new KeyListener() {
            @Override
            public void keyTyped(KeyEvent e) {
@@ -28,12 +31,18 @@ public class Game extends JPanel {
            }
        });
        setFocusable(true);
-   }
+    }
 
-   private void move() {
+    // methods
+
+    private int getScore() {
+        return speed - 1;
+    }
+
+    private void move() {
        ball.move();
        racquet.move();
-   }
+    }
 
 
     @Override
@@ -43,10 +52,14 @@ public class Game extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         ball.paint(g2d);
         racquet.paint(g2d);
+
+        g2d.setColor(Color.GRAY);
+        g2d.setFont(new Font("Verdana", Font.BOLD, 30));
+        g2d.drawString(String.valueOf(getScore()), 10, 30);
     }
 
     public void gameOver() {
-       JOptionPane.showMessageDialog(this, "Game Over", "Game Over", JOptionPane.YES_NO_OPTION);
+       JOptionPane.showMessageDialog(this, "Your score is: " + getScore(), "Game Over", JOptionPane.YES_NO_OPTION);
        System.exit(ABORT);
     }
 

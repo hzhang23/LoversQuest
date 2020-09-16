@@ -1,10 +1,12 @@
 package com.loversQuest.gymGame;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Ball {
     private static final int DIAMETER = 30;
-    int x = 0;
+    Random rand = new Random();
+    int x = rand.nextInt(300);
     int y = 0;
     int xa = 1;
     int ya = 1;
@@ -16,20 +18,21 @@ public class Ball {
 
     void move() {
         if (x + xa < 0) {
-            xa = 1;
+            xa = game.speed;
         }
-        if (x + xa > game.getWidth() - DIAMETER) {
-            xa = -1;
+        else if (x + xa > game.getWidth() - DIAMETER) {
+            xa = -game.speed;
         }
-        if (y + ya < 0) {
-            ya = 1;
+        else if (y + ya < 0) {
+            ya = game.speed;
         }
-        if (y + ya > game.getHeight() - DIAMETER) {
+        else if (y + ya > game.getHeight() - DIAMETER) {
             game.gameOver();
         }
-        if (collision()) {
-            ya = -1;
+        else if (collision()) {
+            ya = -game.speed;
             y = game.racquet.getTopY() - DIAMETER;
+            game.speed++;
         }
 
         x = x + xa;

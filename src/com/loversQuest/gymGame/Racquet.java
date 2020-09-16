@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class Racquet {
+    // variables
     private static final int Y = 330;
     private static final int WIDTH = 60;
     private static final int HEIGHT = 10;
@@ -11,10 +12,13 @@ public class Racquet {
     int xa = 0;
     private Game game;
 
+    // ctor
     public Racquet(Game game) {
         this.game = game;
     }
 
+
+    // business methods
     public void move() {
         if (x + xa > 0 && x + xa < game.getWidth() - WIDTH) {
             x = x + xa;
@@ -31,10 +35,10 @@ public class Racquet {
 
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            xa = -1;
+            xa = -game.speed;
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            xa = 1;
+            xa = game.speed;
         }
     }
 

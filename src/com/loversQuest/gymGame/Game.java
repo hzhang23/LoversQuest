@@ -7,10 +7,24 @@ public class Game extends JPanel {
 
     int x = 0;
     int y = 0;
+    int xa = 1;
+    int ya = 1;
 
     private void moveBall() {
-        x = x + 1;
-        y = y + 1;
+        if (x + xa < 0) {
+            xa = 1;
+        }
+        if (x + xa > getWidth() - 30) {
+            xa = -1;
+        }
+        if (y + ya < 0) {
+            ya = 1;
+        }
+        if (y + ya > getHeight() - 30) {
+            ya = -1;
+        }
+        x = x + xa;
+        y = y + ya;
     }
 
     @Override

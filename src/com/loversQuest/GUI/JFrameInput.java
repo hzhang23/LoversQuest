@@ -18,34 +18,38 @@ import java.util.Scanner;
 
 public class JFrameInput {
 
-    // private?
     InputParser parser = new InputParser();
-    MapFactory generateMap = new MapFactory();
 
-
-
+    /**
+     * when player enter a valid change direction command, return a msg that direction has been changed and he is inside a new location
+     * @param direction
+     * @param player
+     * @return
+     */
     public String displayGoResponse(String direction, Player player) {
 
         String status = "You head to the " +direction+ " and find yourself in the " + player.getCurrentLocation().getName();
         return status;
     }
 
-    //TODO: better error / input checking on responseInput and all methods that use util.Scanner
-
-    //takes a command to be taken in by jframe input text section
+    /**
+     * take player action and return response to show player
+     * all the cases should call methods in player class
+     * @param player
+     * @param command
+     * @return
+     */
     public String getUserAction(Player player, String command) {
-
+        //TODO: Parser should able to filter through the command and find the item: white claw?? which flavor?
         String finalResponse = null;
         String[] response = command.trim().toLowerCase().split("\\s+");
 
-
         // parses user response further, into second array
-        String stringifiedResponse = String.join(" ", Arrays.copyOfRange(response, 1, response.length));
+        String objResponse = String.join(" ", Arrays.copyOfRange(response, 1, response.length));
 
-//        System.out.println("Command is " + command);
-//        ArrayList responseList = new ArrayList(Arrays.asList(response));
-//        System.out.println("Response is " + responseList);
-
+        System.out.println("Command is " + command);
+        ArrayList responseList = new ArrayList(Arrays.asList(response));
+        System.out.println("Response is " + responseList);
         String actionVerb = parser.parseCommand2(response[0]);
 
 
@@ -63,72 +67,15 @@ public class JFrameInput {
                 } else {
                     direction = response[1];
                     Boolean isGo = player.go(direction);
-                    System.out.println(isGo);
-                    System.out.println(player.getCurrentLocation().getName());
                 }
                 finalResponse = (displayGoResponse(direction, player));
             }
             case "look" -> finalResponse = (player.look());
             case "interact" -> finalResponse = (player.interact());
             case "inventory" -> finalResponse = (player.displayItems());
-            case "get" ->{
-                Item chosenItem = null;
-
-                // check if item is in location
-                for (Item item: player.getCurrentLocation().getItemsList()) {
-                    //originally: stringifiedResponse.equals(item.getName().toLowerCase())
-                    if (item.getName().toLowerCase().contains(stringifiedResponse) && stringifiedResponse.length() > 2){
-                        chosenItem = item;
-                        break;
-                    }
-                }
-                // if item is in location pick up item
-                if (chosenItem != null) {
-                    player.pickUpItem(stringifiedResponse);
-                    finalResponse = ("You picked up " + stringifiedResponse);
-                } else {
-                    finalResponse = ("You can't pick that up");
-                }
-
-            }
-            case "use" ->{
-//              if the item is in current inventory
-                for (Item item: player.getAllItems()) {
-                    if (item.getName().toLowerCase().contains(stringifiedResponse) && stringifiedResponse.length() > 2){
-                        finalResponse = (player.getItem(item.getName().toLowerCase()).use());
-                        break;
-                    }
-                }
-                if(finalResponse == null){
-                    finalResponse = ("You can't use that");
-                }
-
-            }
-            case "inspect" ->{
-                // not currently used because locations have only one container
-                String containerName;
-                if(response.length < 2){
-                    finalResponse = ("You can't inspect that");
-                }else{
-                    containerName = response[1];
-                    if(player.inspect() != null && player.getCurrentLocation().getContainer().getName().toLowerCase().contains(containerName.toLowerCase())){
-                        finalResponse = "You find: " + (player.inspect()).toString();
-                        for(Item item: player.inspect()){
-                            player.getCurrentLocation().addItem(item);
-                        }
-                        player.getCurrentLocation().getContainer().emptyContainer();
-                    }else{
-                        finalResponse = ("You can't inspect there.");
-                    };
-                }
-            }
-            // results in jframe window with map jpeg popping up
-            case "map" ->{
-                generateMap.showMapFrame();
-                finalResponse = "Here's the map.";
-            }
-
-            // input action verb does not match
+            case "get" ->finalResponse = player.pickUpItem(objResponse);
+            case "use" ->finalResponse = player.useItem(objResponse);
+            case "inspect" -> finalResponse= player.inspect();
             default -> finalResponse = ("Unreadable input. Please try again.");
         }
 

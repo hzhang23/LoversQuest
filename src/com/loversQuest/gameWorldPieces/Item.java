@@ -33,9 +33,8 @@ public class Item {
     public String use() { return useResponse; }
 
     public void setUseResponse(String useResponse) { this.useResponse = useResponse;}
-
-
-//    public String getColorName(){
+    public String getUseResponse() { return useResponse; }
+    //    public String getColorName(){
 //        return BLUE + this.name + ANSI_RESET;
 //    }
 

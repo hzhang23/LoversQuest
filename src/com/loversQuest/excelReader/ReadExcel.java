@@ -3,16 +3,10 @@ package com.loversQuest.excelReader;
 import com.loversQuest.gameWorldPieces.*;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.loversQuest.gameWorldPieces.models_NPC.NPC_Properties;
 import org.apache.poi.ss.usermodel.*;
-
-import javax.naming.NoPermissionException;
-import javax.swing.*;
 
 public class ReadExcel {
     private String gameBookPath = "resources/gameBook.xlsx";
@@ -48,8 +42,9 @@ public class ReadExcel {
      * @return
      */
 
-    public static List<NonPlayerCharacters> getNpcList (String filePath, List<Location> locationList){
+    public static List<NonPlayerCharacters> getNpcList (String filePath){
         Workbook gameBook = getGamebook(filePath);
+        List<Location> locationList = getLocationList(filePath);
         Sheet npcSheet = gameBook.getSheet("npc");
         List<NonPlayerCharacters> npcList = new ArrayList<>();
         String cellString = null;
@@ -93,9 +88,6 @@ public class ReadExcel {
         List<NonPlayerCharacters> npcForGame = NPC_Factory.getNPCs(npcList);
         return npcForGame;
     }
-
-
-
     /**
      * get item list from excel sheet
      * @param filePath
@@ -134,14 +126,18 @@ public class ReadExcel {
      */
     public static List<Container> getContainerList(String filePath){
         Workbook gameBook = getGamebook(filePath);
+        List<Item> itemList = getItemList(filePath);
         Sheet containerSheet = gameBook.getSheet("container");
         String cellStr = null;
         List<Container> containerList = new ArrayList<>();
         for(int rowNum = 1; rowNum <= containerSheet.getLastRowNum(); rowNum++){
             Container container = new Container();
             Row row = containerSheet.getRow(rowNum);
-            for(int cellNum = 0; cellNum < row.getLastCellNum(); cellNum++){
+            for(int cellNum = 0; cellNum <= row.getLastCellNum(); cellNum++){
                 Cell cell = row.getCell(cellNum);
+                if (cell == null){
+                    continue;
+                }
                 cellStr = cell.getStringCellValue().toLowerCase();
                 switch (cellNum){
                     case 0 -> {
@@ -150,6 +146,19 @@ public class ReadExcel {
                     }
                     case 1 -> {
                         container.setUseResponse(cellStr);
+                        break;
+                    }
+                    case 2 -> {
+                        List<String> itemName = Arrays.asList(cellStr.split(","));
+                        for (Item item : itemList){
+                            if(itemName.contains(item.getName())){
+                                container.addItem(item);
+                            }
+                        }
+                        break;
+                    }
+                    case 3 ->{
+                            container.setLocation(cellStr);
                         break;
                     }
                 }
@@ -226,25 +235,32 @@ public class ReadExcel {
         }
 
     /**
-     * return a locationMap with each location contain occupants
-     * @param locationList
-     * @param npcList
+     * return a locationMap with each location contain occupants & container
+     * @param filePath
      * @return
      */
 
-    public static Map<String,Location> getLocationMap (List<Location> locationList, List<NonPlayerCharacters> npcList){
+    public static Map<String, Location> getLocationMap (String filePath){
         Map<String, Location> locationMap = new HashMap<>();
+        Workbook gameBook = getGamebook(filePath);
+        List<Location> locationList = getLocationList(filePath);
+        List<NonPlayerCharacters> npcList = getNpcList(filePath);
+        List<Container> containerList = getContainerList(filePath);
         for (Location location : locationList){
-            for (NonPlayerCharacters npc: npcList){
+            for(NonPlayerCharacters npc : npcList) {
                 String npcLocation = npc.getLocation();
-                if (location.getName().equals(npcLocation)){
+                if (location.getName().equals(npcLocation)) {
                     location.setOccupant(npc);
+                }
+            }
+            for(Container container : containerList){
+                String conLocation = container.getLocation();
+                if(location.getName().equals(conLocation)){
+                    location.setContainer(container);
                 }
             }
             locationMap.put(location.getName(), location);
         }
         return locationMap;
-        }
-
-
+    }
 }

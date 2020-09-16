@@ -10,9 +10,6 @@ public class NonPlayerCharacters {
     private Item keyItem;
     private Item prize;
 
-//    public static final String ANSI_RESET = "\u001B[0m";
-//    public static final String BLUE = "\u001B[34m";
-
     //ctor
     public NonPlayerCharacters(String name, Location location) {
         this(name, "There is no description for this person.", location);

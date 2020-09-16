@@ -24,6 +24,13 @@ public class NonPlayerCharacters {
         this.location = location;
     }
 
+    public NonPlayerCharacters(String name, String description, Location location, NPC_Properties properties) {
+        this.name = name;
+        this.description = description;
+        this.location = location;
+        this.properties = properties;
+    }
+
     public NonPlayerCharacters(String name, String description) {
         this.name = name;
         this.description = description;
@@ -87,6 +94,8 @@ public class NonPlayerCharacters {
     public String getLocation() {
         return location.getName();
     }
+
+    public Location getLocationClass(){return location;}
 
     public void setLocation(Location location) {
         this.location = location;

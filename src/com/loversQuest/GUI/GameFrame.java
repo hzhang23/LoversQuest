@@ -51,7 +51,7 @@ public class GameFrame extends JFrame{
     Action rightAction;
     Action inputEnterAction;
 
-    public GameFrame(String gameResponse, JFrameInput input, Player player, GraphicClass asciiPrinter) throws IOException {
+    public GameFrame(String gameResponse, JFrameInput input, Player player, GraphicClass asciiPrinter) {
         //TODO: Text input area at bottom has event listener for enter key and button press.
         // When event is triggered the panes are re-rendered with the following
         // Game response text, Inventory, Map(if location is included), Ascii art..

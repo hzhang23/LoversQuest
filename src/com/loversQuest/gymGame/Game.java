@@ -9,7 +9,7 @@ public class Game extends JPanel {
 
    Ball ball = new Ball(this);
    Racquet racquet = new Racquet(this);
-   
+
    public Game() {
        addKeyListener(new KeyListener() {
            @Override
@@ -36,7 +36,6 @@ public class Game extends JPanel {
    }
 
 
-
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -44,6 +43,11 @@ public class Game extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         ball.paint(g2d);
         racquet.paint(g2d);
+    }
+
+    public void gameOver() {
+       JOptionPane.showMessageDialog(this, "Game Over", "Game Over", JOptionPane.YES_NO_OPTION);
+       System.exit(ABORT);
     }
 
     public static void main(String[] args) throws InterruptedException {

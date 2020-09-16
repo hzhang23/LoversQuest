@@ -17,13 +17,13 @@ public class Container extends Item {
         super(name, use);
     }
 
-   public void addItem(Item item){
+    public void addItem(Item item){
         contents.add(item);
    }
-   public void removeItem(Item item){
+    public void removeItem(Item item){
         contents.remove(item);
    }
-   public void emptyContainer(){
+    public void emptyContainer(){
         this.contents = new ArrayList<>();
     }
 
@@ -31,7 +31,7 @@ public class Container extends Item {
         return contents;
    }
 
-   public Item getItem(String name){
+    public Item getItem(String name){
         Item result = null;
         // go through contents of container. set result as first item whose name matches parameter string.
         for(Item item: this.contents){

@@ -1,17 +1,17 @@
 package com.loversQuest.excelReader;
 
-import com.loversQuest.gameWorldPieces.Container;
-import com.loversQuest.gameWorldPieces.Item;
-import com.loversQuest.gameWorldPieces.Location;
+import com.loversQuest.gameWorldPieces.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import com.loversQuest.gameWorldPieces.NonPlayerCharacters;
 import com.loversQuest.gameWorldPieces.models_NPC.NPC_Properties;
 import org.apache.poi.ss.usermodel.*;
 
+import javax.naming.NoPermissionException;
 import javax.swing.*;
 
 public class ReadExcel {
@@ -41,6 +41,60 @@ public class ReadExcel {
         }
         return gameBook;
     }
+
+    /**
+     * get npcList from npc sheet
+     * @param filePath
+     * @return
+     */
+
+    public static List<NonPlayerCharacters> getNpcList (String filePath, List<Location> locationList){
+        Workbook gameBook = getGamebook(filePath);
+        Sheet npcSheet = gameBook.getSheet("npc");
+        List<NonPlayerCharacters> npcList = new ArrayList<>();
+        String cellString = null;
+        for (int i = 1; i < npcSheet.getLastRowNum(); i++) {
+            Row row = npcSheet.getRow(i);
+            NonPlayerCharacters npc = new NonPlayerCharacters();
+            for (int j = 0; j < row.getLastCellNum(); j++) {
+                Cell cell = row.getCell(j);
+                cellString = cell.getStringCellValue().toUpperCase();
+                switch(j){
+                    case 0 ->{
+                        npc.setName(cellString);
+                        break;
+                    }
+                    case 1 ->{
+                        npc.setDescription(cellString);
+                        break;
+                    }
+                    case 2 ->{
+                        for (Location location : locationList){
+                            String locationName = location.getName();
+                            if(cellString.equals(locationName.toUpperCase())){
+                                npc.setLocation(location);
+                            }
+                        }
+                        break;
+                    }
+                    case 3 ->{
+                        for (NPC_Properties property : NPC_Properties.values()){
+                            String npcProperty = property.name();
+                            if (cellString.toUpperCase().equals(npcProperty)){
+                                npc.setProperties(property);
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+            npcList.add(npc);
+        }
+        List<NonPlayerCharacters> npcForGame = NPC_Factory.getNPCs(npcList);
+        return npcForGame;
+    }
+
+
 
     /**
      * get item list from excel sheet
@@ -171,43 +225,26 @@ public class ReadExcel {
             return locationList;
         }
 
-        /**
-         * get npcList from npc sheet
-         * @param filePath
-         * @param locationList
-         * @return
-         */
+    /**
+     * return a locationMap with each location contain occupants
+     * @param locationList
+     * @param npcList
+     * @return
+     */
 
-        public static List<NonPlayerCharacters> getNpcList (String filePath, List < Location > locationList){
-            Workbook gameBook = getGamebook(filePath);
-            Sheet npcSheet = gameBook.getSheet("npc");
-            List<NonPlayerCharacters> npcList = new ArrayList<>();
-            String cellString = null;
-            for (int rowNum = 1; rowNum <= npcSheet.getLastRowNum(); rowNum++) {
-                Row row = npcSheet.getRow(rowNum);
-                NonPlayerCharacters npc = new NonPlayerCharacters();
-                for (int cellNum = 0; cellNum <= row.getLastCellNum(); cellNum++) {
-                    Cell cell = row.getCell(cellNum);
-                    cellString = cell.getStringCellValue().toUpperCase();
-
+    public static Map<String,Location> getLocationMap (List<Location> locationList, List<NonPlayerCharacters> npcList){
+        Map<String, Location> locationMap = new HashMap<>();
+        for (Location location : locationList){
+            for (NonPlayerCharacters npc: npcList){
+                String npcLocation = npc.getLocation();
+                if (location.getName().equals(npcLocation)){
+                    location.setOccupant(npc);
                 }
             }
-            return npcList;
+            locationMap.put(location.getName(), location);
+        }
+        return locationMap;
         }
 
-
-
-    public static void main(String[] args) {
-        ReadExcel reader = new ReadExcel();
-        String path = "resources/gameBook.xlsx";
-        List<Container> containerList = getContainerList("resources/gameBook.xlsx");
-        List<Item> itemList = getItemList(path);
-        System.out.println(containerList.get(1).getName());
-        System.out.println(itemList.get(1).getName());
-        ArrayList<Location> locations = (ArrayList<Location>) reader.getLocationList("resources/gameBook.xlsx");
-        List<NonPlayerCharacters> npcList = reader.getNpcList("resources/gameBook.xlsx", locations);
-        System.out.println(npcList.get(0).getName());
-
-    }
 
 }

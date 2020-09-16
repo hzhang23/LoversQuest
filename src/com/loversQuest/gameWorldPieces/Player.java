@@ -2,6 +2,7 @@ package com.loversQuest.gameWorldPieces;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Player {
 
@@ -25,22 +26,6 @@ public class Player {
 
     // BUSINESS METHODS
 
-    //go function can result in navigating to "NOTHING" area. need to error check if
-    // indicated direction is not a room and prevent movement.
-    /**
-    this go function change room and return a result of boolean
-     */
-    public void changeLocation(String directionInput){
-        String direction = directionInput.toLowerCase();
-        Location destination = this.currentLocation.getDirectionFromString(direction);
-
-
-    }
-
-
-
-
-
     public boolean go(String directionInput) {
         String direction = directionInput.toUpperCase();
         String response = null;
@@ -49,8 +34,8 @@ public class Player {
         Location destination = this.currentLocation.getDirectionFromString(direction);
         if (destination != null && validateLocation(destination)) {
             this.setCurrentLocation(destination);
+            System.out.println(destination.getName());
             result = true;
-
         }
         return result;
     }
@@ -84,15 +69,15 @@ public class Player {
     public boolean pickUpItem(String itemName) {
         //loop through items in current location
         boolean gotItem = false;
-        for (int i = 0; i < currentLocation.getItemsList().size(); i++) {
-            Item locationItem = currentLocation.getItemsList().get(i);
-            // first portion originally: itemName.toLowerCase().equals(locationItem.getName().toLowerCase()
-            if (locationItem.getName().toLowerCase().contains(itemName.toLowerCase()) && !(locationItem instanceof Container)) {
-                this.addItem(locationItem);
-                currentLocation.removeItem(locationItem);
-                gotItem = true;
-            }
-        }
+//        for (int i = 0; i < currentLocation.getItemsList().size(); i++) {
+//            Item locationItem = currentLocation.getItemsList().get(i);
+//            // first portion originally: itemName.toLowerCase().equals(locationItem.getName().toLowerCase()
+//            if (locationItem.getName().toLowerCase().contains(itemName.toLowerCase()) && !(locationItem instanceof Container)) {
+//                this.addItem(locationItem);
+//                currentLocation.removeItem(locationItem);
+//                gotItem = true;
+//            }
+//        }
         return gotItem;
         // if string itemName matches an item in current location
         // add item to inventory and remove item from location
@@ -113,7 +98,6 @@ public class Player {
     public String displayItems() {
         return ruckSack.displayRuckSackContents();
     }
-
     public List<Item> getAllItems() {
         return ruckSack.items;
     }

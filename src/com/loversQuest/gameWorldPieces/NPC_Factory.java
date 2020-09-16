@@ -2,6 +2,7 @@ package com.loversQuest.gameWorldPieces;
 
 import com.loversQuest.gameWorldPieces.models_NPC.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,10 +18,10 @@ public class NPC_Factory {
      * @return
      */
 
-    public static Map<NPC_Properties, NonPlayerCharacters> getNPCs(List<NonPlayerCharacters> NpcList){
-        Map<NPC_Properties,NonPlayerCharacters> NpcForGame = new HashMap<>();
+    public static List<NonPlayerCharacters> getNPCs(List<NonPlayerCharacters> NpcList){
+        List<NonPlayerCharacters> NpcForGame = new ArrayList<>();
         for(NonPlayerCharacters npc : NpcList){
-            NpcForGame.put(npc.getProperties(), getNPC(npc.getName(), npc.getDescription(),npc.getProperties()) );
+            NpcForGame.add(getNPC(npc.getName(), npc.getDescription(), npc.getLocationClass(),npc.getProperties()));
         }
         return NpcForGame;
     }
@@ -32,22 +33,24 @@ public class NPC_Factory {
      * @param description of Npc
      * @return NPC
      */
-    public static NonPlayerCharacters getNPC(String name, String description, NPC_Properties properties) {
-        return getNPCImplementation(name, description, properties);
+    public static NonPlayerCharacters getNPC(String name, String description, Location location, NPC_Properties properties) {
+        return getNPCImplementation(name, description, location, properties);
     }
 
-    private static NonPlayerCharacters getNPCImplementation(String name, String description, NPC_Properties properties){
-        NonPlayerCharacters gameNPC = null;
+    private static NonPlayerCharacters getNPCImplementation(String name, String description,Location location, NPC_Properties properties){
+        NonPlayerCharacters gameNPC;
         switch (properties){
-            case LOVER -> gameNPC = new Lover(name, description);
-            case DRILL_DICKS -> gameNPC = new DrillSGTDicks(name, description);
-            case DRILL_PT -> gameNPC = new DrillSGT_PT(name, description);
-            case DRILL_LANDNAV -> gameNPC = new DrillSGT_LandNav(name, description);
-            case DRILL_RANGE -> gameNPC = new DrillSGT_Range(name, description);
-            case BATTLE_1S1K -> gameNPC = new Battle_1Shot1Kill(name, description);
-            case Battle_PT -> gameNPC = new Battle_BlueFalcon(name, description);
-            case Battle_BF -> gameNPC = new Battle_BlueFalcon(name, description);
-            case BATTLE_SICKCALL -> gameNPC = new Battle_SickRanger(name, description);
+            case LOVER -> gameNPC = new Lover(name,description,location,properties);
+            case DRILL_DICKS -> gameNPC = new DrillSGTDicks(name,description,location,properties);
+            case DRILL_PT -> gameNPC = new DrillSGT_PT(name,description,location,properties);
+            case DRILL_CLS -> gameNPC = new DrillSGT_CLS(name,description,location,properties);
+            case DRILL_RANGE -> gameNPC = new DrillSGT_Range(name,description,location,properties);
+            case BATTLE_1S1K -> gameNPC = new Battle_1Shot1Kill(name,description,location,properties);
+            case BATTLE_PT -> gameNPC = new Battle_PT_Studs(name,description,location,properties);
+            case BATTLE_BF -> gameNPC = new Battle_BlueFalcon(name,description,location,properties);
+            case BATTLE_SICKCALL -> gameNPC = new Battle_SickRanger(name,description,location,properties);
+            case NON_MISSION -> gameNPC = new NonPlayerCharacters(name,description,location,properties);
+            default -> gameNPC = new NonPlayerCharacters();
         }
         return gameNPC;
     }

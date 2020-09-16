@@ -7,9 +7,9 @@ public class Ball {
     int y = 0;
     int xa = 1;
     int ya = 1;
-    private Game2 game;
+    private Game game;
 
-    public Ball(Game2 game) {
+    public Ball(Game game) {
         this.game = game;
     }
 

@@ -16,6 +16,4 @@ public class DrillSGTDicks extends NonPlayerCharacters {
          */
         return returnMsg;
     }
-
-
 }

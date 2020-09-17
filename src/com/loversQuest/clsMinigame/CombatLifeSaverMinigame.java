@@ -28,7 +28,7 @@ public class CombatLifeSaverMinigame extends CLSGame {
    */
   // create method (while loop) that returns a boolean as to whether or not the player passed the test
   @Override
-  public String clsGame(Player player) {
+  public Boolean clsGame(Player player) {
     Scanner sc = new Scanner(System.in);
     int correctAnswers = 0;
     boolean playerHasWon = false;
@@ -43,6 +43,9 @@ public class CombatLifeSaverMinigame extends CLSGame {
     answer = sc.next().toLowerCase().strip();
     if (answer.equals("a")) {
       correctAnswers++;
+      if (answer != "a" || answer != "b" || answer != "c" || answer != "d") {
+        System.out.println("That's not an answer, worm! Next question!");
+      }
     }
     System.out
         .println(drillQuestion + "You apply a tourniquet to your battle-buddy. What are you "
@@ -54,6 +57,9 @@ public class CombatLifeSaverMinigame extends CLSGame {
     answer = sc.next().toLowerCase().strip();
     if (answer.equals("c")) {
       correctAnswers++;
+      if (answer != "a" || answer != "b" || answer != "c" || answer != "d") {
+        System.out.println("That's not an answer, worm! Next question!");
+      }
     }
     System.out
         .println(drillQuestion + "You are shot in the leg and are under heavy fire. What should "
@@ -65,6 +71,9 @@ public class CombatLifeSaverMinigame extends CLSGame {
     answer = sc.next().toLowerCase().strip();
     if (answer.equals("d")) {
       correctAnswers++;
+      if (answer != "a" || answer != "b" || answer != "c" || answer != "d") {
+        System.out.println("That's not an answer, worm! Next question!");
+      }
     }
     System.out
         .println(
@@ -77,6 +86,9 @@ public class CombatLifeSaverMinigame extends CLSGame {
     answer = sc.next().toLowerCase().strip();
     if (answer.equals("b")) {
       correctAnswers++;
+      if (answer != "a" || answer != "b" || answer != "c" || answer != "d") {
+        System.out.println("That's not an answer, worm! Next question!");
+      }
     }
     System.out
         .println(drillQuestion + "Your battle is injured but only responds with a wince from \n"
@@ -88,6 +100,9 @@ public class CombatLifeSaverMinigame extends CLSGame {
     answer = sc.next().toLowerCase().strip();
     if (answer.equals("c")) {
       correctAnswers++;
+      if (answer != "a" || answer != "b" || answer != "c" || answer != "d") {
+        System.out.println("That's not an answer, worm! Next question!");
+      }
     }
     System.out
         .println(drillQuestion + "You've been wounded, are unable to return fire, and there \n"
@@ -99,6 +114,9 @@ public class CombatLifeSaverMinigame extends CLSGame {
     answer = sc.next().toLowerCase().strip();
     if (answer.equals("a")) {
       correctAnswers++;
+      if (answer != "a" || answer != "b" || answer != "c" || answer != "d") {
+        System.out.println("That's not an answer, worm! Next question!");
+      }
     }
     System.out
         .println(drillQuestion + "The look/listen/feel method is used to determine what?"
@@ -109,6 +127,9 @@ public class CombatLifeSaverMinigame extends CLSGame {
     answer = sc.next().toLowerCase().strip();
     if (answer.equals("d")) {
       correctAnswers++;
+      if (answer != "a" || answer != "b" || answer != "c" || answer != "d") {
+        System.out.println("That's not an answer, worm! Next question!");
+      }
     }
     System.out
         .println(drillQuestion + "A casualty is bleeding severely from a head wound. Should you \n "
@@ -120,6 +141,9 @@ public class CombatLifeSaverMinigame extends CLSGame {
     answer = sc.next().toLowerCase().strip();
     if (answer.equals("b")) {
       correctAnswers++;
+      if (answer != "a" || answer != "b" || answer != "c" || answer != "d") {
+        System.out.println("That's not an answer, worm! Next question!");
+      }
     }
     System.out
         .println(drillQuestion + "A casualty is bleeding bright red blood from a wound on their \n "
@@ -131,6 +155,9 @@ public class CombatLifeSaverMinigame extends CLSGame {
     answer = sc.next().toLowerCase().strip();
     if (answer.equals("d")) {
       correctAnswers++;
+      if (answer != "a" || answer != "b" || answer != "c" || answer != "d") {
+        System.out.println("That's not an answer, worm! Next question!");
+      }
     }
     System.out
         .println(drillQuestion + "A casualty you're treating has lost a fair amount of blood, looks \n "
@@ -142,13 +169,18 @@ public class CombatLifeSaverMinigame extends CLSGame {
     answer = sc.next().toLowerCase().strip();
     if (answer.equals("c")) {
       correctAnswers++;
+      if (answer != "a" || answer != "b" || answer != "c" || answer != "d") {
+        System.out.println("That's not an answer, worm! Next question!");
+      }
     }
     if (correctAnswers >= 7) {
       playerHasWon = true;
-      return "You passed, fuzzy. Now go clean the latrine!";
+      System.out.println("You passed, fuzzy. Now go clean the latrine!");
+      return playerHasWon;
     } else {
-      return "You are the biggest failure I've ever seen in my life! Half right~ FACE! \n "
-          + "Front lean-and-rest position~ MOVE!";
+      System.out.println("You are the biggest failure I've ever seen in my life! Half right~ FACE! \n "
+          + "Front lean-and-rest position~ MOVE!");
+      return playerHasWon;
     }
   }
 

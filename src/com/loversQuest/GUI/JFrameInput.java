@@ -93,6 +93,7 @@ public class JFrameInput {
                 }
             }
             case "inventory" -> finalResponse = (player.displayItems());
+
             case "get" -> {if (matchObj.length == 0){
                 finalResponse = player.pickUpItem(objResponse);
             } else if (matchObj.length == 1){

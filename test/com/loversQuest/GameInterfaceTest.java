@@ -12,41 +12,41 @@ import java.util.Scanner;
 
 
 public class GameInterfaceTest {
-    GameWorld g1;
-    InputTest input;
-    Output output;
-    GraphicClass asciiPrinter;
-
-    @Before
-    public void setup(){
-        g1 = new GameWorld();
-        input = new InputTest();
-        output = new Output();
-        asciiPrinter = new GraphicClass();
-        g1.createMap();
-        g1.equipPlayer();
-
-
-    }
-
-    // is it okay to have multiple assert methods?
-    // how do i go about implementing automated tests for a whole text file
-    @Test
-    public void moveFromBarracksToGym() throws IOException {
-        input.getUserAction(g1.p1);
-        String actual = g1.p1.getCurrentLocation().getName();
-        String expected = "GYM";
-        assertEquals(expected, actual);
-
-
-        input.getUserAction(g1.p1);
-        actual = g1.p1.getCurrentLocation().getName();
-        expected = "BARRACKS";
-        assertEquals(expected, actual);
-
-
-
-    }
+//    GameWorld g1;
+//    InputTest input;
+//    Output output;
+//    GraphicClass asciiPrinter;
+//
+//    @Before
+//    public void setup(){
+//        g1 = new GameWorld();
+//        input = new InputTest();
+//        output = new Output();
+//        asciiPrinter = new GraphicClass();
+//        g1.createMap();
+//        g1.equipPlayer();
+//
+//
+//    }
+//
+//    // is it okay to have multiple assert methods?
+//    // how do i go about implementing automated tests for a whole text file
+//    @Test
+//    public void moveFromBarracksToGym() throws IOException {
+//        input.getUserAction(g1.p1);
+//        String actual = g1.p1.getCurrentLocation().getName();
+//        String expected = "GYM";
+//        assertEquals(expected, actual);
+//
+//
+//        input.getUserAction(g1.p1);
+//        actual = g1.p1.getCurrentLocation().getName();
+//        expected = "BARRACKS";
+//        assertEquals(expected, actual);
+//
+//
+//
+//    }
 
 
 

@@ -13,8 +13,6 @@ import java.util.Arrays;
 
 public class GameFrame extends JFrame{
 
-    public static final int MAX_GAME_WINDOW_WIDTH = 1300;
-    public static final int MAX_GAME_WINDOW_HEIGHT = 900;
     JFrame mainFrame;
     //////////////////////////////////////////////DANNY HERE IS YOUR PANEL //////////////////////////////////////////
     JPanel mainPanel;
@@ -28,7 +26,7 @@ public class GameFrame extends JFrame{
 
     //not in use at the moment
     JTextArea locationArt = new JTextArea();
-    GraphicClass asciiPrinter;
+    //GraphicClass asciiPrinter;
 
     //this thing makes panels
     JPanelFactory panelFactory;
@@ -41,25 +39,18 @@ public class GameFrame extends JFrame{
     //bottom right panel
     MapPanel mapPanel;
 
-    //scrolli boi
-    ScrollPane scrollPane = new ScrollPane();
-
-    // creating action instance variables for arrow input
     Action upAction;
     Action downAction;
     Action leftAction;
     Action rightAction;
     Action inputEnterAction;
 
-    public GameFrame(String gameResponse, JFrameInput input, Player player, GraphicClass asciiPrinter) {
+    public GameFrame(String gameResponse, JFrameInput input, Player player) {
         //TODO: Text input area at bottom has event listener for enter key and button press.
         // When event is triggered the panes are re-rendered with the following
         // Game response text, Inventory, Map(if location is included), Ascii art..
         this.input = input;
         this.player = player;
-
-        //not in use at the moment
-        this.asciiPrinter = asciiPrinter;
 
         //make some panels
         this.panelFactory = new JPanelFactory(this);
@@ -80,42 +71,7 @@ public class GameFrame extends JFrame{
         //stop function on exit of main frame
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //set layout
-
         GridLayout mainGridLayout = new GridLayout(1, 1, 3, 3);
-
-
-        //comment out for main panel to have main layout
-//        ///apply layout to content of frame
-//        mainFrame.getContentPane().setLayout(mainGridLayout);
-
-
-
-        // what does this label do? interfering with current layout
-//        JLabel testingArrowsKeys = new JLabel();
-//        inputPanel.add(testingArrowsKeys);
-
-        //set event listeners for input panel (bottom left)
-//        inputPanel.getInputText().addKeyListener(new KeyListener() {
-//
-//            @Override
-//            public void keyTyped(KeyEvent e) {
-//            }
-//
-//            @Override
-//            public void keyPressed(KeyEvent e) {
-//                if(e.getKeyCode()==KeyEvent.VK_ENTER){
-//                    try {
-//                        GameFrame.this.runCommand(inputPanel.getInputText().getText());
-//                    } catch (IOException ioException) {
-//                        ioException.printStackTrace();
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void keyReleased(KeyEvent e) {}
-//
-//        });
 
         inputEnterAction = new GameFrame.inputEnterKeyAction();
         inputPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "inputEnterSubmit");
@@ -126,11 +82,7 @@ public class GameFrame extends JFrame{
             public void mouseClicked(MouseEvent e) {
                 String gameCommand = inputPanel.getInputText().getText();
                 //calls relay command function of GameFrame class instance
-                try {
-                    GameFrame.this.runCommand(gameCommand);
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
+                GameFrame.this.runCommand(gameCommand);
             }
 
             @Override
@@ -177,23 +129,8 @@ public class GameFrame extends JFrame{
         mainPanel.add(inputPanel);
         mainPanel.add(mapPanel);
 
-
-
-        // add all panels to main pane to the main game frame
-//        mainFrame.getContentPane().add(gameResponsePanel);
-//        mainFrame.getContentPane().add(inventoryPanel);
-//        mainFrame.getContentPane().add(inputPanel);
-//        mainFrame.getContentPane().add(mapPanel);
-
-
         //idk what this does
         mainFrame.pack();
-        //sets mainFrame to final params
-       // mainFrame.setSize(MAX_GAME_WINDOW_WIDTH, MAX_GAME_WINDOW_HEIGHT);
-        /**
-         * next line is to set game window to full screen size
-         */
-
         mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         mainFrame.setResizable(false);
         //sets window centered in screen
@@ -220,6 +157,7 @@ public class GameFrame extends JFrame{
         mainFrame.getRootPane().getActionMap().put("leftAction", leftAction);
     }
 
+
     public void changeTopLeftText (String newText){
         gameResponsePanel.setResponseText(newText);
     }
@@ -236,17 +174,13 @@ public class GameFrame extends JFrame{
 
 
     //runs all internal in this method. need to uncouple
-    public void runCommand(String command) throws IOException {
+    public void runCommand(String command) {
 
         String response = input.getUserAction(this.player, command);
         this.gameResponsePanel.setResponseText(response);
         this.inputPanel.getInputText().setText("");
         this.inventoryPanel.setInventoryText(this.player.getAllItems().toString());
-
-        // david edited this to pass the player's location
         this.mapPanel.updateImageLabel(this.player.getCurrentLocation().getName());
-
-//        this.mapPanel.findPlayerLocation(this.player.getCurrentLocation().getName());
         if(this.player.isHasKiss()){
             this.gameResponsePanel.setResponseText(
                     "Your sweetheart says: OMG five WhiteClaws for me? I love you\n" +
@@ -263,22 +197,14 @@ public class GameFrame extends JFrame{
     public class UpAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            try {
-                GameFrame.this.runCommand("go north");
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            GameFrame.this.runCommand("go north");
         }
     }
 
     public class DownAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            try {
-                GameFrame.this.runCommand("go south");
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            GameFrame.this.runCommand("go south");
             System.out.println("working down");
         }
     }
@@ -286,11 +212,7 @@ public class GameFrame extends JFrame{
     public class RightAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            try {
-                GameFrame.this.runCommand("go east");
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            GameFrame.this.runCommand("go east");
             System.out.println("working right");
         }
     }
@@ -298,11 +220,7 @@ public class GameFrame extends JFrame{
     public class LeftAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            try {
-                GameFrame.this.runCommand("go west");
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            GameFrame.this.runCommand("go west");
             System.out.println("working left");
         }
     }
@@ -310,12 +228,8 @@ public class GameFrame extends JFrame{
     public class inputEnterKeyAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            try {
-                GameFrame.this.runCommand(inputPanel.getInputText().getText());
-                inputPanel.cursorFocus();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            GameFrame.this.runCommand(inputPanel.getInputText().getText());
+            inputPanel.cursorFocus();
         }
     }
 

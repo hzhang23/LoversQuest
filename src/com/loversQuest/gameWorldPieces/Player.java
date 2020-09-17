@@ -10,9 +10,7 @@ public class Player {
     private boolean hasChallengeCoin = false;
     private boolean hasCertainItem;
     private boolean hasKiss = false;
-
     public PlayerContainer ruckSack = new PlayerContainer();
-    public PlayerContainer footlocker = new PlayerContainer();
 
     // CTOR
     public Player(String name, Location currentLocation) {

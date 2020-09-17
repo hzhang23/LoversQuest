@@ -5,8 +5,7 @@ import java.util.Map;
 
 public class QuestionsList {
 
-    HashMap<Integer, String> questions = new HashMap<Integer, String>();
-
+    HashMap<Integer, String> questions = new HashMap<>();
     public QuestionsList() {
         questions.put(1, "What's the first thing you do when your buddy goes down?");
         questions.put(2, "You apply a tourniquet to your battle-buddy. What are you supposed to write on their forehead?");

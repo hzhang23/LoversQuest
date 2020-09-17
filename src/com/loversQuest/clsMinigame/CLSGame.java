@@ -2,6 +2,8 @@ package com.loversQuest.clsMinigame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -95,8 +97,29 @@ public class CLSGame extends JFrame {
         // make the buttons
         for (String option : myOptions) {
             JButton optionButton = new JButton(option);
+
+            // what do we want the button to do?
+                // check to see if that answer is correct
+                optionButton.addActionListener(new ActionListener() {
+
+                    AnswersList answersList = new AnswersList();
+                    HashMap<Integer, String> answersMap = answersList.getAnswers();
+                    String correctAnswer = answersMap.get(questionNumber);
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (optionButton.getText().equals(correctAnswer)) {
+                            System.out.println("got it right");
+                        }
+                    }
+                });
+
+                // go to the next question
+
             result.add(optionButton);
         }
+
+
+
 
         return result;
     }

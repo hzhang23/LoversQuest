@@ -2,22 +2,25 @@ package com.loversQuest.gymGame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Game extends JPanel {
 
     // variables
+
     Ball ball = new Ball(this);
     Racquet racquet = new Racquet(this);
     int speed = 1;
 
     // ctor
     public Game() {
+
        addKeyListener(new KeyListener() {
            @Override
            public void keyTyped(KeyEvent e) {
-
            }
 
            @Override
@@ -39,7 +42,7 @@ public class Game extends JPanel {
         return speed - 1;
     }
 
-    private void move() {
+    public void move() {
        ball.move();
        racquet.move();
     }
@@ -59,22 +62,18 @@ public class Game extends JPanel {
     }
 
     public void gameOver() {
-       JOptionPane.showMessageDialog(this, "Your score is: " + getScore(), "Game Over", JOptionPane.YES_NO_OPTION);
-       System.exit(ABORT);
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        JFrame frame = new JFrame("Agility Training Game");
-        Game game = new Game();
-        frame.add(game);
-        frame.setSize(300,400);
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        while (true) {
-            game.move();
-            game.repaint();
-            Thread.sleep(10);
+        int response = JOptionPane.showConfirmDialog(null, "Do you want to play again?", "Game Over",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.NO_OPTION) {
+            System.exit(0);
+        }
+        else if (response == JOptionPane.YES_OPTION) {
+           JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+           frame.dispose();
+           new Client();
+        }
+        else if (response == JOptionPane.CLOSED_OPTION) {
+            System.exit(0);
         }
     }
 }

@@ -1,8 +1,6 @@
 package com.loversQuest.gameWorldPieces;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Player {
 
@@ -47,11 +45,12 @@ public class Player {
             return ("You look around and " + this.getCurrentLocation().getDescription());
     }
 
-    public String interact() {
-        if (currentLocation.getOccupant() == null) {
-            return "There is no one here";
+    public String interact(String npcRequested) {
+        if (currentLocation.getOccupants().isEmpty() || currentLocation.getOccupantByName(npcRequested) == null) {
+            String returingMsg = "seems like " + npcRequested + " is not here";
+            return returingMsg;
         } else {
-            return currentLocation.getOccupant().interact(this);
+            return currentLocation.getOccupantByName(npcRequested).interact(this);
         }
     }
 

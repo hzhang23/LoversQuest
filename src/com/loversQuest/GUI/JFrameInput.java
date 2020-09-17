@@ -46,6 +46,7 @@ public class JFrameInput {
 
         // parses user response further, into second array
         String objResponse = String.join(" ", Arrays.copyOfRange(response, 1, response.length));
+        System.out.println("objResponse is" + objResponse);
 
         System.out.println("Command is " + command);
         ArrayList responseList = new ArrayList(Arrays.asList(response));
@@ -71,7 +72,7 @@ public class JFrameInput {
                 finalResponse = (displayGoResponse(direction, player));
             }
             case "look" -> finalResponse = (player.look());
-            case "interact" -> finalResponse = (player.interact());
+            case "interact" -> finalResponse = (player.interact(objResponse));
             case "inventory" -> finalResponse = (player.displayItems());
             case "get" ->finalResponse = player.pickUpItem(objResponse);
             case "use" ->finalResponse = player.useItem(objResponse);

@@ -74,7 +74,7 @@ public class InputTest {
                 finalResponse = (displayGoResponse(direction, player));
             }
             case "look" -> finalResponse = (player.look());
-            case "interact" -> finalResponse = (player.interact());
+            case "interact" -> finalResponse = (player.interact(response[1]));
             case "inventory" -> finalResponse = (player.displayItems());
             case "get" ->{ finalResponse = player.pickUpItem(responseInput);
 //                Item chosenItem = null;

@@ -12,13 +12,9 @@ public class Location {
     private String name;
     private String description;
     private Container container;
-    private ArrayList<Item> itemsList = new ArrayList<>();
-    private NonPlayerCharacters occupant;
+    private ArrayList<NonPlayerCharacters> occupants = new ArrayList<>();
     private HashMap<CardinalDirection,String> directionMap = new HashMap<>();
-
-    //TODO: See if below variable could be refactor to a consolidate place
-    public static String filePath = "resources/gameBook.xlsx";
-    public static Map<String, Location> locationMap = ReadExcel.getLocationMap(filePath);
+    public static Map<String, Location> locationMap = ReadExcel.getLocationMap();
 
     // CTOR
     public Location(){
@@ -56,9 +52,32 @@ public class Location {
     }
 
     /**
+     * description may vary depends on the occupants and containers
+     * @return
+     */
+    public String getDescription() {
+        StringBuilder result = new StringBuilder(this.description + " ");
+        if(this.container != null){
+            result.append("And you find the " + container.getName() + " which seems " + container.getUseResponse() + ".\n");
+        }
+        if(!this.getOccupants().isEmpty()){
+            result.append("you also see ");
+            int i = 0;
+            while (i < this.getOccupants().size()){
+                NonPlayerCharacters npc = this.getOccupants().get(i);
+                result.append(npc.getName() + " " + npc.getDescription());
+                if (i != (this.getOccupants().size()-1)){
+                    result.append(" and ");}
+                i++;
+            }
+        }
+        return result.toString();
+    }
+
+
+    /**
      * getter/setter for the direction Hashmap
      */
-
     public String getEast(){
         return directionMap.get(CardinalDirection.EAST);
     }
@@ -90,6 +109,11 @@ public class Location {
      * @return
      */
 
+    public void addOccupants(NonPlayerCharacters occupant){ this.occupants.add(occupant); }
+    public ArrayList<NonPlayerCharacters> getOccupants(){
+        return occupants;
+    }
+
     public String getName() {
         return name;
     }
@@ -97,52 +121,24 @@ public class Location {
         this.name = name;
     }
 
-    public String getDescription() {
-        StringBuilder result = new StringBuilder(this.description + " ");
-        if(this.container != null){
-            result.append("And you also see the " + container.getName() + " which seems " + container.getUseResponse() + ".\n");
+    public NonPlayerCharacters getOccupantByName (String name){
+        NonPlayerCharacters npc = null;
+        for(NonPlayerCharacters occupant : this.getOccupants()){
+            if (occupant.getName().toLowerCase().equals(name)){
+                npc = occupant;
+            }
         }
-        if(this.getOccupant() != null){
-            result.append("You see " +
-                    this.getOccupant().getName() +
-                    ". " + this.getOccupant().getDescription());
-        }
-        return result.toString();
+        return npc;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
-
     public Container getContainer() {
         return container;
     }
-
     public void setContainer(Container container) {
         this.container = container;
-    }
-
-    public List<Item> getItemsList() {
-        return itemsList;
-    }
-
-    public void setItemsList(ArrayList<Item> itemsList) {
-        this.itemsList = itemsList;
-    }
-
-    public void addItem(Item item){
-        this.itemsList.add(item);
-    }
-
-    public void removeItem(Item item){
-        this.itemsList.remove(item);
-    }
-
-    public NonPlayerCharacters getOccupant(){
-        return occupant;
-    }
-    public void setOccupant(NonPlayerCharacters occupant) {
-        this.occupant = occupant;
     }
 
     /**

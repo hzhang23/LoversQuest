@@ -4,10 +4,7 @@ package com.loversQuest.gameWorldPieces;
  * location is some thing that has name , description, container and an Item List & NPC
  */
 
-
-import com.loversQuest.GameInit;
 import com.loversQuest.excelReader.ReadExcel;
-
 import java.util.*;
 
 public class Location {
@@ -17,14 +14,11 @@ public class Location {
     private Container container;
     private ArrayList<Item> itemsList = new ArrayList<>();
     private NonPlayerCharacters occupant;
-
-    //hash map with keys = enum of cardinal directions and values = Location instances
     private HashMap<CardinalDirection,String> directionMap = new HashMap<>();
 
+    //TODO: See if below variable could be refactor to a consolidate place
     public static String filePath = "resources/gameBook.xlsx";
-    public static List<Location> locationList = ReadExcel.getLocationList(filePath);
-    public static List<NonPlayerCharacters> npcList = ReadExcel.getNpcList(filePath,locationList);
-    public static Map<String, Location> locationMap = ReadExcel.getLocationMap(locationList,npcList);
+    public static Map<String, Location> locationMap = ReadExcel.getLocationMap(filePath);
 
     // CTOR
     public Location(){
@@ -44,12 +38,61 @@ public class Location {
         this.directionMap.put(CardinalDirection.WEST, null);
     }
 
-    // SETTERS/GETTERS
+    /**
+     * get next direction if a String of direction is provided
+     * @param stringDirection
+     * @return Location
+     */
+
+    public Location getDirectionFromString(String stringDirection){
+        Location result = null;
+        for(CardinalDirection direction : directionMap.keySet()){
+            if(direction.toString().equalsIgnoreCase(stringDirection)){
+                String locationName = directionMap.get(direction);
+                result = locationMap.get(locationName);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * getter/setter for the direction Hashmap
+     */
+
+    public String getEast(){
+        return directionMap.get(CardinalDirection.EAST);
+    }
+    public String getWest(){
+        return directionMap.get(CardinalDirection.WEST);
+    }
+    public String getSouth(){
+        return directionMap.get(CardinalDirection.SOUTH);
+    }
+    public String getNorth(){
+        return directionMap.get(CardinalDirection.NORTH);
+    }
+
+    public void setNorth(String area){
+        directionMap.replace(CardinalDirection.NORTH, area);
+    }
+    public void setSouth(String area){
+        directionMap.replace(CardinalDirection.SOUTH, area);
+    }
+    public void setEast(String area){
+        directionMap.replace(CardinalDirection.EAST, area);
+    }
+    public void setWest(String area){
+        directionMap.replace(CardinalDirection.WEST, area);
+    }
+
+    /**
+     * getter/setter for the class
+     * @return
+     */
 
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -57,21 +100,14 @@ public class Location {
     public String getDescription() {
         StringBuilder result = new StringBuilder(this.description + " ");
         if(this.container != null){
-            result.append("You see a suspicious looking " + container.getName()+ ".\n");
+            result.append("And you also see the " + container.getName() + " which seems " + container.getUseResponse() + ".\n");
         }
-
-//        if(this.itemsList.size() > 0){
-//             result.append("You find " +
-//                    this.getItemsList().toString() + " in the room.\n");
-//        }
         if(this.getOccupant() != null){
             result.append("You see " +
                     this.getOccupant().getName() +
-                    ". They " + this.getOccupant().getDescription());
+                    ". " + this.getOccupant().getDescription());
         }
         return result.toString();
-
-
     }
 
     public void setDescription(String description) {
@@ -105,61 +141,25 @@ public class Location {
     public NonPlayerCharacters getOccupant(){
         return occupant;
     }
-
     public void setOccupant(NonPlayerCharacters occupant) {
         this.occupant = occupant;
     }
 
-    //returns the location that is in the direction given via string
-    public Location getDirectionFromString(String stringDirection){
-        Location result = null;
-        for(CardinalDirection direction : directionMap.keySet()){
-            if(direction.toString().equalsIgnoreCase(stringDirection)){
-                String locationName = directionMap.get(direction);
-                result = locationMap.get(locationName);
-            }
-        }
-        return result;
-    }
+    /**
+     * override toString method so it shows location by name description and map location
+     * @return
+     */
 
-    // return value from direction hashmap corresponding to the given enum
-    public String getEast(){
-        return directionMap.get(CardinalDirection.EAST);
+    @Override
+    public String toString() {
+        return "Location{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", East=" + getEast() +
+                ", North=" + getNorth() +
+                ", South=" + getSouth() +
+                ", West=" + getWest() +
+                '}';
     }
-    public String getWest(){
-        return directionMap.get(CardinalDirection.WEST);
-    }
-    public String getSouth(){
-        return directionMap.get(CardinalDirection.SOUTH);
-    }
-    public String getNorth(){
-        return directionMap.get(CardinalDirection.NORTH);
-    }
-
-    // replace value in direction hashmap with new Location instance
-    public void setNorth(String area){
-        directionMap.replace(CardinalDirection.NORTH, area);
-    }
-    public void setSouth(String area){
-        directionMap.replace(CardinalDirection.SOUTH, area);
-    }
-    public void setEast(String area){
-        directionMap.replace(CardinalDirection.EAST, area);
-    }
-    public void setWest(String area){
-        directionMap.replace(CardinalDirection.WEST, area);
-    }
-
-//    @Override
-//    public String toString() {
-//        return "Location{" +
-//                "name='" + name + '\'' +
-//                ", description='" + description + '\'' +
-//                ", East=" + getEast().getName() +
-//                ", North=" + getNorth().getName() +
-//                ", South=" + getSouth().getName() +
-//                ", West=" + getWest().getName() +
-//                '}';
-//    }
 }
 

@@ -77,20 +77,26 @@ public class Player {
      */
     public String pickUpItem(String itemRequested) {
         StringBuilder returningMsg = new StringBuilder();
-        if (currentLocation.getContainer() != null){
-            if(!currentLocation.getContainer().displayContents().isEmpty()){
+        Item pickedItem = null;
+        if (currentLocation.getContainer() == null){
+            returningMsg.append("there is nothing to pick up other than your dignity");
+        } else {
+            if (currentLocation.getContainer().displayContents().isEmpty()){
+                returningMsg.append("Oops, there is nothing in " + currentLocation.getContainer().getName());
+            } else {
                 for (Item item: currentLocation.getContainer().displayContents()){
                     if (itemRequested.equals(item.getName())){
-                        this.addItem(item);
-                        currentLocation.getContainer().removeItem(item);
-                        returningMsg.append("you found a " + item.getName() + "! finders, keepers!");
+                         pickedItem= item;
+                        returningMsg.append("you found a " + pickedItem.getName() + "! finders, keepers!");
                     }
                 }
-            }else {
-                returningMsg.append("Oops, there is nothing in " + currentLocation.getContainer().getName());
+                if (pickedItem != null) {
+                    this.currentLocation.getContainer().removeItem(pickedItem);
+                    this.ruckSack.addItem(pickedItem);
+                } else {
+                    returningMsg.append("you cannot get a " + itemRequested);
+                }
             }
-        } else {
-            returningMsg.append("there is nothing to pick up other than your dignity");
         }
         return returningMsg.toString();
     }

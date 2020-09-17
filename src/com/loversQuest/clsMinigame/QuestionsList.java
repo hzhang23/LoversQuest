@@ -9,7 +9,7 @@ public class QuestionsList {
     public QuestionsList() {
         questions.put(1, "What's the first thing you do when your buddy goes down?");
         questions.put(2, "You apply a tourniquet to your battle-buddy. What are you supposed to write on their forehead?");
-        questions.put(3,"You are shot in the leg and are under heavy fire. What should you do?");
+        questions.put(3, "You are shot in the leg and are under heavy fire. What should you do?");
         questions.put(4, "What is your first action when you reach a wounded soldier while under fire?");
         questions.put(5, "Your battle is injured but only responds with a wince from a brisk nuggie to his chest. What is this known as on the AVPU scale?");
         questions.put(6, "You've been wounded, are unable to return fire, and there is nowhere nearby to take cover. What should you do?");

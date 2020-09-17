@@ -23,7 +23,7 @@ public class CLSGame extends JFrame {
     // ctor
     public CLSGame(int questionNumber) {
       JFrame gameFrame = new JFrame("Quiz Game");
-      gameFrame.setSize(400,400);
+      gameFrame.setSize(800,800);
       GridLayout myLayout = new GridLayout(2, 1);
       gameFrame.setLayout(myLayout);
 //      gameFrame.pack();
@@ -110,10 +110,14 @@ public class CLSGame extends JFrame {
                         if (optionButton.getText().equals(correctAnswer)) {
                             System.out.println("got it right");
                         }
+
+                // go to the next question
+                        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(optionButton);
+                        frame.dispose();
+                        new CLSGame(questionNumber + 1);
                     }
                 });
 
-                // go to the next question
 
             result.add(optionButton);
         }

@@ -9,7 +9,7 @@ public class AnswersList {
     public AnswersList() {
         answers.put(1, "take cover, return fire, direct him to provide self aid");
         answers.put(2, "the time the tourniquet was applied");
-        answers.put(3, "take cover, return fire, provide self aid when able");
+        answers.put(3, "take cover, return fire, and provide self aid when able");
         answers.put(4, "check responsiveness");
         answers.put(5, "pain");
         answers.put(6, "play dead");

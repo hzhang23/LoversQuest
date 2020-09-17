@@ -16,13 +16,14 @@ public class ReadExcel {
     }
 
     /**
-     * getter/setter for gameWorld obj
-     * @return map
+     * getter/setter for gameMap obj and gameObjList
+      * @return map
      */
 
     public static Map<String, Location> getLocationMap(){
         return createLocationMap(gameBookPath);
     }
+    public static Map<String, List<String>> getGameObjList() {return createGameObjMap(gameBookPath);}
 
 
 
@@ -270,5 +271,40 @@ public class ReadExcel {
             locationMap.put(location.getName(), location);
         }
         return locationMap;
+    }
+
+    /**
+     * create a Map<String, List<String>> to filter through the objResponse
+     */
+
+    private static Map<String, List<String>> createGameObjMap(String filePath){
+        Map<String, List<String>> gameObjMap = new HashMap<>();
+        Workbook gameBook = getGamebook(filePath);
+        Sheet objSheet = gameBook.getSheet("objInGame");
+        String cellstr;
+        //first to take all the key value and generate basic map structure
+        Row keyRow = objSheet.getRow(0);
+        for(int i = 0; i< keyRow.getLastCellNum(); i++){
+            List<String> objList = new ArrayList<>();
+            Cell cell = keyRow.getCell(i);
+            cellstr = cell.getStringCellValue().toLowerCase().trim();
+            gameObjMap.put(cellstr, objList);
+        }
+        //second to add value to each list
+        for (int rowNum = 1; rowNum<= objSheet.getLastRowNum(); rowNum++){
+            Row row = objSheet.getRow(rowNum);
+            int cellNum = 0;
+            while (cellNum < row.getLastCellNum()){
+                int i = row.getLastCellNum();
+                String key = keyRow.getCell(cellNum).getStringCellValue().toLowerCase().trim();
+                Cell cell = row.getCell(cellNum);
+                if (cell != null){
+                    cellstr = cell.getStringCellValue().toLowerCase();
+                    gameObjMap.get(key).add(cellstr);
+                }
+                cellNum++;
+            }
+        }
+        return gameObjMap;
     }
 }

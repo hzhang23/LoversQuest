@@ -61,8 +61,9 @@ public class Game extends JPanel {
         g2d.drawString(String.valueOf(getScore()), 10, 30);
     }
 
+    // Dialog box that gives the player option to restart the game, or exit
     public void gameOver() {
-        int response = JOptionPane.showConfirmDialog(null, "Do you want to play again?", "Game Over",
+        int response = JOptionPane.showConfirmDialog(null, "You scored " + this.getScore() + " points. You need at least 5. Do you want to play again?", "Game Over",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.NO_OPTION) {
             System.exit(0);
@@ -75,5 +76,17 @@ public class Game extends JPanel {
         else if (response == JOptionPane.CLOSED_OPTION) {
             System.exit(0);
         }
+    }
+
+    // checking if the player has satisfied requirement to complete the task
+    public boolean isSatisfied() {
+        if (this.getScore() >= 5) {
+            System.out.println("Congrats!");
+            System.exit(0);
+            return true;
+        } else {
+            gameOver();
+        }
+        return false;
     }
 }

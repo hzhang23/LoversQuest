@@ -1,8 +1,10 @@
 package com.loversQuest.clsMinigame;
 
-import com.loversQuest.gameWorldPieces.Player;
+import javax.swing.JPanel;
 
-  public abstract class CLSGame {
-    public abstract Boolean clsGame(Player player);
+public  class CLSGame extends JPanel {
+
+
+
   }
 

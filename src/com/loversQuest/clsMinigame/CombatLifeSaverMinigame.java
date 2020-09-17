@@ -26,7 +26,12 @@ public class CombatLifeSaverMinigame extends CLSGame {
    * @param player uses player object
    * @return boolean true or false if player wins or loses
    */
-  // create method (while loop) that returns a boolean as to whether or not the player passed the test
+  // returns a boolean as to whether or not the player passed the test
+
+  // GUI - Questions in pane across top
+//  Answer with appropriate key press?
+//  buttons that are linked to string inputs?
+//  timer for responses?
   @Override
   public Boolean clsGame(Player player) {
     Scanner sc = new Scanner(System.in);

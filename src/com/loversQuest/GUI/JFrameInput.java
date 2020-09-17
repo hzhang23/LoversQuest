@@ -69,6 +69,8 @@ public class JFrameInput {
             case "get" ->finalResponse = player.pickUpItem(objResponse);
             case "use" ->finalResponse = player.useItem(objResponse);
             case "inspect" -> finalResponse= player.inspect();
+            //TODO: write method for player to play minigames
+//            case "take test" -> finalResponse = player.takeTest();
             default -> finalResponse = ("Unreadable input. Please try again.");
         }
 

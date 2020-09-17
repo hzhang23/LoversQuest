@@ -1,4 +1,6 @@
 package com.loversQuest.IO;
+import com.loversQuest.excelReader.ReadExcel;
+
 import java.io.*;
 import java.nio.Buffer;
 import java.util.*;
@@ -73,10 +75,56 @@ public class InputParser {
         return result;
     }
 
+    public String[] findMatchObj(String objResponse, String actVerb){
+        /**
+         * objResponse example : drill sgt, claw, slip, ring
+         */
+        List<String> screenedList = new ArrayList<>();
 
-    // find the line number
+        if (actVerb.equals("get") || actVerb.equals("use")){
+            actVerb = "get/use";
+        }
+        Map<String, List<String>> objList=ReadExcel.getGameObjList();
+        List<String> screener = objList.get(actVerb);
+        String rawRespone = objResponse.toLowerCase().replaceAll("\\s", "");
 
-    // read that line
+        for (String obj : screener){
+            String rawObj = obj.toLowerCase().replaceAll("\\s","");
+            if (rawObj.contains(rawRespone) && rawRespone != ""){
+                screenedList.add(obj);
+            }
+        }
+        String[] resultArray = screenedList.toArray(new String[0]);
 
-    // return the first word of that line
+        System.out.println(resultArray);
+        return resultArray;
+
+    }
+
+    public String[] userCommandScreening (String[] response) {
+        List<String> decorationWords = new ArrayList<>();
+        decorationWords.add("the");
+        decorationWords.add("to");
+        for (String filterWord : decorationWords) {
+            for (int i = 0; i < response.length; i++) {
+                if (response[i].equals(filterWord)) {
+                    response = delete(i, response);
+                }
+            }
+        }
+        return response;
+    }
+
+    public String[] delete(int index, String array[]){
+        String[] newArray = new String[array.length-1];
+        for (int i = 0; i < array.length-1; i++){
+            if(i < index){
+                newArray[i] = array[i];
+            } else {
+                newArray[i] = array[i+1];
+            }
+        }
+        return newArray;
+    }
 }
+

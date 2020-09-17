@@ -9,16 +9,27 @@ import com.loversQuest.gameWorldPieces.models_NPC.NPC_Properties;
 import org.apache.poi.ss.usermodel.*;
 
 public class ReadExcel {
-    private String gameBookPath = "resources/gameBook.xlsx";
+    private final static String gameBookPath = "resources/gameBook.xlsx";
 
     private ReadExcel(){
         //private for static class
     }
 
     /**
+     * getter/setter for gameWorld obj
+     * @return map
+     */
+
+    public static Map<String, Location> getLocationMap(){
+        return createLocationMap(gameBookPath);
+    }
+
+
+
+    /**
      * get Excel data and create a Workbook Object
-     * @param filePath
-     * @return
+     * @param filePath take filepath of xls
+     * @return Workbook obj
      */
     private static Workbook getGamebook(String filePath){
        Workbook gameBook = null;
@@ -27,19 +38,17 @@ public class ReadExcel {
             InputStream excelObject = new FileInputStream(excelFile);
             gameBook = WorkbookFactory.create(excelObject);
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            //TODO: add a pop up alert to set up excel sheet
         } catch (IOException e) {
             e.printStackTrace();
+            //TODO: add a pop up alert to set up excel sheet
         }
         return gameBook;
     }
 
     /**
      * get npcList from npc sheet
-     * @param filePath
-     * @return
+     * @param filePath path of xls file
+     * @return npcList
      */
 
     public static List<NonPlayerCharacters> getNpcList (String filePath){
@@ -47,13 +56,13 @@ public class ReadExcel {
         List<Location> locationList = getLocationList(filePath);
         Sheet npcSheet = gameBook.getSheet("npc");
         List<NonPlayerCharacters> npcList = new ArrayList<>();
-        String cellString = null;
+        String cellString;
         for (int i = 1; i < npcSheet.getLastRowNum(); i++) {
             Row row = npcSheet.getRow(i);
             NonPlayerCharacters npc = new NonPlayerCharacters();
             for (int j = 0; j < row.getLastCellNum(); j++) {
                 Cell cell = row.getCell(j);
-                cellString = cell.getStringCellValue().toUpperCase();
+                cellString = cell.getStringCellValue();
                 switch(j){
                     case 0 ->{
                         npc.setName(cellString);
@@ -66,7 +75,7 @@ public class ReadExcel {
                     case 2 ->{
                         for (Location location : locationList){
                             String locationName = location.getName();
-                            if(cellString.equals(locationName.toUpperCase())){
+                            if(cellString.toUpperCase().equals(locationName.toUpperCase())){
                                 npc.setLocation(location);
                             }
                         }
@@ -81,23 +90,23 @@ public class ReadExcel {
                         }
                         break;
                     }
+                    default -> throw new IllegalStateException("Unexpected value: " + j);
                 }
             }
             npcList.add(npc);
         }
-        List<NonPlayerCharacters> npcForGame = NPC_Factory.getNPCs(npcList);
-        return npcForGame;
+        return NPC_Factory.getNPCs(npcList);
     }
     /**
      * get item list from excel sheet
-     * @param filePath
-     * @return
+     * @param filePath path of xls
+     * @return itemList
      */
     public static List<Item> getItemList(String filePath){
         List<Item> itemList = new ArrayList<>();
         Workbook gameBook = getGamebook(filePath);
         Sheet itemSheet = gameBook.getSheet("item");
-        String cellStr = null;
+        String cellStr;
         for (int rowNum = 1; rowNum <= itemSheet.getLastRowNum();rowNum++){
             Item item = new Item();
             Row row = itemSheet.getRow(rowNum);
@@ -119,10 +128,10 @@ public class ReadExcel {
         }
         return itemList;
     }
-    /** TODO: add container items
+    /**
      * get containerList from container sheet
-     * @param filePath
-     * @return
+     * @param filePath same as above
+     * @return containerList
      */
     public static List<Container> getContainerList(String filePath){
         Workbook gameBook = getGamebook(filePath);
@@ -239,8 +248,7 @@ public class ReadExcel {
      * @param filePath
      * @return
      */
-
-    public static Map<String, Location> getLocationMap (String filePath){
+    public static Map<String, Location> createLocationMap(String filePath){
         Map<String, Location> locationMap = new HashMap<>();
         Workbook gameBook = getGamebook(filePath);
         List<Location> locationList = getLocationList(filePath);
@@ -250,7 +258,7 @@ public class ReadExcel {
             for(NonPlayerCharacters npc : npcList) {
                 String npcLocation = npc.getLocation();
                 if (location.getName().equals(npcLocation)) {
-                    location.setOccupant(npc);
+                    location.addOccupants(npc);
                 }
             }
             for(Container container : containerList){

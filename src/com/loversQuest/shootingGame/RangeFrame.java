@@ -83,8 +83,8 @@ public class RangeFrame extends JFrame {
         // 10 <= x <= 1700
         // 600 <= y <= 850
 
-        int x = rand.nextInt(1690) + 10;
-        int y = rand.nextInt(250) + 600;
+        int x = rand.nextInt(1350) + 10;
+        int y = rand.nextInt(250) + 500;
         Target target = new Target(100,100);
         layeredPane.add(target, JLayeredPane.POPUP_LAYER);
         target.setLocation(x,y);

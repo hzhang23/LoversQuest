@@ -14,6 +14,7 @@ public class Game extends JPanel {
     Ball ball = new Ball(this);
     Racquet racquet = new Racquet(this);
     int speed = 1;
+    private boolean isSatisfied = false;
 
     // ctor
     public Game() {

@@ -21,6 +21,7 @@ public class CLSGame extends JFrame {
 
     private JTextArea question;
     private int score;
+    private boolean isSatisfied = false;
 
 
     // ctor
@@ -65,6 +66,10 @@ public class CLSGame extends JFrame {
         gameFrame.remove(questionsPanel);
         if (getScore() >= 7) {
             JOptionPane.showInternalMessageDialog(gameFrame.getContentPane(), "Congrats! You passed the test!");
+            setIsSatisfied(true);
+            if (this.getIsSatisfied() == true) {
+                System.out.println("Satisfied the condition");
+            }
             System.exit(0);
         } else {
             gameOver();
@@ -189,6 +194,17 @@ public class CLSGame extends JFrame {
 
     public static void main(String[] args) {
       new CLSGame(1);
+    }
+
+    public boolean getIsSatisfied() {
+        if (getScore() >= 7 ) {
+            isSatisfied = true;
+        }
+        return isSatisfied;
+    }
+
+    public void setIsSatisfied(boolean value) {
+        this.isSatisfied = value;
     }
 }
 

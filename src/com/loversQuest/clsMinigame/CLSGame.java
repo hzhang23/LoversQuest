@@ -49,16 +49,7 @@ public class CLSGame extends JFrame {
 
     // create a panel with question
     public JPanel makeQuestionsPanel(int questionNumber) {
-        if (questionNumber > 10) {
-            gameFrame.remove(optionsPanel);
-            gameFrame.remove(questionsPanel);
-            if (getScore() >= 7) {
-                JOptionPane.showInternalMessageDialog(gameFrame.getContentPane(), "Congrats! You passed the test!");
-                System.exit(0);
-            } else {
-                gameOver();
-            }
-        }
+
         JPanel result = new JPanel();
         result.setBackground(Color.gray);
 
@@ -66,6 +57,18 @@ public class CLSGame extends JFrame {
         question = getQuestion(questionNumber);
         result.add(question);
         return result;
+    }
+
+    // handling the end of the game
+    public void handleResult() {
+        gameFrame.remove(optionsPanel);
+        gameFrame.remove(questionsPanel);
+        if (getScore() >= 7) {
+            JOptionPane.showInternalMessageDialog(gameFrame.getContentPane(), "Congrats! You passed the test!");
+            System.exit(0);
+        } else {
+            gameOver();
+        }
     }
 
     public void gameOver() {
@@ -100,6 +103,9 @@ public class CLSGame extends JFrame {
 
     // create a panel with 4 options
     public JPanel makeOptionsPanel(int questionNumber) {
+        if (questionNumber > 10) {
+            return null;
+        }
         JPanel result = new JPanel();
         result.setBackground(Color.darkGray);
 
@@ -121,8 +127,8 @@ public class CLSGame extends JFrame {
     }
 
     public ArrayList<JButton> makeButtonsList(int questionNumber) {
-        if (questionNumber >10) {
-
+        if (questionNumber > 10) {
+            return null;
         }
         ArrayList<JButton> result = new ArrayList<>();
 
@@ -151,6 +157,11 @@ public class CLSGame extends JFrame {
                         // go to the next question
                         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(optionButton);
                         frame.remove(questionsPanel);
+
+                        // at the end of question 10, pass it to the handler
+                        if (questionNumber + 1 > 10) {
+                            handleResult();
+                        }
                         questionsPanel = makeQuestionsPanel(questionNumber + 1);
                         frame.add(questionsPanel);
                         frame.revalidate();
@@ -158,6 +169,9 @@ public class CLSGame extends JFrame {
 
                         // update the answer choices
                         frame.remove(optionsPanel);
+                        if (questionNumber + 1 > 10) {
+                            return;
+                        }
                         optionsPanel = makeOptionsPanel(questionNumber + 1);
                         frame.add(optionsPanel);
                         frame.revalidate();

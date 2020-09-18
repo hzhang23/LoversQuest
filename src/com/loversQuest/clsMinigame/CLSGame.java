@@ -1,5 +1,7 @@
 package com.loversQuest.clsMinigame;
 
+import com.loversQuest.gymGame.Client;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,6 +13,7 @@ import java.util.HashMap;
 public class CLSGame extends JFrame {
 
     // variables
+    private JFrame gameFrame;
     private JPanel questionsPanel;
     private JPanel optionsPanel;
 
@@ -22,7 +25,7 @@ public class CLSGame extends JFrame {
 
     // ctor
     public CLSGame(int questionNumber) {
-      JFrame gameFrame = new JFrame("Quiz Game");
+      gameFrame = new JFrame("Quiz Game");
       gameFrame.setSize(800,800);
       GridLayout myLayout = new GridLayout(2, 1);
       gameFrame.setLayout(myLayout);
@@ -32,6 +35,9 @@ public class CLSGame extends JFrame {
       // bring in the panels
       questionsPanel = makeQuestionsPanel(questionNumber);
       optionsPanel = makeOptionsPanel(questionNumber);
+
+      // adding a welcome message box
+      JOptionPane.showInternalMessageDialog(gameFrame.getContentPane(), "Welcome to the CLS quiz, you need to answer at least 7 questions correctly to receive the CLS badge.");
 
       // appending the panels onto the frame
       gameFrame.add(questionsPanel);
@@ -44,17 +50,39 @@ public class CLSGame extends JFrame {
     // create a panel with question
     public JPanel makeQuestionsPanel(int questionNumber) {
         if (questionNumber > 10) {
-            System.out.println("Game Over");
-            System.out.println("You scored " + getScore());
-            System.exit(0);
+            gameFrame.remove(optionsPanel);
+            gameFrame.remove(questionsPanel);
+            if (getScore() >= 7) {
+                JOptionPane.showInternalMessageDialog(gameFrame.getContentPane(), "Congrats! You passed the test!");
+                System.exit(0);
+            } else {
+                gameOver();
+            }
         }
         JPanel result = new JPanel();
-        result.setBackground(Color.pink);
+        result.setBackground(Color.gray);
 
         // in this panel, we want to have a textbox to have the question
         question = getQuestion(questionNumber);
         result.add(question);
         return result;
+    }
+
+    public void gameOver() {
+        int response = JOptionPane.showConfirmDialog(null, "You scored " + this.getScore() + " points. You need at least 7. Do you want to play again?", "Game Over",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.NO_OPTION) {
+            System.exit(0);
+        }
+        else if (response == JOptionPane.YES_OPTION) {
+//            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            gameFrame.dispose();
+//            System.exit(0);
+            new CLSGame(1);
+        }
+        else if (response == JOptionPane.CLOSED_OPTION) {
+            System.exit(0);
+        }
     }
 
     // getting a question
@@ -73,7 +101,7 @@ public class CLSGame extends JFrame {
     // create a panel with 4 options
     public JPanel makeOptionsPanel(int questionNumber) {
         JPanel result = new JPanel();
-        result.setBackground(Color.magenta);
+        result.setBackground(Color.darkGray);
 
 
         GridLayout myLayout = new GridLayout(4, 1);
@@ -93,6 +121,9 @@ public class CLSGame extends JFrame {
     }
 
     public ArrayList<JButton> makeButtonsList(int questionNumber) {
+        if (questionNumber >10) {
+
+        }
         ArrayList<JButton> result = new ArrayList<>();
 
         // accessing the optionsList, and get a list of options per that question

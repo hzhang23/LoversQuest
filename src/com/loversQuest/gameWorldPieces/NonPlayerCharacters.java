@@ -10,6 +10,8 @@ public class NonPlayerCharacters {
     private Item keyItem;
     private Item prize;
 
+
+
     //ctor
     public NonPlayerCharacters(String name, Location location) {
         this(name, "There is no description for this person.", location);
@@ -48,6 +50,10 @@ public class NonPlayerCharacters {
         }else{
             return "You don't have " + keyItem + ", kick rocks nerd!";
         }
+    }
+
+    public void testPlayer (){
+        // holder to be override
     }
 
 

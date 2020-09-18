@@ -1,6 +1,16 @@
 package com.loversQuest.gameWorldPieces;
 
+import com.loversQuest.GUI.GameFrame;
+import com.loversQuest.GUI.JFrameInput;
+import com.loversQuest.gameWorldPieces.models_NPC.DrillSGT_Range;
+import com.loversQuest.gameWorldPieces.models_NPC.NPC_Properties;
+import com.loversQuest.shootingGame.RangeFrame;
+
+import javax.swing.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Scanner;
 
 public class Player {
 
@@ -52,12 +62,31 @@ public class Player {
         }
     }
 
+    public String playGame(){
+        String returning = null;
+        NonPlayerCharacters npc = this.getNpcByType(NPC_Properties.DRILL_RANGE);
+        if (npc != null){
+            npc.testPlayer();
+            try {
+                Scanner scanner = new Scanner(new File("resources/shootingGameResources/score.txt"));
+                int score = scanner.nextInt();
+                returning = "your shooting score is: " + score;
+                scanner.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        } else {
+            returning = "there is no test here";
+        }
+        return returning;
+
+    }
+
     /**
      * //TODO: add a logic that will remove expensable items
      * @param itemRequested
      * @return
      */
-
     public String useItem(String itemRequested){
         StringBuilder returningMsg = new StringBuilder();
         Item itemToUse = this.getItem(itemRequested);
@@ -102,7 +131,7 @@ public class Player {
     }
 
     /**
-     * may return Null??
+     * check container in current location
      * @return
      */
     public String inspect() {
@@ -138,6 +167,17 @@ public class Player {
     }
     public List<Item> getAllItems() {
         return ruckSack.items;
+    }
+
+    public NonPlayerCharacters getNpcByType (NPC_Properties properties) {
+            List<NonPlayerCharacters> npcList = this.getCurrentLocation().getOccupants();
+            NonPlayerCharacters npc = null;
+            for (NonPlayerCharacters npcInHere : npcList) {
+                if (npcInHere.getProperties().equals(properties)) {
+                    npc = npcInHere;
+                }
+            }
+            return npc;
     }
 
     // SETTERS/GETTERS

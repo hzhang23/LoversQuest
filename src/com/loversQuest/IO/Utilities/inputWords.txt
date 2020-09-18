@@ -6,3 +6,4 @@ get,pick,grab,take
 use,shoot,drink
 inspect, open
 map, location, where
+play, play

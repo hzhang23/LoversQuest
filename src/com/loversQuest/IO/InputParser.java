@@ -84,18 +84,22 @@ public class InputParser {
             actVerb = "get/use";
         }
         Map<String, List<String>> objList=ReadExcel.getGameObjList();
-        List<String> screener = objList.get(actVerb);
-        String rawRespone = objResponse.toLowerCase().replaceAll("\\s", "");
+        try {
+            List<String> screener = objList.get(actVerb);
+            String rawRespone = objResponse.toLowerCase().replaceAll("\\s", "");
 
-        for (String obj : screener){
-            String rawObj = obj.toLowerCase().replaceAll("\\s","");
-            if (rawObj.contains(rawRespone) && rawRespone != ""){
-                screenedList.add(obj);
+            for (String obj : screener){
+                String rawObj = obj.toLowerCase().replaceAll("\\s","");
+                if (rawObj.contains(rawRespone) && rawRespone != ""){
+                    screenedList.add(obj);
+                }
             }
+            String[] resultArray = screenedList.toArray(new String[0]);
+            return resultArray;
+        } catch (Exception e){
+            String[] result = {"invalid input"};
+            return result;
         }
-        String[] resultArray = screenedList.toArray(new String[0]);
-        System.out.println(resultArray);
-        return resultArray;
     }
 
     public String[] userCommandScreening (String[] response) {

@@ -1,6 +1,13 @@
 package com.loversQuest.gameWorldPieces;
 
+import com.loversQuest.GUI.GameFrame;
+import com.loversQuest.GUI.JFrameInput;
+import com.loversQuest.gameWorldPieces.models_NPC.DrillSGT_Range;
+import com.loversQuest.shootingGame.RangeFrame;
+
+import javax.swing.*;
 import java.util.List;
+import java.util.Scanner;
 
 public class Player {
 
@@ -52,12 +59,30 @@ public class Player {
         }
     }
 
+    public String playGame(GameFrame mainGame){
+        String returning = null;
+        Scanner scanner = new Scanner(System.in);
+
+        //play shooting game with DrillSGT_Range
+        JFrame shootingGame = new RangeFrame();
+        if (shootingGame.isShowing()) {
+
+            int score = scanner.nextInt();
+            returning = "your score is: " + score;
+        }
+
+        //play CLS game with DrillSGT_CLS
+
+        //play PT game with DrillSGT_
+        return returning;
+
+    }
+
     /**
      * //TODO: add a logic that will remove expensable items
      * @param itemRequested
      * @return
      */
-
     public String useItem(String itemRequested){
         StringBuilder returningMsg = new StringBuilder();
         Item itemToUse = this.getItem(itemRequested);
@@ -102,7 +127,7 @@ public class Player {
     }
 
     /**
-     * may return Null??
+     * check container in current location
      * @return
      */
     public String inspect() {

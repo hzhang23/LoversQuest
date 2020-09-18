@@ -10,6 +10,8 @@ public class NonPlayerCharacters {
     private Item keyItem;
     private Item prize;
 
+
+
     //ctor
     public NonPlayerCharacters(String name, Location location) {
         this(name, "There is no description for this person.", location);

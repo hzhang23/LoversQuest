@@ -34,9 +34,10 @@ public class JFrameInput {
      *
      * @param player
      * @param command
+     * @param mainGame
      * @return
      */
-    public String getUserAction(Player player, String command) {
+    public String getUserAction(Player player, String command, GameFrame mainGame) {
         //TODO: Parser should able to filter through the command and find the item: white claw?? which flavor?
         String finalResponse = null;
         String[] response = command.trim().toLowerCase().split("\\s+");
@@ -50,7 +51,7 @@ public class JFrameInput {
         System.out.println("Command is " + command);
         ArrayList responseList = new ArrayList(Arrays.asList(response));
         System.out.println("Response is " + responseList);
-        String actionVerb = parser.parseCommand2(response[0]);
+        String actionVerb = parser.parseCommand2(response[0]);// TODO: actionVerb could be null if not match list
         String[] matchObj = parser.findMatchObj(objResponse, actionVerb);
         for (int i = 0; i< matchObj.length; i++){
             System.out.println("matchObj are " + matchObj[i]);
@@ -128,7 +129,8 @@ public class JFrameInput {
                 }
             }
             case "inspect" -> finalResponse = player.inspect();
-            default -> finalResponse = ("Unreadable input. Please try again.");
+            case "play" -> finalResponse = player.playGame(mainGame);
+            default -> finalResponse = ("why do you mumbling like " + command + "? try again with plain English please.");
         }
 
         return finalResponse;

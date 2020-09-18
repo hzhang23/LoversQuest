@@ -14,19 +14,11 @@ import java.util.Arrays;
 public class GameFrame extends JFrame{
 
     JFrame mainFrame;
-    //////////////////////////////////////////////DANNY HERE IS YOUR PANEL //////////////////////////////////////////
     JPanel mainPanel;
-    //////////////////////////////////////////////DANNY HERE IS YOUR PANEL //////////////////////////////////////////
     JFrameInput input;
     Player player;
-
     String command;
-
     Border blackBorder = BorderFactory.createLineBorder(Color.BLACK);
-
-    //not in use at the moment
-    JTextArea locationArt = new JTextArea();
-    //GraphicClass asciiPrinter;
 
     //this thing makes panels
     JPanelFactory panelFactory;
@@ -39,10 +31,10 @@ public class GameFrame extends JFrame{
     //bottom right panel
     MapPanel mapPanel;
 
-    Action upAction;
-    Action downAction;
-    Action leftAction;
-    Action rightAction;
+//    Action upAction;
+//    Action downAction;
+//    Action leftAction;
+//    Action rightAction;
     Action inputEnterAction;
 
     public GameFrame(String gameResponse, JFrameInput input, Player player) {
@@ -138,23 +130,27 @@ public class GameFrame extends JFrame{
         //make frame visible
         mainFrame.setVisible(true);
 
-        upAction = new GameFrame.UpAction();
-        downAction = new GameFrame.DownAction();
-        leftAction  = new GameFrame.LeftAction();
-        rightAction = new GameFrame.RightAction();
+//        upAction = new GameFrame.UpAction();
+//        downAction = new GameFrame.DownAction();
+//        leftAction  = new GameFrame.LeftAction();
+//        rightAction = new GameFrame.RightAction();
+//
+//        mainFrame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("UP"), "upAction");
+//        System.out.println(Arrays.toString(mainFrame.getRootPane().getInputMap().allKeys()));
+//        mainFrame.getRootPane().getActionMap().put("upAction", upAction);
+//
+//        mainFrame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DOWN"), "downAction");
+//        mainFrame.getRootPane().getActionMap().put("downAction", downAction);
+//
+//        mainFrame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"), "rightAction");
+//        mainFrame.getRootPane().getActionMap().put("rightAction", rightAction);
+//
+//        mainFrame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"), "leftAction");
+//        mainFrame.getRootPane().getActionMap().put("leftAction", leftAction);
+    }
 
-        mainFrame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("UP"), "upAction");
-        System.out.println(Arrays.toString(mainFrame.getRootPane().getInputMap().allKeys()));
-        mainFrame.getRootPane().getActionMap().put("upAction", upAction);
-
-        mainFrame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DOWN"), "downAction");
-        mainFrame.getRootPane().getActionMap().put("downAction", downAction);
-
-        mainFrame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"), "rightAction");
-        mainFrame.getRootPane().getActionMap().put("rightAction", rightAction);
-
-        mainFrame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"), "leftAction");
-        mainFrame.getRootPane().getActionMap().put("leftAction", leftAction);
+    public void hideFrame(){
+        setVisible(false);
     }
 
 
@@ -176,7 +172,7 @@ public class GameFrame extends JFrame{
     //runs all internal in this method. need to uncouple
     public void runCommand(String command) {
 
-        String response = input.getUserAction(this.player, command);
+        String response = input.getUserAction(this.player, command, this);
         this.gameResponsePanel.setResponseText(response);
         this.inputPanel.getInputText().setText("");
         this.inventoryPanel.setInventoryText(this.player.getAllItems().toString());
@@ -216,6 +212,7 @@ public class GameFrame extends JFrame{
             System.out.println("working right");
         }
     }
+
 
     public class LeftAction extends AbstractAction {
         @Override

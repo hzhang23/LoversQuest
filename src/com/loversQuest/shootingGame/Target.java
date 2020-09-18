@@ -11,7 +11,6 @@ public class Target extends JButton {
 
     private int w;
     private int h;
-    public static JButton target = new JButton();
 
     public Target(int w, int h){
         this.w = w;

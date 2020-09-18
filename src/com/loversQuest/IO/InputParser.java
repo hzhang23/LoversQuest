@@ -80,7 +80,6 @@ public class InputParser {
          * objResponse example : drill sgt, claw, slip, ring
          */
         List<String> screenedList = new ArrayList<>();
-
         if (actVerb.equals("get") || actVerb.equals("use")){
             actVerb = "get/use";
         }
@@ -95,16 +94,15 @@ public class InputParser {
             }
         }
         String[] resultArray = screenedList.toArray(new String[0]);
-
         System.out.println(resultArray);
         return resultArray;
-
     }
 
     public String[] userCommandScreening (String[] response) {
         List<String> decorationWords = new ArrayList<>();
         decorationWords.add("the");
         decorationWords.add("to");
+        decorationWords.add("a");
         for (String filterWord : decorationWords) {
             for (int i = 0; i < response.length; i++) {
                 if (response[i].equals(filterWord)) {

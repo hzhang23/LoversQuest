@@ -1,5 +1,7 @@
 package com.loversQuest.clsMinigame;
 
+import static java.awt.GridBagConstraints.CENTER;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
@@ -7,42 +9,51 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class CLSLandingPage extends JPanel {
+  public static final int GAME_WIDTH = 600;
+  public static final int GAME_HEIGHT = 600;
 
   JButton play, exit;
   static boolean go = false;
-  public static final int GAME_HEIGHT = 1000;
-  public static final int GAME_WIDTH = 1000;
 
-  CLSLandingPage() {
-    JFrame gameFrame = new JFrame("quiz game");
-    gameFrame.setSize(GAME_WIDTH, GAME_HEIGHT);
+  CLSLandingPage(JFrame window) {
+    window.setSize(GAME_WIDTH, GAME_HEIGHT);
     setLayout(null);
     setBackground(Color.DARK_GRAY);
-//    window.setContentPane(this);
+    window.setContentPane(this);
+
 
     play = new JButton("Play");
     play.setBackground(new Color(255, 255, 255));
-    play.setBounds(300, 50, 200, 50);
-    gameFrame.add(play);
+    play.setBounds(25, 100, 533, 200);
+    add(play);
 
     exit = new JButton("Exit");
     exit.setBackground(new Color(255, 255, 255));
-    exit.setBounds(300, 350, 200, 50);
-    gameFrame.add(exit);
+    exit.setBounds(25, 300, 533, 200);
+    add(exit);
 
-    gameFrame.setVisible(true);
+
+    window.setVisible(true);
   }
 
-  void choose(int time) {
+  void choose() {
 
     play.addActionListener((ActionEvent e) -> {
       go = true;
-      setVisible(true);
+      setVisible(false);
     });
-  }
 
+    exit.addActionListener((ActionEvent e) -> {
+      System.exit(0);
+    });
 
-  public static void main(String[] args) {
-  new CLSLandingPage();
+    while (!go) {
+      try {
+        Thread.sleep(0);
+      } catch (InterruptedException ex) {}
+    }
+
+    go = false ;
+
   }
 }

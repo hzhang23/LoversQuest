@@ -22,11 +22,6 @@ public class CLSGame extends JFrame {
 
     // ctor
     public CLSGame(int questionNumber) {
-      if (questionNumber > 10) {
-          System.out.println("Game Over");
-          System.out.println("You scored " + getScore());
-          System.exit(0);
-      }
       JFrame gameFrame = new JFrame("Quiz Game");
       gameFrame.setSize(800,800);
       GridLayout myLayout = new GridLayout(2, 1);
@@ -48,6 +43,11 @@ public class CLSGame extends JFrame {
 
     // create a panel with question
     public JPanel makeQuestionsPanel(int questionNumber) {
+        if (questionNumber > 10) {
+            System.out.println("Game Over");
+            System.out.println("You scored " + getScore());
+            System.exit(0);
+        }
         JPanel result = new JPanel();
         result.setBackground(Color.pink);
 
@@ -117,20 +117,24 @@ public class CLSGame extends JFrame {
                             score++;
                         }
 
-                // go to the next question
+                        // go to the next question
                         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(optionButton);
-                        frame.dispose();
-                        new CLSGame(questionNumber + 1);
+                        frame.remove(questionsPanel);
+                        questionsPanel = makeQuestionsPanel(questionNumber + 1);
+                        frame.add(questionsPanel);
+                        frame.revalidate();
+                        frame.repaint();
+
+                        // update the answer choices
+                        frame.remove(optionsPanel);
+                        optionsPanel = makeOptionsPanel(questionNumber + 1);
+                        frame.add(optionsPanel);
+                        frame.revalidate();
+                        frame.repaint();
                     }
                 });
-
-
             result.add(optionButton);
         }
-
-
-
-
         return result;
     }
 

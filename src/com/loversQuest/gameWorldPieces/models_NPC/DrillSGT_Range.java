@@ -3,6 +3,7 @@ package com.loversQuest.gameWorldPieces.models_NPC;
 import com.loversQuest.gameWorldPieces.Location;
 import com.loversQuest.gameWorldPieces.NonPlayerCharacters;
 import com.loversQuest.gameWorldPieces.Player;
+import com.loversQuest.shootingGame.RangeFrame;
 
 public class DrillSGT_Range extends NonPlayerCharacters {
     public static int shootingScore = 0;
@@ -19,6 +20,11 @@ public class DrillSGT_Range extends NonPlayerCharacters {
          * TODO: write DrillHwak_eyes interact, meet player at range and shoot
          */
         return returnMsg;
+    }
+
+    @Override
+    public void testPlayer(){
+        new RangeFrame();
     }
 
 

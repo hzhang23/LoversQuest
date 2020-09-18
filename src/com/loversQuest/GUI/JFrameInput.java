@@ -34,10 +34,9 @@ public class JFrameInput {
      *
      * @param player
      * @param command
-     * @param mainGame
      * @return
      */
-    public String getUserAction(Player player, String command, GameFrame mainGame) {
+    public String getUserAction(Player player, String command) {
         //TODO: Parser should able to filter through the command and find the item: white claw?? which flavor?
         String finalResponse = null;
         String[] response = command.trim().toLowerCase().split("\\s+");
@@ -129,7 +128,7 @@ public class JFrameInput {
                 }
             }
             case "inspect" -> finalResponse = player.inspect();
-            case "play" -> finalResponse = player.playGame(mainGame);
+            case "play" -> finalResponse = player.playGame();
             default -> finalResponse = ("why do you mumbling like " + command + "? try again with plain English please.");
         }
 

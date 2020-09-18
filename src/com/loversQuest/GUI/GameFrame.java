@@ -172,7 +172,7 @@ public class GameFrame extends JFrame{
     //runs all internal in this method. need to uncouple
     public void runCommand(String command) {
 
-        String response = input.getUserAction(this.player, command, this);
+        String response = input.getUserAction(this.player, command);
         this.gameResponsePanel.setResponseText(response);
         this.inputPanel.getInputText().setText("");
         this.inventoryPanel.setInventoryText(this.player.getAllItems().toString());

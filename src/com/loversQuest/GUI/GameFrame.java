@@ -1,15 +1,16 @@
 package com.loversQuest.GUI;
 
-import com.loversQuest.IO.GraphicClass;
+import com.loversQuest.clsMinigame.CLSGame;
 import com.loversQuest.gameWorldPieces.Player;
+import com.loversQuest.gameWorldPieces.models_NPC.NPC_Properties;
+import com.loversQuest.gymGame.PtGame;
+import com.loversQuest.shootingGame.RangeFrame;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.event.*;
-import java.util.Arrays;
 
 public class GameFrame extends JFrame{
 
@@ -26,16 +27,10 @@ public class GameFrame extends JFrame{
     InventoryPanel inventoryPanel;
     //top left panel
     GameResponsePanel gameResponsePanel;
-    //bottom left panel
     InputPanel inputPanel;
-    //bottom right panel
     MapPanel mapPanel;
-
-//    Action upAction;
-//    Action downAction;
-//    Action leftAction;
-//    Action rightAction;
     Action inputEnterAction;
+    private SafetyBriefPanel safetyBriefPanel;
 
     public GameFrame(String gameResponse, JFrameInput input, Player player) {
         //TODO: Text input area at bottom has event listener for enter key and button press.
@@ -51,57 +46,32 @@ public class GameFrame extends JFrame{
         this.inputPanel = panelFactory.getInputPanel();
         this.mapPanel = new MapPanel(this.player.getCurrentLocation().getName());
 
-
         //main panel
         this.mainPanel = new JPanel();
 
-        //set intro dialogue
+        //set intro dialogue TODO: refactor if have time
         this.gameResponsePanel.setResponseText(gameResponse);
 
         //create main frame with title
         mainFrame = new JFrame("Lovers Quest");
-        //stop function on exit of main frame
+        //stop function on exit of main frame TODO: refactor to add leave message/ save game function
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //set layout
         GridLayout mainGridLayout = new GridLayout(1, 1, 3, 3);
 
+        //TODO: check to see if need save this function, probably not due to the enter to next function
         inputEnterAction = new GameFrame.inputEnterKeyAction();
         inputPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "inputEnterSubmit");
         inputPanel.getActionMap().put("inputEnterSubmit", inputEnterAction);
-        inputPanel.getSubmitButton().addMouseListener(new MouseListener() {
-
+        inputPanel.getSubmitButton().addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 String gameCommand = inputPanel.getInputText().getText();
                 //calls relay command function of GameFrame class instance
                 GameFrame.this.runCommand(gameCommand);
             }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
         });
-
-
         mainFrame.setFocusable(true);
-
-
         //set border
         mainFrame.getRootPane().setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
         gameResponsePanel.setBorder(blackBorder);
@@ -110,12 +80,7 @@ public class GameFrame extends JFrame{
         mapPanel.setBorder(blackBorder);
 
         //add main panel to frame, then add other panels to main panel.
-//        scrollPane.add(mainPanel);
         mainFrame.getContentPane().add(mainPanel);
-        FlowLayout flowFromInsurance = new FlowLayout(2);
-
-
-//      mainPanel.setLayout(mainGridLayout);
         mainPanel.add(gameResponsePanel);
         mainPanel.add(inventoryPanel);
         mainPanel.add(inputPanel);
@@ -125,41 +90,15 @@ public class GameFrame extends JFrame{
         mainFrame.pack();
         mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         mainFrame.setResizable(false);
-        //sets window centered in screen
         mainFrame.setLocationRelativeTo(null);
-        //make frame visible
         mainFrame.setVisible(true);
-
-//        upAction = new GameFrame.UpAction();
-//        downAction = new GameFrame.DownAction();
-//        leftAction  = new GameFrame.LeftAction();
-//        rightAction = new GameFrame.RightAction();
-//
-//        mainFrame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("UP"), "upAction");
-//        System.out.println(Arrays.toString(mainFrame.getRootPane().getInputMap().allKeys()));
-//        mainFrame.getRootPane().getActionMap().put("upAction", upAction);
-//
-//        mainFrame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DOWN"), "downAction");
-//        mainFrame.getRootPane().getActionMap().put("downAction", downAction);
-//
-//        mainFrame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"), "rightAction");
-//        mainFrame.getRootPane().getActionMap().put("rightAction", rightAction);
-//
-//        mainFrame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"), "leftAction");
-//        mainFrame.getRootPane().getActionMap().put("leftAction", leftAction);
     }
-
-    public void hideFrame(){
-        setVisible(false);
-    }
-
 
     public void changeTopLeftText (String newText){
         gameResponsePanel.setResponseText(newText);
     }
 
     public void changeTopRightText(String inventory){
-
         inventoryPanel.setInventoryText(inventory);
         inputPanel.getInputText().requestFocus();
     }
@@ -171,56 +110,69 @@ public class GameFrame extends JFrame{
 
     //runs all internal in this method. need to uncouple
     public void runCommand(String command) {
-
         String response = input.getUserAction(this.player, command);
-        this.gameResponsePanel.setResponseText(response);
-        this.inputPanel.getInputText().setText("");
-        this.inventoryPanel.setInventoryText(this.player.getAllItems().toString());
-        this.mapPanel.updateImageLabel(this.player.getCurrentLocation().getName());
-        if(this.player.isHasKiss()){
-            this.gameResponsePanel.setResponseText(
-                    "Your sweetheart says: OMG five WhiteClaws for me? I love you\n" +
-                    "\nCongrats soldier you've just graduated AIT. Now go buy a Camaro."+
-                    "\nYour quest for Love has ended.");
-            this.inputPanel.setVisible(false);
-            this.mapPanel.setVisible(false);
-            this.inventoryPanel.setVisible(false);
+        if (response.equals("miniGameInit")){
+            openMiniGame(); // open game Frame
+            this.dispose(); // hide this window
+        } else {
+            this.gameResponsePanel.setResponseText(response);
+            this.inputPanel.getInputText().setText("");
+            this.inventoryPanel.setInventoryText(this.player.getAllItems().toString());
+            this.mapPanel.updateImageLabel(this.player.getCurrentLocation().getName());
+            if (this.player.isHasKiss()) {
+                this.gameResponsePanel.setResponseText(
+                        "Your sweetheart says: OMG five WhiteClaws for me? I love you\n" +
+                                "\nCongrats soldier you've just graduated AIT. Now go buy a Camaro." +
+                                "\nYour quest for Love has ended.");
+                this.inputPanel.setVisible(false);
+                this.mapPanel.setVisible(false);
+                this.inventoryPanel.setVisible(false);
+            }
         }
 
     }
 
-    // need for key binding
-    public class UpAction extends AbstractAction {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            GameFrame.this.runCommand("go north");
+    public void openMiniGame(){
+        //TODO: edit game showSafetyBrief(), need read a map from xls
+        showSafetyBrief();
+        if(this.getPlayer().getCurrentLocation().hasNPC_Property(NPC_Properties.DRILL_RANGE)) {
+            RangeFrame miniGame = new RangeFrame(this);
+            miniGame.init();
+        } else if (this.getPlayer().getCurrentLocation().hasNPC_Property(NPC_Properties.DRILL_CLS)){
+            CLSGame miniGame = new CLSGame(this);
+            miniGame.init(1);
+        } else if (this.getPlayer().getCurrentLocation().hasNPC_Property(NPC_Properties.DRILL_PT)){
+            //TODO start PT game
+            PtGame miniGame = new PtGame(this);
+            miniGame.init();
+        } else {
+            this.gameResponsePanel.setResponseText("You need report to the Drill SGT first");
         }
+
     }
 
-    public class DownAction extends AbstractAction {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            GameFrame.this.runCommand("go south");
-            System.out.println("working down");
-        }
+    public void showSafetyBrief(){
+        String[] options = {"Start Qualification Test"};
+        safetyBriefPanel = new SafetyBriefPanel();
+        JOptionPane.showOptionDialog(null, safetyBriefPanel, "Safety Brief", JOptionPane.NO_OPTION,JOptionPane.PLAIN_MESSAGE,null,options,options[0]);
     }
 
-    public class RightAction extends AbstractAction {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            GameFrame.this.runCommand("go east");
-            System.out.println("working right");
-        }
+    public Player getPlayer() {
+        return player;
     }
 
-
-    public class LeftAction extends AbstractAction {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            GameFrame.this.runCommand("go west");
-            System.out.println("working left");
-        }
+    public void setPlayer(Player player) {
+        this.player = player;
     }
+
+    public MapPanel getMapPanel() {
+        return mapPanel;
+    }
+
+    public void setMapPanel(MapPanel mapPanel) {
+        this.mapPanel = mapPanel;
+    }
+
 
     public class inputEnterKeyAction extends AbstractAction {
         @Override

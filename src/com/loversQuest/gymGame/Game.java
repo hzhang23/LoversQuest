@@ -2,8 +2,6 @@ package com.loversQuest.gymGame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -19,33 +17,33 @@ public class Game extends JPanel {
     // ctor
     public Game() {
 
-       addKeyListener(new KeyListener() {
-           @Override
-           public void keyTyped(KeyEvent e) {
-           }
+        addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
 
-           @Override
-           public void keyPressed(KeyEvent e) {
+            @Override
+            public void keyPressed(KeyEvent e) {
                 racquet.keyReleased(e);
-           }
+            }
 
-           @Override
-           public void keyReleased(KeyEvent e) {
+            @Override
+            public void keyReleased(KeyEvent e) {
                 racquet.keyPressed(e);
-           }
-       });
-       setFocusable(true);
+            }
+        });
+        setFocusable(true);
     }
 
     // methods
 
-    private int getScore() {
+    int getScore() {
         return speed - 1;
     }
 
     public void move() {
-       ball.move();
-       racquet.move();
+        ball.move();
+        racquet.move();
     }
 
 
@@ -62,23 +60,6 @@ public class Game extends JPanel {
         g2d.drawString(String.valueOf(getScore()), 10, 30);
     }
 
-    // Dialog box that gives the player option to restart the game, or exit
-    public void gameOver() {
-        int response = JOptionPane.showConfirmDialog(null, "You scored " + this.getScore() + " points. You need at least 5. Do you want to play again?", "Game Over",
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (response == JOptionPane.NO_OPTION) {
-            System.exit(0);
-        }
-        else if (response == JOptionPane.YES_OPTION) {
-           JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-           frame.dispose();
-           new Client();
-        }
-        else if (response == JOptionPane.CLOSED_OPTION) {
-            System.exit(0);
-        }
-    }
-
     // checking if the player has satisfied requirement to complete the task
     public boolean isSatisfied() {
         if (this.getScore() >= 5) {
@@ -86,8 +67,11 @@ public class Game extends JPanel {
             System.exit(0);
             return true;
         } else {
-            gameOver();
+            System.out.println("lose");
+            System.exit(0);
         }
         return false;
     }
 }
+
+

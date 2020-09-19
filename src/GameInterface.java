@@ -13,11 +13,8 @@ public class GameInterface {
 
     public static void main(String[] args) {
 
-        //GameWorld g1 = new GameWorld();
         GameInit g1 = new GameInit();
-
         Output output = new Output();
-        //GraphicClass asciiPrinter = new GraphicClass();
 
         JFrameInput jFrameInput = new JFrameInput();
         GameFrame gameFrame = new GameFrame(output.displayIntroDialog(), jFrameInput, g1.p1);

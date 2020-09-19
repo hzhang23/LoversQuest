@@ -22,10 +22,10 @@ public class DrillSGT_Range extends NonPlayerCharacters {
         return returnMsg;
     }
 
-    @Override
-    public void testPlayer(){
-        new RangeFrame();
-    }
+//    @Override
+//    public void testPlayer(){
+//        new RangeFrame();
+//    }
 
 
     public static int getShootingScore() {

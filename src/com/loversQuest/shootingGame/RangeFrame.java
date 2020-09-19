@@ -1,7 +1,10 @@
 package com.loversQuest.shootingGame;
 
+import com.loversQuest.GUI.GameFrame;
+import com.loversQuest.gameWorldPieces.Item;
 import com.loversQuest.gameWorldPieces.models_NPC.DrillSGT_PT;
 import com.loversQuest.gameWorldPieces.models_NPC.DrillSGT_Range;
+import org.w3c.dom.ranges.Range;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,14 +13,18 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
+import java.util.Scanner;
 
-public class RangeFrame extends JFrame {
+public class RangeFrame {
 
     public static void main(String[] args) {
-        RangeFrame a = new RangeFrame();
+
     }
+
+
     JLayeredPane layeredPane;
     private int ammoCount;
+    ScorePanel scorePanel = new ScorePanel();
     private int targetCount;
     private int targetHit;
     Thread targetThread;
@@ -26,15 +33,21 @@ public class RangeFrame extends JFrame {
     RangePanel bgPanel;
     JButton reloadButton;
     Random rand = new Random();
-    JFrame main;
+    GameFrame gameFrame;
+    JFrame rangeFrame;
 
     JTextArea textArea = new JTextArea();
     JTextArea board = new JTextArea();
 
-    public RangeFrame(){
-        JOptionPane.showMessageDialog(null, "welcome to the Range!","Safety Brief", JOptionPane.PLAIN_MESSAGE);
+
+    public RangeFrame(GameFrame gameFrame){
+        this.gameFrame = gameFrame;
+    }
+
+    public void init(){
+        rangeFrame = new JFrame();
         ammoCount = 3;
-        targetCount = 4;
+        targetCount = 3;
         targetHit = 0;
         layeredPane = new JLayeredPane();
         bgPanel = new RangePanel("resources/shootingGameResources/range1.jpg");
@@ -47,28 +60,23 @@ public class RangeFrame extends JFrame {
         layeredPane.add(board, JLayeredPane.MODAL_LAYER);
         layeredPane.add(textArea, JLayeredPane.MODAL_LAYER);
 
-
-       // layeredPane.add(reloadButton, JLayeredPane.MODAL_LAYER);
-
-
-        this.setTitle("Markmanship Qualification");
-        this.targetUp();
-        this.setAlwaysOnTop(true);
-        this.setLayeredPane(layeredPane);
-        this.setLayout(null);
-        this.setVisible(true);
-        this.setLocationRelativeTo(null);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.setCursor(getEyeCapture());
-        this.addMouseListener(gameMouse);
-        this.addMouseMotionListener(gameMouse);
-        this.addWindowListener(new WindowAdapter() {
+        rangeFrame.setTitle("Markmanship Qualification");
+        rangeFrame.setAlwaysOnTop(true);
+        rangeFrame.setLayeredPane(layeredPane);
+        rangeFrame.setLayout(null);
+        rangeFrame.setVisible(true);
+        rangeFrame.setLocationRelativeTo(null);
+        rangeFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        rangeFrame.setCursor(getEyeCapture());
+        rangeFrame.addMouseListener(gameMouse);
+        rangeFrame.addMouseMotionListener(gameMouse);
+        rangeFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                System.out.println(targetHit);
                 System.exit(0);
             }
         });
+        this.targetUp();
     }
 
     public Cursor getEyeCapture(){
@@ -89,19 +97,41 @@ public class RangeFrame extends JFrame {
     }
 
     public void exitGame(){
-        this.dispose();
-        JOptionPane.showMessageDialog(null, "seize fire! seize fire! seize fire, clear your weapon and get out of my range!", "Shooting Session Completed", JOptionPane.PLAIN_MESSAGE);
-        DrillSGT_Range.setShootingScore(targetHit);
-        System.out.println(DrillSGT_Range.getShootingScore());
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("resources/shootingGameResources/score.txt"));
-            String score = Integer.toString(targetHit);
-            writer.write(score);
-            writer.flush();
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        String[] options = {"Clear Weapon and Leave Your Shooting Position!"};
+        rangeFrame.dispose();
+        scorePanel.scoreField.setText(""+targetHit);
+        int flag = JOptionPane.showOptionDialog(null, scorePanel,
+                "Shooting Score",JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE,null,options,options[0]
+                );
+        if (flag == 0){
+            this.returnGameFrameText();
+            gameFrame.setVisible(true);
         }
+    }
+
+    // TODO: Get badge from Itemlist instead
+
+    public void returnGameFrameText(){
+        if (targetHit > 35) {
+            Item expertShooter = new Item("Army Marksmanship Expert Badge", "you feel like your are the most lethal weapon of Army");
+            gameFrame.changeTopLeftText("You received this very shiny Expert Badge and you cannot wait to put it on your CLASS A uniform");
+            gameFrame.getPlayer().addItem(expertShooter);
+        }
+        else if (targetHit >= 30 && targetHit <= 35){
+            Item sharpShooter = new Item ("Army Marksmanship Sharp Shooter Badge", "you can make things more deader better than most jokers in your platoon");
+            gameFrame.changeTopLeftText("Sharpshooter Badge");
+            gameFrame.getPlayer().addItem(sharpShooter);
+        } else if ( targetHit >= 23 && targetHit < 30) {
+            Item weaponQual = new Item("Army Marksmanship Qualification Badge", "at least you hit a bit more than half targets at Range");
+            gameFrame.changeTopLeftText("you meet U.S Army minimum requirement just like PVT Carl");
+            gameFrame.getPlayer().addItem(weaponQual);
+
+        } else {
+            gameFrame.changeTopLeftText("you think you probably need get your eyes checked and try again.");
+        }
+
+
+
     }
 
     public void targetUp(){
@@ -160,6 +190,7 @@ public class RangeFrame extends JFrame {
             }
         });
     }
+
 
     public int getTargetHit() {
         return targetHit;
@@ -271,5 +302,7 @@ public class RangeFrame extends JFrame {
             this.y = y;
         }
     }
+
+
 
 }

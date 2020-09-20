@@ -52,11 +52,6 @@ public class NonPlayerCharacters {
         }
     }
 
-    public void testPlayer (){
-        // holder to be override
-    }
-
-
     //getter&setter
 
     public NPC_Properties getProperties() {

@@ -3,7 +3,7 @@ package com.loversQuest.GUI;
 import com.loversQuest.clsMinigame.CLSGame;
 import com.loversQuest.gameWorldPieces.Player;
 import com.loversQuest.gameWorldPieces.models_NPC.NPC_Properties;
-import com.loversQuest.gymGame.PtGame;
+import com.loversQuest.gymGame.ptFrame;
 import com.loversQuest.shootingGame.RangeFrame;
 
 import javax.swing.*;
@@ -92,6 +92,7 @@ public class GameFrame extends JFrame{
         mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
+        this.gameResponsePanel.addPainter();
     }
 
     public void changeTopLeftText (String newText){
@@ -113,12 +114,9 @@ public class GameFrame extends JFrame{
         String response = input.getUserAction(this.player, command);
         if (response.equals("miniGameInit")){
             openMiniGame(); // open game Frame
-            this.dispose(); // hide this window
         } else {
             this.gameResponsePanel.setResponseText(response);
-            this.inputPanel.getInputText().setText("");
-            this.inventoryPanel.setInventoryText(this.player.getAllItems().toString());
-            this.mapPanel.updateImageLabel(this.player.getCurrentLocation().getName());
+            this.refreshPanel();
             if (this.player.isHasKiss()) {
                 this.gameResponsePanel.setResponseText(
                         "Your sweetheart says: OMG five WhiteClaws for me? I love you\n" +
@@ -129,26 +127,42 @@ public class GameFrame extends JFrame{
                 this.inventoryPanel.setVisible(false);
             }
         }
-
+        this.gameResponsePanel.addPainter();
     }
 
     public void openMiniGame(){
-        //TODO: edit game showSafetyBrief(), need read a map from xls
-        showSafetyBrief();
         if(this.getPlayer().getCurrentLocation().hasNPC_Property(NPC_Properties.DRILL_RANGE)) {
+            this.gameResponsePanel.setResponseText("you better show me that your can shoot better than my grandma. \nstay tight for the SAFETY BRIEF");
+            showSafetyBrief();
             RangeFrame miniGame = new RangeFrame(this);
             miniGame.init();
         } else if (this.getPlayer().getCurrentLocation().hasNPC_Property(NPC_Properties.DRILL_CLS)){
+            //NPC tell back miniGameInit
+            this.gameResponsePanel.setResponseText("Private! Time to check your CLS knowledge! Don't tell me that you still use duct tape for everything!" +
+                    "\nsit down and wait for the Combat Life saver qualification exam SAFETY BRIEF");
+            showSafetyBrief();
             CLSGame miniGame = new CLSGame(this);
             miniGame.init(1);
         } else if (this.getPlayer().getCurrentLocation().hasNPC_Property(NPC_Properties.DRILL_PT)){
-            //TODO start PT game
-            PtGame miniGame = new PtGame(this);
-            miniGame.init();
+            showSafetyBrief();
+            Thread newTH = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    ptFrame miniGame = new ptFrame(GameFrame.this);
+                    miniGame.init();
+                }
+            });
+            newTH.start();
         } else {
             this.gameResponsePanel.setResponseText("You need report to the Drill SGT first");
         }
 
+    }
+
+    public void refreshPanel(){
+        this.inputPanel.getInputText().setText("");
+        this.inventoryPanel.setInventoryText(this.player.getAllItems().toString());
+        this.mapPanel.updateImageLabel(this.player.getCurrentLocation().getName());
     }
 
     public void showSafetyBrief(){

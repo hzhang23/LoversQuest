@@ -11,10 +11,13 @@ public class DrillSGTDicks extends NonPlayerCharacters {
 
     @Override
     public String interact(Player player) {
-        String returnMsg = "Private, I have more details for you";
-        /**
-         * TODO: write DrillSGT Dicks interact method, do details and change player location
-         */
-        return returnMsg;
+        if (player.isHasCertainItem("Army Marksmanship Expert Badge") && player.isHasCertainItem("Combat Life Saver Badge")
+        ){
+            return "You seems like a square away soldier, I will recommend you to solider of the month board!";
+        } else if (player.isHasCertainItem("Army Marksmanship Expert Badge") || player.isHasCertainItem("Combat Life Saver Badge")) {
+            return "Keep up good work! Keeping improving your PT, Markmanship and Expertise!";
+        } else {
+            return "Privates! the soldier of the month board are for those who have kick ass PT score, sharp at shooting and know their expertise!";
+        }
     }
 }

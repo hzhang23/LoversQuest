@@ -69,26 +69,38 @@ public class JFrameInput {
             case "interact" -> {
                 if (matchObj.length == 1) {
                     finalResponse = (player.interact(matchObj[0]));
-                } else if (matchObj.length < 1 && player.getCurrentLocation().getOccupants().size() == 1) {
-                    NonPlayerCharacters npc = player.getCurrentLocation().getOccupants().get(0);
-                    finalResponse = (player.interact(npc.getName().toLowerCase()));
                 } else if (matchObj.length > 1) {
-                    List<NonPlayerCharacters> npcList = player.getCurrentLocation().getOccupants();
-                    StringBuilder sb = new StringBuilder();
-                    for (int j = 0; j < npcList.size(); j++) {
-                        String npcName = npcList.get(j).getName().toLowerCase();
-                        for (int i = 0; i < matchObj.length; i++) {
-                            if (matchObj[i].equals(npcName)) {
-                                if (j == npcList.size() - 1) {
-                                    sb.append(" or ");
+                    if (player.getCurrentLocation().getOccupants().size() == 1) {
+                        NonPlayerCharacters npc = player.getCurrentLocation().getOccupants().get(0);
+                        finalResponse = (player.interact(npc.getName().toLowerCase()));
+                    } else {
+                        List<NonPlayerCharacters> npcList = player.getCurrentLocation().getOccupants();
+                        StringBuilder sb = new StringBuilder();
+                        ArrayList<String> npcNames = new ArrayList<>();
+                        for (int j = 0; j < npcList.size(); j++) {
+                            String npcName = npcList.get(j).getName().toLowerCase();
+                            for (int i = 0; i < matchObj.length; i++) {
+                                if (matchObj[i].equals(npcName)) {
+                                    npcNames.add(npcName);
                                 }
-                                sb.append(npcList.get(j).getName());
+                            }
+                            if (npcNames.size() == 1) {
+                                finalResponse = player.interact(npcNames.get(0).toLowerCase());
+                            } else {
+                                for (int i = 0; i < npcNames.size(); i++) {
+                                    if (j == npcList.size() - 1) {
+                                        sb.append(" or ");
+                                    }
+                                    sb.append(npcList.get(j).getName());
+                                }
+                                finalResponse = "who do you like to talk to, " + sb.toString() + "?";
                             }
                         }
                     }
-                    finalResponse = "who do you like to talk to, " + sb.toString() + "?";
+                    }else{
+                    finalResponse = "you look around " + player.getCurrentLocation().getName() + ", and cannot find " + objResponse;
                 }
-            }
+                }
             case "inventory" -> finalResponse = (player.displayItems());
 
             case "get" -> {

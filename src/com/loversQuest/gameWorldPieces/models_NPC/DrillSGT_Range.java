@@ -16,17 +16,13 @@ public class DrillSGT_Range extends NonPlayerCharacters {
     @Override
     public String interact(Player player) {
         String returnMsg = "get contact? shoot back! (with Knife hand)";
-        /**
-         * TODO: write DrillHwak_eyes interact, meet player at range and shoot
-         */
+        if (player.isHasCertainItem("Army Marksmanship Expert Badge")){
+            returnMsg = "calm down! tiger! you are not the only one that can shot";
+        } else {
+            returnMsg = "miniGameInit";
+        }
         return returnMsg;
     }
-
-//    @Override
-//    public void testPlayer(){
-//        new RangeFrame();
-//    }
-
 
     public static int getShootingScore() {
         return shootingScore;

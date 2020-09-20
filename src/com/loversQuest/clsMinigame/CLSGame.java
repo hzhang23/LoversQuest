@@ -75,7 +75,7 @@ public class CLSGame {
 
     public void returnGameFrame() {
         if (this.getScore() >= 7) {
-            Item MedicalBadge = new Item("Army Medical Badge", " you know how to make things less dead");
+            Item MedicalBadge = new Item("Combat Life Saver Badge", "You can make things less deader better");
             gameFrame.changeTopLeftText("You are tired from FIREMAN carry your battle buddy but feel happy that you passed the exam");
             gameFrame.getPlayer().addItem(MedicalBadge);
         } else {
@@ -83,6 +83,7 @@ public class CLSGame {
             gameFrame.getPlayer().go("south");
             gameFrame.getMapPanel().updateImageLabel(gameFrame.getPlayer().getCurrentLocation().getName());
         }
+        gameFrame.refreshPanel();
     }
 
     // getting a question

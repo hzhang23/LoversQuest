@@ -4,12 +4,12 @@ import java.awt.*;
 import java.util.Random;
 
 public class Ball {
-    private static final int DIAMETER = 30;
+    private static final int DIAMETER = 50;
     Random rand = new Random();
     int x = rand.nextInt(300);
     int y = 0;
-    int xa = 1;
-    int ya = 1;
+    int xa = 2;
+    int ya = 2;
     private Game game;
 
     public Ball(Game game) {
@@ -44,7 +44,7 @@ public class Ball {
     }
 
     public void paint(Graphics2D g) {
-        g.fillOval(x, y, 30, 30);
+        g.fillOval(x, y, DIAMETER, DIAMETER);
     }
 
     public Rectangle getBounds() {

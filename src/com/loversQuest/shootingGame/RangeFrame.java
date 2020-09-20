@@ -1,6 +1,7 @@
 package com.loversQuest.shootingGame;
 
 import com.loversQuest.GUI.GameFrame;
+import com.loversQuest.excelReader.ReadExcel;
 import com.loversQuest.gameWorldPieces.Item;
 import com.loversQuest.gameWorldPieces.models_NPC.DrillSGT_PT;
 import com.loversQuest.gameWorldPieces.models_NPC.DrillSGT_Range;
@@ -12,6 +13,7 @@ import java.awt.event.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -46,8 +48,8 @@ public class RangeFrame {
 
     public void init(){
         rangeFrame = new JFrame();
-        ammoCount = 3;
-        targetCount = 3;
+        ammoCount = 40;
+        targetCount = 40;
         targetHit = 0;
         layeredPane = new JLayeredPane();
         bgPanel = new RangePanel("resources/shootingGameResources/range1.jpg");
@@ -129,9 +131,7 @@ public class RangeFrame {
         } else {
             gameFrame.changeTopLeftText("you think you probably need get your eyes checked and try again.");
         }
-
-
-
+        gameFrame.refreshPanel();
     }
 
     public void targetUp(){

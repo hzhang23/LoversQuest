@@ -91,6 +91,19 @@ public class Player {
         if (currentLocation.getContainer() == null){
             returningMsg.append("there is nothing to pick up other than your dignity");
         } else {
+            if(itemRequested.toLowerCase().equals("diamond ring")){
+                if(this.isHasCertainItem("Army Marksmanship Expert Badge")
+                        &&this.isHasCertainItem("Combat Life Saver Badge"))
+                {
+                    this.ruckSack.addItem(currentLocation.getContainer().getItem("diamond ring"));
+                    return "you finally get that diamond ring! check it out and go find your Darling!";
+                } else {
+                    return "the diamond ring is like twice as much as your pay check. However, soldier of the month awardee will get a huge discount!";
+                }
+            }
+
+
+
             if (currentLocation.getContainer().displayContents().isEmpty()){
                 returningMsg.append("Oops, there is nothing in " + currentLocation.getContainer().getName());
             } else {
@@ -131,14 +144,12 @@ public class Player {
 
     public boolean isHasCertainItem(String itemName) {
         List<Item> allItems = this.getAllItems();
-        for(Item item : allItems){
-            if(item.getName().equals(itemName)){
-                setHasCertainItem(true);
-            } else {
-                setHasCertainItem(false);
+        for (Item item : allItems) {
+            if (item.getName().toLowerCase().equals(itemName.toLowerCase())) {
+                return true;
             }
         }
-        return hasCertainItem;
+        return false;
     }
 
     public void setHasCertainItem(boolean hasCertainItem) { this.hasCertainItem = hasCertainItem;}

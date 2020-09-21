@@ -3,7 +3,7 @@ package com.loversQuest.GUI;
 import com.loversQuest.clsMinigame.CLSGame;
 import com.loversQuest.gameWorldPieces.Player;
 import com.loversQuest.gameWorldPieces.models_NPC.NPC_Properties;
-import com.loversQuest.gymGame.ptFrame;
+import com.loversQuest.gymGame.ptGame;
 import com.loversQuest.shootingGame.RangeFrame;
 
 import javax.swing.*;
@@ -35,7 +35,7 @@ public class GameFrame extends JFrame{
     public GameFrame(String gameResponse, JFrameInput input, Player player) {
         //TODO: Text input area at bottom has event listener for enter key and button press.
         // When event is triggered the panes are re-rendered with the following
-        // Game response text, Inventory, Map(if location is included), Ascii art..
+        // ptGame response text, Inventory, Map(if location is included), Ascii art..
         this.input = input;
         this.player = player;
 
@@ -133,26 +133,31 @@ public class GameFrame extends JFrame{
     public void openMiniGame(){
         if(this.getPlayer().getCurrentLocation().hasNPC_Property(NPC_Properties.DRILL_RANGE)) {
             this.gameResponsePanel.setResponseText("you better show me that your can shoot better than my grandma. \nstay tight for the SAFETY BRIEF");
-            showSafetyBrief();
+            showSafetyBrief("range");
             RangeFrame miniGame = new RangeFrame(this);
             miniGame.init();
         } else if (this.getPlayer().getCurrentLocation().hasNPC_Property(NPC_Properties.DRILL_CLS)){
             //NPC tell back miniGameInit
             this.gameResponsePanel.setResponseText("Private! Time to check your CLS knowledge! Don't tell me that you still use duct tape for everything!" +
                     "\nsit down and wait for the Combat Life saver qualification exam SAFETY BRIEF");
-            showSafetyBrief();
+            showSafetyBrief("cls");
             CLSGame miniGame = new CLSGame(this);
             miniGame.init(1);
         } else if (this.getPlayer().getCurrentLocation().hasNPC_Property(NPC_Properties.DRILL_PT)){
-            showSafetyBrief();
-//            Thread newTH = new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-                    ptFrame miniGame = new ptFrame(GameFrame.this);
+            this.gameResponsePanel.setResponseText("It's about time you showed up! change to your PT uniform and we're about to start this PT test");
+            showSafetyBrief("pt");
+            ptGame miniGame = new ptGame(GameFrame.this);
+            Thread newTH = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    GameFrame.this.inputPanel.getInputText().setEditable(false);
                     miniGame.init();
-//                }
-//            });
-//            newTH.start();
+                    if (!miniGame.isGameRun()){
+                        GameFrame.this.inputPanel.getInputText().setEditable(true);
+                    }
+                }
+            });
+            newTH.start();
         } else {
             this.gameResponsePanel.setResponseText("You need report to the Drill SGT first");
         }
@@ -165,9 +170,9 @@ public class GameFrame extends JFrame{
         this.mapPanel.updateImageLabel(this.player.getCurrentLocation().getName());
     }
 
-    public void showSafetyBrief(){
+    public void showSafetyBrief(String game){
         String[] options = {"Start Qualification Test"};
-        safetyBriefPanel = new SafetyBriefPanel();
+        safetyBriefPanel = new SafetyBriefPanel(game);
         JOptionPane.showOptionDialog(null, safetyBriefPanel, "Safety Brief", JOptionPane.NO_OPTION,JOptionPane.PLAIN_MESSAGE,null,options,options[0]);
     }
 

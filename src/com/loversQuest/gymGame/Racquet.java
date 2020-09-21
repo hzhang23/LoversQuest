@@ -10,17 +10,17 @@ public class Racquet {
     private static final int HEIGHT = 10;
     int x = 0;
     int xa = 0;
-    private Game game;
+    private ptGame ptGame;
 
     // ctor
-    public Racquet(Game game) {
-        this.game = game;
+    public Racquet(ptGame ptGame) {
+        this.ptGame = ptGame;
     }
 
 
     // business methods
     public void move() {
-        if (x + xa > 0 && x + xa < game.getWidth() - WIDTH) {
+        if (x + xa > 0 && x + xa < ptGame.getWidth() - WIDTH) {
             x = x + xa;
         }
     }
@@ -35,10 +35,10 @@ public class Racquet {
 
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            xa = -game.speed;
+            xa = -ptGame.speed;
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            xa = game.speed;
+            xa = ptGame.speed;
         }
     }
 

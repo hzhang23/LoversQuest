@@ -25,6 +25,7 @@ public class ReadExcel {
     }
     public static Map<String, List<String>> getGameObjList() {return createGameObjMap(gameBookPath);}
     public static List<Item> getItemList(){ return createItemList(gameBookPath); }
+    public static Map<String, String[]> getSafetyBrief() {return getSafetyBriefMap(gameBookPath);}
 
 
     /**
@@ -323,7 +324,7 @@ public class ReadExcel {
                 }
                 if (cellNum == 1){
                     briefString = row.getCell(cellNum).getStringCellValue();
-                    String[] stringArr = briefString.split(",");
+                    String[] stringArr = briefString.split(";");
                     safetyBriefMap.put(key,stringArr);
                 }
                 cellNum++;

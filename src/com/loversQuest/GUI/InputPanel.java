@@ -11,8 +11,6 @@ public class InputPanel extends JPanel{
     private JButton submitButton = new JButton("Submit");
 
     InputPanel(JFrame mainFrame){
-//        GridLayout layoutBottomLeft = new GridLayout(3, 1);
-//        this.setLayout(layoutBottomLeft);
         inputText.setEditable(true);
         inputText.setFont(new Font("Helvetica", Font.PLAIN, 20));
         this.add(bottomLeftLabel);

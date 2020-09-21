@@ -5,8 +5,8 @@ import java.awt.event.KeyEvent;
 
 public class Racquet {
     // variables
-    private static final int Y = 330;
-    private static final int WIDTH = 60;
+    private static final int Y = 700;
+    private static final int WIDTH = 240;
     private static final int HEIGHT = 10;
     int x = 0;
     int xa = 0;

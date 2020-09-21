@@ -1,3 +1,4 @@
+
 package com.loversQuest.gymGame;
 
 import javax.swing.*;
@@ -13,28 +14,27 @@ public class Game extends JPanel {
 
     Ball ball = new Ball(this);
     Racquet racquet = new Racquet(this);
-    int speed = 1;
+    int speed = 2;
     private boolean isSatisfied = false;
 
     // ctor
     public Game() {
+        addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
 
-       addKeyListener(new KeyListener() {
-           @Override
-           public void keyTyped(KeyEvent e) {
-           }
-
-           @Override
-           public void keyPressed(KeyEvent e) {
-                racquet.keyReleased(e);
-           }
-
-           @Override
-           public void keyReleased(KeyEvent e) {
+            @Override
+            public void keyPressed(KeyEvent e) {
                 racquet.keyPressed(e);
-           }
-       });
-       setFocusable(true);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                racquet.keyReleased(e);
+            }
+        });
+        setFocusable(true);
     }
 
     // methods
@@ -44,14 +44,14 @@ public class Game extends JPanel {
     }
 
     public void move() {
-       ball.move();
-       racquet.move();
+        ball.move();
+        racquet.move();
     }
 
 
     @Override
-    public void paint(Graphics g) {
-        super.paint(g);
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         ball.paint(g2d);
@@ -70,9 +70,9 @@ public class Game extends JPanel {
             System.exit(0);
         }
         else if (response == JOptionPane.YES_OPTION) {
-           JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-           frame.dispose();
-           new Client();
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            frame.dispose();
+            //new ptFrame();
         }
         else if (response == JOptionPane.CLOSED_OPTION) {
             System.exit(0);
@@ -91,3 +91,4 @@ public class Game extends JPanel {
         return false;
     }
 }
+

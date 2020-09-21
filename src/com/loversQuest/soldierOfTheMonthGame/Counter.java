@@ -1,4 +1,4 @@
-package com.loversQuest.clsMinigame;
+package com.loversQuest.soldierOfTheMonthGame;
 
 public class Counter {
   int S, Ms;

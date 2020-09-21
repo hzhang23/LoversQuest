@@ -1,10 +1,10 @@
-package com.loversQuest.clsMinigame;
+package com.loversQuest.soldierOfTheMonthGame;
 
-public class CLSQuiz {
+public class SOMQuiz {
 
   String question, ansA, ansB, ansC, ansD, correct_answer;
 
-   CLSQuiz(String question, String ansA, String ansB, String ansC, String ansD, String corrAns) {
+   SOMQuiz(String question, String ansA, String ansB, String ansC, String ansD, String corrAns) {
     this.question = question;
     this.ansA = ansA;
     this.ansB = ansB;

@@ -1,4 +1,4 @@
-package com.loversQuest.clsMinigame;
+package com.loversQuest.soldierOfTheMonthGame;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -13,11 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
-import org.apache.poi.sl.usermodel.TableCell.BorderEdge;
 
-public class CLSQuestionsPanel extends JPanel {
+public class SOMQuestionsPanel extends JPanel {
 
   JTextArea Question;
   JRadioButton answerA, answerB, answerC, answerD;
@@ -29,17 +27,13 @@ public class CLSQuestionsPanel extends JPanel {
   static int score = 0;
   List<JRadioButton> buttonGroup = new ArrayList<>();
 
-  CLSQuestionsPanel(CLSQuiz obj, JFrame window) {
+  SOMQuestionsPanel(SOMQuiz obj, JFrame window) {
 
     Question = new JTextArea(obj.question);
     answerA = new JRadioButton(obj.ansA);
-    boolean isAnswerASelected = answerA.isSelected();
     answerB = new JRadioButton(obj.ansB);
-    boolean isAnswerBSelected = answerB.isSelected();
     answerC = new JRadioButton(obj.ansC);
-    boolean isAnswerCSelected = answerC.isSelected();
     answerD = new JRadioButton(obj.ansD);
-    boolean isAnswerDSelected = answerD.isSelected();
     ButtonGroup choices = new ButtonGroup();
     choices.add(answerA);
     choices.add(answerB);
@@ -81,7 +75,7 @@ public class CLSQuestionsPanel extends JPanel {
     Question.setAlignmentY(JTextArea.CENTER_ALIGNMENT);
     Question.setWrapStyleWord(true);
     Question.setLineWrap(true);
-    Question.setFont(new Font("Verdana", Font.BOLD, 18));
+    Question.setFont(new Font("Verdana", Font.BOLD, 14));
     Question.setEditable(false);
     Question.setFocusable(false);
 

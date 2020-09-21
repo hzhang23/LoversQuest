@@ -5,9 +5,10 @@ import java.awt.*;
 
 public class InventoryPanel extends JPanel{
 
-    private JTextArea inventoryText = new JTextArea(8,35);
+    private JTextArea inventoryText;
 
     InventoryPanel(int x, int y){
+        inventoryText = new JTextArea(8,35);
         GridBagLayout layoutTopRight = new GridBagLayout();
         this.setLayout(layoutTopRight);
         GridBagConstraints gbcTopRight = new GridBagConstraints();
@@ -34,5 +35,13 @@ public class InventoryPanel extends JPanel{
 
     public void setInventoryText(String text) {
         this.inventoryText.setText(text);
+    }
+
+    public JTextArea getInventoryText() {
+        return inventoryText;
+    }
+
+    public void setInventoryText(JTextArea inventoryText) {
+        this.inventoryText = inventoryText;
     }
 }

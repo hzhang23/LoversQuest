@@ -22,7 +22,8 @@ public class MapPanel extends JPanel{
         imageLabel.setIcon(image);
 
         // make the panel
-        imagePanel = new JPanel(new BorderLayout());
+        //imagePanel = new JPanel(new BorderLayout());
+        imagePanel = new JPanel(new GridBagLayout());
         imagePanel.add(imageLabel);
         imagePanel.setSize(imageLabel.getWidth(), imageLabel.getHeight());
 
@@ -38,6 +39,9 @@ public class MapPanel extends JPanel{
     public void updateImageLabel(String location) {
         String picLocation = location.replaceAll(" ", "");
         String fileName = String.format("resources/%s.png", picLocation);
+        if (fileName.contains("ending")){
+            fileName = "resources/ending.gif";
+        }
         ImageIcon image = new ImageIcon(fileName);
         this.imageLabel.setIcon(image);
         System.out.println("file name is " + fileName);

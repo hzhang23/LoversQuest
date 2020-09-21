@@ -12,10 +12,11 @@ public class DrillSGTDicks extends NonPlayerCharacters {
     @Override
     public String interact(Player player) {
         if (player.isHasCertainItem("Army Marksmanship Expert Badge") && player.isHasCertainItem("Combat Life Saver Badge")
+                && player.isHasCertainItem("Physical Training Badge")
         ){
-            return "You seems like a square away soldier, I will recommend you to solider of the month board!";
+            return "miniGameInit";
         } else if (player.isHasCertainItem("Army Marksmanship Expert Badge") || player.isHasCertainItem("Combat Life Saver Badge")) {
-            return "Keep up good work! Keeping improving your PT, Markmanship and Expertise!";
+            return "Keep up the good work! Keeping improving your PT, Marksmanship and Expertise!";
         } else {
             return "Privates! the soldier of the month board are for those who have kick ass PT score, sharp at shooting and know their expertise!";
         }

@@ -7,7 +7,7 @@ import java.awt.*;
 public class InputPanel extends JPanel{
 
     private JLabel bottomLeftLabel = new JLabel("Commands: Go <direction>, Look, Inspect <suspicious container>, Use <item>, Interact");
-    private JTextField inputText = new JTextField(20);
+    private JTextField inputText = new JTextField(30);
     private JButton submitButton = new JButton("Submit");
 
     InputPanel(JFrame mainFrame){

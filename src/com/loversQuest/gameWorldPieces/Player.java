@@ -92,13 +92,12 @@ public class Player {
             returningMsg.append("there is nothing to pick up other than your dignity");
         } else {
             if(itemRequested.toLowerCase().equals("diamond ring")){
-                if(this.isHasCertainItem("Army Marksmanship Expert Badge")
-                        &&this.isHasCertainItem("Combat Life Saver Badge"))
+                if(this.isHasCertainItem("Soldier of Month Certificate"))
                 {
                     this.ruckSack.addItem(currentLocation.getContainer().getItem("diamond ring"));
                     return "you finally get that diamond ring! check it out and go find your Darling!";
                 } else {
-                    return "the diamond ring is like twice as much as your pay check. However, soldier of the month awardee will get a huge discount!";
+                    return "the diamond ring is like twice as much as your pay check. However, if you could show me your soldier of the month certificate, you can get 99% discount";
                 }
             }
 

@@ -5,6 +5,7 @@ import com.loversQuest.gameWorldPieces.Player;
 import com.loversQuest.gameWorldPieces.models_NPC.NPC_Properties;
 import com.loversQuest.gymGame.ptGame;
 import com.loversQuest.shootingGame.RangeFrame;
+import com.loversQuest.soldierOfTheMonthGame.SOMClient;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -114,18 +115,11 @@ public class GameFrame extends JFrame{
         String response = input.getUserAction(this.player, command);
         if (response.equals("miniGameInit")){
             openMiniGame(); // open game Frame
+        } else if(response.equals("happyEnding")){
+            openHappyEnding();
         } else {
             this.gameResponsePanel.setResponseText(response);
             this.refreshPanel();
-            if (this.player.isHasKiss()) {
-                this.gameResponsePanel.setResponseText(
-                        "Your sweetheart says: OMG five WhiteClaws for me? I love you\n" +
-                                "\nCongrats soldier you've just graduated AIT. Now go buy a Camaro." +
-                                "\nYour quest for Love has ended.");
-                this.inputPanel.setVisible(false);
-                this.mapPanel.setVisible(false);
-                this.inventoryPanel.setVisible(false);
-            }
         }
         this.gameResponsePanel.addPainter();
     }
@@ -158,6 +152,19 @@ public class GameFrame extends JFrame{
                 }
             });
             newTH.start();
+        } else if(this.getPlayer().getCurrentLocation().hasNPC_Property(NPC_Properties.DRILL_DICKS)){
+            SOMClient miniGame = new SOMClient(this);
+            Thread gameTh = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    GameFrame.this.inputPanel.getInputText().setEditable(false);
+                    miniGame.init();
+                    if(miniGame.isGameOver()){
+                        GameFrame.this.inputPanel.getInputText().setEditable(true);
+                    }
+                }
+            });
+            gameTh.start();
         } else {
             this.gameResponsePanel.setResponseText("You need report to the Drill SGT first");
         }
@@ -165,15 +172,76 @@ public class GameFrame extends JFrame{
     }
 
     public void refreshPanel(){
-        this.inputPanel.getInputText().setText("");
         this.inventoryPanel.setInventoryText(this.player.getAllItems().toString());
         this.mapPanel.updateImageLabel(this.player.getCurrentLocation().getName());
+        this.inputPanel.getInputText().setText("");
     }
 
     public void showSafetyBrief(String game){
         String[] options = {"Start Qualification Test"};
         safetyBriefPanel = new SafetyBriefPanel(game);
         JOptionPane.showOptionDialog(null, safetyBriefPanel, "Safety Brief", JOptionPane.NO_OPTION,JOptionPane.PLAIN_MESSAGE,null,options,options[0]);
+    }
+
+    public void openHappyEnding(){
+        this.gameResponsePanel.setResponseText("OMG!!! You Did get that Ring for me! I love you!");
+        this.gameResponsePanel.setResponseText(this.getPlayer().displayItems());
+        this.inputPanel.getInputText().setBackground(Color.pink);
+        this.inputPanel.getInputText().setForeground(Color.MAGENTA);
+        this.inputPanel.getInputText().setEditable(false);
+        this.gameResponsePanel.getResponseText().setBackground(Color.pink);
+        this.inventoryPanel.getInventoryText().setBackground(Color.pink);
+        this.mapPanel.updateImageLabel("ending");
+        Thread endTh = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Font font = new Font("Apple Casual", Font.PLAIN,20);
+                    GameFrame.this.gameResponsePanel.getResponseText().setFont(font);
+                    GameFrame.this.inputPanel.getInputText().setText("you are surround by happiness right now (*^︹^*) ❤❤");
+                    GameFrame.this.gameResponsePanel.setResponseText("you are surround by happiness right now (*^︹^*) ❤❤");
+                    Thread.sleep(3000);
+                    useWhiteClaw();
+                    Thread.sleep(3000);
+                    GameFrame.this.gameResponsePanel.setResponseText("Congrats soldier! you've just graduate AIT. Now go buy a Camaro with 24% APR");
+                    Thread.sleep(3000);
+                    GameFrame.this.gameResponsePanel.setResponseText("Your quest for Love has ended");
+                    Thread.sleep(3000);
+                    String[] options = {"OK"};
+                    int response = JOptionPane.showOptionDialog(null, "Thanks for playing the game!", "THE END",
+                            JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+                    if (response == 0) {
+                        System.exit(0);
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        endTh.start();
+
+        //at last: OptionPane to thank playing game
+    }
+    public void useWhiteClaw(){
+       String itemList = this.getPlayer().displayItems();
+       itemList.replace("[", "");
+       itemList.replace("]","");
+       if (itemList.contains("claw")){
+           String[] allwhiteClaws= input.parser.findMatchObj("claw", "use");
+           StringBuilder boardResponse = new StringBuilder();
+
+           for (int i = 0; i< allwhiteClaws.length; i++){
+               if(this.getPlayer().isHasCertainItem(allwhiteClaws[i])){
+               String whiteClaw = "use " + allwhiteClaws[i];
+               String response = "\n" + input.getUserAction(this.player, whiteClaw) + " with your sweet heart";
+               boardResponse.append(response);}
+           }
+           this.gameResponsePanel.setResponseText(boardResponse.toString());
+       } else{
+           this.gameResponsePanel.setResponseText("you wish you could have some white claws to celebrate with your sweetheart at this moment..");
+       }
+
+
     }
 
     public Player getPlayer() {

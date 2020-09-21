@@ -51,6 +51,7 @@ public class StartPanel extends JPanel {
     public void gameInit(){
         GameInit g1 = new GameInit();
         Output output = new Output();
+        g1.addRing();
         JFrameInput jFrameInput = new JFrameInput();
         GameFrame gameFrame = new GameFrame(output.displayIntroDialog(), jFrameInput, g1.p1);
         gameFrame.changeTopRightText("This is your rucksack.\nIn it you will find all the items you are currently carrying and can use.\n" +

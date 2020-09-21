@@ -14,12 +14,14 @@ import java.util.Map;
 
 public class GameResponsePanel extends JPanel{
 
-    private JTextArea responseText = new JTextArea(8, 35);
+
+    private JTextArea responseText;
     private DefaultHighlighter.DefaultHighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(Color.pink);
 
     Highlighter highlighter;
 
     GameResponsePanel(int x, int y){
+        responseText = new JTextArea(8,35);
         GridBagLayout layoutTopLeft = new GridBagLayout();
         this.setLayout(layoutTopLeft);
 
@@ -94,8 +96,12 @@ public class GameResponsePanel extends JPanel{
         painter = new DefaultHighlighter.DefaultHighlightPainter(Color.orange);
     }
 
-    public static void main(String[] args) {
-        GameResponsePanel grp = new GameResponsePanel(10, 10);
-        grp.addPainter();
+
+    public JTextArea getResponseText() {
+        return responseText;
+    }
+
+    public void setResponseText(JTextArea responseText) {
+        this.responseText = responseText;
     }
 }

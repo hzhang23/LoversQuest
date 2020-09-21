@@ -12,10 +12,11 @@ public class Lover extends NonPlayerCharacters {
     @Override
     public String interact(Player player){
         String returnMsg = "I am so proud of you!";
-        /**
-         * your code in here
-         */
-
+        if(player.isHasCertainItem("diamond ring")){
+            returnMsg = "happyEnding";
+        }else{
+            returnMsg = "do you want to move out of the barracks? just put a ring on me!";
+        }
         return returnMsg;
     }
 

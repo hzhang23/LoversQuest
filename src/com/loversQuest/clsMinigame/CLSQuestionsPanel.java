@@ -1,7 +1,10 @@
 package com.loversQuest.clsMinigame;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -9,74 +12,156 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
+import org.apache.poi.sl.usermodel.TableCell.BorderEdge;
 
 public class CLSQuestionsPanel extends JPanel {
 
-  JLabel Question;
+  JTextArea Question;
   JRadioButton answerA, answerB, answerC, answerD;
   JButton submit;
   String correct_answer;
   static boolean next = false;
+  static JLabel timer = new JLabel("00:000");
+  static Counter countdown = new Counter();
   static int score = 0;
+  List<JRadioButton> buttonGroup = new ArrayList<>();
 
-   CLSQuestionsPanel(CLSQuiz obj, JFrame window) {
+  CLSQuestionsPanel(CLSQuiz obj, JFrame window) {
 
-    Question = new JLabel(obj.question);
+    Question = new JTextArea(obj.question);
     answerA = new JRadioButton(obj.ansA);
+    boolean isAnswerASelected = answerA.isSelected();
     answerB = new JRadioButton(obj.ansB);
+    boolean isAnswerBSelected = answerB.isSelected();
     answerC = new JRadioButton(obj.ansC);
+    boolean isAnswerCSelected = answerC.isSelected();
     answerD = new JRadioButton(obj.ansD);
+    boolean isAnswerDSelected = answerD.isSelected();
     ButtonGroup choices = new ButtonGroup();
     choices.add(answerA);
     choices.add(answerB);
     choices.add(answerC);
     choices.add(answerD);
+
+
+    buttonGroup.add(answerA);
+    buttonGroup.add(answerB);
+    buttonGroup.add(answerC);
+    buttonGroup.add(answerD);
+
     correct_answer = obj.correct_answer;
-    submit = new JButton();
+    submit = new JButton("Submit");
 
     JPanel background = new JPanel();
     background.setLayout(null);
-    background.setBorder(BorderFactory.createLineBorder(Color.GRAY, 10, true));
-    background.setBackground(Color.DARK_GRAY);
+    background.setBorder(BorderFactory.createLineBorder(Color.GRAY, 5, true));
+    background.setBackground(Color.WHITE);
+    setBackground(Color.DARK_GRAY);
     window.setContentPane(background);
     setLayout(null);
-    setBackground(Color.getHSBColor(140, 140, 140));
-    setBounds(90, 200, 600, 200);
+    setBounds(0, 0, 595, 595);
     setBorder(BorderFactory.createBevelBorder(3, Color.BLACK, Color.DARK_GRAY));
-    answerA.setBounds(90, 70, 200, 40);
-    answerA.setBackground(new Color(170, 170, 170));
-    answerB.setBounds(90, 140, 200, 40);
-    answerB.setBackground(new Color(170, 170, 170));
-    answerC.setBounds(330, 70, 200, 40);
-    answerC.setBackground(new Color(170, 170, 170));
-    answerD.setBounds(330, 140, 200, 40);
-    answerD.setBackground(new Color(170, 170, 170));
-    window.setVisible(true);
+    window.add(this);
+
+    //add buttons to JFrame
+    add(Question);
+    add(answerA);
+    add(answerB);
+    add(answerC);
+    add(answerD);
+    add(submit);
+
+    //add question to JFrame
+    Question.setBounds(10, 10, 560, 160);
+    Question.setBorder(new LineBorder(Color.GRAY, 2, true));
+    Question.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
+    Question.setAlignmentY(JTextArea.CENTER_ALIGNMENT);
+    Question.setWrapStyleWord(true);
+    Question.setLineWrap(true);
+    Question.setFont(new Font("Verdana", Font.BOLD, 18));
+    Question.setEditable(false);
+    Question.setFocusable(false);
+
+    //add answer selection radio buttons to JFrame
+    answerA.setBackground(Color.WHITE);
+    answerA.setBounds(25, 225, 533, 25);
+    answerA.setBorder(new LineBorder(Color.LIGHT_GRAY, 1, false));
+    answerB.setBackground(Color.WHITE);
+    answerB.setBounds(25, 253, 533, 25);
+    answerB.setBorder(new LineBorder(Color.LIGHT_GRAY, 1, false));
+    answerC.setBackground(Color.WHITE);
+    answerC.setBounds(25, 281, 533, 25);
+    answerC.setBorder(new LineBorder(Color.LIGHT_GRAY, 1, false));
+    answerD.setBackground(Color.WHITE);
+    answerD.setBounds(25, 309, 533, 25);
+    answerD.setBorder(new LineBorder(Color.LIGHT_GRAY, 1, false));
+
+    //add submit button to JFrame
+    submit.setBounds(200,365,200,40);
+    submit.setBackground(new Color(255,255,255)) ;
+    submit.setBorder(new LineBorder(Color.LIGHT_GRAY, 2, false));
+
+    //add timer to JFrame
+    timer.setBounds(150, 450, 300, 50);
+    timer.setFont(new Font("Verdana", Font.BOLD, 40));
+    timer.setHorizontalAlignment(JLabel.CENTER);
+    timer.setBorder(BorderFactory.createLineBorder(Color.white));
+    timer.setForeground(Color.white);
+    add(timer);
   }
 
-  void getAnswer() throws InterruptedException {
-
-    submit.addActionListener((ActionEvent e) -> {
-      if (answerA.getText().equals(correct_answer))
-        score++;
-      next = true;
-      if (answerB.getText().equals(correct_answer))
-        score++;
-      next = true;
-      if (answerC.getText().equals(correct_answer))
-        score++;
-      next = true;
-      if (answerD.getText().equals(correct_answer))
-        score++;
+    //iterate through choices, if selected button matches answer, increment  score
+  void getAnswer(int time) throws InterruptedException {
+    submit.addActionListener((ActionEvent a) -> {
+//          for (JRadioButton button : buttonGroup) {
+//            if (button.isSelected()) {
+//              if (button.getText().equals(correct_answer)) {
+//                score++;
+//              }
+//            }
+//          }
+//          next = true;
+//        });
+      if (answerA.getText().equals(correct_answer) && answerA.isSelected()) {
+        score++; }
+      else if (answerB.getText().equals(correct_answer) && answerB.isSelected()) {
+        score++; }
+      else if (answerC.getText().equals(correct_answer) && answerC.isSelected()) {
+        score++; }
+      else if (answerD.getText().equals(correct_answer) && answerD.isSelected()) {
+        score++; }
       next = true;
     });
+
+
+    while (!next) {
+      timer.setText(String.format("%02d", countdown.S) + ":" + String.format("%03d", countdown.Ms));
+      countdown.Ms++;
+      Thread.sleep(1);
+      if (countdown.Ms == 999) {
+        countdown.S++;
+        countdown.Ms = 0;
+      }
+      if (countdown.S > time - 10) {
+        timer.setForeground(Color.RED);
+        if (countdown.S == time) {
+          return;
+        }
+      }
+    }
+    next = false;
   }
 
-  int getScore() {
-    return score;
-  }
+    int getScore() {
+      return score;
+    }
 
-  void Reset() {
-    score = 0;
+    void reset() {
+      score = 0;
+      countdown.Ms = 0;
+      countdown.S = 0;
+    }
   }
-}

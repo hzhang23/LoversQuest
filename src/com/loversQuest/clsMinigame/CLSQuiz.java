@@ -2,7 +2,7 @@ package com.loversQuest.clsMinigame;
 
 public class CLSQuiz {
 
-  String question, ansA, ansB, ansC, ansD, correct_answer, submit;
+  String question, ansA, ansB, ansC, ansD, correct_answer;
 
    CLSQuiz(String question, String ansA, String ansB, String ansC, String ansD, String corrAns) {
     this.question = question;

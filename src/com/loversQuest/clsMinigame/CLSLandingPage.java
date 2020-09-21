@@ -1,7 +1,5 @@
 package com.loversQuest.clsMinigame;
 
-import static java.awt.GridBagConstraints.CENTER;
-
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
@@ -36,8 +34,7 @@ public class CLSLandingPage extends JPanel {
     window.setVisible(true);
   }
 
-  void choose() {
-
+  void choose(int time) {
     play.addActionListener((ActionEvent e) -> {
       go = true;
       setVisible(false);
@@ -52,8 +49,6 @@ public class CLSLandingPage extends JPanel {
         Thread.sleep(0);
       } catch (InterruptedException ex) {}
     }
-
     go = false ;
-
   }
 }

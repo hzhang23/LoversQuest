@@ -7,7 +7,12 @@ import com.loversQuest.gameWorldPieces.Player;
 
 public class DrillSGT_CLS extends NonPlayerCharacters {
 
+    private static boolean isCLSComplete = false;
     private String clsBadge = "combat life saver badge";
+
+    public static void setCLSComplete(boolean CLSComplete) {
+        isCLSComplete = CLSComplete;
+    }
 
     public DrillSGT_CLS(String name, String description, Location location, NPC_Properties properties){
         super(name, description,location, properties);
@@ -15,22 +20,12 @@ public class DrillSGT_CLS extends NonPlayerCharacters {
 
     @Override
     public String interact(Player player) {
-//        Scanner sc = new Scanner(System.in);
         String returnMsg = null;
         if(player.isHasCertainItem(clsBadge)){
             returnMsg = "Good work, Private! What a shiny badge!";
         }else {
             returnMsg = "Private! Time to check your CLS knowledge! Don't tell me that you still use duct tape for everything!";
-//            String goOrNo = sc.next().toLowerCase().strip();
-//            if (goOrNo.equals("yes")) {
-//                CLSGame game = CombatLifeSaverMinigame.getInstance();
-//                game.clsGame(player);
-//                if (goOrNo != "yes" || goOrNo != "no") {
-//                    System.out.println("Get it together, fam!");
-//                }
-//            } else {
-//                return returnMsg;
-//            }
+
         }
         return returnMsg;
     }

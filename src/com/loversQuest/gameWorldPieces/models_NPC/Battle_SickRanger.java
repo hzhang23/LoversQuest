@@ -1,5 +1,6 @@
 package com.loversQuest.gameWorldPieces.models_NPC;
 
+import com.loversQuest.excelReader.JsonGetter;
 import com.loversQuest.gameWorldPieces.Location;
 import com.loversQuest.gameWorldPieces.NonPlayerCharacters;
 import com.loversQuest.gameWorldPieces.Player;
@@ -11,11 +12,7 @@ public class Battle_SickRanger extends NonPlayerCharacters {
 
     @Override
     public String interact(Player player){
-        String returnMsg = null;
-        /**
-         * your code in here
-         */
-        return returnMsg;
+        return JsonGetter.getShayshay();
     }
 
 }

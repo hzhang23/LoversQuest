@@ -1,14 +1,25 @@
 package com.loversQuest.GUI;
 
+import com.loversQuest.excelReader.ReadExcel;
+import org.apache.commons.compress.compressors.zstandard.ZstdCompressorOutputStream;
+
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
 import java.awt.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 public class GameResponsePanel extends JPanel{
 
     private JTextArea responseText = new JTextArea(8, 35);
+    private DefaultHighlighter.DefaultHighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(Color.pink);
+
+    Highlighter highlighter;
 
     GameResponsePanel(int x, int y){
-
         GridBagLayout layoutTopLeft = new GridBagLayout();
         this.setLayout(layoutTopLeft);
 
@@ -34,10 +45,57 @@ public class GameResponsePanel extends JPanel{
         gbcTopLeft.gridx = 0;
         gbcTopLeft.gridy = 1;
         this.add(responseText, gbcTopLeft);
-
     }
 
     public void setResponseText(String text){
         this.responseText.setText(text);
+    }
+
+    public void addPainter(){
+        Map<String, List<String>> gameObjList = ReadExcel.getGameObjList();
+        List<String> npcList = gameObjList.get("interact");
+        List<String> containerList = gameObjList.get("inspect");
+        String text = responseText.getText();
+        for (String npc : npcList){
+            if(text.toLowerCase().contains(npc.toLowerCase())){
+                setPainterPink();
+                this.highlightKeyword(npc);
+            }
+        }
+        for (String container : containerList){
+            if(text.toLowerCase().contains(container.toLowerCase())){
+                setPainterOrange();
+                this.highlightKeyword(container);
+            }
+
+        }
+
+        //System.out.println(objList);
+
+    }
+
+    public void highlightKeyword(String keyword){
+        int i = 0;
+        highlighter = responseText.getHighlighter();
+        while ((i = responseText.getText().toLowerCase().indexOf(keyword, i))>=0){
+            try {
+                highlighter.addHighlight(i, i+keyword.length(), painter);
+                i += keyword.length();
+            } catch (BadLocationException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void setPainterPink(){
+        painter = new DefaultHighlighter.DefaultHighlightPainter(Color.pink);
+    }
+    public void setPainterOrange(){
+        painter = new DefaultHighlighter.DefaultHighlightPainter(Color.orange);
+    }
+
+    public static void main(String[] args) {
+        GameResponsePanel grp = new GameResponsePanel(10, 10);
+        grp.addPainter();
     }
 }

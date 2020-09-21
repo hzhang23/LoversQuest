@@ -24,7 +24,8 @@ public class ReadExcel {
         return createLocationMap(gameBookPath);
     }
     public static Map<String, List<String>> getGameObjList() {return createGameObjMap(gameBookPath);}
-
+    public static List<Item> getItemList(){ return createItemList(gameBookPath); }
+    public static Map<String, String[]> getSafetyBrief() {return getSafetyBriefMap(gameBookPath);}
 
 
     /**
@@ -58,7 +59,7 @@ public class ReadExcel {
         Sheet npcSheet = gameBook.getSheet("npc");
         List<NonPlayerCharacters> npcList = new ArrayList<>();
         String cellString;
-        for (int i = 1; i < npcSheet.getLastRowNum(); i++) {
+        for (int i = 1; i <= npcSheet.getLastRowNum(); i++) {
             Row row = npcSheet.getRow(i);
             NonPlayerCharacters npc = new NonPlayerCharacters();
             for (int j = 0; j < row.getLastCellNum(); j++) {
@@ -103,7 +104,7 @@ public class ReadExcel {
      * @param filePath path of xls
      * @return itemList
      */
-    public static List<Item> getItemList(String filePath){
+    public static List<Item> createItemList(String filePath){
         List<Item> itemList = new ArrayList<>();
         Workbook gameBook = getGamebook(filePath);
         Sheet itemSheet = gameBook.getSheet("item");
@@ -136,7 +137,7 @@ public class ReadExcel {
      */
     public static List<Container> getContainerList(String filePath){
         Workbook gameBook = getGamebook(filePath);
-        List<Item> itemList = getItemList(filePath);
+        List<Item> itemList = createItemList(filePath);
         Sheet containerSheet = gameBook.getSheet("container");
         String cellStr = null;
         List<Container> containerList = new ArrayList<>();
@@ -306,5 +307,30 @@ public class ReadExcel {
             }
         }
         return gameObjMap;
+    }
+
+    public static Map<String, String[]> getSafetyBriefMap (String filePath){
+        Map<String, String[]> safetyBriefMap = new HashMap<>();
+        Workbook gameBook = getGamebook(filePath);
+        Sheet sbSheet = gameBook.getSheet("miniGame");
+        String key = "pt";
+        String briefString;
+        for (int rowNum = 1; rowNum <= sbSheet.getLastRowNum();rowNum++){
+            Row row = sbSheet.getRow(rowNum);
+            int cellNum = 0;
+            while (cellNum < row.getLastCellNum()){
+                if (cellNum == 0){
+                    key = row.getCell(cellNum).getStringCellValue().toLowerCase().trim();
+                }
+                if (cellNum == 1){
+                    briefString = row.getCell(cellNum).getStringCellValue();
+                    String[] stringArr = briefString.split(";");
+                    safetyBriefMap.put(key,stringArr);
+                }
+                cellNum++;
+            }
+
+        }
+        return safetyBriefMap;
     }
 }

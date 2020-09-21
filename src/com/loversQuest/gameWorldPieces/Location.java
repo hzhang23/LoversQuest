@@ -5,6 +5,8 @@ package com.loversQuest.gameWorldPieces;
  */
 
 import com.loversQuest.excelReader.ReadExcel;
+import com.loversQuest.gameWorldPieces.models_NPC.NPC_Properties;
+
 import java.util.*;
 
 public class Location {
@@ -15,6 +17,7 @@ public class Location {
     private ArrayList<NonPlayerCharacters> occupants = new ArrayList<>();
     private HashMap<CardinalDirection,String> directionMap = new HashMap<>();
     public static Map<String, Location> locationMap = ReadExcel.getLocationMap();
+
 
     // CTOR
     public Location(){
@@ -49,6 +52,19 @@ public class Location {
             }
         }
         return result;
+    }
+
+    /**
+     * check if certain NPC is in this location
+     */
+
+    public boolean hasNPC_Property (NPC_Properties property) {
+        for (NonPlayerCharacters npc : this.getOccupants()){
+            if (npc.getProperties().equals(property)){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

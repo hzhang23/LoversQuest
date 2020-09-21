@@ -79,7 +79,7 @@ public class CLSGame {
             gameFrame.changeTopLeftText("You are tired from FIREMAN carry your battle buddy but feel happy that you passed the exam");
             gameFrame.getPlayer().addItem(MedicalBadge);
         } else {
-            gameFrame.changeTopLeftText("you are smoked by Drill SGT and have to bear claw back to Barracks");
+            gameFrame.changeTopLeftText("you are smoked by Drill SGT and have to bear crawl back to Barracks");
             gameFrame.getPlayer().go("south");
             gameFrame.getMapPanel().updateImageLabel(gameFrame.getPlayer().getCurrentLocation().getName());
         }

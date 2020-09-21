@@ -27,7 +27,6 @@ public class ReadExcel {
     public static List<Item> getItemList(){ return createItemList(gameBookPath); }
 
 
-
     /**
      * get Excel data and create a Workbook Object
      * @param filePath take filepath of xls
@@ -307,5 +306,30 @@ public class ReadExcel {
             }
         }
         return gameObjMap;
+    }
+
+    public static Map<String, String[]> getSafetyBriefMap (String filePath){
+        Map<String, String[]> safetyBriefMap = new HashMap<>();
+        Workbook gameBook = getGamebook(filePath);
+        Sheet sbSheet = gameBook.getSheet("miniGame");
+        String key = "pt";
+        String briefString;
+        for (int rowNum = 1; rowNum <= sbSheet.getLastRowNum();rowNum++){
+            Row row = sbSheet.getRow(rowNum);
+            int cellNum = 0;
+            while (cellNum < row.getLastCellNum()){
+                if (cellNum == 0){
+                    key = row.getCell(cellNum).getStringCellValue().toLowerCase().trim();
+                }
+                if (cellNum == 1){
+                    briefString = row.getCell(cellNum).getStringCellValue();
+                    String[] stringArr = briefString.split(",");
+                    safetyBriefMap.put(key,stringArr);
+                }
+                cellNum++;
+            }
+
+        }
+        return safetyBriefMap;
     }
 }

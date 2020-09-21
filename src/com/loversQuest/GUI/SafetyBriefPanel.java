@@ -10,18 +10,18 @@ class SafetyBriefPanel extends JPanel {
 
 
     public SafetyBriefPanel() {
-        String[] safetyBriefList = new String[]{"You must find at least 70% right answer in order to pass the exam"
+        String[] clsBrief = new String[]{"You must find at least 70% right answer in order to pass the exam"
                 , "if you fail the exam, you are going to do some 'corrective training' with me"};
         setLayout(new GridBagLayout());
         setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createTitledBorder("Safety Brief"),
                 BorderFactory.createEmptyBorder(5, 5, 5, 5)));
         GridBagConstraints gbc;
-        for (int i = 0; i < safetyBriefList.length; i++) {
+        for (int i = 0; i < clsBrief.length; i++) {
             gbc = createGbc(0, i);
             add(new JLabel((i+1)+":", JLabel.LEFT), gbc);
             gbc = createGbc(1, i);
-            JLabel label = new JLabel(safetyBriefList[i]);
+            JLabel label = new JLabel(clsBrief[i]);
             add(label, gbc);
         }
     }

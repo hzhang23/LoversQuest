@@ -1,6 +1,9 @@
 package com.loversQuest.gameWorldPieces;
 
+import com.loversQuest.excelReader.JsonGetter;
 import com.loversQuest.gameWorldPieces.models_NPC.NPC_Properties;
+
+import java.util.Random;
 
 public class NonPlayerCharacters {
     private String name;
@@ -41,15 +44,10 @@ public class NonPlayerCharacters {
 
     //business methods
     public String interact(Player player){
-        if (this.keyItem == null){
-            return "I got nothing for you loser";
-        }
-        if(player.getItem(keyItem.getName()) != null){
-            player.addItem(this.getPrize());
-            return "Ah, I see you have " + keyItem + ", good work soldier!";
-        }else{
-            return "You don't have " + keyItem + ", kick rocks nerd!";
-        }
+        String[] returnWords = {JsonGetter.kanyeQuotes(),JsonGetter.taylorQuotes(),JsonGetter.getCatFact()};
+        Random rand = new Random();
+        int i = rand.nextInt(returnWords.length);
+        return returnWords[i];
     }
 
     //getter&setter

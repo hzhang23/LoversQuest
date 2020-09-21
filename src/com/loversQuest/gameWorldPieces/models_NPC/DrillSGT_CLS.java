@@ -3,6 +3,7 @@ package com.loversQuest.gameWorldPieces.models_NPC;
 import com.loversQuest.GUI.GameFrame;
 import com.loversQuest.clsMinigame.CLSGame;
 //import com.loversQuest.clsMinigame.CombatLifeSaverMinigame;
+import com.loversQuest.excelReader.JsonGetter;
 import com.loversQuest.gameWorldPieces.Item;
 import com.loversQuest.gameWorldPieces.Location;
 import com.loversQuest.gameWorldPieces.NonPlayerCharacters;
@@ -21,7 +22,7 @@ public class DrillSGT_CLS extends NonPlayerCharacters {
     public String interact(Player player) {
         String returnMsg = null;
         if(player.isHasCertainItem("combat life saver badge")){
-            returnMsg = "Good work, Private! What a shiny badge!";
+            returnMsg = JsonGetter.getStarWarAPI();
         }else {
             returnMsg = "miniGameInit";
         }

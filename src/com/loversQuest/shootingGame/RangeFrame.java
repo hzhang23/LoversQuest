@@ -19,11 +19,6 @@ import java.util.Scanner;
 
 public class RangeFrame {
 
-    public static void main(String[] args) {
-
-    }
-
-
     JLayeredPane layeredPane;
     private int ammoCount;
     ScorePanel scorePanel = new ScorePanel();
@@ -37,8 +32,6 @@ public class RangeFrame {
     Random rand = new Random();
     GameFrame gameFrame;
     JFrame rangeFrame;
-
-    JTextArea textArea = new JTextArea();
     JTextArea board = new JTextArea();
 
 
@@ -56,11 +49,8 @@ public class RangeFrame {
         bgPanel.setBounds(0,0,2000,1100);
         board.setBounds(10,10,500,260);
         board.setText(boardNum());
-        textArea.setBounds(600,0,600,100);
-        textArea.setBackground(Color.orange);
         layeredPane.add(bgPanel, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(board, JLayeredPane.MODAL_LAYER);
-        layeredPane.add(textArea, JLayeredPane.MODAL_LAYER);
 
         rangeFrame.setTitle("Markmanship Qualification");
         rangeFrame.setAlwaysOnTop(true);
@@ -75,7 +65,7 @@ public class RangeFrame {
         rangeFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                System.exit(0);
+                rangeFrame.dispose();
             }
         });
         this.targetUp();
@@ -281,8 +271,6 @@ public class RangeFrame {
 
         @Override
         public void mouseMoved(MouseEvent e) {
-            String string = "Mouse Location：（" + e.getX() + "，" + e.getY() +"）";
-            textArea.setText(string);
 
         }
 

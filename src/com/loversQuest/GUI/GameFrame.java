@@ -145,14 +145,14 @@ public class GameFrame extends JFrame{
             miniGame.init(1);
         } else if (this.getPlayer().getCurrentLocation().hasNPC_Property(NPC_Properties.DRILL_PT)){
             showSafetyBrief();
-            Thread newTH = new Thread(new Runnable() {
-                @Override
-                public void run() {
+//            Thread newTH = new Thread(new Runnable() {
+//                @Override
+//                public void run() {
                     ptFrame miniGame = new ptFrame(GameFrame.this);
                     miniGame.init();
-                }
-            });
-            newTH.start();
+//                }
+//            });
+//            newTH.start();
         } else {
             this.gameResponsePanel.setResponseText("You need report to the Drill SGT first");
         }

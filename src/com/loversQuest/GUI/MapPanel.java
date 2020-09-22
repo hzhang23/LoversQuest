@@ -34,7 +34,6 @@ public class MapPanel extends JPanel{
         this.add(scrollPane);
     }
 
-
     // method to update the corresponding map image
     public void updateImageLabel(String location) {
         String picLocation = location.replaceAll(" ", "");
@@ -44,6 +43,5 @@ public class MapPanel extends JPanel{
         }
         ImageIcon image = new ImageIcon(fileName);
         this.imageLabel.setIcon(image);
-        System.out.println("file name is " + fileName);
     }
 }

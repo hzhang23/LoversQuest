@@ -1,22 +1,11 @@
 package com.loversQuest.gameWorldPieces;
 
-import com.loversQuest.GUI.GameFrame;
-import com.loversQuest.GUI.JFrameInput;
-import com.loversQuest.gameWorldPieces.models_NPC.DrillSGT_Range;
-import com.loversQuest.gameWorldPieces.models_NPC.NPC_Properties;
-import com.loversQuest.shootingGame.RangeFrame;
-
-import javax.swing.*;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.List;
-import java.util.Scanner;
 
 public class Player {
 
     private String name;
     private Location currentLocation;
-    private boolean hasCertainItem;
     public PlayerContainer ruckSack = new PlayerContainer();
 
     // CTOR
@@ -96,9 +85,6 @@ public class Player {
                     return "the diamond ring is like twice as much as your pay check. However, if you could show me your soldier of the month certificate, you can get 99% discount";
                 }
             }
-
-
-
             if (currentLocation.getContainer().displayContents().isEmpty()){
                 returningMsg.append("Oops, there is nothing in " + currentLocation.getContainer().getName());
             } else {
@@ -129,13 +115,23 @@ public class Player {
             StringBuilder response = new StringBuilder("you checked out ");
             String conName = this.currentLocation.getContainer().getName();
             List<Item> conList = this.currentLocation.getContainer().displayContents();
-            response.append(conName);
-            response.append(" , and found ");
-            response.append(conList.toString());
-            result = response.toString();
+            if(conList.size() >0 ) {
+                response.append(conName);
+                response.append(" , and found ");
+                response.append(conList.toString());
+                result = response.toString();
+            } else {
+                result = "there is nothing inside " + this.currentLocation.getContainer().getName();
+            }
         }
         return result;
     }
+
+    /**
+     * check if player have an item by name
+     * @param itemName
+     * @return
+     */
 
     public boolean isHasCertainItem(String itemName) {
         List<Item> allItems = this.getAllItems();
@@ -147,7 +143,22 @@ public class Player {
         return false;
     }
 
-    public void setHasCertainItem(boolean hasCertainItem) { this.hasCertainItem = hasCertainItem;}
+    /**
+     * return a string to show what to do here
+     */
+
+    public String helpGuide(){
+        String npcNames = null;
+        for (int i= 0; i < this.getCurrentLocation().getOccupants().size(); i++){
+            StringBuilder sb = new StringBuilder();
+            sb.append(this.getCurrentLocation().getOccupants().get(i).getName());
+            if (i != this.getCurrentLocation().getOccupants().size()-1 ){
+                sb.append(" or ");
+            }
+            npcNames = sb.toString();
+        }
+        return "try to inspect " + this.getCurrentLocation().getContainer().getName() + " or talk to " + npcNames;
+    }
 
     public String displayItems() {
         return ruckSack.displayRuckSackContents();

@@ -1,6 +1,5 @@
 package com.loversQuest.GUI;
 
-import com.loversQuest.IO.InputParser;
 import com.loversQuest.gameWorldPieces.Item;
 import com.loversQuest.gameWorldPieces.NonPlayerCharacters;
 import com.loversQuest.gameWorldPieces.Player;
@@ -35,6 +34,7 @@ public class JFrameInput {
      * @return
      */
     public String getUserAction(Player player, String command) {
+
         String finalResponse = null;
         String[] response = command.trim().toLowerCase().split("\\s+");
         response = parser.userCommandScreening(response);
@@ -43,15 +43,8 @@ public class JFrameInput {
         String objResponse = String.join(" ", Arrays.copyOfRange(response, 1, response.length));
         ArrayList responseList = new ArrayList(Arrays.asList(response));
 
-        System.out.println("objResponse is " + objResponse);
-        System.out.println("Command is " + command);
-        System.out.println("Response is " + responseList);
-
-        String actionVerb = parser.parseCommand2(response[0]);
+        String actionVerb = parser.parseCommand(response[0]);
         String[] matchObj = parser.findMatchObj(objResponse, actionVerb);
-        for (int i = 0; i < matchObj.length; i++) {
-            System.out.println("matchObj are " + matchObj[i]);
-        }
 
         switch (actionVerb) {
             case "go" -> {
@@ -102,6 +95,9 @@ public class JFrameInput {
                         }
                     }
                     }else{
+                    if (response.length <2 ) {
+                        return "you cannot talk to nobody";
+                    }
                     finalResponse = "you look around " + player.getCurrentLocation().getName() + ", and cannot find " + objResponse;
                 }
                 }
@@ -142,7 +138,7 @@ public class JFrameInput {
                 }
             }
             case "inspect" -> finalResponse = player.inspect();
-            case "play" -> finalResponse = "miniGameInit";
+            case "help" -> finalResponse = player.helpGuide();
             default -> finalResponse = ("why do you mumbling like " + command + "? try again with plain English please.");
         }
 

@@ -1,12 +1,12 @@
 package com.loversQuest.GUI;
 
-import com.loversQuest.clsMinigame.CLSGame;
-import com.loversQuest.excelReader.JsonGetter;
+import com.loversQuest.miniGame.clsMinigame.CLSGame;
+import com.loversQuest.fileHandler.JsonGetter;
 import com.loversQuest.gameWorldPieces.Player;
 import com.loversQuest.gameWorldPieces.models_NPC.NPC_Properties;
-import com.loversQuest.gymGame.ptGame;
-import com.loversQuest.shootingGame.RangeFrame;
-import com.loversQuest.soldierOfTheMonthGame.SOMClient;
+import com.loversQuest.miniGame.gymGame.PtGame;
+import com.loversQuest.miniGame.shootingGame.RangeGame;
+import com.loversQuest.miniGame.soldierOfTheMonthGame.SOMClient;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -34,10 +34,11 @@ public class GameFrame extends JFrame{
     Action inputEnterAction;
     private SafetyBriefPanel safetyBriefPanel;
 
+
+    //ctor for GameFrame
+
     public GameFrame(String gameResponse, JFrameInput input, Player player) {
-        //TODO: Text input area at bottom has event listener for enter key and button press.
-        // When event is triggered the panes are re-rendered with the following
-        // ptGame response text, Inventory, Map(if location is included), Ascii art..
+
         this.input = input;
         this.player = player;
 
@@ -56,12 +57,11 @@ public class GameFrame extends JFrame{
 
         //create main frame with title
         mainFrame = new JFrame("Lovers Quest");
-        //stop function on exit of main frame TODO: refactor to add leave message/ save game function
+        //stop function on exit of main frame
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //set layout
         GridLayout mainGridLayout = new GridLayout(1, 1, 3, 3);
 
-        //TODO: check to see if need save this function, probably not due to the enter to next function
         inputEnterAction = new GameFrame.inputEnterKeyAction();
         inputPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "inputEnterSubmit");
         inputPanel.getActionMap().put("inputEnterSubmit", inputEnterAction);
@@ -117,7 +117,7 @@ public class GameFrame extends JFrame{
     }
 
 
-    //runs all internal in this method. need to uncouple
+    //runs all internal and get back response at top left area
     public void runCommand(String command) {
         String response = input.getUserAction(this.player, command);
         if (response.equals("miniGameInit")){
@@ -131,6 +131,7 @@ public class GameFrame extends JFrame{
         this.gameResponsePanel.addPainter();
     }
 
+    //handle leave game function
     public void exitGame() {
         String[] options = {"yes", "no"};
         int flag = JOptionPane.showOptionDialog(null, "Do you want to save the game before leave?",
@@ -138,6 +139,9 @@ public class GameFrame extends JFrame{
         );
         if (flag == 0) {
             String gameFile = JOptionPane.showInputDialog("please enter a name for your game file");
+            if (gameFile == null){
+                System.exit(0);
+            }
             JsonGetter.saveGame(gameFile, this.getPlayer());
         }
         if (flag == 1){
@@ -145,11 +149,12 @@ public class GameFrame extends JFrame{
         }
     }
 
+    // handle mini game
     public void openMiniGame(){
         if(this.getPlayer().getCurrentLocation().hasNPC_Property(NPC_Properties.DRILL_RANGE)) {
             this.gameResponsePanel.setResponseText("you better show me that your can shoot better than my grandma. \nstay tight for the SAFETY BRIEF");
             showSafetyBrief("range");
-            RangeFrame miniGame = new RangeFrame(this);
+            RangeGame miniGame = new RangeGame(this);
             miniGame.init();
         } else if (this.getPlayer().getCurrentLocation().hasNPC_Property(NPC_Properties.DRILL_CLS)){
             //NPC tell back miniGameInit
@@ -161,7 +166,7 @@ public class GameFrame extends JFrame{
         } else if (this.getPlayer().getCurrentLocation().hasNPC_Property(NPC_Properties.DRILL_PT)){
             this.gameResponsePanel.setResponseText("It's about time you showed up! change to your PT uniform and we're about to start this PT test");
             showSafetyBrief("pt");
-            ptGame miniGame = new ptGame(GameFrame.this);
+            PtGame miniGame = new PtGame(GameFrame.this);
             Thread newTH = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -189,21 +194,22 @@ public class GameFrame extends JFrame{
         } else {
             this.gameResponsePanel.setResponseText("You need report to the Drill SGT first");
         }
-
     }
 
+    // to refresh game screen
     public void refreshPanel(){
         this.inventoryPanel.setInventoryText(this.player.getAllItems().toString());
         this.mapPanel.updateImageLabel(this.player.getCurrentLocation().getName());
         this.inputPanel.getInputText().setText("");
     }
 
+    // show mini game instruction
     public void showSafetyBrief(String game){
         String[] options = {"Start Qualification Test"};
         safetyBriefPanel = new SafetyBriefPanel(game);
         JOptionPane.showOptionDialog(null, safetyBriefPanel, "Safety Brief", JOptionPane.NO_OPTION,JOptionPane.PLAIN_MESSAGE,null,options,options[0]);
     }
-
+    // the ending handler
     public void openHappyEnding(){
         this.gameResponsePanel.setResponseText("OMG!!! You Did get that Ring for me! I love you!");
         this.gameResponsePanel.setResponseText(this.getPlayer().displayItems());
@@ -240,9 +246,9 @@ public class GameFrame extends JFrame{
             }
         });
         endTh.start();
-
-        //at last: OptionPane to thank playing game
     }
+
+    //use all whiteClaws at ending scene
     public void useWhiteClaw(){
        String itemList = this.getPlayer().displayItems();
        itemList.replace("[", "");

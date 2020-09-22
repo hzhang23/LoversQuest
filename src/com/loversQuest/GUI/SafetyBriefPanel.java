@@ -1,6 +1,6 @@
 package com.loversQuest.GUI;
 
-import com.loversQuest.excelReader.ExcelManager;
+import com.loversQuest.fileHandler.ExcelManager;
 
 import java.awt.*;
 import java.util.Map;

@@ -1,6 +1,6 @@
 package com.loversQuest.gameWorldPieces.models_NPC;
 
-import com.loversQuest.excelReader.JsonGetter;
+import com.loversQuest.fileHandler.JsonGetter;
 import com.loversQuest.gameWorldPieces.NonPlayerCharacters;
 import com.loversQuest.gameWorldPieces.Player;
 import com.loversQuest.gameWorldPieces.Location;

@@ -1,6 +1,6 @@
 package com.loversQuest.GUI;
 
-import com.loversQuest.excelReader.ExcelManager;
+import com.loversQuest.fileHandler.ExcelManager;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;

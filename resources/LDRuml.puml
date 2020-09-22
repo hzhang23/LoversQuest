@@ -1,0 +1,194 @@
+@startuml
+package com.loversQuest{
+class GameClient{}
+
+package FileHandler{
+class ExcelManager
+class JsonGetter
+}
+
+package gameWorldPieces{
+Item <--"is_A" Container
+enum CarinalDirection
+Item *--"has_a" NonPlayerCharacters
+RuckSack *--"has_a" Player
+NPC_Factory <|-l- "use" Player
+NonPlayerCharacters"generate"<--NPC_Factory
+
+NPC_properties "has_A"*-l- NonPlayerCharacters
+CarinalDirection "has"*- Location
+Location "has_A"*- NonPlayerCharacters
+    package models_NPC{
+    NonPlayerCharacters <-u-"is_A" Lover
+    NonPlayerCharacters <-u-"is_A" Battle_shooter
+    NonPlayerCharacters <-u-"is_A" Battle_BlueFalcon
+    NonPlayerCharacters <-u-"is_A" Battle_PT_Studs
+    NonPlayerCharacters <-d-"is_A" Battle_SickCallRanger
+    NonPlayerCharacters <-d-"is_A" DrillSGT_CLS
+    NonPlayerCharacters <-d-"is_A" DrillSGT_PT
+    NonPlayerCharacters <-d-"is_A" DrillSGT_Range
+    NonPlayerCharacters <-d-"is_A" DrillSGTDICKS
+        class Lover{}
+        class Battle_shooter{}
+        class Battle_BlueFalcon{}
+        class Battle_PT_Studs{}
+        class Battle_SickCallRanger{}
+        class DrillSGT_CLS{}
+        class DrillSGT_PT{}
+        class DrillSGT_Range{}
+        class DrillSGTDICKS{}
+        enum NPC_properties{
+            LOVER,
+            DRILL_DICKS,
+            DRILL_PT,
+            DRILL_RANGE,
+            DRILL_CLS,
+            BATTLE_BF,
+            BATTLE_PT,
+            BATTLE_SICKCALL,
+            BATTLE_1S1K,
+            NON_MISSION
+        }
+    }
+    enum CarinalDirection {
+        NORTH
+        SOUTH
+        EAST
+        WEST
+        }
+    class Container{
+        -Arraylist<Item> contents
+        -String Location
+        +displayItems()
+        +getItem(String name)
+    }
+    class Item {
+        -String name
+        -String useResponse
+        +String use()
+    }
+    class Location{
+        +String name
+        +String description
+        +Container container
+        +Arraylist occupants
+        +Map directionMap
+        +Map LocationMap
+    }
+    class NonPlayerCharacters{
+        -String name
+        -String description
+        -Location location
+        +String interact(Player player)
+    }
+    class NPC_Factory{
+    }
+    class Player{
+        -String name
+        -Location currentLocation
+        +RuckSack ruckSack
+        +go(String directionInput)
+        +validateLocation(Location destination)
+        +look()
+        +interact()
+        +useItem()
+        +addItem(Item item)
+        +pickUpItem(String itemName)
+        +inspect() @return <Item>
+        +isHasCertainItem(String itemName)
+        +helpGuide()
+        +displayItems()
+        +getAllItems() @return ruckSack.items
+    }
+    class RuckSack{
+        #Arraylist<Item> items
+        +addItem(Item item)
+        +getItem(String itemName)
+        +getAllItems() @return <Item>
+        +displayRuckSackContents() @return String
+    }
+}
+
+package miniGame{
+    package shootingGame{
+        class RangeGame{}
+        class RangePanel{}
+        class ScorePanel{}
+        class Target{}
+    }
+    package clsMiniGame{
+        CLSGame -d-|>"use" AnswerList
+        CLSGame -d-|>"use" OptionsList
+        CLSGame -d-|>"use" QuestionsList
+        class AnswerList{}
+        class CLSGame{}
+        class OptionsList{}
+        class QuestionsList{}
+    }
+    package gymGame{
+        PtGame -|>"use" Ball
+        Racquet <|-"use" PtGame
+        class PtGame{}
+        class Ball{}
+        class Racquet{}
+    }
+    package soldierOfTheMonthGame{
+        SOMClient-d-|>"use" Counter
+        SOMClient-d-|>"use" SOMHowItWorks
+        SOMClient-d-|>"use" SOMLandingPage
+        SOMClient-d-|>"use" SOMQuestionPanel
+        SOMClient-|>"use" SOMQuiz
+        class Counter{}
+        class SOMClient{}
+        class SOMHowItWorks{}
+        class SOMLandingPage{}
+        class SOMQuestionPanel{}
+        class SOMQuiz{}
+        }
+    }
+
+    package GUI <<Frame>>{
+        GameClient -d--> StartPanel
+        GameFrame -u-|> "use" Player
+        GameFrame -d-|> "use" CLSGame
+        GameFrame -d-|> "use" PtGame
+        GameFrame -d|> "use" RangeGame
+        GameFrame -d|>"use" SOMClient
+        GameFrame -r*"has" JFrameInput
+        GameFrame -r|>"use" JPanelFactory
+        GameFrame -r*"has" SafetyBriefPanel
+        GameFrame -r*"has" StartPanel
+        GameFrame -u-*"has" MapPanel
+        GameFrame -u-|>"use" InputParser
+        GameFrame --|>"use" JsonGetter
+        GameFrame -|>"use" ExcelManager
+        JPanelFactory -u-*"has" GameResponsePanel
+        JPanelFactory -u-*"has" InputPanel
+        JPanelFactory -u-*"has" InventoryPanel
+        StartPanel -u-*"has" LoadGamePanel
+
+        class StartPanel{
+            -Player player
+            -GameFrame gameFrame
+            +readGameFile()
+            +gameInit()
+            }
+        class GameFrame{
+            JFrame mainFrame
+            Player player
+            String command
+            JPanels diff_panels
+            }
+        class GameResponsePanel{}
+        class InputPanel{}
+        class InventoryPanel{}
+        class JFrameInput{}
+        class JPanelFactory{}
+        class LoadGamePanel{}
+        class MapPanel{}
+        class SafetyBriefPanel{}
+        class InputParser{}
+    }
+}
+
+@enduml

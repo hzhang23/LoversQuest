@@ -4,7 +4,7 @@ package com.loversQuest.gameWorldPieces;
  * location is some thing that has name , description, container and an Item List & NPC
  */
 
-import com.loversQuest.excelReader.ExcelManager;
+import com.loversQuest.fileHandler.ExcelManager;
 import com.loversQuest.gameWorldPieces.models_NPC.NPC_Properties;
 
 import java.util.*;

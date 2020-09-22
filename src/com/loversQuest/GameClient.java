@@ -1,11 +1,6 @@
 package com.loversQuest;
 
-import com.loversQuest.*;
-import com.loversQuest.GUI.GameFrame;
-import com.loversQuest.GUI.JFrameInput;
-import com.loversQuest.IO.*;
-
-import java.io.IOException;
+import com.loversQuest.GUI.StartPanel;
 
 
 public class GameClient {

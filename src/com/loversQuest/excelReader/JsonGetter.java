@@ -22,6 +22,10 @@ public class JsonGetter {
     private static final String catFact = "https://cat-fact.herokuapp.com/facts";
     private static final String filePath = "resources/gameFile.json";
 
+    public static void main(String[] args) {
+
+    }
+
     private JsonGetter(){
         //private for static class
     }

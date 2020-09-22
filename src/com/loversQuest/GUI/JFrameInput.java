@@ -60,7 +60,11 @@ public class JFrameInput {
                 } else if (matchObj.length == 1) {
                     String direction = matchObj[0];
                     boolean isGo = player.go(direction);
-                    finalResponse = (displayGoResponse(direction, player));
+                    if(isGo) {
+                        finalResponse = (displayGoResponse(direction, player));
+                    } else {
+                        finalResponse = "cannot go this way, yo";
+                    }
                 } else {
                     finalResponse = ("what is direction of " + objResponse + "? how come you can be as lost as a LT?");
                 }

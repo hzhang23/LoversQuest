@@ -1,8 +1,7 @@
 package com.loversQuest.IO;
-import com.loversQuest.excelReader.ReadExcel;
+import com.loversQuest.excelReader.ExcelManager;
 
 import java.io.*;
-import java.nio.Buffer;
 import java.util.*;
 
 public class InputParser {
@@ -83,7 +82,7 @@ public class InputParser {
         if (actVerb.equals("get") || actVerb.equals("use")){
             actVerb = "get/use";
         }
-        Map<String, List<String>> objList=ReadExcel.getGameObjList();
+        Map<String, List<String>> objList= ExcelManager.getGameObjList();
         try {
             List<String> screener = objList.get(actVerb);
             String rawRespone = objResponse.toLowerCase().replaceAll("\\s", "");

@@ -1,6 +1,6 @@
 package com.loversQuest.GUI;
 
-import com.loversQuest.excelReader.ReadExcel;
+import com.loversQuest.excelReader.ExcelManager;
 
 import java.awt.*;
 import java.util.Map;
@@ -13,7 +13,7 @@ class SafetyBriefPanel extends JPanel {
 
 
     public SafetyBriefPanel(String game) {
-        Map<String, String[]> safetyBriefMap = ReadExcel.getSafetyBrief();
+        Map<String, String[]> safetyBriefMap = ExcelManager.getSafetyBrief();
         String[] briefList = safetyBriefMap.get(game);
         setLayout(new GridBagLayout());
         setBorder(BorderFactory.createCompoundBorder(

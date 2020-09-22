@@ -1,14 +1,12 @@
 package com.loversQuest.GUI;
 
-import com.loversQuest.excelReader.ReadExcel;
-import org.apache.commons.compress.compressors.zstandard.ZstdCompressorOutputStream;
+import com.loversQuest.excelReader.ExcelManager;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
 import java.awt.*;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -54,7 +52,7 @@ public class GameResponsePanel extends JPanel{
     }
 
     public void addPainter(){
-        Map<String, List<String>> gameObjList = ReadExcel.getGameObjList();
+        Map<String, List<String>> gameObjList = ExcelManager.getGameObjList();
         List<String> npcList = gameObjList.get("interact");
         List<String> containerList = gameObjList.get("inspect");
         String text = responseText.getText();

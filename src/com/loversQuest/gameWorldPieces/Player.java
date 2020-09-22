@@ -16,10 +16,7 @@ public class Player {
 
     private String name;
     private Location currentLocation;
-    private double money;
-    private boolean hasChallengeCoin = false;
     private boolean hasCertainItem;
-    private boolean hasKiss = false;
     public PlayerContainer ruckSack = new PlayerContainer();
 
     // CTOR
@@ -29,7 +26,6 @@ public class Player {
     }
 
     // BUSINESS METHODS
-
     public boolean go(String directionInput) {
         String direction = directionInput.toUpperCase();
         String response = null;
@@ -165,10 +161,6 @@ public class Player {
     public void setName(String name) { this.name = name; }
     public Location getCurrentLocation() { return currentLocation; }
     public void setCurrentLocation(Location currentLocation) { this.currentLocation = currentLocation; }
-    public boolean isHasChallengeCoin() { return hasChallengeCoin; }
-    public void setHasChallengeCoin(boolean hasChallengeCoin) { this.hasChallengeCoin = hasChallengeCoin; }
-    public boolean isHasKiss() { return hasKiss; }
-    public void setHasKiss(boolean hasKiss) { this.hasKiss = hasKiss; }
     public void addItem(Item item) { ruckSack.addItem(item); }
     public Item getItem(String itemName) {
         return this.ruckSack.getItem(itemName.toLowerCase());

@@ -1,22 +1,17 @@
 package com.loversQuest;
 
-import com.loversQuest.excelReader.ReadExcel;
+import com.loversQuest.excelReader.ExcelManager;
+import com.loversQuest.excelReader.JsonGetter;
 import com.loversQuest.gameWorldPieces.*;
 import java.util.Map;
 
 public class GameInit {
-    public static Map<String, Location> locationMap = ReadExcel.getLocationMap();
-    public Player p1 = new Player("Bob", locationMap.get("gazebo"));
+    public static Map<String, Location> locationMap = ExcelManager.getLocationMap();
+    public Player player;
 
-    public void addRing(){
-        p1.addItem(new Item("Diamond Ring", "test ring"));
+    public Player readGameFile(String gamefile){
+        player = JsonGetter.readGame(gamefile);
+        return player;
     }
 
-    public boolean isGameOver(){
-        boolean gameOver = false;
-        if(this.p1.isHasKiss()){
-            gameOver = true;
-        }
-        return gameOver;
-    }
 }

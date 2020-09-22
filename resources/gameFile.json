@@ -1,0 +1,66 @@
+ "New Story": {
+    "name": "bob",
+    "currentLocation": {
+      "name": "barracks",
+      "description": "it smells of gym socks, clp, and peanut butter.",
+      "container": {
+        "contents": [
+          {
+            "name": "m16 assault rifle",
+            "useResponse": "you shoot your rifle in the air in celebration"
+          },
+          {
+            "name": "sick call slip",
+            "useResponse": "you enjoy your soft shoe profile"
+          }
+        ],
+        "location": "barracks",
+        "name": "foot locker",
+        "useResponse": "is your personal safe place. make sure it\u0027s dress right, dress!"
+      },
+      "occupants": [
+        {
+          "name": "Drill SGT Dicks",
+          "description": "is looking into soldiers\u0027 footlockers for contrabands",
+          "properties": "DRILL_DICKS",
+          "location": {
+            "name": "barracks",
+            "description": "it smells of gym socks, clp, and peanut butter.",
+            "occupants": [],
+            "directionMap": {
+              "NORTH": "courtyard",
+              "WEST": "laundry room",
+              "SOUTH": "nothing",
+              "EAST": "gym"
+            }
+          }
+        },
+        {
+          "name": "PVT Carl",
+          "description": "is that guy!",
+          "properties": "BATTLE_BF",
+          "location": {
+            "name": "barracks",
+            "description": "it smells of gym socks, clp, and peanut butter.",
+            "occupants": [],
+            "directionMap": {
+              "NORTH": "courtyard",
+              "WEST": "laundry room",
+              "SOUTH": "nothing",
+              "EAST": "gym"
+            }
+          }
+        }
+      ],
+      "directionMap": {
+        "NORTH": "courtyard",
+        "WEST": "laundry room",
+        "SOUTH": "nothing",
+        "EAST": "gym"
+      }
+    },
+    "hasCertainItem": false,
+    "ruckSack": {
+      "items": []
+    }
+  }

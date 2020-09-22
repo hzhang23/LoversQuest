@@ -1,4 +1,72 @@
- "New Story": {
+{
+  "I passed PT test ": {
+    "name": "bob",
+    "currentLocation": {
+      "name": "gym",
+      "description": "you watch a soldier conduct the “bend and reach” in the squat rack while grunts and clanking of weights can be heard in the far back corner. you see your battle buddies taking an apft (army physical fitness test) in the basketball courts.",
+      "container": {
+        "contents": [
+          {
+            "name": "pt belt",
+            "useResponse": "you put it on and are now super safe and visible"
+          }
+        ],
+        "location": "gym",
+        "name": "trash can",
+        "useResponse": "just full of your hopes and dreams"
+      },
+      "occupants": [
+        {
+          "name": "Drill SGT Spitting",
+          "description": "is yelling at ",
+          "properties": "DRILL_PT",
+          "location": {
+            "name": "gym",
+            "description": "you watch a soldier conduct the “bend and reach” in the squat rack while grunts and clanking of weights can be heard in the far back corner. you see your battle buddies taking an apft (army physical fitness test) in the basketball courts.",
+            "occupants": [],
+            "directionMap": {
+              "NORTH": "portajohn",
+              "WEST": "barracks",
+              "SOUTH": "chow hall",
+              "EAST": "nothing"
+            }
+          }
+        },
+        {
+          "name": "PFC Studs ",
+          "description": "is doing push up at…",
+          "properties": "BATTLE_PT",
+          "location": {
+            "name": "gym",
+            "description": "you watch a soldier conduct the “bend and reach” in the squat rack while grunts and clanking of weights can be heard in the far back corner. you see your battle buddies taking an apft (army physical fitness test) in the basketball courts.",
+            "occupants": [],
+            "directionMap": {
+              "NORTH": "portajohn",
+              "WEST": "barracks",
+              "SOUTH": "chow hall",
+              "EAST": "nothing"
+            }
+          }
+        }
+      ],
+      "directionMap": {
+        "NORTH": "portajohn",
+        "WEST": "barracks",
+        "SOUTH": "chow hall",
+        "EAST": "nothing"
+      }
+    },
+    "hasCertainItem": false,
+    "ruckSack": {
+      "items": [
+        {
+          "name": "Physical Training Badge",
+          "useResponse": "You showed up for the pt test"
+        }
+      ]
+    }
+  },
+  "New Story": {
     "name": "bob",
     "currentLocation": {
       "name": "barracks",
@@ -64,3 +132,4 @@
       "items": []
     }
   }
+}

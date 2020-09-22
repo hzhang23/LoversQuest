@@ -2,10 +2,8 @@ package com.loversQuest;
 
 import com.loversQuest.GUI.GameFrame;
 import com.loversQuest.GUI.JFrameInput;
+import com.loversQuest.GUI.LoadGamePanel;
 import com.loversQuest.IO.Output;
-import com.loversQuest.excelReader.ReadExcel;
-import com.loversQuest.gameWorldPieces.Location;
-import com.loversQuest.gameWorldPieces.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,11 +11,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Map;
 
 public class StartPanel extends JPanel {
     private static String startImage = "resources/start_image.jpg";
     JFrame startFrame;
+
+    GameFrame gameFrame;
     //ctor
     public StartPanel(){
         startFrame = new JFrame("Love Quest");
@@ -41,19 +40,25 @@ public class StartPanel extends JPanel {
         startBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gameInit();
+                gameInit("New Story");
+                startFrame.dispose();
+            }
+        });
+        resumeBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new LoadGamePanel(StartPanel.this);
                 startFrame.dispose();
             }
         });
     }
 
 
-    public void gameInit(){
+    public void gameInit(String gamefile){
         GameInit g1 = new GameInit();
         Output output = new Output();
-        g1.addRing();
         JFrameInput jFrameInput = new JFrameInput();
-        GameFrame gameFrame = new GameFrame(output.displayIntroDialog(), jFrameInput, g1.p1);
+        gameFrame = new GameFrame(output.displayIntroDialog(), jFrameInput, g1.readGameFile(gamefile));
         gameFrame.changeTopRightText("This is your rucksack.\nIn it you will find all the items you are currently carrying and can use.\n" +
                 "Below is the command window. Enter any of the commands listed. You may also maneuver using the arrow keys.");
     }
@@ -89,11 +94,12 @@ public class StartPanel extends JPanel {
         }
     }
 
-    public static void main(String[] args) {
-       new StartPanel();
-
-
+    public GameFrame getGameFrame() {
+        return gameFrame;
     }
 
+    public void setGameFrame(GameFrame gameFrame) {
+        this.gameFrame = gameFrame;
+    }
 
 }

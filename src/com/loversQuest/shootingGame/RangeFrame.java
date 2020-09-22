@@ -1,21 +1,12 @@
 package com.loversQuest.shootingGame;
 
 import com.loversQuest.GUI.GameFrame;
-import com.loversQuest.excelReader.ReadExcel;
 import com.loversQuest.gameWorldPieces.Item;
-import com.loversQuest.gameWorldPieces.models_NPC.DrillSGT_PT;
-import com.loversQuest.gameWorldPieces.models_NPC.DrillSGT_Range;
-import org.w3c.dom.ranges.Range;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 
 public class RangeFrame {
 
@@ -189,27 +180,6 @@ public class RangeFrame {
     public void setTargetHit(int targetHit) {
         this.targetHit = targetHit;
     }
-
-    /**
-     * a button to reload
-     */
-//    public void getReloadButton(){
-//        reloadButton = new JButton();
-//        ImageIcon icon = new ImageIcon("resources/shootingGameResources/M16icon.png");
-//        Image tempTgt = icon.getImage().getScaledInstance(200,100,icon.getImage().SCALE_DEFAULT);
-//        reloadButton.setIcon(icon);
-//        //reloadButton.setBorderPainted(false);
-//        layeredPane.add(reloadButton,JLayeredPane.POPUP_LAYER);
-//        reloadButton.setLocation(1600,800);
-//        reloadButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                setAmmoCount(30);
-//            }
-//        });
-//    }
-
-
 
     public int getAmmoCount() {
         return ammoCount;

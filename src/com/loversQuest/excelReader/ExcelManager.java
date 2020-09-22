@@ -9,7 +9,7 @@ import com.loversQuest.gameWorldPieces.models_NPC.NPC_Properties;
 import org.apache.poi.ss.usermodel.*;
 
 public class ExcelManager {
-    private final static String gameBookPath = "resources/gameBook.xlsx";
+    private final static String gameBookPath = "resources/gameBook.xls";
 
     private ExcelManager(){
         //private for static class

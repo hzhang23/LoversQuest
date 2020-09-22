@@ -97,7 +97,7 @@ public class GameResponsePanel extends JPanel{
         }
     }
 
-g    public void setPainterPink(){
+    public void setPainterPink(){
         painter = new DefaultHighlighter.DefaultHighlightPainter(Color.pink);
     }
     public void setPainterOrange(){

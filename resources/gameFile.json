@@ -1,0 +1,135 @@
+{
+  "I passed PT test ": {
+    "name": "bob",
+    "currentLocation": {
+      "name": "gym",
+      "description": "you watch a soldier conduct the “bend and reach” in the squat rack while grunts and clanking of weights can be heard in the far back corner. you see your battle buddies taking an apft (army physical fitness test) in the basketball courts.",
+      "container": {
+        "contents": [
+          {
+            "name": "pt belt",
+            "useResponse": "you put it on and are now super safe and visible"
+          }
+        ],
+        "location": "gym",
+        "name": "trash can",
+        "useResponse": "just full of your hopes and dreams"
+      },
+      "occupants": [
+        {
+          "name": "Drill SGT Spitting",
+          "description": "is yelling at ",
+          "properties": "DRILL_PT",
+          "location": {
+            "name": "gym",
+            "description": "you watch a soldier conduct the “bend and reach” in the squat rack while grunts and clanking of weights can be heard in the far back corner. you see your battle buddies taking an apft (army physical fitness test) in the basketball courts.",
+            "occupants": [],
+            "directionMap": {
+              "NORTH": "portajohn",
+              "WEST": "barracks",
+              "SOUTH": "chow hall",
+              "EAST": "nothing"
+            }
+          }
+        },
+        {
+          "name": "PFC Studs ",
+          "description": "is doing push up at…",
+          "properties": "BATTLE_PT",
+          "location": {
+            "name": "gym",
+            "description": "you watch a soldier conduct the “bend and reach” in the squat rack while grunts and clanking of weights can be heard in the far back corner. you see your battle buddies taking an apft (army physical fitness test) in the basketball courts.",
+            "occupants": [],
+            "directionMap": {
+              "NORTH": "portajohn",
+              "WEST": "barracks",
+              "SOUTH": "chow hall",
+              "EAST": "nothing"
+            }
+          }
+        }
+      ],
+      "directionMap": {
+        "NORTH": "portajohn",
+        "WEST": "barracks",
+        "SOUTH": "chow hall",
+        "EAST": "nothing"
+      }
+    },
+    "hasCertainItem": false,
+    "ruckSack": {
+      "items": [
+        {
+          "name": "Physical Training Badge",
+          "useResponse": "You showed up for the pt test"
+        }
+      ]
+    }
+  },
+  "New Story": {
+    "name": "bob",
+    "currentLocation": {
+      "name": "barracks",
+      "description": "it smells of gym socks, clp, and peanut butter.",
+      "container": {
+        "contents": [
+          {
+            "name": "m16 assault rifle",
+            "useResponse": "you shoot your rifle in the air in celebration"
+          },
+          {
+            "name": "sick call slip",
+            "useResponse": "you enjoy your soft shoe profile"
+          }
+        ],
+        "location": "barracks",
+        "name": "foot locker",
+        "useResponse": "is your personal safe place. make sure it\u0027s dress right, dress!"
+      },
+      "occupants": [
+        {
+          "name": "Drill SGT Dicks",
+          "description": "is looking into soldiers\u0027 footlockers for contrabands",
+          "properties": "DRILL_DICKS",
+          "location": {
+            "name": "barracks",
+            "description": "it smells of gym socks, clp, and peanut butter.",
+            "occupants": [],
+            "directionMap": {
+              "NORTH": "courtyard",
+              "WEST": "laundry room",
+              "SOUTH": "nothing",
+              "EAST": "gym"
+            }
+          }
+        },
+        {
+          "name": "PVT Carl",
+          "description": "is that guy!",
+          "properties": "BATTLE_BF",
+          "location": {
+            "name": "barracks",
+            "description": "it smells of gym socks, clp, and peanut butter.",
+            "occupants": [],
+            "directionMap": {
+              "NORTH": "courtyard",
+              "WEST": "laundry room",
+              "SOUTH": "nothing",
+              "EAST": "gym"
+            }
+          }
+        }
+      ],
+      "directionMap": {
+        "NORTH": "courtyard",
+        "WEST": "laundry room",
+        "SOUTH": "nothing",
+        "EAST": "gym"
+      }
+    },
+    "hasCertainItem": false,
+    "ruckSack": {
+      "items": []
+    }
+  }
+}

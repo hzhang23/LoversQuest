@@ -1,16 +1,12 @@
 package com.loversQuest.GUI;
 
 import com.google.gson.JsonObject;
-import com.loversQuest.StartPanel;
-import com.loversQuest.excelReader.ExcelManager;
-import com.loversQuest.excelReader.JsonGetter;
+import com.loversQuest.fileHandler.JsonGetter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 public class LoadGamePanel extends JPanel {

@@ -1,6 +1,5 @@
 package com.loversQuest.GUI;
 
-import com.loversQuest.IO.InputParser;
 import com.loversQuest.gameWorldPieces.Item;
 import com.loversQuest.gameWorldPieces.NonPlayerCharacters;
 import com.loversQuest.gameWorldPieces.Player;

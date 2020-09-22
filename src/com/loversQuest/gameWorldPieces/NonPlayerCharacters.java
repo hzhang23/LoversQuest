@@ -1,6 +1,6 @@
 package com.loversQuest.gameWorldPieces;
 
-import com.loversQuest.excelReader.JsonGetter;
+import com.loversQuest.fileHandler.JsonGetter;
 import com.loversQuest.gameWorldPieces.models_NPC.NPC_Properties;
 
 import java.util.Random;
@@ -10,8 +10,6 @@ public class NonPlayerCharacters {
     private String description;
     private NPC_Properties properties;
     private Location location;
-    private Item keyItem;
-    private Item prize;
 
 
 
@@ -79,14 +77,6 @@ public class NonPlayerCharacters {
         this.description = description;
     }
 
-    public void setKeyItem(Item keyItem){
-        this.keyItem = keyItem;
-    }
-
-    public Item getKeyItem(){
-        return this.keyItem;
-    }
-
     public String getLocation() {
         return location.getName();
     }
@@ -95,14 +85,6 @@ public class NonPlayerCharacters {
 
     public void setLocation(Location location) {
         this.location = location;
-    }
-
-    public void setPrize(Item item){
-        this.prize = item;
-    }
-
-    public Item getPrize() {
-        return prize;
     }
 
 }

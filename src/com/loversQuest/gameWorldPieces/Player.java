@@ -1,22 +1,11 @@
 package com.loversQuest.gameWorldPieces;
 
-import com.loversQuest.GUI.GameFrame;
-import com.loversQuest.GUI.JFrameInput;
-import com.loversQuest.gameWorldPieces.models_NPC.DrillSGT_Range;
-import com.loversQuest.gameWorldPieces.models_NPC.NPC_Properties;
-import com.loversQuest.shootingGame.RangeFrame;
-
-import javax.swing.*;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.List;
-import java.util.Scanner;
 
 public class Player {
 
     private String name;
     private Location currentLocation;
-    private boolean hasCertainItem;
     public PlayerContainer ruckSack = new PlayerContainer();
 
     // CTOR
@@ -96,9 +85,6 @@ public class Player {
                     return "the diamond ring is like twice as much as your pay check. However, if you could show me your soldier of the month certificate, you can get 99% discount";
                 }
             }
-
-
-
             if (currentLocation.getContainer().displayContents().isEmpty()){
                 returningMsg.append("Oops, there is nothing in " + currentLocation.getContainer().getName());
             } else {
@@ -173,8 +159,6 @@ public class Player {
         }
         return "try to inspect " + this.getCurrentLocation().getContainer().getName() + " or talk to " + npcNames;
     }
-
-    public void setHasCertainItem(boolean hasCertainItem) { this.hasCertainItem = hasCertainItem;}
 
     public String displayItems() {
         return ruckSack.displayRuckSackContents();

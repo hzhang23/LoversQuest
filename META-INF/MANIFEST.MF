@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: com.loversQuest.GameClient
+Created-By: Ricky Zhang, David Zheng, Luke Thompson
+

@@ -15,9 +15,9 @@ public class GameResponsePanel extends JPanel{
 
     private JTextArea responseText;
     private DefaultHighlighter.DefaultHighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(Color.pink);
-
     Highlighter highlighter;
 
+    //ctor
     GameResponsePanel(int x, int y){
         responseText = new JTextArea(8,35);
         GridBagLayout layoutTopLeft = new GridBagLayout();
@@ -51,10 +51,14 @@ public class GameResponsePanel extends JPanel{
         this.responseText.setText(text);
     }
 
+    /**
+     * add highlighter to key items on response panel
+     */
     public void addPainter(){
         Map<String, List<String>> gameObjList = ExcelManager.getGameObjList();
         List<String> npcList = gameObjList.get("interact");
         List<String> containerList = gameObjList.get("inspect");
+        List<String> itemList = gameObjList.get("get/use");
         String text = responseText.getText();
         for (String npc : npcList){
             if(text.toLowerCase().contains(npc.toLowerCase())){
@@ -67,13 +71,19 @@ public class GameResponsePanel extends JPanel{
                 setPainterOrange();
                 this.highlightKeyword(container);
             }
-
         }
-
-        //System.out.println(objList);
-
+        for (String item: itemList){
+            if(text.toLowerCase().contains(item.toLowerCase())){
+                setPainterCyan();
+                this.highlightKeyword(item);
+            }
+        }
     }
 
+    /**
+     * find the key words to highlighter
+     * @param keyword
+     */
     public void highlightKeyword(String keyword){
         int i = 0;
         highlighter = responseText.getHighlighter();
@@ -93,6 +103,7 @@ public class GameResponsePanel extends JPanel{
     public void setPainterOrange(){
         painter = new DefaultHighlighter.DefaultHighlightPainter(Color.orange);
     }
+    public void setPainterCyan() { painter = new DefaultHighlighter.DefaultHighlightPainter(Color.cyan);}
 
 
     public JTextArea getResponseText() {

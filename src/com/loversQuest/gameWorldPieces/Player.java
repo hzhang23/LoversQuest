@@ -129,13 +129,23 @@ public class Player {
             StringBuilder response = new StringBuilder("you checked out ");
             String conName = this.currentLocation.getContainer().getName();
             List<Item> conList = this.currentLocation.getContainer().displayContents();
-            response.append(conName);
-            response.append(" , and found ");
-            response.append(conList.toString());
-            result = response.toString();
+            if(conList.size() >0 ) {
+                response.append(conName);
+                response.append(" , and found ");
+                response.append(conList.toString());
+                result = response.toString();
+            } else {
+                result = "there is nothing inside " + this.currentLocation.getContainer().getName();
+            }
         }
         return result;
     }
+
+    /**
+     * check if player have an item by name
+     * @param itemName
+     * @return
+     */
 
     public boolean isHasCertainItem(String itemName) {
         List<Item> allItems = this.getAllItems();
@@ -145,6 +155,23 @@ public class Player {
             }
         }
         return false;
+    }
+
+    /**
+     * return a string to show what to do here
+     */
+
+    public String helpGuide(){
+        String npcNames = null;
+        for (int i= 0; i < this.getCurrentLocation().getOccupants().size(); i++){
+            StringBuilder sb = new StringBuilder();
+            sb.append(this.getCurrentLocation().getOccupants().get(i).getName());
+            if (i != this.getCurrentLocation().getOccupants().size()-1 ){
+                sb.append(" or ");
+            }
+            npcNames = sb.toString();
+        }
+        return "try to inspect " + this.getCurrentLocation().getContainer().getName() + " or talk to " + npcNames;
     }
 
     public void setHasCertainItem(boolean hasCertainItem) { this.hasCertainItem = hasCertainItem;}

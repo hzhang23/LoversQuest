@@ -1,9 +1,0 @@
-go, move, walk, run, head, dance
-look, check
-interact,speak,talk
-inventory
-get,pick,grab,take
-use,shoot,drink
-inspect, open
-map, location, where
-play, play

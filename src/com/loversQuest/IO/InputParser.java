@@ -58,7 +58,7 @@ public class InputParser {
     //
     public String parseCommand2(String command) {
        String result = "";
-       File file = new File ("src/com/loversQuest/IO/Utilities/inputWords.txt");
+       File file = new File ("resources/inputWords.txt");
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String linesOfSynonyms;

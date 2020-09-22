@@ -35,6 +35,13 @@ public class JFrameInput {
      */
     public String getUserAction(Player player, String command) {
 
+        /**
+         * eastern egg to cheat the egg
+         */
+        if(command.equals("#GIVE ME MONEY")){
+            return "happyEnding";
+        }
+
         String finalResponse = null;
         String[] response = command.trim().toLowerCase().split("\\s+");
         response = parser.userCommandScreening(response);

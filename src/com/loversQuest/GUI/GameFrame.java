@@ -211,6 +211,34 @@ public class GameFrame extends JFrame{
     }
     // the ending handler
     public void openHappyEnding(){
+        String endScene =
+                "     8                            8\n" +
+                        "     8      /```|     .@@@@@,     8\n" +
+                        "     8     |  66|_    @@@@@@@@,   8 (\\/)\n" +
+                        "     8     C     _)   aa`@@@@@@   8  \\/\n" +
+                        "     8(\\/)  \\ ._|    (_   ?@@@@   8\n" +
+                        "    |8:\\/:~:~) /:~:~: =' @@@@~:~:~8\n" +
+                        "    |8::::::/\\\\/`\\;_:::\\ (__::::::8\n" +
+                        "    |8:::::| \\ '|___/` \\\\// `\\):::8\n" +
+                        "    |8::::|| | '|::/ /  ^^  \\ \\:::8\n" +
+                        "    |8::::|| | ' \\:| \\__/\\__/ |:::8\n" +
+                        "    |8o:::|\\ \\  ' |:\\_\\    /_/::::8o\n" +
+                        "    |\"8o:::=\\ \\===::/`\\`%%`/'\\::::\"8o\n" +
+                        "    |\\\"8o~|  \\_\\  \\|   `\"\"`   |:~:~\\8o\n" +
+                        "    \\ \\\"8o\\   )))  \\           \\::::\"8o\n" +
+                        "     \\ \\\"8o\\`.  \\   \\           \\::::\"8o\n" +
+                        "      \\|~~~~~| -|| -|mmmmmmmmmmmm~~~~~|\n" +
+                        "       `~~~~~|  ||  |~~|  |~|  |~~~~~~\n" +
+                        "             |  ||  |  |__| |__|\n" +
+                        "             |  ||  |  \\  | \\  |\n" +
+                        "             |__||__|  (~~^\\(~~^\\\n" +
+                        "             (   \\   \\  `-._)`-._)\n" +
+                        "              `-._)-._)\n" +
+                        "\n" +
+                        "... and they lived happily ever after!";
+
+
+
         this.gameResponsePanel.setResponseText("OMG!!! You Did get that Ring for me! I love you!");
         this.gameResponsePanel.setResponseText(this.getPlayer().displayItems());
         this.inputPanel.getInputText().setBackground(Color.pink);
@@ -218,6 +246,10 @@ public class GameFrame extends JFrame{
         this.inputPanel.getInputText().setEditable(false);
         this.gameResponsePanel.getResponseText().setBackground(Color.pink);
         this.inventoryPanel.getInventoryText().setBackground(Color.pink);
+        Font font = new Font("arial", Font.PLAIN, 10);
+        this.inventoryPanel.getInventoryText().setFont(font);
+        this.inventoryPanel.getInventoryText().setForeground(Color.MAGENTA);
+        this.inventoryPanel.getInventoryText().setText(endScene);
         this.mapPanel.updateImageLabel("ending");
         Thread endTh = new Thread(new Runnable() {
             @Override

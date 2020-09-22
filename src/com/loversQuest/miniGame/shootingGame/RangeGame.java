@@ -3,9 +3,13 @@ package com.loversQuest.miniGame.shootingGame;
 import com.loversQuest.GUI.GameFrame;
 import com.loversQuest.gameWorldPieces.Item;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.util.Random;
 
 public class RangeGame {
@@ -24,6 +28,7 @@ public class RangeGame {
     GameFrame gameFrame;
     JFrame rangeFrame;
     JTextArea board = new JTextArea();
+    private final File soundFile = new File("resources/shootingGameResources/M4_SOUND.wav");
 
 
     public RangeGame(GameFrame gameFrame){
@@ -60,6 +65,26 @@ public class RangeGame {
             }
         });
         this.targetUp();
+    }
+
+    public void playSound() {
+        Thread soundThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    AudioInputStream sound = AudioSystem.getAudioInputStream(soundFile);
+                    Clip mySound = AudioSystem.getClip();
+                    mySound.open(sound);
+                    mySound.start();
+                    Thread.sleep(3000);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+        soundThread.start();
     }
 
     public Cursor getEyeCapture(){
@@ -167,6 +192,7 @@ public class RangeGame {
                     layeredPane.remove(target);
                     layeredPane.repaint();
                     targetUp();
+                    playSound();
                 }
             }
         });
@@ -217,6 +243,7 @@ public class RangeGame {
             if (ammoCount > 0){
             ammoCount -= 1;}
             board.setText(boardNum());
+            RangeGame.this.playSound();
         }
 
         @Override
@@ -261,6 +288,7 @@ public class RangeGame {
         }
     }
 
-
+    public static void main(String[] args) {
+    }
 
 }

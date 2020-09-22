@@ -1,14 +1,4 @@
 go, move, walk, run, head, dance
-<<<<<<< HEAD
-look, check
-interact,speak,talk
-inventory
-get,pick,grab,take
-use,shoot,drink
-inspect, open
-map, location, where
-play, play
-=======
 look
 interact,speak,talk
 inventory
@@ -16,4 +6,3 @@ get,pick,grab,take,buy
 use,shoot,drink, smell
 inspect, open, check
 help, help
->>>>>>> 181cdd338c06b87d55dbbf1f39cbeba36715f244

@@ -59,6 +59,7 @@ public class InputParser {
         decorationWords.add("to");
         decorationWords.add("a");
         decorationWords.add("again");
+        decorationWords.add("with");
         for (String filterWord : decorationWords) {
             for (int i = 0; i < response.length; i++) {
                 if (response[i].equals(filterWord)) {

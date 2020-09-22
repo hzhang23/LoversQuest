@@ -8,10 +8,10 @@ import java.util.*;
 import com.loversQuest.gameWorldPieces.models_NPC.NPC_Properties;
 import org.apache.poi.ss.usermodel.*;
 
-public class ReadExcel {
-    private final static String gameBookPath = "resources/gameBook.xls";
+public class ExcelManager {
+    private final static String gameBookPath = "resources/gameBook.xlsx";
 
-    private ReadExcel(){
+    private ExcelManager(){
         //private for static class
     }
 
@@ -21,12 +21,13 @@ public class ReadExcel {
      */
 
     public static Map<String, Location> getLocationMap(){
+
         return createLocationMap(gameBookPath);
     }
     public static Map<String, List<String>> getGameObjList() {return createGameObjMap(gameBookPath);}
     public static List<Item> getItemList(){ return createItemList(gameBookPath); }
     public static Map<String, String[]> getSafetyBrief() {return getSafetyBriefMap(gameBookPath);}
-
+    public static Map<String, Map<String, String>> getGameFileMap() {return createGameFile(gameBookPath);}
 
     /**
      * get Excel data and create a Workbook Object
@@ -309,6 +310,12 @@ public class ReadExcel {
         return gameObjMap;
     }
 
+    /**
+     * get data for safety brief
+     * @param filePath
+     * @return
+     */
+
     public static Map<String, String[]> getSafetyBriefMap (String filePath){
         Map<String, String[]> safetyBriefMap = new HashMap<>();
         Workbook gameBook = getGamebook(filePath);
@@ -332,5 +339,30 @@ public class ReadExcel {
 
         }
         return safetyBriefMap;
+    }
+
+    /**
+     * get data for gamefile
+     * @param filePath
+     * @return
+     */
+
+    public static Map<String, Map<String,String>> createGameFile (String filePath){
+        Map<String, Map<String, String>> gameFileMap = new HashMap<>();
+        Map<String,String> catMap = new HashMap<>();
+        Workbook gameBook = getGamebook(filePath);
+        Sheet gfSheet = gameBook.getSheet("savedGame");
+        String cellstr = "new game";
+        String catKey = "gamefile";
+        for(int rowNum = 1; rowNum <=gfSheet.getLastRowNum();rowNum++){
+            Row row = gfSheet.getRow(rowNum);
+            String key = row.getCell(0).getStringCellValue().toLowerCase();
+            String contents = row.getCell(1).getStringCellValue().toLowerCase();
+            String location = row.getCell(2).getStringCellValue().toLowerCase();
+            catMap.put("playerItem", contents);
+            catMap.put("location", location);
+            gameFileMap.put(key, catMap);
+        }
+        return gameFileMap;
     }
 }

@@ -1,15 +1,14 @@
 package com.loversQuest.excelReader;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
+import com.loversQuest.gameWorldPieces.Player;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.Map;
 import java.util.Random;
 
 public class JsonGetter {
@@ -21,6 +20,56 @@ public class JsonGetter {
     private static final String shayShayAPI = "http://burli.pythonanywhere.com/shayshay/random";
     private static final String starWarAPI = "http://swquotesapi.digitaljedi.dk/api/SWQuote/RandomStarWarsQuote";
     private static final String catFact = "https://cat-fact.herokuapp.com/facts";
+    private static final String filePath = "resources/gameFile.json";
+
+    public static void main(String[] args) {
+
+    }
+
+    private JsonGetter(){
+        //private for static class
+    }
+
+    public static JsonObject getGameFile(){
+        JsonObject gameFile = null;
+        try {
+            gameFile = JsonParser.parseReader(new FileReader(filePath)).getAsJsonObject();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return gameFile;
+    }
+
+    public static Player readGame(String fileName){
+        Player player = null;
+
+        Gson gson = new Gson();
+        try {
+            JsonObject gameFile = JsonParser.parseReader(new FileReader(filePath)).getAsJsonObject();
+            JsonObject playerObj = gameFile.get(fileName).getAsJsonObject();
+            player = gson.fromJson(playerObj, Player.class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return player;
+    }
+
+    public static void saveGame(String fileName, Player player){
+        try {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        JsonElement gameFile = JsonParser.parseReader(new FileReader("resources/gameFile.json"));
+        Type filemap = new TypeToken<Map<String, Player>>(){}.getType();
+        Map<String, Player> newMap = gson.fromJson(gameFile,filemap);
+        newMap.put(fileName,player);
+        Writer writer = new FileWriter("resources/gameFile.json");
+        gson.toJson(newMap, writer);
+        writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
     public static String kanyeQuotes() {
         String result = null;

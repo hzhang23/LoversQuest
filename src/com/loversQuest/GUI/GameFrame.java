@@ -1,6 +1,7 @@
 package com.loversQuest.GUI;
 
 import com.loversQuest.clsMinigame.CLSGame;
+import com.loversQuest.excelReader.JsonGetter;
 import com.loversQuest.gameWorldPieces.Player;
 import com.loversQuest.gameWorldPieces.models_NPC.NPC_Properties;
 import com.loversQuest.gymGame.ptGame;
@@ -93,6 +94,12 @@ public class GameFrame extends JFrame{
         mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
+        mainFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                exitGame();
+            }
+        });
         this.gameResponsePanel.addPainter();
     }
 
@@ -122,6 +129,20 @@ public class GameFrame extends JFrame{
             this.refreshPanel();
         }
         this.gameResponsePanel.addPainter();
+    }
+
+    public void exitGame() {
+        String[] options = {"yes", "no"};
+        int flag = JOptionPane.showOptionDialog(null, "Do you want to save the game before leave?",
+                "LOVE QUEST", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1] + options[0]
+        );
+        if (flag == 0) {
+            String gameFile = JOptionPane.showInputDialog("please enter a name for your game file");
+            JsonGetter.saveGame(gameFile, this.getPlayer());
+        }
+        if (flag == 1){
+            System.exit(0);
+        }
     }
 
     public void openMiniGame(){

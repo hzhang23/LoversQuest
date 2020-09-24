@@ -23,7 +23,6 @@ public class Player {
         Location destination = this.currentLocation.getDirectionFromString(direction);
         if (destination != null && validateLocation(destination)) {
             this.setCurrentLocation(destination);
-            System.out.println(destination.getName());
             result = true;
         }
         return result;

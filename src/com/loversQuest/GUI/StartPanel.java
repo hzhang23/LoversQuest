@@ -38,7 +38,7 @@ public class StartPanel extends JPanel {
         startBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gameInit("New Story");
+                gameInit("newgame");
                 startFrame.dispose();
             }
         });

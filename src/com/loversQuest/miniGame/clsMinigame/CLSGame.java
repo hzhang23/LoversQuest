@@ -1,11 +1,14 @@
 package com.loversQuest.miniGame.clsMinigame;
 import com.loversQuest.GUI.GameFrame;
 import com.loversQuest.gameWorldPieces.Item;
+import com.loversQuest.miniGame.shootingGame.RangeGame;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -36,6 +39,13 @@ public class CLSGame {
         clsGameFrame.setLocationRelativeTo(null);
         clsGameFrame.setVisible(true);
         clsGameFrame.setAlwaysOnTop(true);
+        clsGameFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                CLSGame.this.clsGameFrame.dispose();
+                CLSGame.this.returnGameFrame();
+            }
+        });
     }
 
     // create a panel with question
@@ -49,7 +59,7 @@ public class CLSGame {
         question.setWrapStyleWord(true);
         question.setSize(new Dimension(600,400));
         question.setOpaque(false);
-        Font questionFont = new Font("textile", Font.BOLD, 60);
+        Font questionFont = new Font("textile", Font.BOLD, 40);
         question.setFont(questionFont);
         result.add(question, BorderLayout.CENTER);
         return result;
@@ -137,7 +147,6 @@ public class CLSGame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (optionButton.getText().equals(correctAnswer)) {
-                        System.out.println("got it right");
                         score++;
                     }
                     // go to the next question

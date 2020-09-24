@@ -38,7 +38,7 @@ public class JFrameInput {
         /**
          * eastern egg to cheat the egg
          */
-        if(command.equals("#GIVE ME MONEY")){
+        if(command.equals("#SHOW ME THE MONEY")){
             return "happyEnding";
         }
 
@@ -76,7 +76,14 @@ public class JFrameInput {
                 } else if (matchObj.length > 1) {
                     if (player.getCurrentLocation().getOccupants().size() == 1) {
                         NonPlayerCharacters npc = player.getCurrentLocation().getOccupants().get(0);
-                        finalResponse = (player.interact(npc.getName().toLowerCase()));
+                        for (int i = 0; i<matchObj.length; i++){
+                            if (matchObj[i].equals(npc.getName().toLowerCase())){
+                                return (player.interact(npc.getName().toLowerCase()));
+                            } else {
+                                finalResponse = "you look around " + player.getCurrentLocation().getName() + ", and cannot find " + objResponse;
+                            }
+                        }
+
                     } else {
                         List<NonPlayerCharacters> npcList = player.getCurrentLocation().getOccupants();
                         StringBuilder sb = new StringBuilder();

@@ -3,11 +3,14 @@ package com.loversQuest.miniGame.gymGame;
 
 import com.loversQuest.GUI.GameFrame;
 import com.loversQuest.gameWorldPieces.Item;
+import com.loversQuest.miniGame.shootingGame.RangeGame;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class PtGame extends JPanel {
 
@@ -28,7 +31,12 @@ public class PtGame extends JPanel {
         ptFrame.setLocationRelativeTo(null);
         ptFrame.requestFocus();
         ptFrame.setVisible(true);
-        ptFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ptFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                PtGame.this.isSatisfied();
+            }
+        });
 
         try {
             while (isGameRun) {

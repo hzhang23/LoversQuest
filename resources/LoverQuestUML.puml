@@ -1,5 +1,6 @@
 @startuml
 package com.loversQuest{
+
 class GameWorld{
 +Location ++
 +Item ++
@@ -16,6 +17,8 @@ Officer <--"is_A" NonPlayerCharacters
 Lover <--"is_A" NonPlayerCharacters
 RuckSack *--"has_a" Player
 NonPlayerCharacters <|-- "use" Player
+Lover <|-- "use" Player
+Officer <|-- "use" Player
 
 class PlayerController{}
 class Item {
@@ -50,6 +53,7 @@ class Lover{
 +setNumOfItemsNeeded(int numOfItemsNeeded)
 }
 class Player{
+GameWorld "use"-r-|>Player
 -String name
 -Location currentLocation
 -boolean hasChallengeCoin
@@ -78,6 +82,17 @@ WEST
 }
 }
 package GUI{
+GameWorld "use"--|> GameFrame
+GameFrame -|>"use" Player
+GameFrame --*"Has_a" MapFactory
+GameFrame --*"Has_a" InventoryPanel
+GameFrame --*"Has_a" InputPanel
+GameFrame --*"Has_a" JPanelFactory
+GameFrame --*"Has_a" MapPanel
+GameFrame --*"Has_a" MapFrame
+GameFrame --*"Has_a" GameResponsePanel
+GameFrame --*"Has_a" JFrameInput
+
 class GameFrame
 class GameResponsePanel
 class InputPanel
@@ -90,6 +105,7 @@ class MapPanel
 }
 
 package IO{
+GameFrame -u--|>"use" InputParser
 class GraphicClass
 class Input
 class InputParser

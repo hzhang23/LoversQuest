@@ -23,12 +23,16 @@ public class RangeGame {
     Target target;
     GameMouse gameMouse = new GameMouse();
     RangePanel bgPanel;
-    JButton reloadButton;
     Random rand = new Random();
     GameFrame gameFrame;
     JFrame rangeFrame;
     JTextArea board = new JTextArea();
-    private final File soundFile = new File("resources/shootingGameResources/M4_SOUND.wav");
+    private final File fireSoundFile = new File("resources/shootingGameResources/M4_SOUND.wav");
+    private final File reloadFile = new File("resources/shootingGameResources/reload.wav");
+    private final File clickFile = new File("resources/shootingGameResources/click.wav");
+    boolean isGameOn;
+    JButton reLoadBtn;
+    JLabel startLabel;
 
 
     public RangeGame(GameFrame gameFrame){
@@ -37,16 +41,31 @@ public class RangeGame {
 
     public void init(){
         rangeFrame = new JFrame();
-        ammoCount = 40;
+        ammoCount = 0;
         targetCount = 40;
         targetHit = 0;
+        this.getEyeCapture();
         layeredPane = new JLayeredPane();
+        reLoadBtn = new JButton("RELOAD");
+        ImageIcon btnIcn = new ImageIcon("resources/shootingGameResources/M16icon.png");
+        Image btnImage= btnIcn.getImage().getScaledInstance(200,100,btnIcn.getImage().SCALE_DEFAULT);
+        ImageIcon reloadIcon = new ImageIcon(btnImage);
+        startLabel = new JLabel("Click Reload to Start");
+        startLabel.setBounds(400,160, 800,300);
+        startLabel.setForeground(Color.ORANGE);
+        Font font = new Font("arial", Font.BOLD, 60);
+        startLabel.setFont(font);
+        reLoadBtn.setIcon(reloadIcon);
+        reLoadBtn.setBorderPainted(false);
+        reLoadBtn.setBounds(0,0,200,100);
         bgPanel = new RangePanel("resources/shootingGameResources/range1.jpg");
         bgPanel.setBounds(0,0,2000,1100);
-        board.setBounds(10,10,500,260);
+        board.setBounds(220,10,500,260);
         board.setText(boardNum());
+        layeredPane.add(reLoadBtn,JLayeredPane.MODAL_LAYER);
         layeredPane.add(bgPanel, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(board, JLayeredPane.MODAL_LAYER);
+        layeredPane.add(startLabel,JLayeredPane.MODAL_LAYER);
 
         rangeFrame.setTitle("Markmanship Qualification");
         rangeFrame.setAlwaysOnTop(true);
@@ -55,24 +74,50 @@ public class RangeGame {
         rangeFrame.setVisible(true);
         rangeFrame.setLocationRelativeTo(null);
         rangeFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        rangeFrame.setCursor(getEyeCapture());
         rangeFrame.addMouseListener(gameMouse);
         rangeFrame.addMouseMotionListener(gameMouse);
         rangeFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                rangeFrame.dispose();
+                RangeGame.this.exitGame();
+                RangeGame.this.isGameOn =false;
+                targetThread.interrupt();
             }
         });
+        rangeFrame.setFocusable(true);
         this.targetUp();
+        reLoadBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(ammoCount != 30){
+                 playSound(reloadFile);
+                }
+                setAmmoCount(30);
+                layeredPane.remove(startLabel);
+                layeredPane.revalidate();
+                layeredPane.repaint();
+                RangeGame.this.isGameOn = true;
+                RangeGame.this.getEyeCapture();
+            }
+        });
+
     }
 
-    public void playSound() {
+    public void rifleSound(){
+        if (ammoCount > 0){
+            playSound(fireSoundFile);
+        } else {
+            playSound(clickFile);
+        }
+
+    }
+
+    public void playSound(File file) {
         Thread soundThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    AudioInputStream sound = AudioSystem.getAudioInputStream(soundFile);
+                    AudioInputStream sound = AudioSystem.getAudioInputStream(file);
                     Clip mySound = AudioSystem.getClip();
                     mySound.open(sound);
                     mySound.start();
@@ -84,16 +129,18 @@ public class RangeGame {
 
             }
         });
-        soundThread.start();
+        if (isGameOn) {
+            soundThread.start();
+        }
     }
 
-    public Cursor getEyeCapture(){
+    public void getEyeCapture(){
         Cursor eyeCapture = Cursor.getDefaultCursor();
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Image image = toolkit.getImage("resources/shootingGameResources/eye_capture.png");
         Image eyeCap = image.getScaledInstance(50,50,image.SCALE_DEFAULT);
         eyeCapture = toolkit.createCustomCursor(eyeCap, new Point(0, 0), "eyeCapture");
-        return eyeCapture;
+        this.rangeFrame.setCursor(eyeCapture);
     }
 
     public String boardNum(){
@@ -113,7 +160,6 @@ public class RangeGame {
                 );
         if (flag == 0){
             this.returnGameFrameText();
-            gameFrame.setVisible(true);
         }
     }
 
@@ -169,7 +215,9 @@ public class RangeGame {
                 }
             }
         });
-        targetThread.start();
+        if (isGameOn) {
+            targetThread.start();
+        }
     }
 
     private void addNewTarget(){
@@ -192,7 +240,7 @@ public class RangeGame {
                     layeredPane.remove(target);
                     layeredPane.repaint();
                     targetUp();
-                    playSound();
+                    rifleSound();
                 }
             }
         });
@@ -243,7 +291,7 @@ public class RangeGame {
             if (ammoCount > 0){
             ammoCount -= 1;}
             board.setText(boardNum());
-            RangeGame.this.playSound();
+            RangeGame.this.rifleSound();
         }
 
         @Override
@@ -269,6 +317,14 @@ public class RangeGame {
         @Override
         public void mouseMoved(MouseEvent e) {
 
+        }
+
+        public boolean isGameOn() {
+            return isGameOn;
+        }
+
+        public void setGameOn(boolean gameOn) {
+            isGameOn = gameOn;
         }
 
         public int getX() {

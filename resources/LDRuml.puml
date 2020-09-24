@@ -10,7 +10,7 @@ class JsonGetter
 package gameWorldPieces{
 Item <--"is_A" Container
 enum CarinalDirection
-Item *--"has_a" NonPlayerCharacters
+Item "has"*-- NonPlayerCharacters
 RuckSack *--"has_a" Player
 NPC_Factory <|-l- "use" Player
 NonPlayerCharacters"generate"<--NPC_Factory
@@ -111,6 +111,9 @@ Location "has_A"*- NonPlayerCharacters
 
 package miniGame{
     package shootingGame{
+        RangeGame --|>"has_A" RangePanel
+        RangeGame --|>"has_A" ScorePanel
+        RangeGame --|>"has_A" Target
         class RangeGame{}
         class RangePanel{}
         class ScorePanel{}

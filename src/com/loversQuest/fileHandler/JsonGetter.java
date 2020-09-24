@@ -38,14 +38,18 @@ public class JsonGetter {
 
     public static Player readGame(String fileName){
         Player player = null;
-
-        Gson gson = new Gson();
-        try {
-            JsonObject gameFile = JsonParser.parseReader(new FileReader(filePath)).getAsJsonObject();
-            JsonObject playerObj = gameFile.get(fileName).getAsJsonObject();
-            player = gson.fromJson(playerObj, Player.class);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        if (fileName.equals("newgame")){
+            player = new Player("Bob", ExcelManager.getLocationMap().get("barracks"));
+            return player;
+        } else {
+            Gson gson = new Gson();
+            try {
+                JsonObject gameFile = JsonParser.parseReader(new FileReader(filePath)).getAsJsonObject();
+                JsonObject playerObj = gameFile.get(fileName).getAsJsonObject();
+                player = gson.fromJson(playerObj, Player.class);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
         return player;
     }

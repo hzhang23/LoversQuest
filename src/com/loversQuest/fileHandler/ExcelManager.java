@@ -20,14 +20,10 @@ public class ExcelManager {
       * @return map
      */
 
-    public static Map<String, Location> getLocationMap(){
-
-        return createLocationMap(gameBookPath);
-    }
+    public static Map<String, Location> getLocationMap(){ return createLocationMap(gameBookPath); }
     public static Map<String, List<String>> getGameObjList() {return createGameObjMap(gameBookPath);}
     public static List<Item> getItemList(){ return createItemList(gameBookPath); }
     public static Map<String, String[]> getSafetyBrief() {return getSafetyBriefMap(gameBookPath);}
-    public static Map<String, Map<String, String>> getGameFileMap() {return createGameFile(gameBookPath);}
 
     /**
      * get Excel data and create a Workbook Object
